@@ -1,20 +1,16 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
+public class Unidade implements Serializable{
 
-@Entity
-public class Categoria implements Serializable{
-
+	
+	
 	/**
 	 * 
 	 */
@@ -24,22 +20,18 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	
 	private String nome;
 	
 	private String usualt;
 	
 	private Date datalt;
-	
-	@ManyToMany(mappedBy = "categorias")
-	private List<Produto> produtos = new ArrayList<>();
 
-	public Categoria() {
+	public Unidade() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Categoria(Integer id, String nome, String usualt, Date datalt) {
+	public Unidade(Integer id, String nome, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -63,14 +55,6 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
-	public Date getDatalt() {
-		return datalt;
-	}
-
-	public void setDatalt(Date datalt) {
-		this.datalt = datalt;
-	}
-
 	public String getUsualt() {
 		return usualt;
 	}
@@ -79,12 +63,12 @@ public class Categoria implements Serializable{
 		this.usualt = usualt;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
+	public Date getDatalt() {
+		return datalt;
 	}
-	
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+
+	public void setDatalt(Date datalt) {
+		this.datalt = datalt;
 	}
 
 	@Override
@@ -103,7 +87,7 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Unidade other = (Unidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -111,7 +95,6 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
-
 	
 	
 	
