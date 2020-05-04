@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.services.CategoriaService;
+import br.ipen.cestoque.services.exception.ObjectNotFoundException;
+
 
 @RestController
 @RequestMapping(value="/categorias")
@@ -18,9 +20,9 @@ public class CategoriaResource {
 	private CategoriaService service;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Categoria categoria = service.buscar(id);
-		
+	public ResponseEntity<?> find(@PathVariable Integer id){
+		Categoria categoria;
+		categoria = service.find(id);
 		return ResponseEntity.ok().body(categoria);
 	}
 	

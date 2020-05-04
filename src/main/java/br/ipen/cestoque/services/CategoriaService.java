@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.repositories.CategoriaRepository;
+import br.ipen.cestoque.services.exception.ObjectNotFoundException;
+
 
 @Service
 public class CategoriaService {
@@ -14,9 +16,11 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	public Categoria buscar(Integer id) {
-		Optional<Categoria> obj =  repo.findById(id);
-		return obj.orElse(null); 
+		
+	public Categoria find(Integer id) throws ObjectNotFoundException {
+		Optional<Categoria> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 	
 }
