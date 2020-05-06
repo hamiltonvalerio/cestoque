@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Cliente implements Serializable{
+public class Colaborador implements Serializable{
 	
 	/**
 	 * 
@@ -32,16 +32,20 @@ public class Cliente implements Serializable{
 	@CollectionTable(name = "EMAIL")
 	private Set<String> emails = new HashSet<>();
 	
+	@ElementCollection
+	@CollectionTable(name = "TELEFONE")
+	private Set<String> telefones = new HashSet<>();
+	
 	private String usualt;
 	
 	private Date datalt;
 
-	public Cliente() {
+	public Colaborador() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(Integer id, String nome, String cpf, String usualt, Date datalt) {
+	public Colaborador(Integer id, String nome, String cpf, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -114,7 +118,7 @@ public class Cliente implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Colaborador other = (Colaborador) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

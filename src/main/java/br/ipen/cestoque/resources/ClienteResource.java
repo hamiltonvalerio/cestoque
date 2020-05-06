@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ipen.cestoque.domain.Cliente;
+import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.services.ClienteService;
 
 
@@ -20,7 +20,7 @@ public class ClienteResource {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id){
-		Cliente Cliente;
+		Colaborador Cliente;
 		Cliente = service.find(id);
 		return ResponseEntity.ok().body(Cliente);
 	}
