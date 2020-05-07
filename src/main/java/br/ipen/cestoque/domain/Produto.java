@@ -2,6 +2,8 @@ package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,6 +36,8 @@ public class Produto implements Serializable{
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
 	private Producao producao;
+	
+	private Set<ItemProduto> itens = new HashSet<>();
 
 	public Produto() {
 		super();
@@ -122,6 +126,14 @@ public class Produto implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Set<ItemProduto> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemProduto> itens) {
+		this.itens = itens;
 	}
 	
 	

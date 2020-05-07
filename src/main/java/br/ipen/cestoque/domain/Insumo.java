@@ -3,7 +3,9 @@ package br.ipen.cestoque.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,6 +46,7 @@ public class Insumo implements Serializable{
 			)
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	private Set<ItemProduto> itens = new HashSet<>();
 
 	public Insumo(){
 		super();
@@ -64,6 +67,14 @@ public class Insumo implements Serializable{
 		this.quantidade = quantidade;
 		this.usualt = usualt;
 		this.datalt = datalt;
+	}
+	
+	public List<Produto> produtos(){
+		List<Produto> lista = new ArrayList<>();
+		for(ItemProduto i : itens) {
+			lista.add(i.getProduto());
+		}
+		return lista;
 	}
 
 	public Integer getId() {
@@ -185,6 +196,14 @@ public class Insumo implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Set<ItemProduto> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemProduto> itens) {
+		this.itens = itens;
 	}
 	
 	
