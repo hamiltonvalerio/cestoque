@@ -33,7 +33,6 @@ public class Categoria implements Serializable{
 	
 	private Date datalt;
 	
-	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
 	private List<Insumo> insumos = new ArrayList<>();
 

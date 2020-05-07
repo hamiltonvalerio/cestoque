@@ -39,12 +39,10 @@ public class Produto implements Serializable{
 	private String usualt;
 	private Date datalt;
 	
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "colaborador_id")
 	private Colaborador colaborador;
 	
-	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
 	private Producao producao;
 	

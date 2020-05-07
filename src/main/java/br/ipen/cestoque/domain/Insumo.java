@@ -44,7 +44,7 @@ public class Insumo implements Serializable{
 	private String usualt;	
 	private Date datalt;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "INSUMO_CATEGORIA", 
 			joinColumns = @JoinColumn(name = "insumo_id"),

@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Colaborador implements Serializable{
@@ -45,7 +46,7 @@ public class Colaborador implements Serializable{
 	
 	private Date datalt;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "colaborador")
 	private List<Produto> produtos = new ArrayList<>();
 
