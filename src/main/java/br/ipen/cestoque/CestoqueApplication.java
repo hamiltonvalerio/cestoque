@@ -27,7 +27,7 @@ public class CestoqueApplication implements CommandLineRunner{
 		//Categoria cat1 = new Categoria(null, "Informatica", "Usuario", new Date());
 		//Categoria cat2 = new Categoria(null, "Escritorio", "Usuario", new Date());
 		
-		//categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		//2categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 	}
 
 }

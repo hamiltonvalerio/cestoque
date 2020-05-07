@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Colaborador;
-import br.ipen.cestoque.repositories.ClienteRepository;
+import br.ipen.cestoque.repositories.ColaboradorRepository;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 
 
@@ -14,7 +14,7 @@ import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 public class ClienteService {
 
 	@Autowired
-	private ClienteRepository repo;
+	private ColaboradorRepository repo;
 	
 		
 	public Colaborador find(Integer id) throws ObjectNotFoundException {
