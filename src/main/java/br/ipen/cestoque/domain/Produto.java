@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -37,6 +38,7 @@ public class Produto implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
 	private Producao producao;
 	
+	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemProduto> itens = new HashSet<>();
 
 	public Produto() {
