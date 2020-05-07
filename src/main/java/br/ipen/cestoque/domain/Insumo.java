@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Insumo implements Serializable{
@@ -34,7 +36,10 @@ public class Insumo implements Serializable{
 	private Integer codigo_almox;
 	private String observacao;
 	private Boolean essencial;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_validade;
+	
 	private Double quantidade;
 	private String usualt;	
 	private Date datalt;
@@ -47,6 +52,7 @@ public class Insumo implements Serializable{
 			)
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<ItemProduto> itens = new HashSet<>();
 
@@ -71,7 +77,8 @@ public class Insumo implements Serializable{
 		this.datalt = datalt;
 	}
 	
-	public List<Produto> produtos(){
+	@JsonIgnore
+	public List<Produto> getProdutos(){
 		List<Produto> lista = new ArrayList<>();
 		for(ItemProduto i : itens) {
 			lista.add(i.getProduto());

@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.ipen.cestoque.domain.enums.EstadoProducao;
 
 @Entity
@@ -26,6 +28,7 @@ public class Producao implements Serializable{
 		private String usualt;
 		private Date datalt;
 		
+		@JsonBackReference
 		@OneToOne
 		@JoinColumn(name = "produto_id")
 		@MapsId

@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Produto implements Serializable{
 
@@ -27,14 +30,21 @@ public class Produto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_produto;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private Date data_validade;
+	
 	private String usualt;
 	private Date datalt;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "colaborador_id")
 	private Colaborador colaborador;
 	
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
 	private Producao producao;
 	
@@ -47,7 +57,7 @@ public class Produto implements Serializable{
 	}
 
 	public Produto(Integer id, Date data_produto, String usualt, Date datalt, Colaborador colaborador,
-			Producao producao) {
+			Producao producao, Date data_validade) {
 		super();
 		this.id = id;
 		this.data_produto = data_produto;
@@ -55,6 +65,7 @@ public class Produto implements Serializable{
 		this.datalt = datalt;
 		this.colaborador = colaborador;
 		this.producao = producao;
+		this.data_validade = data_validade;
 	}
 
 	public Integer getId() {
@@ -136,6 +147,14 @@ public class Produto implements Serializable{
 
 	public void setItens(Set<ItemProduto> itens) {
 		this.itens = itens;
+	}
+
+	public Date getData_validade() {
+		return data_validade;
+	}
+
+	public void setData_validade(Date data_validade) {
+		this.data_validade = data_validade;
 	}
 	
 	

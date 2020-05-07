@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemProduto implements Serializable{
 
@@ -15,7 +17,7 @@ public class ItemProduto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
+	@JsonIgnore
 	@EmbeddedId
 	private ItemProdutoPK id = new ItemProdutoPK();
 
@@ -34,7 +36,8 @@ public class ItemProduto implements Serializable{
 		this.quantidade = quantidade;
 		this.valor = valor;
 	}
-
+	
+	@JsonIgnore
 	public Produto getProduto() {
 		return id.getProduto();
 	}
