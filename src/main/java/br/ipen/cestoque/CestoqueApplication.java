@@ -24,10 +24,10 @@ public class CestoqueApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		//Categoria cat1 = new Categoria(null, "Informatica", "Usuario", new Date());
-		//Categoria cat2 = new Categoria(null, "Escritorio", "Usuario", new Date());
+		Categoria cat1 = new Categoria(null, "Informatica", "Usuario", new Date());
+		Categoria cat2 = new Categoria(null, "Escritorio", "Usuario", new Date());
 		
-		//2categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 	}
 
 }
