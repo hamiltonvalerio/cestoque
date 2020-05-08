@@ -24,10 +24,17 @@ public class CategoriaService {
 	}
 
 
-	public Categoria insert(Categoria cat) {
+	public Categoria insert(Categoria obj) {
 		// TODO Auto-generated method stub
-		cat.setId(null);
-		return repo.save(cat);
+		obj.setId(null);
+		return repo.save(obj);
+	}
+
+
+	public Categoria update(Categoria obj) {
+		// TODO Auto-generated method stub
+		find(obj.getId());
+		return repo.save(obj);
 	}
 	
 }

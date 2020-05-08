@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ipen.cestoque.domain.Produto;
 import br.ipen.cestoque.services.ProdutoService;
-import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 
 
 @RestController
@@ -20,7 +19,7 @@ public class ProdutoResource {
 	private ProdutoService service;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id){
+	public ResponseEntity<Produto> find(@PathVariable Integer id){
 		Produto produto;
 		produto = service.find(id);
 		return ResponseEntity.ok().body(produto);
