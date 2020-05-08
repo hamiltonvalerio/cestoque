@@ -1,5 +1,6 @@
 package br.ipen.cestoque.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
+import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.dto.CategoriaDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
 import br.ipen.cestoque.services.exception.DataIntegrityException;
@@ -39,10 +41,19 @@ public class CategoriaService {
 
 
 	public Categoria update(Categoria obj) {
-		// TODO Auto-generated method stub
-		find(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		// TODO Auto-generated method stub
+		newObj.setNome(obj.getNome());
+		newObj.setUsualt(obj.getUsualt());
+		newObj.setDatalt(new Date());
+		
+	}
+
 
 
 	public void delete(Integer id) {

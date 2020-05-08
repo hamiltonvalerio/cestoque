@@ -23,7 +23,10 @@ public class Producao implements Serializable{
 
 		@Id
 		private Integer id;
+		
 		private EstadoProducao estadoProducao;
+		
+		private Integer estado;
 		
 		private String usualt;
 		private Date datalt;
@@ -44,7 +47,7 @@ public class Producao implements Serializable{
 		public Producao(Integer id, EstadoProducao estadoProducao, String usualt, Date datalt, Produto produto) {
 			super();
 			this.id = id;
-			this.estadoProducao = estadoProducao;
+			this.setEstado((estadoProducao == null) ? null :  estadoProducao.getCod());
 			this.usualt = usualt;
 			this.datalt = datalt;
 			this.setProduto(produto);
@@ -119,6 +122,18 @@ public class Producao implements Serializable{
 
 		public void setProduto(Produto produto) {
 			this.produto = produto;
+		}
+
+
+
+		public Integer getEstado() {
+			return estado;
+		}
+
+
+
+		public void setEstado(Integer estado) {
+			this.estado = estado;
 		}
 		
 		

@@ -54,7 +54,7 @@ public class ColaboradorService {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
 			// TODO: handle exception
-			throw new DataIntegrityException("Não é possível excluir uma categoria que possui insumos");
+			throw new DataIntegrityException("Não é possível excluir um Colaborador");
 		}
 	}
 
