@@ -3,10 +3,12 @@ package br.ipen.cestoque.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.repositories.CategoriaRepository;
+import br.ipen.cestoque.services.exception.DataIntegrityException;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 
 
@@ -35,6 +37,18 @@ public class CategoriaService {
 		// TODO Auto-generated method stub
 		find(obj.getId());
 		return repo.save(obj);
+	}
+
+
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			// TODO: handle exception
+			throw new DataIntegrityException("Não é possível excluir uma categoria que possui insumos");
+		}
 	}
 	
 }
