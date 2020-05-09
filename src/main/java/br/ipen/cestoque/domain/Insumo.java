@@ -54,6 +54,14 @@ public class Insumo implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<ItemProduto> itens = new HashSet<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.insumo")
+	private Set<LocalizacaoInsumo> localizacoes = new HashSet<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.insumo")
+	private Set<InsumoEntrada> entradas = new HashSet<>();
 
 	public Insumo(){
 		super();
@@ -81,6 +89,26 @@ public class Insumo implements Serializable{
 		List<Produto> lista = new ArrayList<>();
 		for(ItemProduto i : itens) {
 			lista.add(i.getProduto());
+		}
+		return lista;
+	}
+	
+	@JsonIgnore
+	public List<Localizacao> getLocalizacoesInsumos()
+	{
+		List<Localizacao> lista = new ArrayList<>();
+		for (LocalizacaoInsumo l : localizacoes) {
+			lista.add(l.getLocalizacao());
+		}
+		return lista;
+	}
+	
+	@JsonIgnore
+	public List<Entrada> getEntradasInsumos()
+	{
+		List<Entrada> lista = new ArrayList<>();
+		for (InsumoEntrada l : getEntradas()) {
+			lista.add(l.getEntrada());
 		}
 		return lista;
 	}
@@ -212,6 +240,22 @@ public class Insumo implements Serializable{
 
 	public void setItens(Set<ItemProduto> itens) {
 		this.itens = itens;
+	}
+
+	public Set<LocalizacaoInsumo> getLocalizacoes() {
+		return localizacoes;
+	}
+
+	public void setLocalizacoes(Set<LocalizacaoInsumo> localizacoes) {
+		this.localizacoes = localizacoes;
+	}
+
+	public Set<InsumoEntrada> getEntradas() {
+		return entradas;
+	}
+
+	public void setEntradas(Set<InsumoEntrada> entradas) {
+		this.entradas = entradas;
 	}
 	
 	

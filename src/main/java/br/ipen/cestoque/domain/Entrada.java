@@ -11,36 +11,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
-public class Localizacao implements Serializable{
+public class Entrada implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome;
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private Date data_entrada;
+	
+	private Double total;
+	
+	private String numeronf;
 	
 	private String usualt;
-	
 	private Date datalt;
 	
-	@OneToMany(mappedBy = "id.localizacao")
-	private Set<LocalizacaoInsumo> localizacoes = new HashSet<>();
-
-	public Localizacao() {
+	@OneToMany(mappedBy = "id.entrada")
+	private Set<InsumoEntrada> itens = new HashSet<>();
+	
+	public Entrada() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Localizacao(Integer id, String nome, String usualt, Date datalt) {
+	public Entrada(Integer id, Date data_entrada, Double total, String numeronf, String usualt, Date datalt) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.data_entrada = data_entrada;
+		this.total = total;
+		this.numeronf = numeronf;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -53,12 +61,28 @@ public class Localizacao implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Date getData_entrada() {
+		return data_entrada;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setData_entrada(Date data_entrada) {
+		this.data_entrada = data_entrada;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public String getNumeronf() {
+		return numeronf;
+	}
+
+	public void setNumeronf(String numeronf) {
+		this.numeronf = numeronf;
 	}
 
 	public String getUsualt() {
@@ -93,7 +117,7 @@ public class Localizacao implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Localizacao other = (Localizacao) obj;
+		Entrada other = (Entrada) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -101,8 +125,14 @@ public class Localizacao implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
+	public Set<InsumoEntrada> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<InsumoEntrada> itens) {
+		this.itens = itens;
+	}
 	
 	
 	
