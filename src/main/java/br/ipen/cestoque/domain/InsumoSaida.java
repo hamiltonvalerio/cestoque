@@ -6,42 +6,42 @@ import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class InsumoEntrada {
+public class InsumoSaida {
 
 	@JsonIgnore
 	@EmbeddedId
-	private InsumoEntradaPK id = new InsumoEntradaPK();
+	private InsumoSaidaPK id = new InsumoSaidaPK();
 	
 	private Double quantidade;
 	private Double valor;
 	
-	public InsumoEntrada() {
+	public InsumoSaida() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public InsumoEntrada(Insumo insumo, Entrada entrada, Double quantidade, Double valor) {
+	public InsumoSaida(Insumo insumo, Saida saida, Double quantidade, Double valor) {
 		super();
 		id.setInsumo(insumo);
-		id.setEntrada(entrada);
+		id.setSaida(saida);
 		this.quantidade = quantidade;
 		this.setValor(valor);
 	}
 	
 	@JsonIgnore
-	public Entrada getEntrada() {
-		return id.getEntrada();
+	public Saida getSaida() {
+		return id.getSaida();
 	}
 	
 	public Insumo getInsumo() {
 		return id.getInsumo();
 	}
 
-	public InsumoEntradaPK getId() {
+	public InsumoSaidaPK getId() {
 		return id;
 	}
 
-	public void setId(InsumoEntradaPK id) {
+	public void setId(InsumoSaidaPK id) {
 		this.id = id;
 	}
 
