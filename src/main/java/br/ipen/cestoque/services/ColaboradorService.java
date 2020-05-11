@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.dto.ColaboradorDTO;
+import br.ipen.cestoque.dto.ColaboradorNewDTO;
 import br.ipen.cestoque.repositories.ColaboradorRepository;
 import br.ipen.cestoque.services.exception.DataIntegrityException;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
@@ -29,6 +30,12 @@ public class ColaboradorService {
 		Optional<Colaborador> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Colaborador.class.getName()));
+	}
+	
+	public Colaborador insert(Colaborador obj) {
+		// TODO Auto-generated method stub
+		obj.setId(null);
+		return repo.save(obj);
 	}
 	
 	public Colaborador update(Colaborador obj) {
@@ -70,6 +77,11 @@ public class ColaboradorService {
 	
 	public Colaborador fromDTO(ColaboradorDTO objDto) {
 		return new Colaborador(objDto.getId(), objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt());
+	}
+	
+	public Colaborador fromDTO(ColaboradorNewDTO objDto) {
+		Colaborador col = new Colaborador(null, objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt());
+		return col;
 	}
 	
 }

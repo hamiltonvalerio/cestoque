@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
-import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.dto.CategoriaDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
 import br.ipen.cestoque.services.exception.DataIntegrityException;

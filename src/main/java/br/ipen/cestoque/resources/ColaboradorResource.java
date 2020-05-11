@@ -1,5 +1,6 @@
 package br.ipen.cestoque.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.dto.ColaboradorDTO;
+import br.ipen.cestoque.dto.ColaboradorNewDTO;
 import br.ipen.cestoque.services.ColaboradorService;
 
 
@@ -34,13 +37,13 @@ public class ColaboradorResource {
 		return ResponseEntity.ok().body(Cliente);
 	}
 	
-	/*@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ColaboradorDTO objDto){
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ColaboradorNewDTO objDto){
 		Colaborador obj = service.fromDTO(objDto);
 		obj = service.insert(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-	}*/
+	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ColaboradorDTO objDto, @PathVariable Integer id){

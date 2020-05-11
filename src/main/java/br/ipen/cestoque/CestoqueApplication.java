@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.ipen.cestoque.domain.Categoria;
+import br.ipen.cestoque.domain.Colaborador;
+import br.ipen.cestoque.dto.ColaboradorNewDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
 
 @SpringBootApplication
@@ -28,6 +30,8 @@ public class CestoqueApplication implements CommandLineRunner{
 		Categoria cat2 = new Categoria(null, "Escritorio", "Usuario", new Date());
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		
+		//Colaborador col = new Colaborador(id, nome, cpf, usualt, datalt)
 	}
 
 }
