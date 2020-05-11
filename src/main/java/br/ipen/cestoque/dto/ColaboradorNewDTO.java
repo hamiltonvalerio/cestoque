@@ -5,6 +5,13 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.br.CPF;
+
+import br.ipen.cestoque.services.validation.ColaboradorInsert;
+
+@ColaboradorInsert
 public class ColaboradorNewDTO implements Serializable{
 
 	/**
@@ -12,9 +19,14 @@ public class ColaboradorNewDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String cpf;
+	
 	private String usualt;
+	
 	private Date datalt;
 	
 	private Set<String> telefones = new HashSet<>();

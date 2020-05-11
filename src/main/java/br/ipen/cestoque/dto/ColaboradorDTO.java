@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import br.ipen.cestoque.domain.Colaborador;
 
 
@@ -21,6 +23,8 @@ public class ColaboradorDTO implements Serializable{
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
 	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	@CPF
 	private String cpf;
 	
 	private String usualt;
