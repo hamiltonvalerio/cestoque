@@ -5,10 +5,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 
-import br.ipen.cestoque.services.validation.FornecedorInsert;
-
-@FornecedorInsert
-public class FornecedorNewDTO implements Serializable{
+public class LocalizacaoNewDTO implements Serializable{
 
 	/**
 	 * 
@@ -18,15 +15,12 @@ public class FornecedorNewDTO implements Serializable{
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
 	
-	@NotEmpty(message = "Preenchimento obrigatório!")
-	private String cnpj;
-	
 	private String usualt;
 	
 	private Date datalt;
 
 
-	public FornecedorNewDTO() {
+	public LocalizacaoNewDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,14 +31,6 @@ public class FornecedorNewDTO implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
 	}
 
 	public String getUsualt() {

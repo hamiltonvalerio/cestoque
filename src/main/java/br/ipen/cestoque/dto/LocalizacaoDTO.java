@@ -5,30 +5,53 @@ import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 
-import br.ipen.cestoque.services.validation.FornecedorInsert;
+import br.ipen.cestoque.domain.Localizacao;
 
-@FornecedorInsert
-public class FornecedorNewDTO implements Serializable{
 
+public class LocalizacaoDTO implements Serializable{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+
+	private Integer id;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
 	
-	@NotEmpty(message = "Preenchimento obrigatório!")
-	private String cnpj;
-	
 	private String usualt;
 	
 	private Date datalt;
-
-
-	public FornecedorNewDTO() {
+	
+	
+	public LocalizacaoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public LocalizacaoDTO(Localizacao obj) {
+		id = obj.getId();
+		nome = obj.getNome();
+		usualt = obj.getUsualt();
+		datalt = obj.getDatalt();
+	}
+
+	public LocalizacaoDTO(Integer id, String nome, String usualt, Date datalt) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.usualt = usualt;
+		this.datalt = datalt;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -37,14 +60,6 @@ public class FornecedorNewDTO implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
 	}
 
 	public String getUsualt() {
@@ -63,5 +78,8 @@ public class FornecedorNewDTO implements Serializable{
 		this.datalt = datalt;
 	}
 	
+	
+
+
 	
 }
