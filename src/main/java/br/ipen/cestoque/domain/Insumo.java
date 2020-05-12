@@ -52,6 +52,14 @@ public class Insumo implements Serializable{
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "INSUMO_FORNECEDOR", 
+			joinColumns = @JoinColumn(name = "insumo_id"),
+			inverseJoinColumns = @JoinColumn(name = "fornecedor_id")
+			)
+	private List<Categoria> fornecedores = new ArrayList<>();
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<ItemProduto> itens = new HashSet<>();
 	
@@ -256,6 +264,14 @@ public class Insumo implements Serializable{
 
 	public void setEntradas(Set<InsumoEntrada> entradas) {
 		this.entradas = entradas;
+	}
+
+	public List<Categoria> getFornecedores() {
+		return fornecedores;
+	}
+
+	public void setFornecedores(List<Categoria> fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 	
 	

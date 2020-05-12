@@ -17,37 +17,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.ipen.cestoque.domain.Colaborador;
-import br.ipen.cestoque.dto.ColaboradorDTO;
-import br.ipen.cestoque.dto.ColaboradorNewDTO;
-import br.ipen.cestoque.services.ColaboradorService;
+import br.ipen.cestoque.domain.Fornecedor;
+import br.ipen.cestoque.dto.FornecedorDTO;
+import br.ipen.cestoque.dto.FornecedorNewDTO;
+import br.ipen.cestoque.services.FornecedorService;
 
 
 @RestController
-@RequestMapping(value="/colaboradores")
-public class ColaboradorResource {
+@RequestMapping(value="/fornecedores")
+public class FornecedorResource {
 
 	@Autowired
-	private ColaboradorService service;
+	private FornecedorService service;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<Colaborador> find(@PathVariable Integer id){
-		Colaborador Cliente;
+	public ResponseEntity<Fornecedor> find(@PathVariable Integer id){
+		Fornecedor Cliente;
 		Cliente = service.find(id);
 		return ResponseEntity.ok().body(Cliente);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ColaboradorNewDTO objDto){
-		Colaborador obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody FornecedorNewDTO objDto){
+		Fornecedor obj = service.fromDTO(objDto);
 		obj = service.insert(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ColaboradorDTO objDto, @PathVariable Integer id){
-		Colaborador obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> update(@Valid @RequestBody FornecedorDTO objDto, @PathVariable Integer id){
+		Fornecedor obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -60,21 +60,21 @@ public class ColaboradorResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<ColaboradorDTO> > findAll(){
-		List<Colaborador> list = service.findAll();
-		List<ColaboradorDTO> listDto = list.stream().map(obj -> new ColaboradorDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<FornecedorDTO> > findAll(){
+		List<Fornecedor> list = service.findAll();
+		List<FornecedorDTO> listDto = list.stream().map(obj -> new FornecedorDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<ColaboradorDTO> > findPage(
+	public ResponseEntity<Page<FornecedorDTO> > findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage, 
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction
 			){
-		Page<Colaborador> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<ColaboradorDTO> listDto = list.map(obj -> new ColaboradorDTO(obj));
+		Page<Fornecedor> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<FornecedorDTO> listDto = list.map(obj -> new FornecedorDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}
 	

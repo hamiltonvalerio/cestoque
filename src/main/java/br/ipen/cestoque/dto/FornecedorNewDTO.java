@@ -2,15 +2,13 @@ package br.ipen.cestoque.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 
 import br.ipen.cestoque.services.validation.ColaboradorInsert;
 
 @ColaboradorInsert
-public class ColaboradorNewDTO implements Serializable{
+public class FornecedorNewDTO implements Serializable{
 
 	/**
 	 * 
@@ -21,17 +19,14 @@ public class ColaboradorNewDTO implements Serializable{
 	private String nome;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
-	private String cpf;
+	private String cnpj;
 	
 	private String usualt;
 	
 	private Date datalt;
-	
-	private Set<String> telefones = new HashSet<>();
-	
-	private Set<String> emails = new HashSet<>();
 
-	public ColaboradorNewDTO() {
+
+	public FornecedorNewDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -44,28 +39,12 @@ public class ColaboradorNewDTO implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
-	}
-
-	public Set<String> getEmails() {
-		return emails;
-	}
-
-	public void setEmails(Set<String> emails) {
-		this.emails = emails;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	public String getUsualt() {

@@ -11,9 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-
 @Entity
-public class Categoria implements Serializable{
+public class Fornecedor implements Serializable {
 
 	/**
 	 * 
@@ -23,25 +22,28 @@ public class Categoria implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
-	
+
+	private String cnpj;
+
 	private String usualt;
-	
+
 	private Date datalt;
-	
-	@ManyToMany(mappedBy = "categorias")
+
+	@ManyToMany(mappedBy = "fornecedores")
 	private List<Insumo> insumos = new ArrayList<>();
 
-	public Categoria() {
+	public Fornecedor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Categoria(Integer id, String nome, String usualt, Date datalt) {
+	public Fornecedor(Integer id, String nome, String cnpj, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.cnpj = cnpj;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -62,12 +64,12 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
-	public Date getDatalt() {
-		return datalt;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setDatalt(Date datalt) {
-		this.datalt = datalt;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	public String getUsualt() {
@@ -76,6 +78,14 @@ public class Categoria implements Serializable{
 
 	public void setUsualt(String usualt) {
 		this.usualt = usualt;
+	}
+
+	public Date getDatalt() {
+		return datalt;
+	}
+
+	public void setDatalt(Date datalt) {
+		this.datalt = datalt;
 	}
 
 	public List<Insumo> getInsumos() {
@@ -102,7 +112,7 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Fornecedor other = (Fornecedor) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -111,7 +121,4 @@ public class Categoria implements Serializable{
 		return true;
 	}
 
-	
-	
-	
 }
