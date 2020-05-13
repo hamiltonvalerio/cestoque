@@ -1,12 +1,17 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Unidade implements Serializable{
@@ -27,11 +32,17 @@ public class Unidade implements Serializable{
 	private String usualt;
 	
 	private Date datalt;
-
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "unidade")
+	private List<Insumo> insumos = new ArrayList<>();
+	
 	public Unidade() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	public Unidade(Integer id, String nome, String usualt, Date datalt) {
 		super();
@@ -40,6 +51,8 @@ public class Unidade implements Serializable{
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -97,7 +110,18 @@ public class Unidade implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
+
+
+	public List<Insumo> getInsumos() {
+		return insumos;
+	}
+
+
+
+	public void setInsumos(List<Insumo> insumos) {
+		this.insumos = insumos;
+	}
+
 	
 }

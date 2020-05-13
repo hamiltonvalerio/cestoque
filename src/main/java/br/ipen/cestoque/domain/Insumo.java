@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -70,6 +71,10 @@ public class Insumo implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<InsumoEntrada> entradas = new HashSet<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "unidade_id")
+	private Unidade unidade;
 
 	public Insumo(){
 		super();
@@ -77,7 +82,7 @@ public class Insumo implements Serializable{
 	}
 
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, Integer codigo_almox, String observacao,
-			Boolean essencial, Date data_validade, Double quantidade, String usualt, Date datalt) {
+			Boolean essencial, Date data_validade, Double quantidade, String usualt, Date datalt, Unidade uidade) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -90,6 +95,7 @@ public class Insumo implements Serializable{
 		this.quantidade = quantidade;
 		this.usualt = usualt;
 		this.datalt = datalt;
+		this.setUnidade(unidade);
 	}
 	
 	@JsonIgnore
@@ -272,6 +278,14 @@ public class Insumo implements Serializable{
 
 	public void setFornecedores(List<Categoria> fornecedores) {
 		this.fornecedores = fornecedores;
+	}
+
+	public Unidade getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
 	}
 	
 	
