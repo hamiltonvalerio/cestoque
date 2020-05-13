@@ -73,6 +73,10 @@ public class CestoqueApplication implements CommandLineRunner{
 		i2.setUnidade(un2);
 		i3.setUnidade(un2);
 		
+		i1.setLocalizacoes(Arrays.asList(l1));
+		i2.setLocalizacoes(Arrays.asList(l1));
+		i3.setLocalizacoes(Arrays.asList(l2));
+		
 		insumoRepository.saveAll(Arrays.asList(i1,i2,i3));
 	}
 

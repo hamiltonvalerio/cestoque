@@ -58,15 +58,19 @@ public class Insumo implements Serializable{
 			joinColumns = @JoinColumn(name = "insumo_id"),
 			inverseJoinColumns = @JoinColumn(name = "fornecedor_id")
 			)
-	private List<Categoria> fornecedores = new ArrayList<>();
+	private List<Categoria> fornecedores = new ArrayList<>();	
 	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "INSUMO_LOCALIZACAO", 
+			joinColumns = @JoinColumn(name = "insumo_id"),
+			inverseJoinColumns = @JoinColumn(name = "localizacao_id")
+			)
+	private List<Localizacao> localizacoes = new ArrayList<>();
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<ItemProduto> itens = new HashSet<>();
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "id.insumo")
-	private Set<LocalizacaoInsumo> localizacoes = new HashSet<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
@@ -103,26 +107,6 @@ public class Insumo implements Serializable{
 		List<Produto> lista = new ArrayList<>();
 		for(ItemProduto i : itens) {
 			lista.add(i.getProduto());
-		}
-		return lista;
-	}
-	
-	@JsonIgnore
-	public List<Localizacao> getLocalizacoesInsumos()
-	{
-		List<Localizacao> lista = new ArrayList<>();
-		for (LocalizacaoInsumo l : localizacoes) {
-			lista.add(l.getLocalizacao());
-		}
-		return lista;
-	}
-	
-	@JsonIgnore
-	public List<Entrada> getEntradasInsumos()
-	{
-		List<Entrada> lista = new ArrayList<>();
-		for (InsumoEntrada l : getEntradas()) {
-			lista.add(l.getEntrada());
 		}
 		return lista;
 	}
@@ -256,14 +240,6 @@ public class Insumo implements Serializable{
 		this.itens = itens;
 	}
 
-	public Set<LocalizacaoInsumo> getLocalizacoes() {
-		return localizacoes;
-	}
-
-	public void setLocalizacoes(Set<LocalizacaoInsumo> localizacoes) {
-		this.localizacoes = localizacoes;
-	}
-
 	public Set<InsumoEntrada> getEntradas() {
 		return entradas;
 	}
@@ -286,6 +262,14 @@ public class Insumo implements Serializable{
 
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
+	}
+
+	public List<Localizacao> getLocalizacoes() {
+		return localizacoes;
+	}
+
+	public void setLocalizacoes(List<Localizacao> localizacoes) {
+		this.localizacoes = localizacoes;
 	}
 	
 	
