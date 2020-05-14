@@ -9,14 +9,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.ipen.cestoque.domain.Categoria;
+import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.domain.Fornecedor;
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.ItemProduto;
 import br.ipen.cestoque.domain.Localizacao;
+import br.ipen.cestoque.domain.Producao;
+import br.ipen.cestoque.domain.Produto;
 import br.ipen.cestoque.domain.Unidade;
+import br.ipen.cestoque.domain.enums.EstadoProducao;
 import br.ipen.cestoque.repositories.CategoriaRepository;
+import br.ipen.cestoque.repositories.ColaboradorRepository;
 import br.ipen.cestoque.repositories.FornecedorRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
+import br.ipen.cestoque.repositories.ItemProdutoRepository;
 import br.ipen.cestoque.repositories.LocalizacaoRepository;
+import br.ipen.cestoque.repositories.ProducaoRepository;
+import br.ipen.cestoque.repositories.ProdutoRepository;
 import br.ipen.cestoque.repositories.UnidadeRepository;
 
 @SpringBootApplication
@@ -36,6 +45,18 @@ public class CestoqueApplication implements CommandLineRunner{
 	
 	@Autowired
 	private InsumoRepository insumoRepository;
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private ColaboradorRepository colaboradorRepository;
+	
+	@Autowired
+	private ProducaoRepository producaoRepository;
+	
+	@Autowired
+	private ItemProdutoRepository itemProdutoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CestoqueApplication.class, args);
@@ -73,11 +94,41 @@ public class CestoqueApplication implements CommandLineRunner{
 		i2.setUnidade(un2);
 		i3.setUnidade(un2);
 		
+		i1.setFornecedores(Arrays.asList(f1));
+		i2.setFornecedores(Arrays.asList(f1));
+		i3.setFornecedores(Arrays.asList(f2));
+		
 		i1.setLocalizacoes(Arrays.asList(l1));
 		i2.setLocalizacoes(Arrays.asList(l1));
 		i3.setLocalizacoes(Arrays.asList(l2));
 		
 		insumoRepository.saveAll(Arrays.asList(i1,i2,i3));
+		
+		Colaborador c1 = new Colaborador(null, "Hamilton", "84025166100", "Hamilton", new Date());
+		
+		colaboradorRepository.save(c1);
+		
+		
+		Produto p1 = new Produto(null, new Date(), "Hamilton", new Date(), c1, new Date()); 
+		p1.setColaborador(c1);
+		
+		Producao pc1 = new Producao(null, EstadoProducao.EMPRODUCAO, "Hamilton", new Date(), p1);
+		pc1.setProduto(p1);
+		p1.setProducao(pc1);
+		
+		produtoRepository.save(p1);
+		producaoRepository.save(pc1);
+		
+		ItemProduto it1 = new ItemProduto(p1, i1, 1.0, 0.0);
+		ItemProduto it2 = new ItemProduto(p1, i2, 2.0, 0.0);
+		
+		p1.getItens().addAll(Arrays.asList(it1,it2));
+		
+		i1.getItens().addAll(Arrays.asList(it1));
+		i2.getItens().addAll(Arrays.asList(it2));
+		
+		itemProdutoRepository.saveAll(Arrays.asList(it1,it2));
+		
 	}
 
 }

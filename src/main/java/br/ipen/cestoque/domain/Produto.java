@@ -53,15 +53,13 @@ public class Produto implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produto(Integer id, Date data_produto, String usualt, Date datalt, Colaborador colaborador,
-			Producao producao, Date data_validade) {
+	public Produto(Integer id, Date data_produto, String usualt, Date datalt, Colaborador colaborador, Date data_validade) {
 		super();
 		this.id = id;
 		this.data_produto = data_produto;
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.colaborador = colaborador;
-		this.producao = producao;
 		this.data_validade = data_validade;
 	}
 

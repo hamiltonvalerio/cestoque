@@ -58,7 +58,7 @@ public class Insumo implements Serializable{
 			joinColumns = @JoinColumn(name = "insumo_id"),
 			inverseJoinColumns = @JoinColumn(name = "fornecedor_id")
 			)
-	private List<Categoria> fornecedores = new ArrayList<>();	
+	private List<Fornecedor> fornecedores = new ArrayList<>();	
 	
 	@JsonIgnore
 	@ManyToMany
@@ -248,11 +248,11 @@ public class Insumo implements Serializable{
 		this.entradas = entradas;
 	}
 
-	public List<Categoria> getFornecedores() {
+	public List<Fornecedor> getFornecedores() {
 		return fornecedores;
 	}
 
-	public void setFornecedores(List<Categoria> fornecedores) {
+	public void setFornecedores(List<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
 	}
 
