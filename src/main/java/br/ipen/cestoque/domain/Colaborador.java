@@ -144,6 +144,18 @@ public class Colaborador implements Serializable{
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		for(String s : emails) {
+			builder.append(s);
+			builder.append(",");
+		}
+		
+		return builder.toString();
+	}
+
 	
 	
 	

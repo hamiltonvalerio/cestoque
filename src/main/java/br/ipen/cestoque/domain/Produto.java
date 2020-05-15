@@ -29,6 +29,8 @@ public class Produto implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	private String nome;
 
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_produto;
@@ -54,9 +56,10 @@ public class Produto implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produto(Integer id, Date data_produto, String usualt, Date datalt, Colaborador colaborador, Date data_validade) {
+	public Produto(Integer id, String nome, Date data_produto, String usualt, Date datalt, Colaborador colaborador, Date data_validade) {
 		super();
 		this.id = id;
+		this.nome = nome;
 		this.data_produto = data_produto;
 		this.usualt = usualt;
 		this.datalt = datalt;
@@ -152,6 +155,15 @@ public class Produto implements Serializable{
 	public void setData_validade(Date data_validade) {
 		this.data_validade = data_validade;
 	}
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	@Override
 	public String toString() {
@@ -159,6 +171,8 @@ public class Produto implements Serializable{
 		StringBuilder builder = new StringBuilder();
 		builder.append("Data: ");
 		builder.append(sdf.format(getData_produto()));
+		builder.append(", Nome: ");
+		builder.append(getNome());
 		builder.append(", Inserido por: ");
 		builder.append(getColaborador().getNome());
 		builder.append(", Estado: ");

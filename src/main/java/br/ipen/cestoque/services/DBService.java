@@ -102,7 +102,7 @@ public class DBService {
 				colaboradorRepository.save(c1);
 				
 				
-				Produto p1 = new Produto(null, new Date(), "Hamilton", new Date(), c1, new Date()); 
+				Produto p1 = new Produto(null, "DEX500-TEC",new Date(), "Hamilton", new Date(), c1, new Date()); 
 				p1.setColaborador(c1);
 				
 				Producao pc1 = new Producao(null, EstadoProducao.EMPRODUCAO, "Hamilton", new Date(), p1);
