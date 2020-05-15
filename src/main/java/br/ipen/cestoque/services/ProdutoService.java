@@ -3,6 +3,7 @@ package br.ipen.cestoque.services;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
 import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class ProdutoService {
 	}
 
 
+	@Transactional
 	public Produto insert(Produto obj) {
 		obj.setId(null);
 		obj.setData_produto(new Date());

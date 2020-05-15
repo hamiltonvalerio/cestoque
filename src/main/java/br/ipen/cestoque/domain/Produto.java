@@ -1,6 +1,7 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -151,7 +152,23 @@ public class Produto implements Serializable{
 	public void setData_validade(Date data_validade) {
 		this.data_validade = data_validade;
 	}
-	
+
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		StringBuilder builder = new StringBuilder();
+		builder.append("Data: ");
+		builder.append(sdf.format(getData_produto()));
+		builder.append(", Inserido por: ");
+		builder.append(getColaborador().getNome());
+		builder.append(", Estado: ");
+		builder.append(getProducao().getEstadoProducao().getDescricao());
+		builder.append("\nDetalhes:\n");
+		for(ItemProduto ip : getItens()) {
+			builder.append(ip.toString());
+		}
+		return builder.toString();
+	}
 	
 	
 	

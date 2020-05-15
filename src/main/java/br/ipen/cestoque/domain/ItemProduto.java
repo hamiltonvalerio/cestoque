@@ -102,6 +102,16 @@ public class ItemProduto implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getInsumo().getNome());
+		builder.append(", Qtd: ");
+		builder.append(getQuantidade());
+		builder.append("\n");
+		return builder.toString();
+	}
 	
 	
 
