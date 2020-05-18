@@ -2,12 +2,12 @@ package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,13 +29,12 @@ public class Producao implements Serializable{
 		private Integer estado;
 		
 		private String usualt;
+		
 		private Date datalt;
 		
 		@JsonIgnore
-		@OneToOne
-		@JoinColumn(name = "produto_id")
-		@MapsId
-		private Produto produto;
+		@OneToMany(mappedBy = "id.producao")
+		private Set<ItemProducao> itensProducao = new HashSet<>();
 		
 		public Producao() {
 			super();
@@ -44,13 +43,12 @@ public class Producao implements Serializable{
 
 		
 
-		public Producao(Integer id, EstadoProducao estadoProducao, String usualt, Date datalt, Produto produto) {
+		public Producao(Integer id, EstadoProducao estadoProducao, String usualt, Date datalt) {
 			super();
 			this.id = id;
 			this.setEstado((estadoProducao == null) ? null :  estadoProducao.getCod());
 			this.usualt = usualt;
 			this.datalt = datalt;
-			this.setProduto(produto);
 		}
 
 
@@ -114,14 +112,17 @@ public class Producao implements Serializable{
 
 
 
-		public Produto getProduto() {
-			return produto;
+		
+
+
+		public Set<ItemProducao> getItensProducao() {
+			return itensProducao;
 		}
 
 
 
-		public void setProduto(Produto produto) {
-			this.produto = produto;
+		public void setItensProducao(Set<ItemProducao> itensProducao) {
+			this.itensProducao = itensProducao;
 		}
 
 

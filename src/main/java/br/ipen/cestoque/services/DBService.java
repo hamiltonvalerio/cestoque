@@ -12,10 +12,8 @@ import br.ipen.cestoque.domain.Fornecedor;
 import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.ItemProduto;
 import br.ipen.cestoque.domain.Localizacao;
-import br.ipen.cestoque.domain.Producao;
 import br.ipen.cestoque.domain.Produto;
 import br.ipen.cestoque.domain.Unidade;
-import br.ipen.cestoque.domain.enums.EstadoProducao;
 import br.ipen.cestoque.repositories.CategoriaRepository;
 import br.ipen.cestoque.repositories.ColaboradorRepository;
 import br.ipen.cestoque.repositories.FornecedorRepository;
@@ -102,15 +100,12 @@ public class DBService {
 				colaboradorRepository.save(c1);
 				
 				
-				Produto p1 = new Produto(null, "DEX500-TEC",new Date(), "Hamilton", new Date(), c1, new Date()); 
+				Produto p1 = new Produto(null, "DEX500-TEC",0.0,new Date(), "Hamilton", new Date(), c1, new Date()); 
 				p1.setColaborador(c1);
 				
-				Producao pc1 = new Producao(null, EstadoProducao.EMPRODUCAO, "Hamilton", new Date(), p1);
-				pc1.setProduto(p1);
-				p1.setProducao(pc1);
 				
 				produtoRepository.save(p1);
-				producaoRepository.save(pc1);
+			
 				
 				ItemProduto it1 = new ItemProduto(p1, i1, 1.0, 0.0);
 				ItemProduto it2 = new ItemProduto(p1, i2, 2.0, 0.0);

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable{
@@ -31,6 +30,8 @@ public class Produto implements Serializable{
 	private Integer id;
 	
 	private String nome;
+	
+	private Double quantidade;
 
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_produto;
@@ -45,21 +46,24 @@ public class Produto implements Serializable{
 	@JoinColumn(name = "colaborador_id")
 	private Colaborador colaborador;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "produto")
-	private Producao producao;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemProduto> itens = new HashSet<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemProducao> itensProducao = new HashSet<>();
 
 	public Produto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produto(Integer id, String nome, Date data_produto, String usualt, Date datalt, Colaborador colaborador, Date data_validade) {
+	public Produto(Integer id, String nome, Double quantidade, Date data_produto, String usualt, Date datalt, Colaborador colaborador, Date data_validade) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.quantidade = quantidade;
 		this.data_produto = data_produto;
 		this.usualt = usualt;
 		this.datalt = datalt;
@@ -105,14 +109,6 @@ public class Produto implements Serializable{
 
 	public void setColaborador(Colaborador colaborador) {
 		this.colaborador = colaborador;
-	}
-
-	public Producao getProducao() {
-		return producao;
-	}
-
-	public void setProducao(Producao producao) {
-		this.producao = producao;
 	}
 
 	@Override
@@ -175,13 +171,27 @@ public class Produto implements Serializable{
 		builder.append(getNome());
 		builder.append(", Inserido por: ");
 		builder.append(getColaborador().getNome());
-		builder.append(", Estado: ");
-		builder.append(getProducao().getEstadoProducao().getDescricao());
 		builder.append("\nDetalhes:\n");
 		for(ItemProduto ip : getItens()) {
 			builder.append(ip.toString());
 		}
 		return builder.toString();
+	}
+
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Set<ItemProducao> getItensProducao() {
+		return itensProducao;
+	}
+
+	public void setItensProducao(Set<ItemProducao> itensProducao) {
+		this.itensProducao = itensProducao;
 	}
 	
 	
