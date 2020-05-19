@@ -40,8 +40,10 @@ public class Colaborador implements Serializable{
 	@JsonIgnore
 	private String senha;
 	
+	private String email;
+	
 	@ElementCollection
-	@CollectionTable(name = "EMAIL")
+	@CollectionTable(name = "EMAILALTERNATIVO")
 	private Set<String> emails = new HashSet<>();
 	
 	@ElementCollection
@@ -64,7 +66,7 @@ public class Colaborador implements Serializable{
 		addPerfil(Perfil.ADMIN);
 	}
 
-	public Colaborador(Integer id, String nome, String cpf, String usualt, Date datalt, String senha) {
+	public Colaborador(Integer id, String nome, String cpf, String usualt, Date datalt, String senha, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -72,6 +74,7 @@ public class Colaborador implements Serializable{
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.senha = senha;
+		this.setEmail(email);
 		addPerfil(Perfil.ADMIN);
 	}
 
@@ -182,6 +185,14 @@ public class Colaborador implements Serializable{
 	
 	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

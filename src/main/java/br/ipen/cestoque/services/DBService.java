@@ -99,7 +99,7 @@ public class DBService {
 				
 				insumoRepository.saveAll(Arrays.asList(i1,i2,i3));
 				
-				Colaborador c1 = new Colaborador(null, "Hamilton", "84025166100", "Hamilton", new Date(),bCryptPasswordEncoder.encode("123"));
+				Colaborador c1 = new Colaborador(null, "Hamilton", "84025166100", "Hamilton", new Date(),bCryptPasswordEncoder.encode("123"),"htecmac@gmail.com");
 				
 				colaboradorRepository.save(c1);
 				

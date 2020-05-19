@@ -80,11 +80,11 @@ public class ColaboradorService {
 	}
 	
 	public Colaborador fromDTO(ColaboradorDTO objDto) {
-		return new Colaborador(objDto.getId(), objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt(),null);
+		return new Colaborador(objDto.getId(), objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt(),null,null);
 	}
 	
 	public Colaborador fromDTO(ColaboradorNewDTO objDto) {
-		Colaborador col = new Colaborador(null, objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt(), bCryptPasswordEncoder.encode(objDto.getSenha()));
+		Colaborador col = new Colaborador(null, objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt(), bCryptPasswordEncoder.encode(objDto.getSenha()), objDto.getEmail());
 		return col;
 	}
 	

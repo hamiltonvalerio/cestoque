@@ -30,6 +30,9 @@ public class ColaboradorNewDTO implements Serializable{
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String senha;
 	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	private String email;
+	
 	private Set<String> telefones = new HashSet<>();
 	
 	private Set<String> emails = new HashSet<>();
@@ -93,6 +96,14 @@ public class ColaboradorNewDTO implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
