@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Colaborador;
@@ -24,6 +25,9 @@ public class ColaboradorService {
 
 	@Autowired
 	private ColaboradorRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 		
 	public Colaborador find(Integer id) throws ObjectNotFoundException {
@@ -76,11 +80,11 @@ public class ColaboradorService {
 	}
 	
 	public Colaborador fromDTO(ColaboradorDTO objDto) {
-		return new Colaborador(objDto.getId(), objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt());
+		return new Colaborador(objDto.getId(), objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt(),null);
 	}
 	
 	public Colaborador fromDTO(ColaboradorNewDTO objDto) {
-		Colaborador col = new Colaborador(null, objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt());
+		Colaborador col = new Colaborador(null, objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt(), bCryptPasswordEncoder.encode(objDto.getSenha()));
 		return col;
 	}
 	

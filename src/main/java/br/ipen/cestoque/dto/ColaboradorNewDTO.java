@@ -27,6 +27,9 @@ public class ColaboradorNewDTO implements Serializable{
 	
 	private Date datalt;
 	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	private String senha;
+	
 	private Set<String> telefones = new HashSet<>();
 	
 	private Set<String> emails = new HashSet<>();
@@ -82,6 +85,14 @@ public class ColaboradorNewDTO implements Serializable{
 
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
@@ -54,6 +55,9 @@ public class DBService {
 	@Autowired
 	private ItemProdutoRepository itemProdutoRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public void instantiateTestDatabase() {
 		// TODO Auto-generated method stub
 				Categoria cat1 = new Categoria(null, "Categoria 01", "Hamilton", new Date());
@@ -95,7 +99,7 @@ public class DBService {
 				
 				insumoRepository.saveAll(Arrays.asList(i1,i2,i3));
 				
-				Colaborador c1 = new Colaborador(null, "Hamilton", "84025166100", "Hamilton", new Date());
+				Colaborador c1 = new Colaborador(null, "Hamilton", "84025166100", "Hamilton", new Date(),bCryptPasswordEncoder.encode("123"));
 				
 				colaboradorRepository.save(c1);
 				
