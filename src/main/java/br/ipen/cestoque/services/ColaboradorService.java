@@ -13,9 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Colaborador;
+import br.ipen.cestoque.domain.enums.Perfil;
 import br.ipen.cestoque.dto.ColaboradorDTO;
 import br.ipen.cestoque.dto.ColaboradorNewDTO;
 import br.ipen.cestoque.repositories.ColaboradorRepository;
+import br.ipen.cestoque.security.UserSS;
+import br.ipen.cestoque.services.exception.AuthorizationException;
 import br.ipen.cestoque.services.exception.DataIntegrityException;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 
@@ -31,6 +34,11 @@ public class ColaboradorService {
 	
 		
 	public Colaborador find(Integer id) throws ObjectNotFoundException {
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasHole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Colaborador> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Colaborador.class.getName()));
