@@ -6,12 +6,18 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.domain.ItemProduto;
 import br.ipen.cestoque.domain.Produto;
 import br.ipen.cestoque.repositories.ItemProdutoRepository;
 import br.ipen.cestoque.repositories.ProdutoRepository;
+import br.ipen.cestoque.security.UserSS;
+import br.ipen.cestoque.services.exception.AuthorizationException;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 
 
@@ -53,6 +59,18 @@ public class ProdutoService {
 		}
 		itemProdutoRepository.saveAll(obj.getItens());
 		return obj;
+	}
+	
+	public Page<Produto> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		
+		UserSS user =  UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Colaborador colaborador = colaboradorService.find(user.getId());
+		
+		return repo.findByColaborador(colaborador,pageRequest);
 	}
 	
 }
