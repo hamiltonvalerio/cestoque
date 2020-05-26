@@ -3,6 +3,7 @@ package br.ipen.cestoque.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -27,6 +28,10 @@ public class ColaboradorDTO implements Serializable{
 	@CPF
 	private String cpf;
 	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Email(message="Email inválido")
+	private String email;
+	
 	private String usualt;
 	
 	private Date datalt;
@@ -41,15 +46,17 @@ public class ColaboradorDTO implements Serializable{
 		id = obj.getId();
 		nome = obj.getNome();
 		cpf = obj.getCpf();
+		setEmail(obj.getEmail());
 		usualt = obj.getUsualt();
 		datalt = obj.getDatalt();
 	}
 
-	public ColaboradorDTO(Integer id, String nome, String cpf, String usualt, Date datalt) {
+	public ColaboradorDTO(Integer id, String nome, String cpf, String email, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
+		this.setEmail(email);
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -92,6 +99,14 @@ public class ColaboradorDTO implements Serializable{
 
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

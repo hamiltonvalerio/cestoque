@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import br.ipen.cestoque.services.validation.ColaboradorInsert;
@@ -31,6 +32,7 @@ public class ColaboradorNewDTO implements Serializable{
 	private String senha;
 	
 	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Email(message="Email inválido")
 	private String email;
 	
 	private Set<String> telefones = new HashSet<>();
