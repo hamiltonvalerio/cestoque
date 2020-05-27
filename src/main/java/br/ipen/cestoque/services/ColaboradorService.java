@@ -82,6 +82,18 @@ public class ColaboradorService {
 		return repo.findAll();
 	}
 	
+	public Colaborador findByEmail(String email) {
+		UserSS user = UserService.authenticated();
+		if(user==null || !user.hasHole(Perfil.ADMIN) && !email.equals(email)) {
+			throw new AuthorizationException("Acesso negado!");
+		} 
+		Colaborador obj = repo.findByEmail(email);
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: "+ user.getId() +", Tipo: "+Colaborador.class.getName());
+		}
+		return obj;
+	}
+	
 	public Page<Colaborador> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
@@ -95,5 +107,7 @@ public class ColaboradorService {
 		Colaborador col = new Colaborador(null, objDto.getNome(), objDto.getCpf(), objDto.getUsualt(), objDto.getDatalt(), bCryptPasswordEncoder.encode(objDto.getSenha()), objDto.getEmail());
 		return col;
 	}
+	
+	
 	
 }
