@@ -120,5 +120,7 @@ public class DBService {
 				i2.getItens().addAll(Arrays.asList(it2));
 				
 				itemProdutoRepository.saveAll(Arrays.asList(it1,it2));
+				
+				
 	}
 }
