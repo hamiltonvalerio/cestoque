@@ -46,10 +46,10 @@ public class ProdutoService {
 	@Transactional
 	public Produto insert(Produto obj) {
 		obj.setId(null);
-		obj.setData_produto(new Date());
-		obj.setData_validade(new Date());
-		obj.setUsualt("Hamilton");
-		obj.setDatalt(new Date());
+		obj.setData_produto(new Date(System.currentTimeMillis()));
+		//obj.setData_validade(new Date(System.currentTimeMillis()));
+		obj.setUsualt(UserService.authenticated().getUsername());
+		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj.setColaborador(colaboradorService.find(obj.getColaborador().getId()));
 		obj = repo.save(obj);
 		for(ItemProduto ip : obj.getItens()) {

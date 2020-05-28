@@ -33,8 +33,16 @@ public class InsumoEntrada {
 		return id.getEntrada();
 	}
 	
+	public void setEntrada(Entrada entrada) {
+		id.setEntrada(entrada);
+	}
+	
 	public Insumo getInsumo() {
 		return id.getInsumo();
+	}
+	
+	public void setInsumo(Insumo insumo) {
+		id.setInsumo(insumo);
 	}
 
 	public InsumoEntradaPK getId() {
