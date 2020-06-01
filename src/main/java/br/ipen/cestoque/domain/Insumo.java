@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@DynamicUpdate
+@DynamicUpdate(value=true)
 public class Insumo implements Serializable{
 
 	/**
