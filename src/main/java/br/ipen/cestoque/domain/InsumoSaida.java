@@ -33,8 +33,16 @@ public class InsumoSaida {
 		return id.getSaida();
 	}
 	
+	public void setSaida(Saida saida) {
+		id.setSaida(saida);
+	}
+	
 	public Insumo getInsumo() {
 		return id.getInsumo();
+	}
+	
+	public void setInsumo(Insumo insumo) {
+		id.setInsumo(insumo);
 	}
 
 	public InsumoSaidaPK getId() {
