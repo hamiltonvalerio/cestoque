@@ -35,6 +35,9 @@ public class ColaboradorNewDTO implements Serializable{
 	@Email(message="Email inválido")
 	private String email;
 	
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	private String confirmarsenha;
+	
 	private Set<String> telefones = new HashSet<>();
 	
 	private Set<String> emails = new HashSet<>();
@@ -106,6 +109,14 @@ public class ColaboradorNewDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getConfirmarsenha() {
+		return confirmarsenha;
+	}
+
+	public void setConfirmarsenha(String confirmarsenha) {
+		this.confirmarsenha = confirmarsenha;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,13 +41,17 @@ public class ColaboradorResource {
 	
 	@RequestMapping(value="/email",method=RequestMethod.GET)
 	public ResponseEntity<Colaborador> find(@RequestParam(value="value") String email){
+		System.out.println(email);
 		Colaborador colaborador = service.findByEmail(email);
+		System.out.println(colaborador.getEmail());
 		return ResponseEntity.ok().body(colaborador);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ColaboradorNewDTO objDto){
 		Colaborador obj = service.fromDTO(objDto);
+		obj.setDatalt(new Date(System.currentTimeMillis()));
+		obj.setUsualt(obj.getNome());
 		obj = service.insert(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
