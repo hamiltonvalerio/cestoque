@@ -29,6 +29,8 @@ public class Unidade implements Serializable{
 	
 	private String nome;
 	
+	private String sigla;
+	
 	private String usualt;
 	
 	private Date datalt;
@@ -44,10 +46,11 @@ public class Unidade implements Serializable{
 
 	
 
-	public Unidade(Integer id, String nome, String usualt, Date datalt) {
+	public Unidade(Integer id, String nome, String sigla, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.sigla = sigla;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -121,6 +124,18 @@ public class Unidade implements Serializable{
 
 	public void setInsumos(List<Insumo> insumos) {
 		this.insumos = insumos;
+	}
+
+
+
+	public String getSigla() {
+		return sigla;
+	}
+
+
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 
 	

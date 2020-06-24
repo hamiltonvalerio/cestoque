@@ -64,9 +64,9 @@ public class DBService {
 				Categoria cat2 = new Categoria(null, "Categoria 02", "Hamilton", new Date());
 				categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 				
-				Unidade un1 = new Unidade(null, "UN", "Hamilton", new Date()); 
-				Unidade un2 = new Unidade(null, "ML", "Hamilton", new Date());
-				Unidade un3 = new Unidade(null, "G", "Hamilton", new Date());
+				Unidade un1 = new Unidade(null, "UNIDADE","UN", "Hamilton", new Date()); 
+				Unidade un2 = new Unidade(null, "MILILITRO", "ML","Hamilton", new Date());
+				Unidade un3 = new Unidade(null, "GRAMA", "GR", "Hamilton", new Date());
 				unidadeRepository.saveAll(Arrays.asList(un1,un2,un3));
 				
 				Fornecedor f1 = new Fornecedor(null, "Teste de Fornecedor", "02114428000190", "Hamilton", new Date());
