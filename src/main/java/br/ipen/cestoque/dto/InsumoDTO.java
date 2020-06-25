@@ -26,6 +26,11 @@ public class InsumoDTO implements Serializable{
 	private Date data_validade;
 	
 	private Double quantidade;
+	
+	private String codigo_barra;
+	private String qrcode;
+	private String rfid;
+	
 	private String usualt;	
 	private Date datalt;
 	
@@ -44,6 +49,9 @@ public class InsumoDTO implements Serializable{
 		essencial = obj.getEssencial();
 		data_validade = obj.getData_validade();
 		quantidade = obj.getQuantidade();
+		codigo_barra = obj.getCodigo_barra();
+		qrcode = obj.getQrcode();
+		rfid = obj.getRfid();
 		usualt = obj.getUsualt();	
 		datalt = obj.getDatalt();
 	}
@@ -118,6 +126,30 @@ public class InsumoDTO implements Serializable{
 
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public String getCodigo_barra() {
+		return codigo_barra;
+	}
+
+	public void setCodigo_barra(String codigo_barra) {
+		this.codigo_barra = codigo_barra;
+	}
+
+	public String getQrcode() {
+		return qrcode;
+	}
+
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
+	}
+
+	public String getRfid() {
+		return rfid;
+	}
+
+	public void setRfid(String rfid) {
+		this.rfid = rfid;
 	}
 
 	public String getUsualt() {

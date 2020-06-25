@@ -44,6 +44,10 @@ public class Insumo implements Serializable{
 	private Date data_validade;
 	
 	private Double quantidade;
+	private String codigo_barra;
+	private String qrcode;
+	private String rfid;
+	
 	private String usualt;	
 	private Date datalt;
 	
@@ -87,9 +91,11 @@ public class Insumo implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, Integer codigo_almox, String observacao,
-			Boolean essencial, Date data_validade, Double quantidade, String usualt, Date datalt, Unidade uidade) {
+			Boolean essencial, Date data_validade, Double quantidade, String codigo_barra, String qrcode, 
+			String rfid, String usualt, Date datalt, Unidade uidade) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -100,10 +106,14 @@ public class Insumo implements Serializable{
 		this.essencial = essencial;
 		this.data_validade = data_validade;
 		this.quantidade = quantidade;
+		this.codigo_barra = codigo_barra;
+		this.qrcode = qrcode;
+		this.rfid = rfid;
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.setUnidade(unidade);
 	}
+
 	
 	@JsonIgnore
 	public List<Produto> getProdutos(){
@@ -185,6 +195,37 @@ public class Insumo implements Serializable{
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
+	
+
+	public String getCodigo_barra() {
+		return codigo_barra;
+	}
+
+
+	public void setCodigo_barra(String codigo_barra) {
+		this.codigo_barra = codigo_barra;
+	}
+
+
+	public String getQrcode() {
+		return qrcode;
+	}
+
+
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
+	}
+
+
+	public String getRfid() {
+		return rfid;
+	}
+
+
+	public void setRfid(String rfid) {
+		this.rfid = rfid;
+	}
+
 
 	public String getUsualt() {
 		return usualt;
