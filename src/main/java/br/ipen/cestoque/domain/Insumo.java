@@ -44,6 +44,7 @@ public class Insumo implements Serializable{
 	private Date data_validade;
 	
 	private Double quantidade;
+	private Double taxa_de_consumo;
 	private String codigo_barra;
 	private String qrcode;
 	private String rfid;
@@ -94,7 +95,7 @@ public class Insumo implements Serializable{
 	
 
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, Integer codigo_almox, String observacao,
-			Boolean essencial, Date data_validade, Double quantidade, String codigo_barra, String qrcode, 
+			Boolean essencial, Date data_validade, Double quantidade, Double taxa_de_consumo, String codigo_barra, String qrcode, 
 			String rfid, String usualt, Date datalt, Unidade uidade) {
 		super();
 		this.id = id;
@@ -106,6 +107,7 @@ public class Insumo implements Serializable{
 		this.essencial = essencial;
 		this.data_validade = data_validade;
 		this.quantidade = quantidade;
+		this.taxa_de_consumo = taxa_de_consumo;
 		this.codigo_barra = codigo_barra;
 		this.qrcode = qrcode;
 		this.rfid = rfid;
@@ -314,6 +316,16 @@ public class Insumo implements Serializable{
 
 	public void setLocalizacoes(List<Localizacao> localizacoes) {
 		this.localizacoes = localizacoes;
+	}
+
+
+	public Double getTaxa_de_consumo() {
+		return taxa_de_consumo;
+	}
+
+
+	public void setTaxa_de_consumo(Double taxa_de_consumo) {
+		this.taxa_de_consumo = taxa_de_consumo;
 	}
 	
 	
