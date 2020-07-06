@@ -3,33 +3,49 @@ package br.ipen.cestoque.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.Unidade;
 
-public class InsumoDTO implements Serializable{
+
+public class InsumoNewDTO implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nomenclatura;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
+	
 	private Double valor;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private Integer codigo_almox;
+	
+	
 	private String observacao;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private Boolean essencial;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_validade;
 	
+	
 	private Double quantidade;
+	
 	private Double taxa_de_consumo;
+	
 	private String codigo_barra;
+	
 	private String qrcode;
+	
 	private String rfid;
 	
 	private String usualt;	
@@ -37,36 +53,9 @@ public class InsumoDTO implements Serializable{
 	
 	private Unidade unidade;
 	
-	public InsumoDTO() {
+	public InsumoNewDTO() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	
-	public InsumoDTO(Insumo obj) {
-		id = obj.getId();
-		nomenclatura = obj.getNomenclatura();
-		nome = obj.getNome();
-		valor = obj.getValor();
-		observacao = obj.getObservacao();
-		codigo_almox = obj.getCodigo_almox();
-		essencial = obj.getEssencial();
-		data_validade = obj.getData_validade();
-		quantidade = obj.getQuantidade();
-		taxa_de_consumo = obj.getTaxa_de_consumo();
-		codigo_barra = obj.getCodigo_barra();
-		qrcode = obj.getQrcode();
-		rfid = obj.getRfid();
-		usualt = obj.getUsualt();	
-		datalt = obj.getDatalt();
-		unidade = obj.getUnidade();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNomenclatura() {

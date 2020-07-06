@@ -96,7 +96,7 @@ public class Insumo implements Serializable{
 
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, Integer codigo_almox, String observacao,
 			Boolean essencial, Date data_validade, Double quantidade, Double taxa_de_consumo, String codigo_barra, String qrcode, 
-			String rfid, String usualt, Date datalt, Unidade uidade) {
+			String rfid, String usualt, Date datalt, Unidade unidade) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
