@@ -2,6 +2,7 @@ package br.ipen.cestoque.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -38,6 +39,13 @@ public class InsumoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<InsumoDTO> > findAll(){
+		List<Insumo> list = service.findAll();
+		List<InsumoDTO> listDto = list.stream().map(obj -> new InsumoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<InsumoDTO> > findPage(
 			@RequestParam(value = "nome", defaultValue = "0") String nome, 
 			@RequestParam(value = "categorias", defaultValue = "0") String categorias, 

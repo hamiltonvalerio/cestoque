@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
-import br.ipen.cestoque.domain.Fornecedor;
 import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
@@ -110,7 +109,7 @@ public class InsumoService {
 	}
 	
 	public List<Insumo> findAll(){
-		return repo.findAll();
+		return repo.findAllByOrderByNomeAsc();
 	}
 	
 	public Page<Insumo> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){

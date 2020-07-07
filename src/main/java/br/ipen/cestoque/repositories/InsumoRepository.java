@@ -22,4 +22,6 @@ public interface InsumoRepository extends JpaRepository<Insumo, Integer>{
 			+ " cat WHERE obj.nome LIKE %:nome% AND cat IN :categorias")
 	Page<Insumo> search(@Param("nome") String nome, @Param("categorias") List<Categoria> categorias, Pageable pageRequest);
 
+	public List<Insumo> findAllByOrderByNomeAsc();
+
 }
