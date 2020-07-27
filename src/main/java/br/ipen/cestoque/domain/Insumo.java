@@ -68,13 +68,17 @@ public class Insumo implements Serializable{
 			)
 	private List<Fornecedor> fornecedores = new ArrayList<>();	
 	
+	/*
+	 * @JsonIgnore
+	 * 
+	 * @ManyToMany
+	 * 
+	 * @JoinTable(name = "INSUMO_LOCALIZACAO", joinColumns = @JoinColumn(name =
+	 * "insumo_id"), inverseJoinColumns = @JoinColumn(name = "localizacao_id") )
+	 */
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "INSUMO_LOCALIZACAO", 
-			joinColumns = @JoinColumn(name = "insumo_id"),
-			inverseJoinColumns = @JoinColumn(name = "localizacao_id")
-			)
-	private List<Localizacao> localizacoes = new ArrayList<>();
+	@OneToMany(mappedBy = "id.insumo")
+	private List<InsumoLocalizacao> localizacoes = new ArrayList<>();
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
@@ -83,6 +87,8 @@ public class Insumo implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<InsumoEntrada> entradas = new HashSet<>();
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
@@ -310,11 +316,15 @@ public class Insumo implements Serializable{
 		this.unidade = unidade;
 	}
 
-	public List<Localizacao> getLocalizacoes() {
+	
+
+
+	public List<InsumoLocalizacao> getLocalizacoes() {
 		return localizacoes;
 	}
 
-	public void setLocalizacoes(List<Localizacao> localizacoes) {
+
+	public void setLocalizacoes(List<InsumoLocalizacao> localizacoes) {
 		this.localizacoes = localizacoes;
 	}
 

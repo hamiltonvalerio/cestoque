@@ -32,7 +32,7 @@ public class InsumoLocalizacao {
 	}
 
 	public void setLocalizacao(Localizacao localizacao) {
-		this.id.setLocalizacao(localizacao);
+		id.setLocalizacao(localizacao);
 	}
 	
 	public Insumo getInsumo() {

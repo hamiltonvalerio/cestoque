@@ -1,15 +1,15 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Localizacao implements Serializable{
@@ -29,8 +29,9 @@ public class Localizacao implements Serializable{
 	
 	private Date datalt;
 	
-	@ManyToMany(mappedBy = "localizacoes")
-	private List<Insumo> insumos = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "id.localizacao")
+	private Set<InsumoLocalizacao> itens = new HashSet<>();
 
 	public Localizacao() {
 		super();
