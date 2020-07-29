@@ -68,4 +68,9 @@ public class EntradaService {
 		insumoRepository.saveAll(insumos);
 		return obj;
 	}
+	
+	public List<Entrada> findAll() {
+		// TODO Auto-generated method stub
+		return repo.findAll();
+	}
 }
