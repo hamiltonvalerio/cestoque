@@ -82,9 +82,9 @@ public class DBService {
 				Localizacao l2 = new Localizacao(null, "CONTROLE DE QUALIDADE", "Hamilton", new Date());
 				localizacaoRepository.saveAll(Arrays.asList(l1,l2));
 				
-				Insumo i1 = new Insumo(null, "bandeja de liofilizador estéril", "BANDEJA DE ACO INOXIDAVEL P/LIOFILIZADOS", 0.0, 8171, "", true, new Date(), 3.0,3.0,"","","","hamilton", new Date(), un1);
-				Insumo i2 = new Insumo(null, "ACIDO ASCORBICO PARA PREPARO DE SOLUCAO", "ACIDO ASCORBICO PA REF.A5960 (FR 100G) SIGMA", 0.0, 7588, "", true, new Date(), 1.0, 1.0,"","","","hamilton", new Date(), un2);
-				Insumo i3 = new Insumo(null, "ACETATO DE SODIO TRIHIDRATADO FR. 500G (106267) MERCK", "ACETATO DE SODIO 10%", 0.0, 7588, "", true, new Date(), 5.0, 5.0, "","","","hamilton", new Date(), un2);
+				Insumo i1 = new Insumo(null, "bandeja de liofilizador estéril", "BANDEJA DE ACO INOXIDAVEL P/LIOFILIZADOS", 0.0, "8171", "", true, new Date(), 3.0,3.0,"","","","hamilton", new Date(), un1, 123, true, new Date(), true, new Date(), "123");
+				Insumo i2 = new Insumo(null, "ACIDO ASCORBICO PARA PREPARO DE SOLUCAO", "ACIDO ASCORBICO PA REF.A5960 (FR 100G) SIGMA", 0.0, "7588", "", true, new Date(), 1.0, 1.0,"","","","hamilton", new Date(), un2, 123, true, new Date(), true, new Date(), "123");
+				Insumo i3 = new Insumo(null, "ACETATO DE SODIO TRIHIDRATADO FR. 500G (106267) MERCK", "ACETATO DE SODIO 10%", 0.0, "7588", "", true, new Date(), 5.0, 5.0, "","","","hamilton", new Date(), un2, 123, true, new Date(), true, new Date(), "123");
 				
 				i1.setCategorias(Arrays.asList(cat1));
 				i2.setCategorias(Arrays.asList(cat1));

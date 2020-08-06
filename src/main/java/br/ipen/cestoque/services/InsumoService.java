@@ -59,7 +59,14 @@ public class InsumoService {
 				objDto.getRfid(), 
 				objDto.getUsualt(), 
 				objDto.getDatalt(), 
-				objDto.getUnidade());
+				objDto.getUnidade(),
+				objDto.getCod_insumo_fornecedor(),
+				objDto.getIrradiado(),
+				objDto.getData_irradiado(),
+				objDto.getAmostra_cq(),
+				objDto.getData_amostra_cq(),
+				objDto.getLote()
+				);
 	}
 	
 	public Insumo fromDTO(@Valid InsumoNewDTO objDto) {
@@ -78,7 +85,14 @@ public class InsumoService {
 				objDto.getRfid(), 
 				objDto.getUsualt(), 
 				objDto.getDatalt(), 
-				objDto.getUnidade());
+				objDto.getUnidade(),
+				objDto.getCod_insumo_fornecedor(),
+				objDto.getIrradiado(),
+				objDto.getData_irradiado(),
+				objDto.getAmostra_cq(),
+				objDto.getData_amostra_cq(),
+				objDto.getLote()
+				);
 	}
 
 	public Insumo insert(Insumo obj) {

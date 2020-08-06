@@ -19,7 +19,7 @@ public class InsumoDTO implements Serializable{
 	private String nomenclatura;
 	private String nome;
 	private Double valor;
-	private Integer codigo_almox;
+	private String codigo_almox;
 	private String observacao;
 	private Boolean essencial;
 	
@@ -36,6 +36,13 @@ public class InsumoDTO implements Serializable{
 	private Date datalt;
 	
 	private Unidade unidade;
+	
+	private Integer cod_insumo_fornecedor;
+	private Boolean irradiado;
+	private Date data_irradiado;
+	private Boolean amostra_cq;
+	private Date data_amostra_cq;
+	private String lote;
 	
 	public InsumoDTO() {
 		super();
@@ -59,6 +66,13 @@ public class InsumoDTO implements Serializable{
 		usualt = obj.getUsualt();	
 		datalt = obj.getDatalt();
 		unidade = obj.getUnidade();
+		cod_insumo_fornecedor = obj.getCod_insumo_fornecedor();
+		irradiado = obj.getIrradiado();
+		data_irradiado = obj.getData_irradiado();
+		amostra_cq = obj.getAmostra_cq();
+		data_amostra_cq = obj.getData_amostra_cq();
+		lote = obj.getLote();
+		
 	}
 
 	public Integer getId() {
@@ -93,11 +107,11 @@ public class InsumoDTO implements Serializable{
 		this.valor = valor;
 	}
 
-	public Integer getCodigo_almox() {
+	public String getCodigo_almox() {
 		return codigo_almox;
 	}
 
-	public void setCodigo_almox(Integer codigo_almox) {
+	public void setCodigo_almox(String codigo_almox) {
 		this.codigo_almox = codigo_almox;
 	}
 
@@ -187,6 +201,54 @@ public class InsumoDTO implements Serializable{
 
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
+	}
+
+	public Integer getCod_insumo_fornecedor() {
+		return cod_insumo_fornecedor;
+	}
+
+	public void setCod_insumo_fornecedor(Integer cod_insumo_fornecedor) {
+		this.cod_insumo_fornecedor = cod_insumo_fornecedor;
+	}
+
+	public Boolean getIrradiado() {
+		return irradiado;
+	}
+
+	public void setIrradiado(Boolean irradiado) {
+		this.irradiado = irradiado;
+	}
+
+	public Date getData_irradiado() {
+		return data_irradiado;
+	}
+
+	public void setData_irradiado(Date data_irradiado) {
+		this.data_irradiado = data_irradiado;
+	}
+
+	public Boolean getAmostra_cq() {
+		return amostra_cq;
+	}
+
+	public void setAmostra_cq(Boolean amostra_cq) {
+		this.amostra_cq = amostra_cq;
+	}
+
+	public Date getData_amostra_cq() {
+		return data_amostra_cq;
+	}
+
+	public void setData_amostra_cq(Date data_amostra_cq) {
+		this.data_amostra_cq = data_amostra_cq;
+	}
+
+	public String getLote() {
+		return lote;
+	}
+
+	public void setLote(String lote) {
+		this.lote = lote;
 	}
 	
 	
