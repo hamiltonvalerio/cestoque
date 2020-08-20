@@ -43,6 +43,7 @@ public class InsumoDTO implements Serializable{
 	private Boolean amostra_cq;
 	private Date data_amostra_cq;
 	private String lote;
+	private String nome_codalmox;
 	
 	public InsumoDTO() {
 		super();
@@ -72,7 +73,7 @@ public class InsumoDTO implements Serializable{
 		amostra_cq = obj.getAmostra_cq();
 		data_amostra_cq = obj.getData_amostra_cq();
 		lote = obj.getLote();
-		
+		nome_codalmox = obj.getNome() +" - "+ obj.getCodigo_almox();
 	}
 
 	public Integer getId() {
@@ -249,6 +250,14 @@ public class InsumoDTO implements Serializable{
 
 	public void setLote(String lote) {
 		this.lote = lote;
+	}
+
+	public String getNome_codalmox() {
+		return nome_codalmox;
+	}
+
+	public void setNome_codalmox(String nome_codalmox) {
+		this.nome_codalmox = nome_codalmox;
 	}
 	
 	

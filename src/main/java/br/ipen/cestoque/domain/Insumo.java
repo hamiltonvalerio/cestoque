@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -58,6 +59,9 @@ public class Insumo implements Serializable{
 	private Boolean amostra_cq;
 	private Date data_amostra_cq;
 	private String lote;
+	
+	@Transient
+	private String nome_codalmox;
 	
 	
 	
@@ -421,6 +425,25 @@ public class Insumo implements Serializable{
 
 	public void setLote(String lote) {
 		this.lote = lote;
+	}
+
+
+
+
+
+	public String getNome_codalmox() {
+		if(this.nome != null && this.codigo_almox != null) {
+			this.setCodigo_almox(this.nome + " - "+ this.codigo_almox);
+		}
+		return nome_codalmox;
+	}
+
+
+
+
+
+	public void setNome_codalmox(String nome_codalmox) {
+		this.nome_codalmox = nome_codalmox;
 	}
 	
 	
