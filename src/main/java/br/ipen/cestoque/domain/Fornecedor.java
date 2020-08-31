@@ -23,6 +23,8 @@ public class Fornecedor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	private String cod_fornecedor;
+	
 	private String nome;
 
 	private String cnpj;
@@ -39,14 +41,19 @@ public class Fornecedor implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Fornecedor(Integer id, String nome, String cnpj, String usualt, Date datalt) {
+	
+
+	public Fornecedor(Integer id, String cod_fornecedor, String nome, String cnpj, String usualt, Date datalt) {
 		super();
 		this.id = id;
+		this.cod_fornecedor = cod_fornecedor;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -119,6 +126,14 @@ public class Fornecedor implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getCod_fornecedor() {
+		return cod_fornecedor;
+	}
+
+	public void setCod_fornecedor(String cod_fornecedor) {
+		this.cod_fornecedor = cod_fornecedor;
 	}
 
 }

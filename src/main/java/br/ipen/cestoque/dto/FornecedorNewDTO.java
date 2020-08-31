@@ -15,6 +15,8 @@ public class FornecedorNewDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String cod_fornecedor;
+	
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
 	
@@ -61,6 +63,14 @@ public class FornecedorNewDTO implements Serializable{
 
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
+	}
+
+	public String getCod_fornecedor() {
+		return cod_fornecedor;
+	}
+
+	public void setCod_fornecedor(String cod_fornecedor) {
+		this.cod_fornecedor = cod_fornecedor;
 	}
 	
 	

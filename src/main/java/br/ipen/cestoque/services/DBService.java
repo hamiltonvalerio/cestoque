@@ -74,8 +74,8 @@ public class DBService {
 				Unidade un3 = new Unidade(null, "GRAMA", "GR", "Hamilton", new Date());
 				unidadeRepository.saveAll(Arrays.asList(un1,un2,un3));
 				
-				Fornecedor f1 = new Fornecedor(null, "Teste de Fornecedor", "02114428000190", "Hamilton", new Date());
-				Fornecedor f2 = new Fornecedor(null, "Teste de Fornecedor2", "02114428000190", "Hamilton", new Date());
+				Fornecedor f1 = new Fornecedor(null, "123","Teste de Fornecedor", "02114428000190", "Hamilton", new Date());
+				Fornecedor f2 = new Fornecedor(null, "456","Teste de Fornecedor2", "02114428000190", "Hamilton", new Date());
 				fornecedorRepository.saveAll(Arrays.asList(f1,f2));
 				
 				Localizacao l1 = new Localizacao(null, "BUFFER RL", "Hamilton", new Date());

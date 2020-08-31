@@ -17,6 +17,8 @@ public class FornecedorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	private String cod_fornecedor;
 
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
@@ -40,11 +42,17 @@ public class FornecedorDTO implements Serializable {
 		cnpj = obj.getCnpj();
 		usualt = obj.getUsualt();
 		datalt = obj.getDatalt();
+		cod_fornecedor = obj.getCod_fornecedor();
 	}
 
-	public FornecedorDTO(Integer id, String nome, String cnpj, String usualt, Date datalt) {
+	
+	
+	public FornecedorDTO(Integer id, String cod_fornecedor,
+			@NotEmpty(message = "Preenchimento obrigatório!") String nome,
+			@NotEmpty(message = "Preenchimento obrigatório!") @CNPJ String cnpj, String usualt, Date datalt) {
 		super();
 		this.id = id;
+		this.cod_fornecedor = cod_fornecedor;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.usualt = usualt;
@@ -89,6 +97,14 @@ public class FornecedorDTO implements Serializable {
 
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
+	}
+
+	public String getCod_fornecedor() {
+		return cod_fornecedor;
+	}
+
+	public void setCod_fornecedor(String cod_fornecedor) {
+		this.cod_fornecedor = cod_fornecedor;
 	}
 
 }

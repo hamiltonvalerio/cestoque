@@ -76,11 +76,11 @@ public class FornecedorService {
 	}
 	
 	public Fornecedor fromDTO(FornecedorDTO objDto) {
-		return new Fornecedor(objDto.getId(), objDto.getNome(), objDto.getCnpj(), objDto.getUsualt(), objDto.getDatalt());
+		return new Fornecedor(objDto.getId(), objDto.getCod_fornecedor() ,objDto.getNome(), objDto.getCnpj(), objDto.getUsualt(), objDto.getDatalt());
 	}
 	
 	public Fornecedor fromDTO(FornecedorNewDTO objDto) {
-		Fornecedor col = new Fornecedor(null, objDto.getNome(), objDto.getCnpj(), objDto.getUsualt(), objDto.getDatalt());
+		Fornecedor col = new Fornecedor(null, objDto.getCod_fornecedor() ,objDto.getNome(), objDto.getCnpj(), objDto.getUsualt(), objDto.getDatalt());
 		return col;
 	}
 	
