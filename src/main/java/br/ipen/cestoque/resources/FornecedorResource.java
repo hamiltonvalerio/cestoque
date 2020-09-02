@@ -1,6 +1,7 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,17 @@ public class FornecedorResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<FornecedorDTO> > findAll(){
 		List<Fornecedor> list = service.findAll();
+		List<FornecedorDTO> listDto = list.stream().map(obj -> new FornecedorDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(value="/buscanome/",method=RequestMethod.GET)
+	public ResponseEntity<List<FornecedorDTO> > findByNome(@RequestParam(value = "nome") String nome){
+		if(nome.trim() == "") {
+			
+			return ResponseEntity.ok().body(new ArrayList<FornecedorDTO>());
+		}
+		List<Fornecedor> list = service.findByNome(nome);
 		List<FornecedorDTO> listDto = list.stream().map(obj -> new FornecedorDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}

@@ -10,6 +10,6 @@ import br.ipen.cestoque.domain.Fornecedor;
 @Repository
 public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>{
 
-	public List<Fornecedor> findByNome(String nome);
+	public List<Fornecedor> findByNomeContains(String nome);
 	
 }

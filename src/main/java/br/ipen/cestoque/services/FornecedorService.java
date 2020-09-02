@@ -70,6 +70,11 @@ public class FornecedorService {
 		return repo.findAll();
 	}
 	
+	public List<Fornecedor> findByNome(String nome) {
+		// TODO Auto-generated method stub
+		return repo.findByNomeContains(nome);
+	}
+	
 	public Page<Fornecedor> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
