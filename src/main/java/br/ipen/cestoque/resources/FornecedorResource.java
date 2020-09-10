@@ -81,7 +81,7 @@ public class FornecedorResource {
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<FornecedorDTO> > findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage, 
+			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage, 
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction
 			){
