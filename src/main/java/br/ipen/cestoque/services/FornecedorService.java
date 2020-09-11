@@ -72,7 +72,7 @@ public class FornecedorService {
 	
 	public List<Fornecedor> findByNome(String nome) {
 		// TODO Auto-generated method stub
-		return repo.findByNomeContains(nome);
+		return repo.findByNomeFormatado(nome);
 	}
 	
 	public Page<Fornecedor> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
