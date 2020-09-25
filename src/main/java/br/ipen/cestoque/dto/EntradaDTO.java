@@ -22,8 +22,13 @@ public class EntradaDTO implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_entrada;
 	
-	
 	private String numeronf;
+
+	private String numLIA;
+	
+	private String numProcesso;
+	
+	private String numRequisicao;
 	
 	private String usualt;
 	private Date datalt;
@@ -48,12 +53,15 @@ public class EntradaDTO implements Serializable{
 	
 
 
-	public EntradaDTO(Integer id, Date data_entrada, String numeronf, String usualt, Date datalt,
+	public EntradaDTO(Integer id, Date data_entrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt,
 			Set<InsumoEntrada> itens) {
 		super();
 		this.id = id;
 		this.data_entrada = data_entrada;
 		this.numeronf = numeronf;
+		this.numLIA = numLIA;
+		this.numProcesso = numProcesso;
+		this.numRequisicao = numRequisicao;
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.itens = itens;
@@ -81,6 +89,31 @@ public class EntradaDTO implements Serializable{
 
 	public void setNumeronf(String numeronf) {
 		this.numeronf = numeronf;
+	}
+	
+
+	public String getNumLIA() {
+		return numLIA;
+	}
+
+	public void setNumLIA(String numLIA) {
+		this.numLIA = numLIA;
+	}
+
+	public String getNumProcesso() {
+		return numProcesso;
+	}
+
+	public void setNumProcesso(String numProcesso) {
+		this.numProcesso = numProcesso;
+	}
+
+	public String getNumRequisicao() {
+		return numRequisicao;
+	}
+
+	public void setNumRequisicao(String numRequisicao) {
+		this.numRequisicao = numRequisicao;
 	}
 
 	public String getUsualt() {

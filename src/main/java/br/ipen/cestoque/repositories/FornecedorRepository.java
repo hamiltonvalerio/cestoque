@@ -18,6 +18,6 @@ public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>
 	public List<Fornecedor> findByNomeContainingIgnoreCase(String nome);
 	
 	@Transactional(readOnly=true)
-	@Query("SELECT f FROM Fornecedor f WHERE f.nome LIKE %:nome% ORDER BY f.nome ASC")
+	@Query("SELECT f FROM Fornecedor f WHERE LOWER(f.nome) LIKE %:nome% ORDER BY f.nome ASC")
 	public List<Fornecedor> findByNomeFormatado(@Param("nome") String nome);
 }
