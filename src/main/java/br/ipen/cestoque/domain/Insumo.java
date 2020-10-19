@@ -37,27 +37,27 @@ public class Insumo implements Serializable{
 	private String nomenclatura;
 	private String nome;
 	private Double valor;
-	private String codigo_almox;
+	private String codigoalmox;
 	private String observacao;
 	private Boolean essencial;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date data_validade;
+	private Date datavalidade;
 	
 	private Double quantidade;
-	private Double taxa_de_consumo;
-	private String codigo_barra;
+	private Double taxadeconsumo;
+	private String codigobarra;
 	private String qrcode;
 	private String rfid;
 	
 	private String usualt;	
 	private Date datalt;
 	
-	private Integer cod_insumo_fornecedor;
+	private Integer codinsumofornecedor;
 	private Boolean irradiado;
-	private Date data_irradiado;
-	private Boolean amostra_cq;
-	private Date data_amostra_cq;
+	private Date datairradiado;
+	private Boolean amostracq;
+	private Date dataamostracq;
 	private String lote;
 	
 	@Transient
@@ -116,32 +116,32 @@ public class Insumo implements Serializable{
 	
 
 	
-	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigo_almox, String observacao,
-			Boolean essencial, Date data_validade, Double quantidade, Double taxa_de_consumo, String codigo_barra,
-			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer cod_insumo_fornecedor, Boolean irradiado,
-			Date data_irradiado, Boolean amostra_cq, Date data_amostra_cq, String lote) {
+	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigoalmox, String observacao,
+			Boolean essencial, Date datavalidade, Double quantidade, Double taxadeconsumo, String codigobarra,
+			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor, Boolean irradiado,
+			Date datairradiado, Boolean amostracq, Date dataamostracq, String lote) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
 		this.nome = nome;
 		this.valor = valor;
-		this.codigo_almox = codigo_almox;
+		this.codigoalmox = codigoalmox;
 		this.observacao = observacao;
 		this.essencial = essencial;
-		this.data_validade = data_validade;
+		this.datavalidade = datavalidade;
 		this.quantidade = quantidade;
-		this.taxa_de_consumo = taxa_de_consumo;
-		this.codigo_barra = codigo_barra;
+		this.taxadeconsumo = taxadeconsumo;
+		this.codigobarra = codigobarra;
 		this.qrcode = qrcode;
 		this.rfid = rfid;
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.setUnidade(unidade);
-		this.cod_insumo_fornecedor = cod_insumo_fornecedor;
+		this.codinsumofornecedor = codinsumofornecedor;
 		this.irradiado = irradiado;
-		this.data_irradiado = data_irradiado;
-		this.amostra_cq = amostra_cq;
-		this.data_amostra_cq = data_amostra_cq;
+		this.datairradiado = datairradiado;
+		this.amostracq = amostracq;
+		this.dataamostracq = dataamostracq;
 		this.lote = lote;
 	}
 
@@ -193,13 +193,6 @@ public class Insumo implements Serializable{
 		this.valor = valor;
 	}
 
-	public String getCodigo_almox() {
-		return codigo_almox;
-	}
-
-	public void setCodigo_almox(String codigo_almox) {
-		this.codigo_almox = codigo_almox;
-	}
 
 	public String getObservacao() {
 		return observacao;
@@ -217,13 +210,6 @@ public class Insumo implements Serializable{
 		this.essencial = essencial;
 	}
 
-	public Date getData_validade() {
-		return data_validade;
-	}
-
-	public void setData_validade(Date data_validade) {
-		this.data_validade = data_validade;
-	}
 
 	public Double getQuantidade() {
 		return quantidade;
@@ -234,14 +220,6 @@ public class Insumo implements Serializable{
 	}
 	
 
-	public String getCodigo_barra() {
-		return codigo_barra;
-	}
-
-
-	public void setCodigo_barra(String codigo_barra) {
-		this.codigo_barra = codigo_barra;
-	}
 
 
 	public String getQrcode() {
@@ -358,24 +336,7 @@ public class Insumo implements Serializable{
 	}
 
 
-	public Double getTaxa_de_consumo() {
-		return taxa_de_consumo;
-	}
 
-
-	public void setTaxa_de_consumo(Double taxa_de_consumo) {
-		this.taxa_de_consumo = taxa_de_consumo;
-	}
-
-
-	public Integer getCod_insumo_fornecedor() {
-		return cod_insumo_fornecedor;
-	}
-
-
-	public void setCod_insumo_fornecedor(Integer cod_insumo_fornecedor) {
-		this.cod_insumo_fornecedor = cod_insumo_fornecedor;
-	}
 
 
 	public Boolean getIrradiado() {
@@ -388,34 +349,7 @@ public class Insumo implements Serializable{
 	}
 
 
-	public Date getData_irradiado() {
-		return data_irradiado;
-	}
-
-
-	public void setData_irradiado(Date data_irradiado) {
-		this.data_irradiado = data_irradiado;
-	}
-
-
-	public Boolean getAmostra_cq() {
-		return amostra_cq;
-	}
-
-
-	public void setAmostra_cq(Boolean amostra_cq) {
-		this.amostra_cq = amostra_cq;
-	}
-
-
-	public Date getData_amostra_cq() {
-		return data_amostra_cq;
-	}
-
-
-	public void setData_amostra_cq(Date data_amostra_cq) {
-		this.data_amostra_cq = data_amostra_cq;
-	}
+	
 
 
 	public String getLote() {
@@ -427,13 +361,143 @@ public class Insumo implements Serializable{
 		this.lote = lote;
 	}
 
+	
+	
+
+
+
+
+	public String getCodigoalmox() {
+		return codigoalmox;
+	}
+
+
+
+
+
+	public void setCodigoalmox(String codigoalmox) {
+		this.codigoalmox = codigoalmox;
+	}
+
+
+
+
+
+	public Date getDatavalidade() {
+		return datavalidade;
+	}
+
+
+
+
+
+	public void setDatavalidade(Date datavalidade) {
+		this.datavalidade = datavalidade;
+	}
+
+
+
+
+
+	public Double getTaxadeconsumo() {
+		return taxadeconsumo;
+	}
+
+
+
+
+
+	public void setTaxadeconsumo(Double taxadeconsumo) {
+		this.taxadeconsumo = taxadeconsumo;
+	}
+
+
+
+
+
+	public String getCodigobarra() {
+		return codigobarra;
+	}
+
+
+
+
+
+	public void setCodigobarra(String codigobarra) {
+		this.codigobarra = codigobarra;
+	}
+
+
+
+
+
+	public Integer getCodinsumofornecedor() {
+		return codinsumofornecedor;
+	}
+
+
+
+
+
+	public void setCodinsumofornecedor(Integer codinsumofornecedor) {
+		this.codinsumofornecedor = codinsumofornecedor;
+	}
+
+
+
+
+
+	public Date getDatairradiado() {
+		return datairradiado;
+	}
+
+
+
+
+
+	public void setDatairradiado(Date datairradiado) {
+		this.datairradiado = datairradiado;
+	}
+
+
+
+
+
+	public Boolean getAmostracq() {
+		return amostracq;
+	}
+
+
+
+
+
+	public void setAmostracq(Boolean amostracq) {
+		this.amostracq = amostracq;
+	}
+
+
+
+
+
+	public Date getDataamostracq() {
+		return dataamostracq;
+	}
+
+
+
+
+
+	public void setDataamostracq(Date dataamostracq) {
+		this.dataamostracq = dataamostracq;
+	}
+
 
 
 
 
 	public String getNome_codalmox() {
-		if(this.nome != null && this.codigo_almox != null) {
-			this.setCodigo_almox(this.nome + " - "+ this.codigo_almox);
+		if(this.nome != null && this.codigoalmox != null) {
+			this.setCodigoalmox(this.nome + " - "+ this.codigoalmox);
 		}
 		return nome_codalmox;
 	}

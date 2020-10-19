@@ -19,16 +19,16 @@ public class InsumoDTO implements Serializable{
 	private String nomenclatura;
 	private String nome;
 	private Double valor;
-	private String codigo_almox;
+	private String codigoalmox;
 	private String observacao;
 	private Boolean essencial;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date data_validade;
+	private Date datavalidade;
 	
 	private Double quantidade;
-	private Double taxa_de_consumo;
-	private String codigo_barra;
+	private Double taxadeconsumo;
+	private String codigobarra;
 	private String qrcode;
 	private String rfid;
 	
@@ -37,13 +37,13 @@ public class InsumoDTO implements Serializable{
 	
 	private Unidade unidade;
 	
-	private Integer cod_insumo_fornecedor;
+	private Integer codinsumofornecedor;
 	private Boolean irradiado;
-	private Date data_irradiado;
-	private Boolean amostra_cq;
-	private Date data_amostra_cq;
+	private Date datairradiado;
+	private Boolean amostracq;
+	private Date dataamostracq;
 	private String lote;
-	private String nome_codalmox;
+	private String nomecodalmox;
 	
 	public InsumoDTO() {
 		super();
@@ -56,24 +56,24 @@ public class InsumoDTO implements Serializable{
 		nome = obj.getNome();
 		valor = obj.getValor();
 		observacao = obj.getObservacao();
-		codigo_almox = obj.getCodigo_almox();
+		codigoalmox = obj.getCodigoalmox();
 		essencial = obj.getEssencial();
-		data_validade = obj.getData_validade();
+		datavalidade = obj.getDatavalidade();
 		quantidade = obj.getQuantidade();
-		taxa_de_consumo = obj.getTaxa_de_consumo();
-		codigo_barra = obj.getCodigo_barra();
+		taxadeconsumo = obj.getTaxadeconsumo();
+		codigobarra = obj.getCodigobarra();
 		qrcode = obj.getQrcode();
 		rfid = obj.getRfid();
 		usualt = obj.getUsualt();	
 		datalt = obj.getDatalt();
 		unidade = obj.getUnidade();
-		cod_insumo_fornecedor = obj.getCod_insumo_fornecedor();
+		codinsumofornecedor = obj.getCodinsumofornecedor();
 		irradiado = obj.getIrradiado();
-		data_irradiado = obj.getData_irradiado();
-		amostra_cq = obj.getAmostra_cq();
-		data_amostra_cq = obj.getData_amostra_cq();
+		datairradiado = obj.getDatairradiado();
+		amostracq = obj.getAmostracq();
+		dataamostracq = obj.getDataamostracq();
 		lote = obj.getLote();
-		nome_codalmox = obj.getNome() +" - "+ obj.getCodigo_almox();
+		nomecodalmox = obj.getNome() +" - "+ obj.getCodigoalmox();
 	}
 
 	public Integer getId() {
@@ -108,12 +108,12 @@ public class InsumoDTO implements Serializable{
 		this.valor = valor;
 	}
 
-	public String getCodigo_almox() {
-		return codigo_almox;
+	public String getCodigoalmox() {
+		return codigoalmox;
 	}
 
-	public void setCodigo_almox(String codigo_almox) {
-		this.codigo_almox = codigo_almox;
+	public void setCodigoalmox(String codigoalmox) {
+		this.codigoalmox = codigoalmox;
 	}
 
 	public String getObservacao() {
@@ -132,12 +132,12 @@ public class InsumoDTO implements Serializable{
 		this.essencial = essencial;
 	}
 
-	public Date getData_validade() {
-		return data_validade;
+	public Date getDatavalidade() {
+		return datavalidade;
 	}
 
-	public void setData_validade(Date data_validade) {
-		this.data_validade = data_validade;
+	public void setDatavalidade(Date datavalidade) {
+		this.datavalidade = datavalidade;
 	}
 
 	public Double getQuantidade() {
@@ -148,12 +148,12 @@ public class InsumoDTO implements Serializable{
 		this.quantidade = quantidade;
 	}
 
-	public String getCodigo_barra() {
-		return codigo_barra;
+	public String getCodigobarra() {
+		return codigobarra;
 	}
 
-	public void setCodigo_barra(String codigo_barra) {
-		this.codigo_barra = codigo_barra;
+	public void setCodigobarra(String codigobarra) {
+		this.codigobarra = codigobarra;
 	}
 
 	public String getQrcode() {
@@ -188,12 +188,12 @@ public class InsumoDTO implements Serializable{
 		this.datalt = datalt;
 	}
 
-	public Double getTaxa_de_consumo() {
-		return taxa_de_consumo;
+	public Double getTaxadeconsumo() {
+		return taxadeconsumo;
 	}
 
-	public void setTaxa_de_consumo(Double taxa_de_consumo) {
-		this.taxa_de_consumo = taxa_de_consumo;
+	public void setTaxadeconsumo(Double taxadeconsumo) {
+		this.taxadeconsumo = taxadeconsumo;
 	}
 
 	public Unidade getUnidade() {
@@ -204,12 +204,12 @@ public class InsumoDTO implements Serializable{
 		this.unidade = unidade;
 	}
 
-	public Integer getCod_insumo_fornecedor() {
-		return cod_insumo_fornecedor;
+	public Integer getCodinsumofornecedor() {
+		return codinsumofornecedor;
 	}
 
-	public void setCod_insumo_fornecedor(Integer cod_insumo_fornecedor) {
-		this.cod_insumo_fornecedor = cod_insumo_fornecedor;
+	public void setCodinsumofornecedor(Integer codinsumofornecedor) {
+		this.codinsumofornecedor = codinsumofornecedor;
 	}
 
 	public Boolean getIrradiado() {
@@ -220,28 +220,28 @@ public class InsumoDTO implements Serializable{
 		this.irradiado = irradiado;
 	}
 
-	public Date getData_irradiado() {
-		return data_irradiado;
+	public Date getDatairradiado() {
+		return datairradiado;
 	}
 
-	public void setData_irradiado(Date data_irradiado) {
-		this.data_irradiado = data_irradiado;
+	public void setDatairradiado(Date datairradiado) {
+		this.datairradiado = datairradiado;
 	}
 
-	public Boolean getAmostra_cq() {
-		return amostra_cq;
+	public Boolean getAmostracq() {
+		return amostracq;
 	}
 
-	public void setAmostra_cq(Boolean amostra_cq) {
-		this.amostra_cq = amostra_cq;
+	public void setAmostracq(Boolean amostracq) {
+		this.amostracq = amostracq;
 	}
 
-	public Date getData_amostra_cq() {
-		return data_amostra_cq;
+	public Date getDataamostracq() {
+		return dataamostracq;
 	}
 
-	public void setData_amostra_cq(Date data_amostra_cq) {
-		this.data_amostra_cq = data_amostra_cq;
+	public void setDataamostracq(Date dataamostracq) {
+		this.dataamostracq = dataamostracq;
 	}
 
 	public String getLote() {
@@ -252,12 +252,12 @@ public class InsumoDTO implements Serializable{
 		this.lote = lote;
 	}
 
-	public String getNome_codalmox() {
-		return nome_codalmox;
+	public String getNomecodalmox() {
+		return nomecodalmox;
 	}
 
-	public void setNome_codalmox(String nome_codalmox) {
-		this.nome_codalmox = nome_codalmox;
+	public void setNomecodalmox(String nomecodalmox) {
+		this.nomecodalmox = nomecodalmox;
 	}
 	
 	

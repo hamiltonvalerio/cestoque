@@ -26,7 +26,7 @@ public class Entrada implements Serializable{
 	private Integer id;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date data_entrada;
+	private Date dataEntrada;
 	
 	private String numeronf;
 	
@@ -47,10 +47,10 @@ public class Entrada implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Entrada(Integer id, Date data_entrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt) {
+	public Entrada(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt) {
 		super();
 		this.id = id;
-		this.data_entrada = data_entrada;
+		this.dataEntrada = dataEntrada;
 		this.numeronf = numeronf;
 		this.numLIA = numLIA;
 		this.numProcesso = numProcesso;
@@ -67,12 +67,12 @@ public class Entrada implements Serializable{
 		this.id = id;
 	}
 
-	public Date getData_entrada() {
-		return data_entrada;
+	public Date getDataEntrada() {
+		return dataEntrada;
 	}
 
-	public void setData_entrada(Date data_entrada) {
-		this.data_entrada = data_entrada;
+	public void setDataEntrada(Date dataEntrada) {
+		this.dataEntrada = dataEntrada;
 	}
 
 	public String getNumeronf() {

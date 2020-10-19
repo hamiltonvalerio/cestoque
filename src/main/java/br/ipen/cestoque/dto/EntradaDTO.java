@@ -20,7 +20,7 @@ public class EntradaDTO implements Serializable{
 	private Integer id;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date data_entrada;
+	private Date dataEntrada;
 	
 	private String numeronf;
 
@@ -33,6 +33,8 @@ public class EntradaDTO implements Serializable{
 	private String usualt;
 	private Date datalt;
 	
+	private Boolean show;
+	
 	private Set<InsumoEntrada> itens = new HashSet<>();
 	
 	public EntradaDTO() {
@@ -43,21 +45,25 @@ public class EntradaDTO implements Serializable{
 	public EntradaDTO(Entrada obj) {
 		super();
 		this.id = obj.getId();
-		this.data_entrada = obj.getData_entrada();
+		this.dataEntrada = obj.getDataEntrada();
 		this.numeronf = obj.getNumeronf();
+		this.numLIA = obj.getNumLIA();
+		this.numProcesso = obj.getNumProcesso();
+		this.numRequisicao = obj.getNumRequisicao();
 		this.usualt = obj.getUsualt();
 		this.datalt = obj.getDatalt();
 		this.itens.addAll(obj.getItens());
+		this.show = false;
 	}
 	
 	
 
 
-	public EntradaDTO(Integer id, Date data_entrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt,
+	public EntradaDTO(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt,
 			Set<InsumoEntrada> itens) {
 		super();
 		this.id = id;
-		this.data_entrada = data_entrada;
+		this.dataEntrada = dataEntrada;
 		this.numeronf = numeronf;
 		this.numLIA = numLIA;
 		this.numProcesso = numProcesso;
@@ -75,12 +81,13 @@ public class EntradaDTO implements Serializable{
 		this.id = id;
 	}
 
-	public Date getData_entrada() {
-		return data_entrada;
+
+	public Date getDataEntrada() {
+		return dataEntrada;
 	}
 
-	public void setData_entrada(Date data_entrada) {
-		this.data_entrada = data_entrada;
+	public void setDataEntrada(Date dataEntrada) {
+		this.dataEntrada = dataEntrada;
 	}
 
 	public String getNumeronf() {
@@ -138,6 +145,14 @@ public class EntradaDTO implements Serializable{
 
 	public void setItens(Set<InsumoEntrada> itens) {
 		this.itens = itens;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 	
 	

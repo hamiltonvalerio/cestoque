@@ -45,7 +45,7 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@RequestMapping(value="/page", method=RequestMethod.GET)
+	/*@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<InsumoDTO> > findPage(
 			@RequestParam(value = "nome", defaultValue = "0") String nome, 
 			@RequestParam(value = "categorias", defaultValue = "0") String categorias, 
@@ -57,6 +57,20 @@ public class InsumoResource {
 	    List<Integer> ids = URL.decodeIntList(categorias);
 	    String nomeDecoded = URL.decodeParam(nome);
 		Page<Insumo> list = service.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
+		Page<InsumoDTO> listDto = list.map(obj -> new InsumoDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+	}*/
+	
+	
+	@RequestMapping(value="/page", method=RequestMethod.GET)
+	public ResponseEntity<Page<InsumoDTO> > findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage, 
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction
+			){
+
+		Page<Insumo> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<InsumoDTO> listDto = list.map(obj -> new InsumoDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}

@@ -36,6 +36,7 @@ public class EntradaResource {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Entrada obj){
+		System.out.println("obj: "+obj.getNumLIA());
 		obj = service.insert(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -44,7 +45,13 @@ public class EntradaResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<EntradaDTO> > findAll(){
 		List<Entrada> list = service.findAll();
+		for (Entrada e : list) {
+			System.out.println(e.getNumRequisicao());
+		}
 		List<EntradaDTO> listDto = list.stream().map(obj -> new EntradaDTO(obj)).collect(Collectors.toList());
+		for (EntradaDTO eDTO : listDto) {
+			System.out.println("AQUI: "+eDTO.getNumRequisicao());
+		}
 		return ResponseEntity.ok().body(listDto);
 	}
 	
