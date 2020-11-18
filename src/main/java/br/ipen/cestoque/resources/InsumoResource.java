@@ -71,7 +71,9 @@ public class InsumoResource {
 			){
 
 		Page<Insumo> list = service.findPage(page, linesPerPage, orderBy, direction);
+		System.out.println(list.getSize());
 		Page<InsumoDTO> listDto = list.map(obj -> new InsumoDTO(obj));
+		System.out.println(listDto.getSize());
 		return ResponseEntity.ok().body(listDto);
 	}
 	

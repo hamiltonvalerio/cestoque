@@ -59,6 +59,9 @@ public class EntradaService {
 			ie.setInsumo(insumo);
 			ie.setQuantidade(quant);
 			//insumo.setId(ie.getInsumo().getId());
+			if(ie.getInsumo().getQuantidade() == null) {
+				ie.getInsumo().setQuantidade(0.0);
+			}
 			insumo.setQuantidade(ie.getInsumo().getQuantidade() + quant);
 			insumos.add(insumo);
 			ie.setValor(ie.getInsumo().getValor());
