@@ -55,6 +55,8 @@ public class EntradaService {
 		for(InsumoEntrada ie : obj.getItens()) {
 			insumo = new Insumo();
 			insumo = insumoService.find(ie.getInsumo().getId());
+			insumo.setUnidade(ie.getId().getInsumo().getUnidade());
+			insumo.setValor(ie.getValor());
 			quant = ie.getQuantidade();
 			ie.setInsumo(insumo);
 			ie.setQuantidade(quant);
@@ -64,7 +66,7 @@ public class EntradaService {
 			}
 			insumo.setQuantidade(ie.getInsumo().getQuantidade() + quant);
 			insumos.add(insumo);
-			ie.setValor(ie.getInsumo().getValor());
+			//ie.setValor(ie.getInsumo().getValor());
 			ie.setEntrada(obj);
 		}
 		insumoEntradaRepository.saveAll(obj.getItens());
