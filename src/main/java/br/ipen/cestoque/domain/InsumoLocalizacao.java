@@ -23,7 +23,7 @@ public class InsumoLocalizacao {
 		super();
 		id.setInsumo(insumo);
 		id.setLocalizacao(localizacao);
-		this.quantidade = quantidade;
+		this.setQuantidade(quantidade);
 	}
 	
 	@JsonIgnore
@@ -58,5 +58,7 @@ public class InsumoLocalizacao {
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	
 
 }

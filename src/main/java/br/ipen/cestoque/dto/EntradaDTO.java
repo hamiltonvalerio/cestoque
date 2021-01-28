@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.ipen.cestoque.domain.Entrada;
 import br.ipen.cestoque.domain.InsumoEntrada;
+import br.ipen.cestoque.domain.Localizacao;
 
 public class EntradaDTO implements Serializable{
 
@@ -35,6 +36,8 @@ public class EntradaDTO implements Serializable{
 	
 	private Boolean show;
 	
+	private Localizacao localizacao;
+	
 	private Set<InsumoEntrada> itens = new HashSet<>();
 	
 	public EntradaDTO() {
@@ -52,6 +55,7 @@ public class EntradaDTO implements Serializable{
 		this.numRequisicao = obj.getNumRequisicao();
 		this.usualt = obj.getUsualt();
 		this.datalt = obj.getDatalt();
+		this.setLocalizacao(obj.getLocalizacao());
 		this.itens.addAll(obj.getItens());
 		this.show = false;
 	}
@@ -153,6 +157,15 @@ public class EntradaDTO implements Serializable{
 
 	public void setShow(Boolean show) {
 		this.show = show;
+	}
+
+	
+	public Localizacao getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
 	}
 	
 	

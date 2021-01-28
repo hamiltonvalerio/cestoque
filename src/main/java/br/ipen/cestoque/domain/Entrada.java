@@ -39,6 +39,8 @@ public class Entrada implements Serializable{
 	private String usualt;
 	private Date datalt;
 	
+	private Localizacao localizacao;
+	
 	@OneToMany(mappedBy = "id.entrada")
 	private Set<InsumoEntrada> itens = new HashSet<>();
 	
@@ -47,7 +49,7 @@ public class Entrada implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Entrada(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt) {
+	public Entrada(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt, Localizacao localizacao) {
 		super();
 		this.id = id;
 		this.dataEntrada = dataEntrada;
@@ -57,6 +59,7 @@ public class Entrada implements Serializable{
 		this.numRequisicao = numRequisicao;
 		this.usualt = usualt;
 		this.datalt = datalt;
+		this.localizacao = localizacao;
 	}
 
 	public Integer getId() {
@@ -155,6 +158,14 @@ public class Entrada implements Serializable{
 
 	public void setItens(Set<InsumoEntrada> itens) {
 		this.itens = itens;
+	}
+
+	public Localizacao getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
 	}
 	
 	
