@@ -106,6 +106,8 @@ public class Insumo implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
+	
+	
 
 	public Insumo(){
 		super();
@@ -509,6 +511,9 @@ public class Insumo implements Serializable{
 	public void setNome_codalmox(String nome_codalmox) {
 		this.nome_codalmox = nome_codalmox;
 	}
+
+
+
 	
 	
 	

@@ -79,4 +79,6 @@ public class LocalizacaoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	
+	
 }

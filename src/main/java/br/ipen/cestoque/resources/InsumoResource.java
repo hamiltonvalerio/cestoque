@@ -1,6 +1,7 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
 import br.ipen.cestoque.resources.utils.URL;
@@ -76,6 +78,51 @@ public class InsumoResource {
 		System.out.println(listDto.getSize());
 		return ResponseEntity.ok().body(listDto);
 	}
+	
+	@RequestMapping(value="/buscaporlocalizacao2", method=RequestMethod.GET)
+	public ResponseEntity<Page<InsumoDTO> > findByLocalizacao2(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage, 
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction
+			){
+
+		Page<Insumo> list = service.findByLocalizacao(Integer.parseInt(localizacao_id), page, linesPerPage, orderBy, direction);
+		//System.out.println(list.getSize());
+		Page<InsumoDTO> listDto = list.map(obj -> new InsumoDTO(obj));
+		//System.out.println(listDto.getSize());
+		return ResponseEntity.ok().body(listDto);
+		//return ResponseEntity.ok().body(list);
+	
+	}
+	
+	@RequestMapping(value="/buscaporlocalizacao", method=RequestMethod.GET)
+	public ResponseEntity<Page<Insumo> > findByLocalizacao(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage, 
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction
+			){
+
+		Page<Insumo> list = service.findByLocalizacao(Integer.parseInt(localizacao_id), page, linesPerPage, orderBy, direction);
+		//System.out.println(list.getSize());
+		for (Insumo insumo : list) {
+			for (InsumoLocalizacao il : insumo.getLocalizacoes()) {
+				if(il.getId().getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
+					insumo.setQuantidade(il.getQuantidade());
+				}
+			}
+		}
+		//Page<InsumoDTO> listDto = list.map(obj -> new InsumoDTO(obj));
+		//System.out.println(listDto.getSize());
+		return ResponseEntity.ok().body(list);
+		//return ResponseEntity.ok().body(list);
+	
+	}
+	
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody InsumoNewDTO objDto){

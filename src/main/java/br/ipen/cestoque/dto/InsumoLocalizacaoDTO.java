@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.Unidade;
 
-public class InsumoDTO implements Serializable{
+public class InsumoLocalizacaoDTO implements Serializable{
 
 	/**
 	 * 
@@ -44,17 +44,13 @@ public class InsumoDTO implements Serializable{
 	private Date dataamostracq;
 	private String lote;
 	private String nomecodalmox;
-
 	
-	
-	public InsumoDTO() {
+	public InsumoLocalizacaoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-
-
-	public InsumoDTO(Insumo obj) {
+	public InsumoLocalizacaoDTO(Insumo obj) {
 		id = obj.getId();
 		nomenclatura = obj.getNomenclatura();
 		nome = obj.getNome();
@@ -78,7 +74,6 @@ public class InsumoDTO implements Serializable{
 		dataamostracq = obj.getDataamostracq();
 		lote = obj.getLote();
 		nomecodalmox = obj.getNome() +" - "+ obj.getCodigoalmox();
-		
 	}
 
 	public Integer getId() {

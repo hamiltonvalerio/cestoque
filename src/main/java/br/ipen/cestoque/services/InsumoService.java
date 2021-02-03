@@ -131,4 +131,11 @@ public class InsumoService {
 		return repo.findAll(pageRequest);
 	}
 
+	public Page<Insumo> findByLocalizacao(Integer localizacao_id, Integer page, Integer linesPerPage, String orderBy,
+			String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		// TODO Auto-generated method stub
+		return repo.findByLocalizacaoId(localizacao_id , pageRequest);
+	}
+
 }
