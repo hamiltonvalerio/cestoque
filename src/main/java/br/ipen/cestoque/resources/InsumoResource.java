@@ -1,7 +1,6 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,6 @@ import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
-import br.ipen.cestoque.resources.utils.URL;
 import br.ipen.cestoque.services.InsumoService;
 
 

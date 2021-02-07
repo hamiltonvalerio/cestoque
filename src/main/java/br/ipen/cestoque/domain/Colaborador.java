@@ -18,8 +18,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.ipen.cestoque.domain.enums.Perfil;
