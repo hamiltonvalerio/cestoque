@@ -27,6 +27,10 @@ public class Movimentacao implements Serializable{
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datamovimentacao;
+	
+	private Localizacao localizacaoOrigem;
+	
+	private Localizacao localizacaoDestino;
 
 	@OneToMany(mappedBy = "movimentacao")
 	private Set<InsumoMovimentacao> itens = new HashSet<>();
@@ -39,14 +43,20 @@ public class Movimentacao implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Movimentacao(Integer id, Date datamovimentacao, Set<InsumoMovimentacao> itens, String usualt, Date datalt) {
+	
+	public Movimentacao(Integer id, Date datamovimentacao, Localizacao localizacaoOrigem,
+			Localizacao localizacaoDestino, Set<InsumoMovimentacao> itens, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.datamovimentacao = datamovimentacao;
+		this.localizacaoOrigem = localizacaoOrigem;
+		this.localizacaoDestino = localizacaoDestino;
 		this.itens = itens;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -87,6 +97,29 @@ public class Movimentacao implements Serializable{
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
 	}
+	
+	
+	
+
+	public Localizacao getLocalizacaoOrigem() {
+		return localizacaoOrigem;
+	}
+
+
+	public void setLocalizacaoOrigem(Localizacao localizacaoOrigem) {
+		this.localizacaoOrigem = localizacaoOrigem;
+	}
+
+
+	public Localizacao getLocalizacaoDestino() {
+		return localizacaoDestino;
+	}
+
+
+	public void setLocalizacaoDestino(Localizacao localizacaoDestino) {
+		this.localizacaoDestino = localizacaoDestino;
+	}
+
 
 	@Override
 	public int hashCode() {

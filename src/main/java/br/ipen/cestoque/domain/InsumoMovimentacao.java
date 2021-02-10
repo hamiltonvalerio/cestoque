@@ -19,9 +19,12 @@ public class InsumoMovimentacao{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Localizacao localizacao;
-	
 	private Insumo insumo;
+	
+	private Double quantidadeOrigem;
+	
+	private Double quantidadeMovimentada;
+	
 	
 	@ManyToOne
 	private Movimentacao movimentacao;
@@ -30,12 +33,14 @@ public class InsumoMovimentacao{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public InsumoMovimentacao(Integer id, Localizacao localizacao, Insumo insumo, Movimentacao movimentacao) {
+	
+	public InsumoMovimentacao(Integer id, Insumo insumo, Double quantidadeOrigem, Double quantidadeMovimentada,
+			Movimentacao movimentacao) {
 		super();
 		this.id = id;
-		this.localizacao = localizacao;
 		this.insumo = insumo;
+		this.quantidadeOrigem = quantidadeOrigem;
+		this.quantidadeMovimentada = quantidadeMovimentada;
 		this.movimentacao = movimentacao;
 	}
 
@@ -47,20 +52,29 @@ public class InsumoMovimentacao{
 		this.id = id;
 	}
 
-	public Localizacao getLocalizacao() {
-		return localizacao;
-	}
-
-	public void setLocalizacao(Localizacao localizacao) {
-		this.localizacao = localizacao;
-	}
-
 	public Insumo getInsumo() {
 		return insumo;
 	}
 
 	public void setInsumo(Insumo insumo) {
 		this.insumo = insumo;
+	}
+	
+
+	public Double getQuantidadeOrigem() {
+		return quantidadeOrigem;
+	}
+
+	public void setQuantidadeOrigem(Double quantidadeOrigem) {
+		this.quantidadeOrigem = quantidadeOrigem;
+	}
+
+	public Double getQuantidadeMovimentada() {
+		return quantidadeMovimentada;
+	}
+
+	public void setQuantidadeMovimentada(Double quantidadeMovimentada) {
+		this.quantidadeMovimentada = quantidadeMovimentada;
 	}
 
 	public Movimentacao getMovimentacao() {
