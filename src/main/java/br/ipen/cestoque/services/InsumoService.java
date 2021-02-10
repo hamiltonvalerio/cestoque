@@ -137,5 +137,11 @@ public class InsumoService {
 		// TODO Auto-generated method stub
 		return repo.findByLocalizacaoId(localizacao_id , pageRequest);
 	}
-
+	
+	public List<Insumo> buscaporlocalizacaonopage(Integer localizacao_id) {
+		// TODO Auto-generated method stub
+		return repo.buscaporlocalizacaonopage(localizacao_id);
+	}
+	
+	
 }

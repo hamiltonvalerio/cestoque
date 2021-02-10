@@ -67,6 +67,13 @@ public class LocalizacaoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@RequestMapping(value="/findAllInsumoLocalizacao", method=RequestMethod.GET)
+	public ResponseEntity<List<LocalizacaoDTO>> findAllInsumoLocalizacao(){
+		List<Localizacao> list = service.findAllInsumoLocalizacao();
+		List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<LocalizacaoDTO> > findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 

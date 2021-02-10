@@ -69,6 +69,11 @@ public class LocalizacaoService {
 		return repo.findAll();
 	}
 	
+	public List<Localizacao> findAllInsumoLocalizacao() {
+		// TODO Auto-generated method stub
+		return repo.findAllInsumoLocalizacao();
+	}
+	
 	public Page<Localizacao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
@@ -82,5 +87,6 @@ public class LocalizacaoService {
 		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getUsualt(), objDto.getDatalt());
 		return col;
 	}
+	
 	
 }

@@ -61,7 +61,7 @@ public class Insumo implements Serializable{
 	private String lote;
 	
 	@Transient
-	private String nome_codalmox;
+	private String nomecodalmox;
 	
 	
 	
@@ -145,6 +145,7 @@ public class Insumo implements Serializable{
 		this.amostracq = amostracq;
 		this.dataamostracq = dataamostracq;
 		this.lote = lote;
+		this.nomecodalmox = nome +" - "+ codigoalmox;
 	}
 
 
@@ -497,19 +498,19 @@ public class Insumo implements Serializable{
 
 
 
-	public String getNome_codalmox() {
+	public String getNomecodalmox() {
 		if(this.nome != null && this.codigoalmox != null) {
 			this.setCodigoalmox(this.nome + " - "+ this.codigoalmox);
 		}
-		return nome_codalmox;
+		return nomecodalmox;
 	}
 
 
 
 
 
-	public void setNome_codalmox(String nome_codalmox) {
-		this.nome_codalmox = nome_codalmox;
+	public void setNomecodalmox(String nome_codalmox) {
+		this.nomecodalmox = nome_codalmox;
 	}
 
 

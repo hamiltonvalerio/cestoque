@@ -120,6 +120,27 @@ public class InsumoResource {
 	
 	}
 	
+		
+	
+	@RequestMapping(value="/buscaporlocalizacaonopage", method=RequestMethod.GET)
+	public ResponseEntity<List<Insumo> > buscaporlocalizacaonopage(
+			@RequestParam(value = "localizacao_id") String localizacao_id){
+		
+		List<Insumo> list = service.buscaporlocalizacaonopage(Integer.parseInt(localizacao_id));
+		
+		for (Insumo insumo : list) {
+			for (InsumoLocalizacao il : insumo.getLocalizacoes()) {
+				if(il.getId().getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
+					insumo.setQuantidade(il.getQuantidade());
+					insumo.setNomecodalmox(il.getId().getInsumo().getNome()+" - "+il.getId().getInsumo().getCodigoalmox());
+					
+				}
+			}
+		}
+		
+		
+		return ResponseEntity.ok().body(list);
+	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
