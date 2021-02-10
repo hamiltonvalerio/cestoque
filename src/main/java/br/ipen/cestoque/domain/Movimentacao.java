@@ -1,8 +1,10 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -25,6 +27,8 @@ public class Movimentacao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+
+	//@JsonFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datamovimentacao;
 	
@@ -33,7 +37,8 @@ public class Movimentacao implements Serializable{
 	private Localizacao localizacaoDestino;
 
 	@OneToMany(mappedBy = "movimentacao")
-	private Set<InsumoMovimentacao> itens = new HashSet<>();
+	private List<InsumoMovimentacao> itens = new ArrayList<>();
+	//private Set<InsumoMovimentacao> itens = new HashSet<>();
 	
 	private String usualt;
 	private Date datalt;
@@ -45,13 +50,12 @@ public class Movimentacao implements Serializable{
 
 	
 	public Movimentacao(Integer id, Date datamovimentacao, Localizacao localizacaoOrigem,
-			Localizacao localizacaoDestino, Set<InsumoMovimentacao> itens, String usualt, Date datalt) {
+			Localizacao localizacaoDestino, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.datamovimentacao = datamovimentacao;
 		this.localizacaoOrigem = localizacaoOrigem;
 		this.localizacaoDestino = localizacaoDestino;
-		this.itens = itens;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -74,13 +78,25 @@ public class Movimentacao implements Serializable{
 		this.datamovimentacao = datamovimentacao;
 	}
 
-	public Set<InsumoMovimentacao> getItens() {
+	
+	
+	/*public Set<InsumoMovimentacao> getItens() {
 		return itens;
 	}
 
 	public void setItens(Set<InsumoMovimentacao> itens) {
 		this.itens = itens;
+	}*/
+
+	public List<InsumoMovimentacao> getItens() {
+		return itens;
 	}
+
+
+	public void setItens(List<InsumoMovimentacao> itens) {
+		this.itens = itens;
+	}
+
 
 	public String getUsualt() {
 		return usualt;
