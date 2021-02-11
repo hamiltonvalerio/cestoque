@@ -63,6 +63,14 @@ public class Insumo implements Serializable{
 	@Transient
 	private String nomecodalmox;
 	
+	@Transient
+	private Double quantidademinima;
+	
+	@Transient
+	private Integer codlocalizacaoIE;
+	
+	
+	
 	
 	
 	@JsonIgnore
@@ -512,6 +520,45 @@ public class Insumo implements Serializable{
 	public void setNomecodalmox(String nome_codalmox) {
 		this.nomecodalmox = nome_codalmox;
 	}
+
+
+
+
+
+	public Double getQuantidademinima() {
+		return quantidademinima;
+	}
+
+
+
+
+
+	public void setQuantidademinima(Double quantidademinima) {
+		this.quantidademinima = quantidademinima;
+	}
+
+
+
+
+
+	public Integer getCodlocalizacaoIE() {
+		return codlocalizacaoIE;
+	}
+
+
+
+
+
+	public void setCodlocalizacaoIE(Integer codlocalizacaoIE) {
+		this.codlocalizacaoIE = codlocalizacaoIE;
+	}
+
+
+
+
+
+
+
 
 
 

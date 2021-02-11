@@ -21,6 +21,7 @@ import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
+import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.services.InsumoService;
 
 
@@ -30,6 +31,9 @@ public class InsumoResource {
 
 	@Autowired
 	private InsumoService service;
+	
+	@Autowired
+	private InsumoLocalizacaoRepository ilrepo;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Insumo> find(@PathVariable Integer id){
@@ -110,6 +114,10 @@ public class InsumoResource {
 			for (InsumoLocalizacao il : insumo.getLocalizacoes()) {
 				if(il.getId().getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
 					insumo.setQuantidade(il.getQuantidade());
+					insumo.setQuantidademinima(il.getQuantidademinima());
+					insumo.setCodlocalizacaoIE(il.getLocalizacao().getId());
+					//insumo.setInsumoLocalizacao(il);
+					//insumo.setInsumoLocalizacaoPK(il.getId());
 				}
 			}
 		}
@@ -137,8 +145,6 @@ public class InsumoResource {
 				}
 			}
 		}
-		
-		
 		return ResponseEntity.ok().body(list);
 	}
 	
@@ -149,6 +155,15 @@ public class InsumoResource {
 		obj = service.insert(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value = "/updateQuantidadeMinima", method = RequestMethod.POST)
+	public ResponseEntity<Void> updateQuantidadeMinima(
+			@RequestParam(value = "insumo_id") String insumo_id,
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "quantidademinima") String quantidademinima){
+		ilrepo.update(Integer.parseInt(insumo_id),Integer.parseInt(localizacao_id),Double.parseDouble(quantidademinima));
+		return ResponseEntity.noContent().build();
 	}
 	
 }
