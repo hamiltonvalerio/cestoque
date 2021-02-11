@@ -1,6 +1,7 @@
 package br.ipen.cestoque.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class InsumoMovimentacao{
 	private Double quantidadeMovimentada;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Movimentacao movimentacao;
 
 	public InsumoMovimentacao() {

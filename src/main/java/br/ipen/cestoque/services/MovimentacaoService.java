@@ -114,7 +114,7 @@ public class MovimentacaoService {
 	public List<Movimentacao> findAll() {
 		// TODO Auto-generated method stub
 		//return repo.findAll();
-		return repo.findAllByOrderByDatamovimentacaoDesc();
+		return repo.findAll();
 		
 	}
 }

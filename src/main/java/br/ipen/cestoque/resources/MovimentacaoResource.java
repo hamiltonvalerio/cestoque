@@ -1,6 +1,7 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -23,6 +24,13 @@ public class MovimentacaoResource {
 	@Autowired
 	private MovimentacaoService service;
 	
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Movimentacao>> findAll(){
+		List<Movimentacao> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+		
+	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST)

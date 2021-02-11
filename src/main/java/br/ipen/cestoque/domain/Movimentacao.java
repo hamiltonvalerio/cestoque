@@ -3,10 +3,9 @@ package br.ipen.cestoque.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +26,6 @@ public class Movimentacao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-
-	//@JsonFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datamovimentacao;
 	
@@ -36,10 +33,11 @@ public class Movimentacao implements Serializable{
 	
 	private Localizacao localizacaoDestino;
 
-	@OneToMany(mappedBy = "movimentacao")
+	@OneToMany(mappedBy = "movimentacao",
+			cascade = CascadeType.ALL,
+	        orphanRemoval = true)
 	private List<InsumoMovimentacao> itens = new ArrayList<>();
-	//private Set<InsumoMovimentacao> itens = new HashSet<>();
-	
+
 	private String usualt;
 	private Date datalt;
 	
@@ -79,15 +77,6 @@ public class Movimentacao implements Serializable{
 	}
 
 	
-	
-	/*public Set<InsumoMovimentacao> getItens() {
-		return itens;
-	}
-
-	public void setItens(Set<InsumoMovimentacao> itens) {
-		this.itens = itens;
-	}*/
-
 	public List<InsumoMovimentacao> getItens() {
 		return itens;
 	}
@@ -148,6 +137,7 @@ public class Movimentacao implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
+			
 			return true;
 		if (obj == null)
 			return false;
