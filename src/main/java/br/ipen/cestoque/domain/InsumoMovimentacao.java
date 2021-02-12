@@ -91,7 +91,6 @@ public class InsumoMovimentacao{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((movimentacao == null) ? 0 : movimentacao.hashCode());
 		return result;
 	}
 
@@ -109,13 +108,10 @@ public class InsumoMovimentacao{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (movimentacao == null) {
-			if (other.movimentacao != null)
-				return false;
-		} else if (!movimentacao.equals(other.movimentacao))
-			return false;
 		return true;
 	}
+
+	
 	
 	
 

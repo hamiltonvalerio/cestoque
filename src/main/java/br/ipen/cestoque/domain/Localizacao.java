@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Localizacao implements Serializable{
@@ -20,7 +21,8 @@ public class Localizacao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="localizacao_sequence")
+	@SequenceGenerator(name="localizacao_sequence", sequenceName="localizacao_seq", allocationSize = 1)
 	private Integer id;
 	
 	private String nome;
