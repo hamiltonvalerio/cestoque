@@ -125,15 +125,5 @@ public class MovimentacaoService {
 		return repo.findAll(pageRequest);
 	}
 
-	public List<String> findString() {
-		// TODO Auto-generated method stub
-		return repo.findString();
-	}
-
-	public List<Movimentacao> findTodos() {
-		// TODO Auto-generated method stub
-		return repo.findTodos();
-	}
-	
 	
 }

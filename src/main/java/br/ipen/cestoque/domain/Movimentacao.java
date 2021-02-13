@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,9 +32,7 @@ public class Movimentacao implements Serializable{
 	
 	private Localizacao localizacaoDestino;
 
-	@OneToMany(mappedBy = "movimentacao",
-			cascade = CascadeType.ALL,
-	        orphanRemoval = true)
+	@OneToMany(mappedBy = "id.movimentacao")
 	private List<InsumoMovimentacao> itens = new ArrayList<>();
 
 	private String usualt;
@@ -134,10 +131,10 @@ public class Movimentacao implements Serializable{
 		return result;
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			
 			return true;
 		if (obj == null)
 			return false;
@@ -151,6 +148,8 @@ public class Movimentacao implements Serializable{
 			return false;
 		return true;
 	}
+
+
 	
 		
 	

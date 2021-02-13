@@ -45,13 +45,14 @@ public class EntradaResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<EntradaDTO> > findAll(){
 		List<Entrada> list = service.findAll();
-		for (Entrada e : list) {
-			System.out.println(e.getNumRequisicao());
-		}
+		/*
+		 * for (Entrada e : list) { System.out.println(e.getNumRequisicao()); }
+		 */
 		List<EntradaDTO> listDto = list.stream().map(obj -> new EntradaDTO(obj)).collect(Collectors.toList());
-		for (EntradaDTO eDTO : listDto) {
-			System.out.println("AQUI: "+eDTO.getNumRequisicao());
-		}
+		/*
+		 * for (EntradaDTO eDTO : listDto) {
+		 * System.out.println("AQUI: "+eDTO.getNumRequisicao()); }
+		 */
 		return ResponseEntity.ok().body(listDto);
 	}
 	

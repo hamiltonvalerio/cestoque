@@ -34,27 +34,6 @@ public class MovimentacaoResource {
 		
 	}
 	
-	@RequestMapping(value="/string", method = RequestMethod.GET)
-	public ResponseEntity<List<String>> findString(){
-		System.out.println("aqui");
-		List<String> list = service.findString();
-		return ResponseEntity.ok().body(list);
-		
-	}
-
-	/*@RequestMapping(value="/findTodos", method = RequestMethod.GET)
-	public ResponseEntity<List<Movimentacao>> findTodos(){
-		List<Movimentacao> list = service.findTodos();
-		return ResponseEntity.ok().body(list);
-		
-	}*/
-	
-	@RequestMapping(value="/findTodos", method = RequestMethod.GET)
-	public ResponseEntity<List<Movimentacao>> findTodos(){
-		List<Movimentacao> list = service.findTodos();
-		return ResponseEntity.ok().body(list);
-		
-	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Movimentacao obj){

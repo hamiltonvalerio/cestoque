@@ -98,9 +98,9 @@ public class DBService {
 				i2.setFornecedores(Arrays.asList(f1));
 				i3.setFornecedores(Arrays.asList(f2));
 				
-				InsumoLocalizacao il1 = new InsumoLocalizacao(i1, l1, 2.0,1.0);
-				InsumoLocalizacao il2 = new InsumoLocalizacao(i1, l2, 4.0,1.0);
-				InsumoLocalizacao il3 = new InsumoLocalizacao(i2, l1, 3.0,2.0);
+				InsumoLocalizacao il1 = new InsumoLocalizacao(i1, l1, 2.0,1.0,"LF123","LCR123","LP123",new Date(),new Date(),new Date(),false);
+				InsumoLocalizacao il2 = new InsumoLocalizacao(i1, l2, 4.0,1.0,"LF456","LCR456","LP123",new Date(),new Date(),new Date(),false);
+				InsumoLocalizacao il3 = new InsumoLocalizacao(i2, l1, 3.0,2.0,"LF789","LCR789","LP789",new Date(),new Date(),new Date(),false);
 				
 				i1.getLocalizacoes().addAll(Arrays.asList(il1,il2));
 				i2.getLocalizacoes().addAll(Arrays.asList(il3));
