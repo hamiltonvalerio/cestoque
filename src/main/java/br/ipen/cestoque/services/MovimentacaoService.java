@@ -79,6 +79,7 @@ public class MovimentacaoService {
 			insumos.add(insumo);
 			
 			//verificar se tem insumos nesta localização, se sim, somar os as quantidades
+			//filtros: insumo, insumo_id, localizacao_id, lotefornecedor, data_validade, data_irradiacao
 			insumoLocalizacaoDestino = new InsumoLocalizacao();
 			
 			insumoLocalizacaoDestino = insumoLocalizacaoRepository.findByIdLocalizacaoAndIdInsumo(localizacaoDestino, insumo);
