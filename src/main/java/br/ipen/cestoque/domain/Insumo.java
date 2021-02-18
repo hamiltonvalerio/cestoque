@@ -97,9 +97,7 @@ public class Insumo implements Serializable{
 	 * @JoinTable(name = "INSUMO_LOCALIZACAO", joinColumns = @JoinColumn(name =
 	 * "insumo_id"), inverseJoinColumns = @JoinColumn(name = "localizacao_id") )
 	 */
-	@JsonIgnore
-	@OneToMany(mappedBy = "id.insumo")
-	private List<InsumoLocalizacao> localizacoes = new ArrayList<>();
+	
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
@@ -109,14 +107,13 @@ public class Insumo implements Serializable{
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<InsumoEntrada> entradas = new HashSet<>();
 	
-	
-	
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
 	
 	
-
+	
+	
 	public Insumo(){
 		super();
 		// TODO Auto-generated constructor stub
@@ -155,11 +152,6 @@ public class Insumo implements Serializable{
 		this.lote = lote;
 		this.nomecodalmox = nome +" - "+ codigoalmox;
 	}
-
-
-
-
-
 
 
 
@@ -335,16 +327,6 @@ public class Insumo implements Serializable{
 	}
 
 	
-
-
-	public List<InsumoLocalizacao> getLocalizacoes() {
-		return localizacoes;
-	}
-
-
-	public void setLocalizacoes(List<InsumoLocalizacao> localizacoes) {
-		this.localizacoes = localizacoes;
-	}
 
 
 
@@ -552,8 +534,6 @@ public class Insumo implements Serializable{
 	public void setCodlocalizacaoIE(Integer codlocalizacaoIE) {
 		this.codlocalizacaoIE = codlocalizacaoIE;
 	}
-
-
 
 
 

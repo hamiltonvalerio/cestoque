@@ -28,18 +28,25 @@ public interface InsumoRepository extends JpaRepository<Insumo, Integer>{
 	@Transactional(readOnly=true)
 	@Query("SELECT  i "
 			+ "FROM Insumo i "
-			+ "INNER JOIN InsumoLocalizacao ie ON (ie.id.insumo.id = i.id) "
-			+ "WHERE ie.id.localizacao.id = :localizacao_id")
+			+ "INNER JOIN InsumoLocalizacao ie ON (ie.insumo.id = i.id) "
+			+ "WHERE ie.localizacao.id = :localizacao_id")
 	Page<Insumo> findByLocalizacaoId(@Param("localizacao_id") Integer localizacao_id, Pageable  pageRequest);
 
 	
 	@Transactional(readOnly=true)
 	@Query("SELECT  i "
 			+ "FROM Insumo i "
-			+ "INNER JOIN InsumoLocalizacao ie ON (ie.id.insumo.id = i.id) "
-			+ "WHERE ie.id.localizacao.id = :localizacao_id "
+			+ "INNER JOIN InsumoLocalizacao ie ON (ie.insumo.id = i.id) "
+			+ "WHERE ie.localizacao.id = :localizacao_id "
 			+ "ORDER BY i.nome ASC")
-	public List<Insumo> buscaporlocalizacaonopage(Integer localizacao_id);
+	public List<Insumo> buscaporlocalizacaonopage(@Param("localizacao_id") Integer localizacao_id);
+	
+	@Transactional(readOnly=true)
+	@Query("SELECT  il "
+			+ "FROM InsumoLocalizacao il "
+			+ "WHERE il.localizacao.id = :localizacao_id "
+			+ "ORDER BY il.insumo.nome ASC")
+	public List<Insumo> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id);
 
 
 

@@ -19,6 +19,8 @@ public class InsumoEntrada {
 	private Date dataIrradiacao;
 	private Date dataVencIrradiacao;
 	
+	private Date dataValidade;
+	
 	private Double quantidade;
 	private Double valor;
 	
@@ -30,7 +32,7 @@ public class InsumoEntrada {
 	}
 
 	public InsumoEntrada(Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR, Date dataIrradiacao, Date dataVencIrradiacao,
-			Double quantidade, Double valor, Double valorTotal) {
+			Date dataValidade, Double quantidade, Double valor, Double valorTotal) {
 		super();
 		id.setInsumo(insumo);
 		id.setEntrada(entrada);
@@ -38,6 +40,7 @@ public class InsumoEntrada {
 		this.loteCR = loteCR;
 		this.dataIrradiacao = dataIrradiacao;
 		this.dataVencIrradiacao = dataVencIrradiacao;
+		this.dataValidade = dataValidade;
 		this.quantidade = quantidade;
 		this.setValor(valor);
 		this.setValorTotal(valorTotal);
@@ -122,6 +125,14 @@ public class InsumoEntrada {
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public Date getDataValidade() {
+		return dataValidade;
+	}
+
+	public void setDataValidade(Date dataValidade) {
+		this.dataValidade = dataValidade;
 	}
 	
 	

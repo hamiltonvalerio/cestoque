@@ -71,7 +71,7 @@ public class LocalizacaoService {
 	
 	public List<Localizacao> findAllInsumoLocalizacao() {
 		// TODO Auto-generated method stub
-		return repo.findAllInsumoLocalizacao();
+		return repo.findAll();
 	}
 	
 	public Page<Localizacao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){

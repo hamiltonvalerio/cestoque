@@ -1,20 +1,40 @@
 package br.ipen.cestoque.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class InsumoMovimentacao{
+public class InsumoMovimentacao implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	
+	@ManyToOne
+    @JoinColumn(name="insumo_id", nullable=false)
+	private Insumo insumo;
+	
 	@JsonIgnore
-	@EmbeddedId
-	private InsumoMovimentacaoPK id = new InsumoMovimentacaoPK();
+	@ManyToOne
+	@JoinColumn(name = "movimentacao_id")
+	private Movimentacao movimentacao;
 	
 	private Double quantidadeOrigem;
 	
@@ -35,6 +55,9 @@ public class InsumoMovimentacao{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataAprovacao;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private Date dataReprovacao;
+	
 	private Boolean aprovado;
 	
 
@@ -43,18 +66,17 @@ public class InsumoMovimentacao{
 		// TODO Auto-generated constructor stub
 	}
 
+
 	
-	@JsonIgnore
-	public Movimentacao getMovimentacao() {
-		return id.getMovimentacao();
-	}
-	
-	public InsumoMovimentacao(Insumo insumo, Movimentacao movimentacao, Double quantidadeOrigem, Double quantidadeMovimentada, String loteFornecedor,
-			String loteCR, String loteProducao, Date dataIrradiacao, Date dataValidade, Date dataAprovacao,
-			Boolean aprovado) {
+
+
+	public InsumoMovimentacao(Integer id, Insumo insumo, Movimentacao movimentacao, Double quantidadeOrigem,
+			Double quantidadeMovimentada, String loteFornecedor, String loteCR, String loteProducao,
+			Date dataIrradiacao, Date dataValidade, Date dataAprovacao, Date dataReprovacao, Boolean aprovado) {
 		super();
-		id.setInsumo(insumo);
-		id.setMovimentacao(movimentacao);
+		this.id = id;
+		this.insumo = insumo;
+		this.movimentacao = movimentacao;
 		this.quantidadeOrigem = quantidadeOrigem;
 		this.quantidadeMovimentada = quantidadeMovimentada;
 		this.loteFornecedor = loteFornecedor;
@@ -63,32 +85,40 @@ public class InsumoMovimentacao{
 		this.dataIrradiacao = dataIrradiacao;
 		this.dataValidade = dataValidade;
 		this.dataAprovacao = dataAprovacao;
+		this.dataReprovacao = dataReprovacao;
 		this.aprovado = aprovado;
 	}
 
 
-	public void setMovimentacao(Movimentacao movimentacao) {
-		id.setMovimentacao(movimentacao);
-	}
-	
-	public Insumo getInsumo() {
-		return id.getInsumo();
-	}
-	
-	public void setInsumo(Insumo insumo) {
-		id.setInsumo(insumo);
-	}
 
 
-	public InsumoMovimentacaoPK getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(InsumoMovimentacaoPK id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
+
+	public Insumo getInsumo() {
+		return insumo;
+	}
+
+
+	public void setInsumo(Insumo insumo) {
+		this.insumo = insumo;
+	}
+
+	public Movimentacao getMovimentacao() {
+		return movimentacao;
+	}
+
+	public void setMovimentacao(Movimentacao movimentacao) {
+		this.movimentacao = movimentacao;
+	}
 
 	public Double getQuantidadeOrigem() {
 		return quantidadeOrigem;
@@ -169,6 +199,16 @@ public class InsumoMovimentacao{
 		this.dataAprovacao = dataAprovacao;
 	}
 
+	
+	public Date getDataReprovacao() {
+		return dataReprovacao;
+	}
+
+
+	public void setDataReprovacao(Date dataReprovacao) {
+		this.dataReprovacao = dataReprovacao;
+	}
+
 
 	public Boolean getAprovado() {
 		return aprovado;
@@ -178,7 +218,37 @@ public class InsumoMovimentacao{
 	public void setAprovado(Boolean aprovado) {
 		this.aprovado = aprovado;
 	}
-		
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InsumoMovimentacao other = (InsumoMovimentacao) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	
+	
+
 	
 
 }

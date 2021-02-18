@@ -11,7 +11,6 @@ import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Colaborador;
 import br.ipen.cestoque.domain.Fornecedor;
 import br.ipen.cestoque.domain.Insumo;
-import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.domain.ItemProduto;
 import br.ipen.cestoque.domain.Localizacao;
 import br.ipen.cestoque.domain.Produto;
@@ -19,7 +18,6 @@ import br.ipen.cestoque.domain.Unidade;
 import br.ipen.cestoque.repositories.CategoriaRepository;
 import br.ipen.cestoque.repositories.ColaboradorRepository;
 import br.ipen.cestoque.repositories.FornecedorRepository;
-import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
 import br.ipen.cestoque.repositories.ItemProdutoRepository;
 import br.ipen.cestoque.repositories.LocalizacaoRepository;
@@ -57,8 +55,8 @@ public class DBService {
 	@Autowired
 	private ItemProdutoRepository itemProdutoRepository;
 	
-	@Autowired
-	private InsumoLocalizacaoRepository insumoLocalizacaoRepository;
+	/*@Autowired
+	private InsumoLocalizacaoRepository insumoLocalizacaoRepository;*/
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -98,19 +96,19 @@ public class DBService {
 				i2.setFornecedores(Arrays.asList(f1));
 				i3.setFornecedores(Arrays.asList(f2));
 				
-				InsumoLocalizacao il1 = new InsumoLocalizacao(i1, l1, 2.0,1.0,"LF123","LCR123","LP123",new Date(),new Date(),new Date(),false);
+				/*InsumoLocalizacao il1 = new InsumoLocalizacao(i1, l1, 2.0,1.0,"LF123","LCR123","LP123",new Date(),new Date(),new Date(),false);
 				InsumoLocalizacao il2 = new InsumoLocalizacao(i1, l2, 4.0,1.0,"LF456","LCR456","LP123",new Date(),new Date(),new Date(),false);
 				InsumoLocalizacao il3 = new InsumoLocalizacao(i2, l1, 3.0,2.0,"LF789","LCR789","LP789",new Date(),new Date(),new Date(),false);
 				
 				i1.getLocalizacoes().addAll(Arrays.asList(il1,il2));
-				i2.getLocalizacoes().addAll(Arrays.asList(il3));
+				i2.getLocalizacoes().addAll(Arrays.asList(il3));*/
 				
 				//i1.setLocalizacoes(Arrays.asList(il1));
 				//i2.setLocalizacoes(Arrays.asList(il2));
 				//i3.setLocalizacoes(Arrays.asList(il3));
 				
 				insumoRepository.saveAll(Arrays.asList(i1,i2,i3));
-				insumoLocalizacaoRepository.saveAll(Arrays.asList(il1,il2,il3));
+				//insumoLocalizacaoRepository.saveAll(Arrays.asList(il1,il2,il3));
 				
 				Colaborador c1 = new Colaborador(null, "Hamilton", "84025166100", "Hamilton", new Date(),bCryptPasswordEncoder.encode("123"),"htecmac@gmail.com");
 				

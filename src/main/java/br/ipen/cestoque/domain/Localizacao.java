@@ -1,16 +1,17 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Localizacao implements Serializable{
@@ -21,8 +22,7 @@ public class Localizacao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="localizacao_sequence")
-	@SequenceGenerator(name="localizacao_sequence", sequenceName="localizacao_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nome;
@@ -32,8 +32,12 @@ public class Localizacao implements Serializable{
 	private Date datalt;
 	
 	
-	@OneToMany(mappedBy = "id.localizacao")
-	private Set<InsumoLocalizacao> itens = new HashSet<>();
+	//@ManyToMany(mappedBy = "localizacoes")
+	@JsonIgnore
+	@OneToMany(mappedBy = "localizacao")
+	private List<InsumoLocalizacao> insumolocalizacoes = new ArrayList<>();
+	
+	
 
 	public Localizacao() {
 		super();
@@ -104,8 +108,16 @@ public class Localizacao implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
+	public List<InsumoLocalizacao> getInsumolocalizacoes() {
+		return insumolocalizacoes;
+	}
+
+	public void setInsumolocalizacoes(List<InsumoLocalizacao> insumolocalizacoes) {
+		this.insumolocalizacoes = insumolocalizacoes;
+	}
+
+
 	
 	
 	

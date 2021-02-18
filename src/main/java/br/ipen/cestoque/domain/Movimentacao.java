@@ -32,8 +32,11 @@ public class Movimentacao implements Serializable{
 	
 	private Localizacao localizacaoDestino;
 
-	@OneToMany(mappedBy = "id.movimentacao")
+	
+	@OneToMany(mappedBy = "movimentacao")
 	private List<InsumoMovimentacao> itens = new ArrayList<>();
+	
+	
 
 	private String usualt;
 	private Date datalt;
@@ -72,6 +75,7 @@ public class Movimentacao implements Serializable{
 	public void setDatamovimentacao(Date datamovimentacao) {
 		this.datamovimentacao = datamovimentacao;
 	}
+
 
 	
 	public List<InsumoMovimentacao> getItens() {
@@ -121,6 +125,8 @@ public class Movimentacao implements Serializable{
 	public void setLocalizacaoDestino(Localizacao localizacaoDestino) {
 		this.localizacaoDestino = localizacaoDestino;
 	}
+	
+	
 
 
 	@Override

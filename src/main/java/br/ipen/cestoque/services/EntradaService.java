@@ -40,6 +40,7 @@ public class EntradaService {
 	@Autowired
 	private InsumoService insumoService;
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private ColaboradorService colaboradorService;
 		
@@ -85,14 +86,25 @@ public class EntradaService {
 			//verificar se tem insumos nesta localização, se sim, somar os as quantidades
 			insumoLocalizacao = new InsumoLocalizacao();
 			
-			insumoLocalizacao = insumoLocalizacaoRepository.findByIdLocalizacaoAndIdInsumo(localizacao, insumo);
+			if(ie.getDataIrradiacao() != null){
+				insumoLocalizacao = insumoLocalizacaoRepository.findDuplicado(localizacao.getId(), insumo, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());	
+			}else {
+				
+				insumoLocalizacao = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacao.getId(), insumo, ie.getLoteFornecedor().toUpperCase().trim(), ie.getDataValidade(), ie.getDataIrradiacao());
+		
+			}
 			
+
 			if(insumoLocalizacao == null) {
 				insumoLocalizacao = new InsumoLocalizacao();
 				insumoLocalizacao.setInsumo(insumo);
 				insumoLocalizacao.setLocalizacao(obj.getLocalizacao());
-				insumosLocalizacoes.add(insumoLocalizacao);
 				insumoLocalizacao.setQuantidade(quant);
+				insumoLocalizacao.setLoteFornecedor(ie.getLoteFornecedor());
+				insumoLocalizacao.setLoteCR(ie.getLoteCR());
+				insumoLocalizacao.setDataIrradiacao(ie.getDataIrradiacao());
+				insumoLocalizacao.setDataValidade(ie.getDataValidade());
+				insumosLocalizacoes.add(insumoLocalizacao);
 			}else {
 				Double novaQuantidade = insumoLocalizacao.getQuantidade() + quant;
 				insumoLocalizacao.setQuantidade(novaQuantidade);

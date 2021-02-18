@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
+import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
 import br.ipen.cestoque.services.exception.DataIntegrityException;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
@@ -26,6 +28,9 @@ public class InsumoService {
 
 	@Autowired
 	private InsumoRepository repo;
+	
+	@Autowired
+	private InsumoLocalizacaoRepository insumoLocalizacaoRepository;
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -141,6 +146,18 @@ public class InsumoService {
 	public List<Insumo> buscaporlocalizacaonopage(Integer localizacao_id) {
 		// TODO Auto-generated method stub
 		return repo.buscaporlocalizacaonopage(localizacao_id);
+	}
+	
+	public List<InsumoLocalizacao> buscatodosporlocalizacaonopage(Integer localizacao_id) {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.findAllByLocalizacao_id(localizacao_id);
+	}
+
+	public Page<InsumoLocalizacao> findInsumoLocalizacaoByLocalizacao(int localizacao_id, Integer page, Integer linesPerPage) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage);
+		
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.buscaTodosPorLocalizacao(localizacao_id,pageRequest);
 	}
 	
 	

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Movimentacao;
+import br.ipen.cestoque.dto.MovimentacaoDTO;
 import br.ipen.cestoque.services.MovimentacaoService;
 
 
@@ -27,13 +28,34 @@ public class MovimentacaoResource {
 	private MovimentacaoService service;
 	
 	
+	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Movimentacao>> findAll(){
-		List<Movimentacao> list = service.findAll();
+	public ResponseEntity<List<MovimentacaoDTO>> findAll(){
+		
+		List<MovimentacaoDTO> list = service.findAll();
+		
+		//List<MovimentacaoDTO> listaDTO =  MovimentacaoMapper.INSTANCE.tolistmovimentacaoDTO(list);
+		
 		return ResponseEntity.ok().body(list);
 		
 	}
 	
+	
+	/*@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<Page<MovimentacaoDTO> > findAll(
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage, 
+			@RequestParam(value = "orderBy", defaultValue = "datamovimentacao") String orderBy, 
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction
+			){
+
+		Page<Movimentacao> list = service.findPage(page, linesPerPage, orderBy, direction);
+		//System.out.println(list.getSize());
+		
+		Page<MovimentacaoDTO> listDto = list.map(obj -> new MovimentacaoDTO(obj));
+		//System.out.println(listDto.getSize());
+		return ResponseEntity.ok().body(listDto);
+	}*/
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Movimentacao obj){

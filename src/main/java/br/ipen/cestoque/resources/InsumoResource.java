@@ -1,6 +1,7 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,7 +82,7 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@RequestMapping(value="/buscaporlocalizacao2", method=RequestMethod.GET)
+	/*@RequestMapping(value="/buscaporlocalizacao2", method=RequestMethod.GET)
 	public ResponseEntity<Page<InsumoDTO> > findByLocalizacao2(
 			@RequestParam(value = "localizacao_id") String localizacao_id,
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
@@ -97,7 +98,7 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(listDto);
 		//return ResponseEntity.ok().body(list);
 	
-	}
+	}*/
 	
 	@RequestMapping(value="/buscaporlocalizacao", method=RequestMethod.GET)
 	public ResponseEntity<Page<Insumo> > findByLocalizacao(
@@ -110,17 +111,17 @@ public class InsumoResource {
 
 		Page<Insumo> list = service.findByLocalizacao(Integer.parseInt(localizacao_id), page, linesPerPage, orderBy, direction);
 		//System.out.println(list.getSize());
-		for (Insumo insumo : list) {
-			for (InsumoLocalizacao il : insumo.getLocalizacoes()) {
-				if(il.getId().getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
-					insumo.setQuantidade(il.getQuantidade());
-					insumo.setQuantidademinima(il.getQuantidademinima());
-					insumo.setCodlocalizacaoIE(il.getLocalizacao().getId());
-					//insumo.setInsumoLocalizacao(il);
-					//insumo.setInsumoLocalizacaoPK(il.getId());
-				}
-			}
-		}
+		/*
+		 * for (Insumo insumo : list) { for (InsumoLocalizacao il :
+		 * insumo.getLocalizacoes()) {
+		 * if(il.getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
+		 * insumo.setQuantidade(il.getQuantidade());
+		 * insumo.setQuantidademinima(il.getQuantidademinima());
+		 * insumo.setCodlocalizacaoIE(il.getLocalizacao().getId());
+		 * //insumo.setInsumoLocalizacao(il);
+		 * //insumo.setInsumoLocalizacaoPK(il.getId()); } } }
+		 */
+		
 		//Page<InsumoDTO> listDto = list.map(obj -> new InsumoDTO(obj));
 		//System.out.println(listDto.getSize());
 		return ResponseEntity.ok().body(list);
@@ -128,24 +129,50 @@ public class InsumoResource {
 	
 	}
 	
+	@RequestMapping(value="/buscainsumolocalizacaoporlocalizacao", method=RequestMethod.GET)
+	public ResponseEntity<Page<InsumoLocalizacao> > findInsumoLocalizacaoByLocalizacao(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage){
+
+		
+		Page<InsumoLocalizacao> list = service.findInsumoLocalizacaoByLocalizacao(Integer.parseInt(localizacao_id), page, linesPerPage);
+
+		return ResponseEntity.ok().body(list);
+		
+	
+	}
+	
 		
 	
 	@RequestMapping(value="/buscaporlocalizacaonopage", method=RequestMethod.GET)
-	public ResponseEntity<List<Insumo> > buscaporlocalizacaonopage(
+	public ResponseEntity<List<InsumoLocalizacao> > buscaporlocalizacaonopage(
 			@RequestParam(value = "localizacao_id") String localizacao_id){
 		
-		List<Insumo> list = service.buscaporlocalizacaonopage(Integer.parseInt(localizacao_id));
+		List<InsumoLocalizacao> ils = service.buscatodosporlocalizacaonopage(Integer.parseInt(localizacao_id)); 
 		
-		for (Insumo insumo : list) {
+		
+		//List<Insumo> list = service.buscaporlocalizacaonopage(Integer.parseInt(localizacao_id));
+		
+		/*List<Insumo> list = new ArrayList<>();
+		
+		for(InsumoLocalizacao il : ils) {
+			Insumo i = new Insumo();
+			
+			list.add(new Insumo())
+		}*/
+		
+		
+		/*for (Insumo insumo : list) {
 			for (InsumoLocalizacao il : insumo.getLocalizacoes()) {
-				if(il.getId().getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
+				if(il.getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
 					insumo.setQuantidade(il.getQuantidade());
-					insumo.setNomecodalmox(il.getId().getInsumo().getNome()+" - "+il.getId().getInsumo().getCodigoalmox());
+					insumo.setNomecodalmox(il.getInsumo().getNome()+" - "+il.getInsumo().getCodigoalmox());
 					
 				}
 			}
-		}
-		return ResponseEntity.ok().body(list);
+		}*/
+		return ResponseEntity.ok().body(ils);
 	}
 	
 	
@@ -159,10 +186,9 @@ public class InsumoResource {
 	
 	@RequestMapping(value = "/updateQuantidadeMinima", method = RequestMethod.POST)
 	public ResponseEntity<Void> updateQuantidadeMinima(
-			@RequestParam(value = "insumo_id") String insumo_id,
-			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "insumolocalizacao_id") String insumolocalizacao_id,
 			@RequestParam(value = "quantidademinima") String quantidademinima){
-		ilrepo.update(Integer.parseInt(insumo_id),Integer.parseInt(localizacao_id),Double.parseDouble(quantidademinima));
+		ilrepo.update(Integer.parseInt(insumolocalizacao_id),Double.parseDouble(quantidademinima));
 		return ResponseEntity.noContent().build();
 	}
 	

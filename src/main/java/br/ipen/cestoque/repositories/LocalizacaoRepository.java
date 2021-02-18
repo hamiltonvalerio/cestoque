@@ -14,7 +14,7 @@ public interface LocalizacaoRepository extends JpaRepository<Localizacao, Intege
 
 	@Transactional(readOnly=true)
 	@Query("SELECT DISTINCT l FROM Localizacao l "
-			+ "INNER JOIN InsumoLocalizacao ie ON (ie.id.localizacao.id = l.id) ")
+			+ "INNER JOIN InsumoLocalizacao ie ON (ie.localizacao.id = l.id) ")
 	public List<Localizacao> findAllInsumoLocalizacao();
 
 }
