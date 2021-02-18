@@ -33,9 +33,9 @@ public class LocalizacaoResource {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Localizacao> find(@PathVariable Integer id){
-		Localizacao Cliente;
-		Cliente = service.find(id);
-		return ResponseEntity.ok().body(Cliente);
+		Localizacao localizacao;
+		localizacao = service.find(id);
+		return ResponseEntity.ok().body(localizacao);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -46,10 +46,11 @@ public class LocalizacaoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody LocalizacaoDTO objDto, @PathVariable Integer id){
+	
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> update(@Valid @RequestBody LocalizacaoDTO objDto){
 		Localizacao obj = service.fromDTO(objDto);
-		obj.setId(id);
+		//obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}

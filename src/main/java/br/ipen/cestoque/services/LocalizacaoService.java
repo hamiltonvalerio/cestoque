@@ -35,11 +35,15 @@ public class LocalizacaoService {
 	public Localizacao insert(Localizacao obj) {
 		// TODO Auto-generated method stub
 		obj.setId(null);
+		obj.setUsualt(UserService.authenticated().getUsername());
+		obj.setDatalt(new Date(System.currentTimeMillis()));
 		return repo.save(obj);
 	}
 	
 	public Localizacao update(Localizacao obj) {
 		Localizacao newObj = find(obj.getId());
+		newObj.setUsualt(UserService.authenticated().getUsername());
+		newObj.setDatalt(new Date(System.currentTimeMillis()));
 		updateData(newObj, obj);
 		return repo.save(newObj);
 	}
@@ -48,8 +52,9 @@ public class LocalizacaoService {
 	private void updateData(Localizacao newObj, Localizacao obj) {
 		// TODO Auto-generated method stub
 		newObj.setNome(obj.getNome());
-		newObj.setUsualt(obj.getUsualt());
-		newObj.setDatalt(new Date());
+		newObj.setUsualt(UserService.authenticated().getUsername());
+		newObj.setDatalt(new Date(System.currentTimeMillis()));
+		
 		
 	}
 
@@ -66,7 +71,7 @@ public class LocalizacaoService {
 
 	public List<Localizacao> findAll() {
 		// TODO Auto-generated method stub
-		return repo.findAll();
+		return repo.findAllByOrderByNome();
 	}
 	
 	public List<Localizacao> findAllInsumoLocalizacao() {
@@ -80,11 +85,11 @@ public class LocalizacaoService {
 	}
 	
 	public Localizacao fromDTO(LocalizacaoDTO objDto) {
-		return new Localizacao(objDto.getId(), objDto.getNome(), objDto.getUsualt(), objDto.getDatalt());
+		return new Localizacao(objDto.getId(), objDto.getNome().toUpperCase(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt());
 	}
 	
 	public Localizacao fromDTO(LocalizacaoNewDTO objDto) {
-		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getUsualt(), objDto.getDatalt());
+		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt());
 		return col;
 	}
 	

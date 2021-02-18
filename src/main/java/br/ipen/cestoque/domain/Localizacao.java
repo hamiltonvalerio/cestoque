@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,40 +15,41 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Localizacao implements Serializable{
+public class Localizacao implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
-	
+
 	private String usualt;
-	
+
 	private Date datalt;
-	
-	
-	//@ManyToMany(mappedBy = "localizacoes")
+
+	@Column(name = "aprovacao", nullable = false)
+	private Boolean aprovacao = false;
+
+	// @ManyToMany(mappedBy = "localizacoes")
 	@JsonIgnore
 	@OneToMany(mappedBy = "localizacao")
 	private List<InsumoLocalizacao> insumolocalizacoes = new ArrayList<>();
-	
-	
 
 	public Localizacao() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Localizacao(Integer id, String nome, String usualt, Date datalt) {
+	public Localizacao(Integer id, String nome, Boolean aprovacao, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.aprovacao = aprovacao;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -84,6 +86,14 @@ public class Localizacao implements Serializable{
 		this.datalt = datalt;
 	}
 
+	public Boolean getAprovacao() {
+		return aprovacao;
+	}
+
+	public void setAprovacao(Boolean aprovacao) {
+		this.aprovacao = aprovacao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -117,8 +127,4 @@ public class Localizacao implements Serializable{
 		this.insumolocalizacoes = insumolocalizacoes;
 	}
 
-
-	
-	
-	
 }

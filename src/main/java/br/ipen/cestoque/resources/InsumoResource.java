@@ -1,7 +1,6 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +47,14 @@ public class InsumoResource {
 		List<Insumo> list = service.findAll();
 		List<InsumoDTO> listDto = list.stream().map(obj -> new InsumoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(value="/totalcadastrados",method=RequestMethod.GET)
+	public ResponseEntity<Long> findTotalCadastrados(){
+		
+		Long total = service.findTotalCadastrados();
+
+		return ResponseEntity.ok().body(total);
 	}
 	
 	/*@RequestMapping(value="/page", method=RequestMethod.GET)

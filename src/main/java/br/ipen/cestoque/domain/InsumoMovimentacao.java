@@ -14,9 +14,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class InsumoMovimentacao implements Serializable{
+public class InsumoMovimentacao implements Serializable {
 
-	
 	/**
 	 * 
 	 */
@@ -25,50 +24,44 @@ public class InsumoMovimentacao implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	
+
 	@ManyToOne
-    @JoinColumn(name="insumo_id", nullable=false)
+	@JoinColumn(name = "insumo_id", nullable = false)
 	private Insumo insumo;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "movimentacao_id")
 	private Movimentacao movimentacao;
-	
+
 	private Double quantidadeOrigem;
-	
+
 	private Double quantidadeMovimentada;
-	
+
 	private String loteFornecedor;
-	
+
 	private String loteCR;
-	
+
 	private String loteProducao;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataIrradiacao;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataValidade;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataAprovacao;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataReprovacao;
-	
+
 	private Boolean aprovado;
-	
 
 	public InsumoMovimentacao() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	
-
 
 	public InsumoMovimentacao(Integer id, Insumo insumo, Movimentacao movimentacao, Double quantidadeOrigem,
 			Double quantidadeMovimentada, String loteFornecedor, String loteCR, String loteProducao,
@@ -89,24 +82,17 @@ public class InsumoMovimentacao implements Serializable{
 		this.aprovado = aprovado;
 	}
 
-
-
-
-
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
 	public Insumo getInsumo() {
 		return insumo;
 	}
-
 
 	public void setInsumo(Insumo insumo) {
 		this.insumo = insumo;
@@ -124,101 +110,81 @@ public class InsumoMovimentacao implements Serializable{
 		return quantidadeOrigem;
 	}
 
-
 	public void setQuantidadeOrigem(Double quantidadeOrigem) {
 		this.quantidadeOrigem = quantidadeOrigem;
 	}
-
 
 	public Double getQuantidadeMovimentada() {
 		return quantidadeMovimentada;
 	}
 
-
 	public void setQuantidadeMovimentada(Double quantidadeMovimentada) {
 		this.quantidadeMovimentada = quantidadeMovimentada;
 	}
-
 
 	public String getLoteFornecedor() {
 		return loteFornecedor;
 	}
 
-
 	public void setLoteFornecedor(String loteFornecedor) {
 		this.loteFornecedor = loteFornecedor;
 	}
-
 
 	public String getLoteCR() {
 		return loteCR;
 	}
 
-
 	public void setLoteCR(String loteCR) {
 		this.loteCR = loteCR;
 	}
-
 
 	public String getLoteProducao() {
 		return loteProducao;
 	}
 
-
 	public void setLoteProducao(String loteProducao) {
 		this.loteProducao = loteProducao;
 	}
-
 
 	public Date getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-
 	public void setDataIrradiacao(Date dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
-
 
 	public Date getDataValidade() {
 		return dataValidade;
 	}
 
-
 	public void setDataValidade(Date dataValidade) {
 		this.dataValidade = dataValidade;
 	}
-
 
 	public Date getDataAprovacao() {
 		return dataAprovacao;
 	}
 
-
 	public void setDataAprovacao(Date dataAprovacao) {
 		this.dataAprovacao = dataAprovacao;
 	}
 
-	
 	public Date getDataReprovacao() {
 		return dataReprovacao;
 	}
-
 
 	public void setDataReprovacao(Date dataReprovacao) {
 		this.dataReprovacao = dataReprovacao;
 	}
 
-
 	public Boolean getAprovado() {
 		return aprovado;
 	}
 
-
 	public void setAprovado(Boolean aprovado) {
 		this.aprovado = aprovado;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -227,7 +193,6 @@ public class InsumoMovimentacao implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -245,10 +210,5 @@ public class InsumoMovimentacao implements Serializable{
 			return false;
 		return true;
 	}
-
-	
-	
-
-	
 
 }

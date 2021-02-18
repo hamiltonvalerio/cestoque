@@ -159,6 +159,11 @@ public class InsumoService {
 		// TODO Auto-generated method stub
 		return insumoLocalizacaoRepository.buscaTodosPorLocalizacao(localizacao_id,pageRequest);
 	}
+
+	public Long findTotalCadastrados() {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.count();
+	}
 	
 	
 }

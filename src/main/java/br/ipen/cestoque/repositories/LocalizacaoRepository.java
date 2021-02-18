@@ -17,4 +17,6 @@ public interface LocalizacaoRepository extends JpaRepository<Localizacao, Intege
 			+ "INNER JOIN InsumoLocalizacao ie ON (ie.localizacao.id = l.id) ")
 	public List<Localizacao> findAllInsumoLocalizacao();
 
+	public List<Localizacao> findAllByOrderByNome();
+
 }

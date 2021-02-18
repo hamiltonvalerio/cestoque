@@ -17,71 +17,67 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @DynamicUpdate
-public class InsumoLocalizacao implements Serializable{
+public class InsumoLocalizacao implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ManyToOne
-    @JoinColumn(name="insumo_id", nullable=false)
+	@JoinColumn(name = "insumo_id", nullable = false)
 	private Insumo insumo;
-	
+
 	@ManyToOne
-    @JoinColumn(name="localizacao_id", nullable=false)
+	@JoinColumn(name = "localizacao_id", nullable = false)
 	private Localizacao localizacao;
-	
+
 	private Double quantidade;
-	
+
 	private Double quantidademinima;
-	
+
 	private String loteFornecedor;
-	
+
 	private String loteCR;
-	
+
 	private String loteProducao;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataIrradiacao;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataValidade;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataAprovacao;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataReprovacao;
-	
+
 	private Boolean aprovado;
-	
+
 	@Transient
 	private String nomedoinsumo;
-	
 
-	
-	/*@ManyToMany
-	@JoinTable(name = "INSUMOS_LOCALIZACOES", 
-			joinColumns = @JoinColumn(name = "insumolocalizacao_id"),
-			inverseJoinColumns = @JoinColumn(name = "localizacao_id")
-			)
-	private List<Localizacao> localizacoes = new ArrayList<>();*/
-	
-	
-	//private Localizacao localizacao;
-	
+	/*
+	 * @ManyToMany
+	 * 
+	 * @JoinTable(name = "INSUMOS_LOCALIZACOES", joinColumns = @JoinColumn(name =
+	 * "insumolocalizacao_id"), inverseJoinColumns = @JoinColumn(name =
+	 * "localizacao_id") ) private List<Localizacao> localizacoes = new
+	 * ArrayList<>();
+	 */
+
+	// private Localizacao localizacao;
+
 	public InsumoLocalizacao() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	public InsumoLocalizacao(Integer id, Insumo insumo, Localizacao localizacao, Double quantidade,
 			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao, Date dataIrradiacao,
@@ -103,9 +99,6 @@ public class InsumoLocalizacao implements Serializable{
 		this.setNomedoinsumo(insumo.getNome());
 	}
 
-
-
-
 	public Insumo getInsumo() {
 		return insumo;
 	}
@@ -121,14 +114,13 @@ public class InsumoLocalizacao implements Serializable{
 	public void setLocalizacao(Localizacao localizacao) {
 		this.localizacao = localizacao;
 	}
-	
-	/*public List<Localizacao> getLocalizacoes() {
-		return localizacoes;
-	}
 
-	public void setLocalizacoes(List<Localizacao> localizacoes) {
-		this.localizacoes = localizacoes;
-	}*/
+	/*
+	 * public List<Localizacao> getLocalizacoes() { return localizacoes; }
+	 * 
+	 * public void setLocalizacoes(List<Localizacao> localizacoes) {
+	 * this.localizacoes = localizacoes; }
+	 */
 
 	public Double getQuantidade() {
 		return quantidade;
@@ -177,20 +169,14 @@ public class InsumoLocalizacao implements Serializable{
 	public void setDataAprovacao(Date dataAprovacao) {
 		this.dataAprovacao = dataAprovacao;
 	}
-	
-	
 
 	public Date getDataReprovacao() {
 		return dataReprovacao;
 	}
 
-
-
 	public void setDataReprovacao(Date dataReprovacao) {
 		this.dataReprovacao = dataReprovacao;
 	}
-
-
 
 	public Boolean getAprovado() {
 		return aprovado;
@@ -200,33 +186,21 @@ public class InsumoLocalizacao implements Serializable{
 		this.aprovado = aprovado;
 	}
 
-
 	public String getLoteProducao() {
 		return loteProducao;
 	}
-
 
 	public void setLoteProducao(String loteProducao) {
 		this.loteProducao = loteProducao;
 	}
 
-
-
-
 	public String getLoteFornecedor() {
 		return loteFornecedor;
 	}
 
-
-
-
 	public void setLoteFornecedor(String loteFornecedor) {
 		this.loteFornecedor = loteFornecedor;
 	}
-
-
-
-
 
 	@Override
 	public int hashCode() {
@@ -253,42 +227,25 @@ public class InsumoLocalizacao implements Serializable{
 		return true;
 	}
 
-	
-	
-
-
-
-
 	public Integer getId() {
 		return id;
 	}
-
-
-
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
 	public String getNomedoinsumo() {
-		if(this.getInsumo().getNome() != null) {
-			this.nomedoinsumo = this.getInsumo().getNome()+" Lote Fornecedor:"+this.getLoteFornecedor()+" Data Validade:"+this.getDataValidade();
-			
+		if (this.getInsumo().getNome() != null) {
+			this.nomedoinsumo = this.getInsumo().getNome() + " Lote Fornecedor:" + this.getLoteFornecedor()
+					+ " Data Validade:" + this.getDataValidade();
+
 		}
 		return nomedoinsumo;
 	}
 
-
-
 	public void setNomedoinsumo(String nomedoinsumo) {
 		this.nomedoinsumo = nomedoinsumo;
 	}
-
-
-
-	
 
 }

@@ -7,41 +7,42 @@ import javax.validation.constraints.NotEmpty;
 
 import br.ipen.cestoque.domain.Localizacao;
 
+public class LocalizacaoDTO implements Serializable {
 
-public class LocalizacaoDTO implements Serializable{
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	private Integer id;
-	
+
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
-	
+
 	private String usualt;
-	
+
 	private Date datalt;
-	
-	
+
+	private Boolean aprovacao = false;
+
 	public LocalizacaoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public LocalizacaoDTO(Localizacao obj) {
-		id = obj.getId();
-		nome = obj.getNome();
-		usualt = obj.getUsualt();
-		datalt = obj.getDatalt();
+		this.id = obj.getId();
+		this.nome = obj.getNome();
+		this.aprovacao = obj.getAprovacao();
+		this.usualt = obj.getUsualt();
+		this.datalt = obj.getDatalt();
 	}
 
-	public LocalizacaoDTO(Integer id, String nome, String usualt, Date datalt) {
+	public LocalizacaoDTO(Integer id, String nome, Boolean aprovacao, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.aprovacao = aprovacao;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -62,6 +63,14 @@ public class LocalizacaoDTO implements Serializable{
 		this.nome = nome;
 	}
 
+	public Boolean getAprovacao() {
+		return aprovacao;
+	}
+
+	public void setAprovacao(Boolean aprovacao) {
+		this.aprovacao = aprovacao;
+	}
+
 	public String getUsualt() {
 		return usualt;
 	}
@@ -77,9 +86,5 @@ public class LocalizacaoDTO implements Serializable{
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
 	}
-	
-	
 
-
-	
 }
