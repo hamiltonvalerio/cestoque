@@ -7,6 +7,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -45,15 +46,15 @@ public class MovimentacaoService {
 	@Autowired
 	private InsumoService insumoService;
 	
-	private final MovimentacaoMapper movimentacaoMapper; 
+	private MovimentacaoMapper movimentacaoMapper; 
 	
-	private final InsumoMovimentacaoMapper insumomovimentacaoMapper;
+	private InsumoMovimentacaoMapper insumomovimentacaoMapper;
 	
 	
-	public MovimentacaoService(final MovimentacaoMapper movimentacaoMapper, final InsumoMovimentacaoMapper insumomovimentacaoMapper) {
+	/*public MovimentacaoService(final MovimentacaoMapper movimentacaoMapper, final InsumoMovimentacaoMapper insumomovimentacaoMapper) {
 		this.movimentacaoMapper = movimentacaoMapper;
 		this.insumomovimentacaoMapper = insumomovimentacaoMapper;
-	}
+	}*/
 	
 	
 	
@@ -95,14 +96,38 @@ public class MovimentacaoService {
 			//verificar se tem insumos nesta localização, se sim, somar os as quantidades
 			//filtros: insumo, insumo_id, localizacao_id, lotefornecedor, data_validade, data_irradiacao
 			insumoLocalizacaoDestino = new InsumoLocalizacao();
+			insumoLocalizacaoDestino.setInsumo(insumo);
+			insumoLocalizacaoDestino.setLocalizacao(localizacaoDestino);
+			insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
+			
+			
+			
+			
 			insumoLocalizacaoOrigem = new InsumoLocalizacao();
 			
+			
+			
+			
+			
+			
+			
+			
 			if(im.getDataIrradiacao() != null){
-				insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());	
-				insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());
+				if(im.getLoteFornecedor() != null) {
+					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());	
+					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());
+				}else {
+					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());	
+					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
+				}
 			}else {
-				insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoDestino.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());
-				insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());
+				if(im.getLoteFornecedor() != null) {
+					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoDestino.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade());
+					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade());
+				}else {
+					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoDestino.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade());
+					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade());
+				}
 			}
 			
 
@@ -130,6 +155,9 @@ public class MovimentacaoService {
 			
 			
 			//insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findByIdLocalizacaoAndIdInsumo(localizacaoOrigem, insumo);
+			if(insumoLocalizacaoOrigem.getQuantidade() == null) {
+				insumoLocalizacaoOrigem.setQuantidade(0.0);
+			}
 			Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant;
 			insumoLocalizacaoOrigem.setQuantidade(novaQuantidade);
 			insumosLocalizacoesOrigem.add(insumoLocalizacaoOrigem);

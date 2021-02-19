@@ -26,6 +26,10 @@ public class InsumoMovimentacao implements Serializable {
 	private Integer id;
 
 	@ManyToOne
+	@JoinColumn(name = "localizacao_id", nullable = false)
+	private Localizacao localizacao;
+
+	@ManyToOne
 	@JoinColumn(name = "insumo_id", nullable = false)
 	private Insumo insumo;
 
@@ -63,12 +67,14 @@ public class InsumoMovimentacao implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public InsumoMovimentacao(Integer id, Insumo insumo, Movimentacao movimentacao, Double quantidadeOrigem,
-			Double quantidadeMovimentada, String loteFornecedor, String loteCR, String loteProducao,
-			Date dataIrradiacao, Date dataValidade, Date dataAprovacao, Date dataReprovacao, Boolean aprovado) {
+	public InsumoMovimentacao(Integer id, Insumo insumo, Localizacao localizacao, Movimentacao movimentacao,
+			Double quantidadeOrigem, Double quantidadeMovimentada, String loteFornecedor, String loteCR,
+			String loteProducao, Date dataIrradiacao, Date dataValidade, Date dataAprovacao, Date dataReprovacao,
+			Boolean aprovado) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
+		this.localizacao = localizacao;
 		this.movimentacao = movimentacao;
 		this.quantidadeOrigem = quantidadeOrigem;
 		this.quantidadeMovimentada = quantidadeMovimentada;
@@ -96,6 +102,14 @@ public class InsumoMovimentacao implements Serializable {
 
 	public void setInsumo(Insumo insumo) {
 		this.insumo = insumo;
+	}
+
+	public Localizacao getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
 	}
 
 	public Movimentacao getMovimentacao() {

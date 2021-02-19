@@ -23,7 +23,7 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			+ "WHERE localizacao_id =:localizacao_id "
 			+ "AND insumo =:insumo "
 			+ "AND loteFornecedor =:loteFornecedor "
-			+ "AND dataValidade =:dataValidade "
+			+ "AND cast(:dataValidade as date) IS NULL OR dataValidade =:dataValidade "
 			+ "AND dataIrradiacao =:dataIrradiacao ")
 	public InsumoLocalizacao findDuplicado(
 			@Param("localizacao_id") Integer localizacao_id, 
@@ -35,15 +35,20 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 	@Query("SELECT il FROM InsumoLocalizacao il "
 			+ "WHERE localizacao_id =:localizacao_id "
 			+ "AND insumo =:insumo "
-			+ "AND loteFornecedor =:loteFornecedor "
-			+ "AND dataValidade =:dataValidade "
-			+ "AND cast(:dataIrradiacao as date) IS NULL OR dataIrradiacao =:dataIrradiacao ")
+			+ "AND lote_fornecedor =:loteFornecedor "
+			+ "AND cast(:dataValidade as date) IS NULL OR data_validade =:dataValidade ")
 	public InsumoLocalizacao findDuplicadoDataIrradiacaoNull(
 			@Param("localizacao_id") Integer localizacao_id, 
 			@Param("insumo") Insumo insumo,
 			@Param("loteFornecedor") String loteFornecedor,
-			@Param("dataValidade") Date dataValidade,
-			@Param("dataIrradiacao") @Temporal Date dataIrradiacao);
+			@Param("dataValidade") Date dataValidade);
+	
+	@Query("SELECT il FROM InsumoLocalizacao il "
+			+ "WHERE localizacao_id =:localizacao_id "
+			+ "AND insumo =:insumo ")
+	public InsumoLocalizacao findDuplicadoLocalizacaoInsumo(
+			@Param("localizacao_id") Integer localizacao_id, 
+			@Param("insumo") Insumo insumo);
 	
 	
 	

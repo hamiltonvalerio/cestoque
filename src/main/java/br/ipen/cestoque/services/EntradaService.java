@@ -89,8 +89,11 @@ public class EntradaService {
 			if(ie.getDataIrradiacao() != null){
 				insumoLocalizacao = insumoLocalizacaoRepository.findDuplicado(localizacao.getId(), insumo, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());	
 			}else {
-				
-				insumoLocalizacao = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacao.getId(), insumo, ie.getLoteFornecedor().toUpperCase().trim(), ie.getDataValidade(), ie.getDataIrradiacao());
+				if(ie.getLoteFornecedor() != null){
+					insumoLocalizacao = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacao.getId(), insumo, ie.getLoteFornecedor().toUpperCase().trim(), ie.getDataValidade());
+				}else{
+					insumoLocalizacao = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacao.getId(), insumo, ie.getLoteFornecedor(), ie.getDataValidade());
+				}
 		
 			}
 			
