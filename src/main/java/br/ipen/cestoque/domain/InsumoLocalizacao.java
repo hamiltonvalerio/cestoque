@@ -247,5 +247,7 @@ public class InsumoLocalizacao implements Serializable {
 	public void setNomedoinsumo(String nomedoinsumo) {
 		this.nomedoinsumo = nomedoinsumo;
 	}
+	
+	
 
 }

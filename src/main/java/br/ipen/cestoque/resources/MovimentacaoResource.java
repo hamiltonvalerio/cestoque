@@ -30,9 +30,9 @@ public class MovimentacaoResource {
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<MovimentacaoDTO>> findAll(){
+	public ResponseEntity<List<Movimentacao>> findAll(){
 		
-		List<MovimentacaoDTO> list = service.findAll();
+		List<Movimentacao> list = service.findAll();
 		
 		//List<MovimentacaoDTO> listaDTO =  MovimentacaoMapper.INSTANCE.tolistmovimentacaoDTO(list);
 		

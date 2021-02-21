@@ -8,6 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.ipen.cestoque.domain.Localizacao;
+import br.ipen.cestoque.domain.Movimentacao;
 
 public class MovimentacaoDTO implements Serializable{
 

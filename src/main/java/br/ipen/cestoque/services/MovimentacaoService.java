@@ -19,45 +19,37 @@ import br.ipen.cestoque.domain.InsumoMovimentacao;
 import br.ipen.cestoque.domain.Localizacao;
 import br.ipen.cestoque.domain.Movimentacao;
 import br.ipen.cestoque.dto.MovimentacaoDTO;
-import br.ipen.cestoque.mappers.InsumoMovimentacaoMapper;
-import br.ipen.cestoque.mappers.MovimentacaoMapper;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoMovimentacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
 import br.ipen.cestoque.repositories.MovimentacaoRepository;
-
 
 @Service
 public class MovimentacaoService {
 
 	@Autowired
 	private MovimentacaoRepository repo;
-	//private EntradaRepository repo;
-	
+	// private EntradaRepository repo;
+
 	@Autowired
-	private InsumoMovimentacaoRepository insumoMovimentacaoRepository; 
-	
+	private InsumoMovimentacaoRepository insumoMovimentacaoRepository;
+
 	@Autowired
 	private InsumoRepository insumoRepository;
-	
+
 	@Autowired
 	private InsumoLocalizacaoRepository insumoLocalizacaoRepository;
-	
+
 	@Autowired
 	private InsumoService insumoService;
-	
-	private MovimentacaoMapper movimentacaoMapper; 
-	
-	private InsumoMovimentacaoMapper insumomovimentacaoMapper;
-	
-	
-	/*public MovimentacaoService(final MovimentacaoMapper movimentacaoMapper, final InsumoMovimentacaoMapper insumomovimentacaoMapper) {
-		this.movimentacaoMapper = movimentacaoMapper;
-		this.insumomovimentacaoMapper = insumomovimentacaoMapper;
-	}*/
-	
-	
-	
+
+	/*
+	 * public MovimentacaoService(final MovimentacaoMapper movimentacaoMapper, final
+	 * InsumoMovimentacaoMapper insumomovimentacaoMapper) { this.movimentacaoMapper
+	 * = movimentacaoMapper; this.insumomovimentacaoMapper =
+	 * insumomovimentacaoMapper; }
+	 */
+
 	@Transactional
 	public Movimentacao insert(Movimentacao obj) {
 		List<Insumo> insumos = new ArrayList<>();
@@ -65,73 +57,74 @@ public class MovimentacaoService {
 		List<InsumoLocalizacao> insumosLocalizacoesOrigem = new ArrayList<>();
 		Insumo insumo;
 		Double quant;
-		
+
 		Localizacao localizacaoOrigem = new Localizacao();
 		InsumoLocalizacao insumoLocalizacaoOrigem;
 		localizacaoOrigem = obj.getLocalizacaoOrigem();
-		
+
 		Localizacao localizacaoDestino = new Localizacao();
 		InsumoLocalizacao insumoLocalizacaoDestino;
 		localizacaoDestino = obj.getLocalizacaoDestino();
-		
+
 		obj.setId(null);
 		obj.setUsualt(UserService.authenticated().getUsername());
 		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj = repo.save(obj);
-		
-		for(InsumoMovimentacao im : obj.getItens()) {
+
+		for (InsumoMovimentacao im : obj.getItens()) {
+			im.setLocalizacao(localizacaoDestino);
 			insumo = new Insumo();
 			insumo = insumoService.find(im.getInsumo().getId());
 			insumo.setUnidade(im.getInsumo().getUnidade());
 			insumo.setValor(im.getInsumo().getValor());
 			quant = im.getQuantidadeMovimentada();
 			im.setInsumo(insumo);
-			//im.setQuantidadeMovimentada(quant);
-			if(im.getInsumo().getQuantidade() == null) {
+			// im.setQuantidadeMovimentada(quant);
+			if (im.getInsumo().getQuantidade() == null) {
 				im.getInsumo().setQuantidade(0.0);
 			}
 			insumo.setQuantidade(im.getInsumo().getQuantidade());
 			insumos.add(insumo);
-			
-			//verificar se tem insumos nesta localização, se sim, somar os as quantidades
-			//filtros: insumo, insumo_id, localizacao_id, lotefornecedor, data_validade, data_irradiacao
-			insumoLocalizacaoDestino = new InsumoLocalizacao();
-			insumoLocalizacaoDestino.setInsumo(insumo);
-			insumoLocalizacaoDestino.setLocalizacao(localizacaoDestino);
-			insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
-			
-			
-			
-			
-			insumoLocalizacaoOrigem = new InsumoLocalizacao();
-			
-			
-			
-			
-			
-			
-			
-			
-			if(im.getDataIrradiacao() != null){
-				if(im.getLoteFornecedor() != null) {
-					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());	
-					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(), im.getDataIrradiacao());
-				}else {
-					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());	
-					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-				}
-			}else {
-				if(im.getLoteFornecedor() != null) {
-					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoDestino.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade());
-					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade());
-				}else {
-					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoDestino.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade());
-					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem.getId(), insumo, im.getLoteFornecedor(), im.getDataValidade());
-				}
-			}
-			
 
-			if(insumoLocalizacaoDestino == null) {
+			insumoLocalizacaoDestino = new InsumoLocalizacao();
+
+			insumoLocalizacaoOrigem = new InsumoLocalizacao();
+
+			insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicado(insumo, localizacaoDestino,
+					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
+			insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(insumo, localizacaoOrigem,
+					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
+
+			/*
+			 * f(im.getDataIrradiacao() != null){ if(im.getLoteFornecedor() != null) {
+			 * insumoLocalizacaoDestino =
+			 * insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo,
+			 * im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(),
+			 * im.getDataIrradiacao()); insumoLocalizacaoOrigem =
+			 * insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo,
+			 * im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(),
+			 * im.getDataIrradiacao()); }else { insumoLocalizacaoDestino =
+			 * insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo,
+			 * im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
+			 * insumoLocalizacaoOrigem =
+			 * insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo,
+			 * im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao()); }
+			 * }else { if(im.getLoteFornecedor() != null) { insumoLocalizacaoDestino =
+			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(
+			 * localizacaoDestino.getId(), insumo,
+			 * im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade());
+			 * insumoLocalizacaoOrigem =
+			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem
+			 * .getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(),
+			 * im.getDataValidade()); }else { insumoLocalizacaoDestino =
+			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(
+			 * localizacaoDestino.getId(), insumo, im.getLoteFornecedor(),
+			 * im.getDataValidade()); insumoLocalizacaoOrigem =
+			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem
+			 * .getId(), insumo, im.getLoteFornecedor(), im.getDataValidade()); } }
+			 */
+
+			if (insumoLocalizacaoDestino == null) {
 				insumoLocalizacaoDestino = new InsumoLocalizacao();
 				insumoLocalizacaoDestino.setAprovado(im.getAprovado());
 				insumoLocalizacaoDestino.setDataAprovacao(im.getDataAprovacao());
@@ -144,53 +137,44 @@ public class MovimentacaoService {
 				insumoLocalizacaoDestino.setInsumo(insumo);
 				insumoLocalizacaoDestino.setLocalizacao(obj.getLocalizacaoDestino());
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
-			}else {
+			} else {
 				Double novaQuantidade = insumoLocalizacaoDestino.getQuantidade() + quant;
 				insumoLocalizacaoDestino.setQuantidade(novaQuantidade);
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 			}
-			
-			//verificar se tem insumos nesta localização ORIGEM, se sim, subtrair as quantidades
-			
-			
-			
-			//insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findByIdLocalizacaoAndIdInsumo(localizacaoOrigem, insumo);
-			if(insumoLocalizacaoOrigem.getQuantidade() == null) {
+
+			// verificar se tem insumos nesta localização ORIGEM, se sim, subtrair as
+			// quantidades
+
+			// insumoLocalizacaoOrigem =
+			// insumoLocalizacaoRepository.findByIdLocalizacaoAndIdInsumo(localizacaoOrigem,
+			// insumo);
+			if (insumoLocalizacaoOrigem.getQuantidade() == null) {
 				insumoLocalizacaoOrigem.setQuantidade(0.0);
 			}
 			Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant;
 			insumoLocalizacaoOrigem.setQuantidade(novaQuantidade);
 			insumosLocalizacoesOrigem.add(insumoLocalizacaoOrigem);
-			
+
 			im.setMovimentacao(obj);
 
 		}
-		
-			insumoLocalizacaoRepository.saveAll(insumosLocalizacoesDestino);
-			insumoLocalizacaoRepository.saveAll(insumosLocalizacoesOrigem);
-			insumoMovimentacaoRepository.saveAll(obj.getItens());
-			insumoRepository.saveAll(insumos);
-			return obj;
-	}
-	
-	public List<MovimentacaoDTO> findAll() {
-		// TODO Auto-generated method stub
-		//return repo.findAll();
-		
-		List<Movimentacao> lista = repo.findAll();	
-		
-		List<MovimentacaoDTO> listaDTO = this.movimentacaoMapper.tolistmovimentacaoDTO(lista);
 
-		for (Movimentacao m : lista) {
-			for(MovimentacaoDTO mdto : listaDTO) {
-				if(m.getId().equals(mdto.getId())) {
-					mdto.setItens(this.insumomovimentacaoMapper.toDto(m.getItens()));
-				}
-			}
-		}
-		
-		
-		return listaDTO;	
+		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesDestino);
+		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesOrigem);
+		insumoMovimentacaoRepository.saveAll(obj.getItens());
+		insumoRepository.saveAll(insumos);
+		return obj;
+	}
+
+	public List<Movimentacao> findAll() {
+		// TODO Auto-generated method stub
+		// return repo.findAll();
+
+		List<Movimentacao> lista = repo.findAll();
+		//List<MovimentacaoDTO> listaDTO = new ArrayList<>();
+
+		return lista;
 	}
 
 	public Page<Movimentacao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
@@ -198,5 +182,4 @@ public class MovimentacaoService {
 		return repo.findAll(pageRequest);
 	}
 
-	
 }

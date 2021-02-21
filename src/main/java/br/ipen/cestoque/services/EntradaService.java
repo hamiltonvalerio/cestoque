@@ -85,19 +85,8 @@ public class EntradaService {
 			
 			//verificar se tem insumos nesta localização, se sim, somar os as quantidades
 			insumoLocalizacao = new InsumoLocalizacao();
+			insumoLocalizacao = insumoLocalizacaoRepository.findDuplicado(insumo, localizacao, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());
 			
-			if(ie.getDataIrradiacao() != null){
-				insumoLocalizacao = insumoLocalizacaoRepository.findDuplicado(localizacao.getId(), insumo, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());	
-			}else {
-				if(ie.getLoteFornecedor() != null){
-					insumoLocalizacao = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacao.getId(), insumo, ie.getLoteFornecedor().toUpperCase().trim(), ie.getDataValidade());
-				}else{
-					insumoLocalizacao = insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacao.getId(), insumo, ie.getLoteFornecedor(), ie.getDataValidade());
-				}
-		
-			}
-			
-
 			if(insumoLocalizacao == null) {
 				insumoLocalizacao = new InsumoLocalizacao();
 				insumoLocalizacao.setInsumo(insumo);

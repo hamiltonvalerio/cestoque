@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@DynamicUpdate(value=true)
-public class Insumo implements Serializable{
+@DynamicUpdate(value = true)
+public class Insumo implements Serializable {
 
 	/**
 	 * 
@@ -40,55 +40,45 @@ public class Insumo implements Serializable{
 	private String codigoalmox;
 	private String observacao;
 	private Boolean essencial;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datavalidade;
-	
+
 	private Double quantidade;
 	private Double taxadeconsumo;
 	private String codigobarra;
 	private String qrcode;
 	private String rfid;
-	
-	private String usualt;	
+
+	private String usualt;
 	private Date datalt;
-	
+
 	private Integer codinsumofornecedor;
 	private Boolean irradiado;
 	private Date datairradiado;
 	private Boolean amostracq;
 	private Date dataamostracq;
 	private String lote;
-	
+
 	@Transient
 	private String nomecodalmox;
-	
+
 	@Transient
 	private Double quantidademinima;
-	
+
 	@Transient
 	private Integer codlocalizacaoIE;
-	
-	
-	
-	
-	
+
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "INSUMO_CATEGORIA", 
-			joinColumns = @JoinColumn(name = "insumo_id"),
-			inverseJoinColumns = @JoinColumn(name = "categoria_id")
-			)
+	@JoinTable(name = "INSUMO_CATEGORIA", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
-	
+
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "INSUMO_FORNECEDOR", 
-			joinColumns = @JoinColumn(name = "insumo_id"),
-			inverseJoinColumns = @JoinColumn(name = "fornecedor_id")
-			)
-	private List<Fornecedor> fornecedores = new ArrayList<>();	
-	
+	@JoinTable(name = "INSUMO_FORNECEDOR", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "fornecedor_id"))
+	private List<Fornecedor> fornecedores = new ArrayList<>();
+
 	/*
 	 * @JsonIgnore
 	 * 
@@ -97,36 +87,28 @@ public class Insumo implements Serializable{
 	 * @JoinTable(name = "INSUMO_LOCALIZACAO", joinColumns = @JoinColumn(name =
 	 * "insumo_id"), inverseJoinColumns = @JoinColumn(name = "localizacao_id") )
 	 */
-	
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<ItemProduto> itens = new HashSet<>();
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<InsumoEntrada> entradas = new HashSet<>();
-	
+
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
-	
-	
-	
-	
-	public Insumo(){
+
+	public Insumo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 
-	
-
-	
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigoalmox, String observacao,
 			Boolean essencial, Date datavalidade, Double quantidade, Double taxadeconsumo, String codigobarra,
-			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor, Boolean irradiado,
-			Date datairradiado, Boolean amostracq, Date dataamostracq, String lote) {
+			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor,
+			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -150,15 +132,13 @@ public class Insumo implements Serializable{
 		this.amostracq = amostracq;
 		this.dataamostracq = dataamostracq;
 		this.lote = lote;
-		this.nomecodalmox = nome +" - "+ codigoalmox;
+		this.nomecodalmox = nome + " - " + codigoalmox;
 	}
 
-
-
 	@JsonIgnore
-	public List<Produto> getProdutos(){
+	public List<Produto> getProdutos() {
 		List<Produto> lista = new ArrayList<>();
-		for(ItemProduto i : itens) {
+		for (ItemProduto i : itens) {
 			lista.add(i.getProduto());
 		}
 		return lista;
@@ -196,7 +176,6 @@ public class Insumo implements Serializable{
 		this.valor = valor;
 	}
 
-
 	public String getObservacao() {
 		return observacao;
 	}
@@ -213,7 +192,6 @@ public class Insumo implements Serializable{
 		this.essencial = essencial;
 	}
 
-
 	public Double getQuantidade() {
 		return quantidade;
 	}
@@ -221,29 +199,22 @@ public class Insumo implements Serializable{
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
-	
-
-
 
 	public String getQrcode() {
 		return qrcode;
 	}
 
-
 	public void setQrcode(String qrcode) {
 		this.qrcode = qrcode;
 	}
-
 
 	public String getRfid() {
 		return rfid;
 	}
 
-
 	public void setRfid(String rfid) {
 		this.rfid = rfid;
 	}
-
 
 	public String getUsualt() {
 		return usualt;
@@ -326,223 +297,111 @@ public class Insumo implements Serializable{
 		this.unidade = unidade;
 	}
 
-	
-
-
-
-
-
 	public Boolean getIrradiado() {
 		return irradiado;
 	}
-
 
 	public void setIrradiado(Boolean irradiado) {
 		this.irradiado = irradiado;
 	}
 
-
-	
-
-
 	public String getLote() {
 		return lote;
 	}
-
 
 	public void setLote(String lote) {
 		this.lote = lote;
 	}
 
-	
-	
-
-
-
-
 	public String getCodigoalmox() {
 		return codigoalmox;
 	}
-
-
-
-
 
 	public void setCodigoalmox(String codigoalmox) {
 		this.codigoalmox = codigoalmox;
 	}
 
-
-
-
-
 	public Date getDatavalidade() {
 		return datavalidade;
 	}
-
-
-
-
 
 	public void setDatavalidade(Date datavalidade) {
 		this.datavalidade = datavalidade;
 	}
 
-
-
-
-
 	public Double getTaxadeconsumo() {
 		return taxadeconsumo;
 	}
-
-
-
-
 
 	public void setTaxadeconsumo(Double taxadeconsumo) {
 		this.taxadeconsumo = taxadeconsumo;
 	}
 
-
-
-
-
 	public String getCodigobarra() {
 		return codigobarra;
 	}
-
-
-
-
 
 	public void setCodigobarra(String codigobarra) {
 		this.codigobarra = codigobarra;
 	}
 
-
-
-
-
 	public Integer getCodinsumofornecedor() {
 		return codinsumofornecedor;
 	}
-
-
-
-
 
 	public void setCodinsumofornecedor(Integer codinsumofornecedor) {
 		this.codinsumofornecedor = codinsumofornecedor;
 	}
 
-
-
-
-
 	public Date getDatairradiado() {
 		return datairradiado;
 	}
-
-
-
-
 
 	public void setDatairradiado(Date datairradiado) {
 		this.datairradiado = datairradiado;
 	}
 
-
-
-
-
 	public Boolean getAmostracq() {
 		return amostracq;
 	}
-
-
-
-
 
 	public void setAmostracq(Boolean amostracq) {
 		this.amostracq = amostracq;
 	}
 
-
-
-
-
 	public Date getDataamostracq() {
 		return dataamostracq;
 	}
-
-
-
-
 
 	public void setDataamostracq(Date dataamostracq) {
 		this.dataamostracq = dataamostracq;
 	}
 
-
-
-
-
 	public String getNomecodalmox() {
-		if(this.nome != null && this.codigoalmox != null) {
-			this.setCodigoalmox(this.nome + " - "+ this.codigoalmox);
+		if (this.nome != null && this.codigoalmox != null) {
+			this.setCodigoalmox(this.nome + " - " + this.codigoalmox);
 		}
 		return nomecodalmox;
 	}
-
-
-
-
 
 	public void setNomecodalmox(String nome_codalmox) {
 		this.nomecodalmox = nome_codalmox;
 	}
 
-
-
-
-
 	public Double getQuantidademinima() {
 		return quantidademinima;
 	}
-
-
-
-
 
 	public void setQuantidademinima(Double quantidademinima) {
 		this.quantidademinima = quantidademinima;
 	}
 
-
-
-
-
 	public Integer getCodlocalizacaoIE() {
 		return codlocalizacaoIE;
 	}
-
-
-
-
 
 	public void setCodlocalizacaoIE(Integer codlocalizacaoIE) {
 		this.codlocalizacaoIE = codlocalizacaoIE;
 	}
 
-
-
-
-
-
-
-
-	
-	
-	
 }
