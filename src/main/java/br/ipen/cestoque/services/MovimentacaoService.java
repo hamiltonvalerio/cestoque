@@ -95,34 +95,6 @@ public class MovimentacaoService {
 			insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(insumo, localizacaoOrigem,
 					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
 
-			/*
-			 * f(im.getDataIrradiacao() != null){ if(im.getLoteFornecedor() != null) {
-			 * insumoLocalizacaoDestino =
-			 * insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo,
-			 * im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(),
-			 * im.getDataIrradiacao()); insumoLocalizacaoOrigem =
-			 * insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo,
-			 * im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade(),
-			 * im.getDataIrradiacao()); }else { insumoLocalizacaoDestino =
-			 * insumoLocalizacaoRepository.findDuplicado(localizacaoDestino.getId(), insumo,
-			 * im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-			 * insumoLocalizacaoOrigem =
-			 * insumoLocalizacaoRepository.findDuplicado(localizacaoOrigem.getId(), insumo,
-			 * im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao()); }
-			 * }else { if(im.getLoteFornecedor() != null) { insumoLocalizacaoDestino =
-			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(
-			 * localizacaoDestino.getId(), insumo,
-			 * im.getLoteFornecedor().toUpperCase().trim(), im.getDataValidade());
-			 * insumoLocalizacaoOrigem =
-			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem
-			 * .getId(), insumo, im.getLoteFornecedor().toUpperCase().trim(),
-			 * im.getDataValidade()); }else { insumoLocalizacaoDestino =
-			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(
-			 * localizacaoDestino.getId(), insumo, im.getLoteFornecedor(),
-			 * im.getDataValidade()); insumoLocalizacaoOrigem =
-			 * insumoLocalizacaoRepository.findDuplicadoDataIrradiacaoNull(localizacaoOrigem
-			 * .getId(), insumo, im.getLoteFornecedor(), im.getDataValidade()); } }
-			 */
 
 			if (insumoLocalizacaoDestino == null) {
 				insumoLocalizacaoDestino = new InsumoLocalizacao();
