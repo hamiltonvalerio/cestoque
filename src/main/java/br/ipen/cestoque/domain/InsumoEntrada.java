@@ -1,5 +1,6 @@
 package br.ipen.cestoque.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.EmbeddedId;
@@ -8,7 +9,12 @@ import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class InsumoEntrada {
+public class InsumoEntrada implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
 	@EmbeddedId
