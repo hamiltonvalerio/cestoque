@@ -1,6 +1,7 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Entrada;
 import br.ipen.cestoque.dto.EntradaDTO;
+import br.ipen.cestoque.resources.utils.GeraLoteRecebimentoCR;
 import br.ipen.cestoque.services.EntradaService;
 
 
@@ -26,6 +28,8 @@ public class EntradaResource {
 
 	@Autowired
 	private EntradaService service;
+	
+	private GeraLoteRecebimentoCR gera;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Entrada> find(@PathVariable Integer id){
@@ -50,9 +54,13 @@ public class EntradaResource {
 		 */
 		List<EntradaDTO> listDto = list.stream().map(obj -> new EntradaDTO(obj)).collect(Collectors.toList());
 		/*
+		 * 
 		 * for (EntradaDTO eDTO : listDto) {
 		 * System.out.println("AQUI: "+eDTO.getNumRequisicao()); }
 		 */
+		
+		
+		
 		return ResponseEntity.ok().body(listDto);
 	}
 	

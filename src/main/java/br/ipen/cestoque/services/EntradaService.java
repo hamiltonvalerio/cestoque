@@ -119,7 +119,14 @@ public class EntradaService {
 	public List<Entrada> findAll() {
 		// TODO Auto-generated method stub
 		//return repo.findAll();
+		
 		return repo.findAllByOrderByDataEntradaDesc();
 		
+	}
+
+	public Integer findMaxId() {
+		// TODO Auto-generated method stub
+		
+		return repo.findMaxId();
 	}
 }

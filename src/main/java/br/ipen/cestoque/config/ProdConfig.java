@@ -20,15 +20,18 @@ public class ProdConfig {
 	@Autowired
 	private DBService dbService;
 	
+	
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String strategy;
 	
 	@Bean
 	public boolean instantiateDatabase() {
 		
+		
 		if(!"create".equals(strategy)) {
 			return false;
 		}
+		
 		
 		//dbService.instantiateTestDatabase();
 		return true;
