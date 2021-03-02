@@ -112,15 +112,22 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
+	<dependency>
 	  <groupId>io.springfox</groupId>
 	  <artifactId>springfox-swagger2</artifactId>
 	  <version>LATEST</version>
 	</dependency>
+	
 	<dependency>
-	  <groupId>io.springfox</groupId>
-	  <artifactId>springfox-swagger-ui</artifactId>
-	  <version>LATEST</version>
+	    <groupId>io.springfox</groupId>
+	    <artifactId>springfox-swagger-ui</artifactId>
+	    <version>LATEST</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>io.springfox</groupId>
+	    <artifactId>springfox-boot-starter</artifactId>
+	    <version>LATEST</version>
 	</dependency>
 
 
