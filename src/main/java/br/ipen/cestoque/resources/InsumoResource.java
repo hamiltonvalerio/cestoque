@@ -23,8 +23,10 @@ import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.services.InsumoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
-
+@Api(value = "Insumos")
 @RestController
 @RequestMapping(value="/insumos")
 public class InsumoResource {
@@ -35,6 +37,7 @@ public class InsumoResource {
 	@Autowired
 	private InsumoLocalizacaoRepository ilrepo;
 	
+	@ApiOperation(value = "Retorna insumo por ID")
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Insumo> find(@PathVariable Integer id){
 		Insumo insumo;
@@ -42,6 +45,7 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(insumo);
 	}
 	
+	@ApiOperation(value = "Busca todos os insumos")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<InsumoDTO> > findAll(){
 		List<Insumo> list = service.findAll();
@@ -49,6 +53,7 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@ApiOperation(value = "Retorna Total de insumos cadastrados")
 	@RequestMapping(value="/totalcadastrados",method=RequestMethod.GET)
 	public ResponseEntity<Long> findTotalCadastrados(){
 		
@@ -73,7 +78,7 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(listDto);
 	}*/
 	
-	
+	@ApiOperation(value = "Retorna Insumos paginados e ordenados")
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<InsumoDTO> > findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
@@ -107,6 +112,7 @@ public class InsumoResource {
 	
 	}*/
 	
+	@ApiOperation(value = "Busca insumos por Localização")
 	@RequestMapping(value="/buscaporlocalizacao", method=RequestMethod.GET)
 	public ResponseEntity<Page<Insumo> > findByLocalizacao(
 			@RequestParam(value = "localizacao_id") String localizacao_id,
@@ -135,6 +141,7 @@ public class InsumoResource {
 		//return ResponseEntity.ok().body(list);
 	
 	}
+	
 	
 	@RequestMapping(value="/buscainsumolocalizacaoporlocalizacao", method=RequestMethod.GET)
 	public ResponseEntity<Page<InsumoLocalizacao> > findInsumoLocalizacaoByLocalizacao(
@@ -182,7 +189,7 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(ils);
 	}
 	
-	
+	@ApiOperation(value = "Insere novo insumo")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody InsumoNewDTO objDto){
 		Insumo obj = service.fromDTO(objDto);
@@ -191,6 +198,7 @@ public class InsumoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiOperation(value = "Atualiza a quantidade mínima aceitável por insumo")
 	@RequestMapping(value = "/updateQuantidadeMinima", method = RequestMethod.POST)
 	public ResponseEntity<Void> updateQuantidadeMinima(
 			@RequestParam(value = "insumolocalizacao_id") String insumolocalizacao_id,
