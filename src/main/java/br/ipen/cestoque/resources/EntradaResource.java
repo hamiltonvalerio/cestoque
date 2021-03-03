@@ -1,7 +1,6 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +28,7 @@ public class EntradaResource {
 	@Autowired
 	private EntradaService service;
 	
+	@Autowired
 	private GeraLoteRecebimentoCR gera;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
@@ -41,6 +41,8 @@ public class EntradaResource {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Entrada obj){
 		System.out.println("obj: "+obj.getNumLIA());
+		String loterecebimento = gera.gerarLote(obj.getDataEntrada());
+		obj.setLoteRecebimento(loterecebimento);
 		obj = service.insert(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -49,6 +51,11 @@ public class EntradaResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<EntradaDTO> > findAll(){
 		List<Entrada> list = service.findAll();
+		
+		
+		
+		
+		
 		/*
 		 * for (Entrada e : list) { System.out.println(e.getNumRequisicao()); }
 		 */

@@ -45,6 +45,8 @@ public class InsumoLocalizacaoDTO implements Serializable{
 	private String lote;
 	private String nomecodalmox;
 	
+	private String loteRecebimento;
+	
 	public InsumoLocalizacaoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -259,6 +261,13 @@ public class InsumoLocalizacaoDTO implements Serializable{
 	public void setNomecodalmox(String nomecodalmox) {
 		this.nomecodalmox = nomecodalmox;
 	}
-	
+
+	public String getLoteRecebimento() {
+		return loteRecebimento;
+	}
+
+	public void setLoteRecebimento(String loteRecebimento) {
+		this.loteRecebimento = loteRecebimento;
+	}
 	
 }

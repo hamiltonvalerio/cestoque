@@ -7,7 +7,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -18,7 +17,6 @@ import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.domain.InsumoMovimentacao;
 import br.ipen.cestoque.domain.Localizacao;
 import br.ipen.cestoque.domain.Movimentacao;
-import br.ipen.cestoque.dto.MovimentacaoDTO;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoMovimentacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
@@ -108,6 +106,7 @@ public class MovimentacaoService {
 				insumoLocalizacaoDestino.setQuantidade(quant);
 				insumoLocalizacaoDestino.setInsumo(insumo);
 				insumoLocalizacaoDestino.setLocalizacao(obj.getLocalizacaoDestino());
+				insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 			} else {
 				Double novaQuantidade = insumoLocalizacaoDestino.getQuantidade() + quant;

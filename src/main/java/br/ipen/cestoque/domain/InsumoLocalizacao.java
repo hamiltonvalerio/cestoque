@@ -62,6 +62,8 @@ public class InsumoLocalizacao implements Serializable {
 
 	@Transient
 	private String nomedoinsumo;
+	
+	private String loteRecebimento; 
 
 	/*
 	 * @ManyToMany
@@ -81,7 +83,7 @@ public class InsumoLocalizacao implements Serializable {
 
 	public InsumoLocalizacao(Integer id, Insumo insumo, Localizacao localizacao, Double quantidade,
 			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao, Date dataIrradiacao,
-			Date dataValidade, Date dataAprovacao, Date dataReprovacao, Boolean aprovado) {
+			Date dataValidade, Date dataAprovacao, Date dataReprovacao, Boolean aprovado, String loteRecebimento) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
@@ -97,6 +99,7 @@ public class InsumoLocalizacao implements Serializable {
 		this.dataReprovacao = dataReprovacao;
 		this.aprovado = aprovado;
 		this.setNomedoinsumo(insumo.getNome());
+		this.loteRecebimento = loteRecebimento;
 	}
 
 	public Insumo getInsumo() {
@@ -246,6 +249,14 @@ public class InsumoLocalizacao implements Serializable {
 
 	public void setNomedoinsumo(String nomedoinsumo) {
 		this.nomedoinsumo = nomedoinsumo;
+	}
+
+	public String getLoteRecebimento() {
+		return loteRecebimento;
+	}
+
+	public void setLoteRecebimento(String loteRecebimento) {
+		this.loteRecebimento = loteRecebimento;
 	}
 	
 	

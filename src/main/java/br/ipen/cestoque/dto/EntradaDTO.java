@@ -38,6 +38,8 @@ public class EntradaDTO implements Serializable{
 	
 	private Localizacao localizacao;
 	
+	private String loteRecebimento;
+	
 	private Set<InsumoEntrada> itens = new HashSet<>();
 	
 	public EntradaDTO() {
@@ -58,13 +60,14 @@ public class EntradaDTO implements Serializable{
 		this.setLocalizacao(obj.getLocalizacao());
 		this.itens.addAll(obj.getItens());
 		this.show = false;
+		this.loteRecebimento = obj.getLoteRecebimento();
 	}
 	
 	
 
 
 	public EntradaDTO(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt,
-			Set<InsumoEntrada> itens) {
+			Set<InsumoEntrada> itens, String loteRecebimento) {
 		super();
 		this.id = id;
 		this.dataEntrada = dataEntrada;
@@ -75,6 +78,7 @@ public class EntradaDTO implements Serializable{
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.itens = itens;
+		this.loteRecebimento = loteRecebimento;
 	}
 
 	public Integer getId() {
@@ -166,6 +170,14 @@ public class EntradaDTO implements Serializable{
 
 	public void setLocalizacao(Localizacao localizacao) {
 		this.localizacao = localizacao;
+	}
+
+	public String getLoteRecebimento() {
+		return loteRecebimento;
+	}
+
+	public void setLoteRecebimento(String loteRecebimento) {
+		this.loteRecebimento = loteRecebimento;
 	}
 	
 	

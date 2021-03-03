@@ -74,6 +74,7 @@ public class EntradaService {
 			quant = ie.getQuantidade();
 			ie.setInsumo(insumo);
 			ie.setQuantidade(quant);
+			ie.setLoteRecebimento(obj.getLoteRecebimento());
 			//insumo.setId(ie.getInsumo().getId());
 			if(ie.getInsumo().getQuantidade() == null) {
 				ie.getInsumo().setQuantidade(0.0);
@@ -96,10 +97,12 @@ public class EntradaService {
 				insumoLocalizacao.setLoteCR(ie.getLoteCR());
 				insumoLocalizacao.setDataIrradiacao(ie.getDataIrradiacao());
 				insumoLocalizacao.setDataValidade(ie.getDataValidade());
+				insumoLocalizacao.setLoteRecebimento(obj.getLoteRecebimento());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}else {
 				Double novaQuantidade = insumoLocalizacao.getQuantidade() + quant;
 				insumoLocalizacao.setQuantidade(novaQuantidade);
+				insumoLocalizacao.setLoteRecebimento(obj.getLoteRecebimento());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}
 			

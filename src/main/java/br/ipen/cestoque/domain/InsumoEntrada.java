@@ -32,13 +32,15 @@ public class InsumoEntrada implements Serializable{
 	
 	private Double valorTotal;
 	
+	private String loteRecebimento;
+	
 	public InsumoEntrada() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public InsumoEntrada(Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR, Date dataIrradiacao, Date dataVencIrradiacao,
-			Date dataValidade, Double quantidade, Double valor, Double valorTotal) {
+			Date dataValidade, Double quantidade, Double valor, Double valorTotal, String loteRecebimento) {
 		super();
 		id.setInsumo(insumo);
 		id.setEntrada(entrada);
@@ -48,6 +50,7 @@ public class InsumoEntrada implements Serializable{
 		this.dataVencIrradiacao = dataVencIrradiacao;
 		this.dataValidade = dataValidade;
 		this.quantidade = quantidade;
+		this.loteRecebimento = loteRecebimento;
 		this.setValor(valor);
 		this.setValorTotal(valorTotal);
 	}
@@ -139,6 +142,14 @@ public class InsumoEntrada implements Serializable{
 
 	public void setDataValidade(Date dataValidade) {
 		this.dataValidade = dataValidade;
+	}
+
+	public String getLoteRecebimento() {
+		return loteRecebimento;
+	}
+
+	public void setLoteRecebimento(String loteRecebimento) {
+		this.loteRecebimento = loteRecebimento;
 	}
 	
 	

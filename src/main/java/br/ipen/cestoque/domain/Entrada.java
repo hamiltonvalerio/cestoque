@@ -38,6 +38,8 @@ public class Entrada implements Serializable{
 	
 	private String numRequisicao;
 	
+	private String loteRecebimento;
+	
 	private String usualt;
 	private Date datalt;
 	
@@ -53,7 +55,7 @@ public class Entrada implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Entrada(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt, Localizacao localizacao) {
+	public Entrada(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String loteRecebimento, String usualt, Date datalt, Localizacao localizacao) {
 		super();
 		this.id = id;
 		this.dataEntrada = dataEntrada;
@@ -61,6 +63,7 @@ public class Entrada implements Serializable{
 		this.numLIA = numLIA;
 		this.numProcesso = numProcesso;
 		this.numRequisicao = numRequisicao;
+		this.setLoteRecebimento(loteRecebimento);
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.localizacao = localizacao;
@@ -170,6 +173,14 @@ public class Entrada implements Serializable{
 
 	public void setLocalizacao(Localizacao localizacao) {
 		this.localizacao = localizacao;
+	}
+
+	public String getLoteRecebimento() {
+		return loteRecebimento;
+	}
+
+	public void setLoteRecebimento(String loteRecebimento) {
+		this.loteRecebimento = loteRecebimento;
 	}
 	
 	

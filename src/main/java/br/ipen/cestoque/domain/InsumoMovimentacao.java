@@ -48,6 +48,8 @@ public class InsumoMovimentacao implements Serializable {
 
 	private String loteProducao;
 
+	private String loteRecebimento;
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataIrradiacao;
 
@@ -69,8 +71,8 @@ public class InsumoMovimentacao implements Serializable {
 
 	public InsumoMovimentacao(Integer id, Insumo insumo, Localizacao localizacao, Movimentacao movimentacao,
 			Double quantidadeOrigem, Double quantidadeMovimentada, String loteFornecedor, String loteCR,
-			String loteProducao, Date dataIrradiacao, Date dataValidade, Date dataAprovacao, Date dataReprovacao,
-			Boolean aprovado) {
+			String loteProducao, String loteRecebimento, Date dataIrradiacao, Date dataValidade, Date dataAprovacao,
+			Date dataReprovacao, Boolean aprovado) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
@@ -81,6 +83,7 @@ public class InsumoMovimentacao implements Serializable {
 		this.loteFornecedor = loteFornecedor;
 		this.loteCR = loteCR;
 		this.loteProducao = loteProducao;
+		this.loteRecebimento = loteRecebimento;
 		this.dataIrradiacao = dataIrradiacao;
 		this.dataValidade = dataValidade;
 		this.dataAprovacao = dataAprovacao;
@@ -158,6 +161,14 @@ public class InsumoMovimentacao implements Serializable {
 
 	public void setLoteProducao(String loteProducao) {
 		this.loteProducao = loteProducao;
+	}
+
+	public String getLoteRecebimento() {
+		return loteRecebimento;
+	}
+
+	public void setLoteRecebimento(String loteRecebimento) {
+		this.loteRecebimento = loteRecebimento;
 	}
 
 	public Date getDataIrradiacao() {
