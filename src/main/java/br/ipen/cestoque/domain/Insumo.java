@@ -92,10 +92,6 @@ public class Insumo implements Serializable {
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<ItemProduto> itens = new HashSet<>();
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "id.insumo")
-	private Set<InsumoEntrada> entradas = new HashSet<>();
-
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
@@ -271,14 +267,6 @@ public class Insumo implements Serializable {
 
 	public void setItens(Set<ItemProduto> itens) {
 		this.itens = itens;
-	}
-
-	public Set<InsumoEntrada> getEntradas() {
-		return entradas;
-	}
-
-	public void setEntradas(Set<InsumoEntrada> entradas) {
-		this.entradas = entradas;
 	}
 
 	public List<Fornecedor> getFornecedores() {

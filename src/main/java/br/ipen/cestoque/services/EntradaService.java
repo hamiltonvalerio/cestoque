@@ -19,6 +19,7 @@ import br.ipen.cestoque.repositories.EntradaRepository;
 import br.ipen.cestoque.repositories.InsumoEntradaRepository;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
+import br.ipen.cestoque.resources.utils.ComparaInsumoLocalizacao;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 
 
@@ -39,6 +40,9 @@ public class EntradaService {
 	
 	@Autowired
 	private InsumoService insumoService;
+	
+	@Autowired
+	private ComparaInsumoLocalizacao comparaInsumoLocalizacao; 
 	
 	@SuppressWarnings("unused")
 	@Autowired
@@ -69,7 +73,7 @@ public class EntradaService {
 		for(InsumoEntrada ie : obj.getItens()) {
 			insumo = new Insumo();
 			insumo = insumoService.find(ie.getInsumo().getId());
-			insumo.setUnidade(ie.getId().getInsumo().getUnidade());
+			insumo.setUnidade(ie.getInsumo().getUnidade());
 			insumo.setValor(ie.getValor());
 			quant = ie.getQuantidade();
 			ie.setInsumo(insumo);
@@ -86,7 +90,8 @@ public class EntradaService {
 			
 			//verificar se tem insumos nesta localização, se sim, somar os as quantidades
 			insumoLocalizacao = new InsumoLocalizacao();
-			insumoLocalizacao = insumoLocalizacaoRepository.findDuplicado(insumo, localizacao, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());
+			//insumoLocalizacao = insumoLocalizacaoRepository.findDuplicado(insumo, localizacao, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());
+			insumoLocalizacao = comparaInsumoLocalizacao.compara(insumo, localizacao, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());
 			
 			if(insumoLocalizacao == null) {
 				insumoLocalizacao = new InsumoLocalizacao();

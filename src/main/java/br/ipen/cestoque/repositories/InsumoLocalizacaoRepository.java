@@ -59,7 +59,8 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("dataIrradiacao") Date dataIrradiacao);
 
 	@Transactional(readOnly = true)
-	@Query("SELECT il " + "FROM InsumoLocalizacao il " + "WHERE il.localizacao.id =:localizacao_id "
+	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
+			+ "AND il.quantidade != 0 "
 			+ "ORDER BY il.insumo.nome ASC")
 	Page<InsumoLocalizacao> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id,
 			Pageable pageRequest);
@@ -73,6 +74,18 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 
 	public List<InsumoLocalizacao> findAllByLocalizacao_id(Integer localizacao_id);
 
-	// InsumoLocalizacao findByIdLocalizacao(Localizacao localizacao);
+	@Query("SELECT il FROM InsumoLocalizacao il "
+			+ "WHERE il.localizacao =:localizacao "
+			+ "AND il.insumo =:insumo "
+			+ "AND (:loteFornecedor is null or il.loteFornecedor = :loteFornecedor) "
+			+ "AND (cast(:dataValidade as date) is null or il.dataValidade = :dataValidade) "
+			+ "AND (cast(:dataIrradiacao as date) is null or il.dataIrradiacao = :dataIrradiacao) ")
+	public List<InsumoLocalizacao> findTodosDuplicado(
+			@Param("insumo") Insumo insumo, 
+			@Param("localizacao") Localizacao localizacao,
+			@Param("loteFornecedor") String loteFornecedor,
+			@Param("dataValidade") Date dataValidade, 
+			@Param("dataIrradiacao") Date dataIrradiacao);
+
 
 }

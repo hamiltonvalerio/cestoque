@@ -64,6 +64,12 @@ public class InsumoLocalizacao implements Serializable {
 	private String nomedoinsumo;
 	
 	private String loteRecebimento; 
+	
+	@Transient
+	private String foiaprovado;
+	
+	@Transient
+	private String emaprovacao;
 
 	/*
 	 * @ManyToMany
@@ -258,7 +264,21 @@ public class InsumoLocalizacao implements Serializable {
 	public void setLoteRecebimento(String loteRecebimento) {
 		this.loteRecebimento = loteRecebimento;
 	}
-	
+
+	public String getFoiaprovado() {
+		if(this.aprovado != null) {
+			if(this.aprovado == true) {
+				this.foiaprovado = "SIM";
+			}else {
+				this.foiaprovado = "NÃO";
+			}
+		}
+		return foiaprovado;
+	}
+
+	public void setFoiaprovado(String foiaprovado) {
+		this.foiaprovado = foiaprovado;
+	}
 	
 
 }

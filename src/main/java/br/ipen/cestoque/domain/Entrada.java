@@ -1,9 +1,9 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Entrada implements Serializable{
+public class Entrada implements Serializable {
 
 	/**
 	 * 
@@ -26,36 +26,37 @@ public class Entrada implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataEntrada;
-	
+
 	private String numeronf;
-	
+
 	private String numLIA;
-	
+
 	private String numProcesso;
-	
+
 	private String numRequisicao;
-	
+
 	private String loteRecebimento;
-	
+
 	private String usualt;
 	private Date datalt;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "localizacao_id")
 	private Localizacao localizacao;
-	
-	@OneToMany(mappedBy = "id.entrada")
-	private Set<InsumoEntrada> itens = new HashSet<>();
-	
+
+	@OneToMany(mappedBy = "entrada")
+	private List<InsumoEntrada> itens = new ArrayList<>();
+
 	public Entrada() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Entrada(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String loteRecebimento, String usualt, Date datalt, Localizacao localizacao) {
+	public Entrada(Integer id, Date dataEntrada, String numeronf, String numLIA, String numProcesso,
+			String numRequisicao, String loteRecebimento, String usualt, Date datalt, Localizacao localizacao) {
 		super();
 		this.id = id;
 		this.dataEntrada = dataEntrada;
@@ -92,7 +93,6 @@ public class Entrada implements Serializable{
 	public void setNumeronf(String numeronf) {
 		this.numeronf = numeronf;
 	}
-	
 
 	public String getNumLIA() {
 		return numLIA;
@@ -159,11 +159,11 @@ public class Entrada implements Serializable{
 		return true;
 	}
 
-	public Set<InsumoEntrada> getItens() {
+	public List<InsumoEntrada> getItens() {
 		return itens;
 	}
 
-	public void setItens(Set<InsumoEntrada> itens) {
+	public void setItens(List<InsumoEntrada> itens) {
 		this.itens = itens;
 	}
 
@@ -182,7 +182,5 @@ public class Entrada implements Serializable{
 	public void setLoteRecebimento(String loteRecebimento) {
 		this.loteRecebimento = loteRecebimento;
 	}
-	
-	
-	
+
 }
