@@ -55,6 +55,12 @@ public class AuthResource {
 		service.sendNewPassword(objDTO.getEmail());
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/forgotteste", method = RequestMethod.POST)
+	public ResponseEntity<Void> forgot(@Valid @RequestBody String email) {
+		service.sendNewPassword(email);
+		return ResponseEntity.noContent().build();
+	}
 
 	@RequestMapping(value = "/alterpass", method = RequestMethod.POST)
 	public ResponseEntity<Void> alterpass(@RequestBody ColaboradorAlterPassDTO objDTO) {
