@@ -1,5 +1,6 @@
 package br.ipen.cestoque.config;
 
+import java.security.GeneralSecurityException;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+
+import com.sun.mail.util.MailSSLSocketFactory;
 
 import br.ipen.cestoque.services.DBService;
 import br.ipen.cestoque.services.EmailService;
@@ -55,7 +58,7 @@ public class ProdConfig {
 		return new SmtpEmailService();
 	}
 
-	@Bean
+	/*@Bean
 	public MailSender mailSender() {
 		return new MailSender() {
 
@@ -71,19 +74,37 @@ public class ProdConfig {
 
 			}
 		};
-	}
+	}*/
 
 	@Bean
 	public JavaMailSender javaMailService() {
 		
+		MailSSLSocketFactory sf = null;
+		try {
+			sf = new MailSSLSocketFactory();
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sf.setTrustAllHosts(true);
+		
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 		javaMailSender.setHost(host);
 		javaMailSender.setPort(port);
-		Properties javaMailProperties = javaMailSender.getJavaMailProperties();
-		javaMailProperties.put("mail.smtp.starttls.enable", "true");
-		javaMailSender.setJavaMailProperties(javaMailProperties );
 		javaMailSender.setUsername(username);
 		javaMailSender.setPassword(password);
+		Properties props = javaMailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+		//props.put("mail.smtps.ssl.checkserveridentity", "true");
+	    //props.put("mail.smtps.ssl.trust", "*");
+		//props.put("mail.smtp.ssl.enable", "true");
+		//props.put("mail.smtp.ssl.socketFactory", sf);
+
+	    //javaMailSender.setJavaMailProperties(javaMailProperties );
+		
 		return javaMailSender;
 	}
 }
