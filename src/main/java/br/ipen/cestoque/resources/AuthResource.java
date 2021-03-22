@@ -63,7 +63,7 @@ public class AuthResource {
 	}
 
 	@RequestMapping(value = "/alterpass", method = RequestMethod.POST)
-	public ResponseEntity<Void> alterpass(@RequestBody ColaboradorAlterPassDTO objDTO) {
+	public synchronized ResponseEntity<Void> alterpass(@RequestBody ColaboradorAlterPassDTO objDTO){
 
 		if (objDTO != null) {
 			if (objDTO.getEmail() != null) {
