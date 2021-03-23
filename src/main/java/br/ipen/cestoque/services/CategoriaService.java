@@ -35,6 +35,8 @@ public class CategoriaService {
 
 	public Categoria insert(Categoria obj) {
 		// TODO Auto-generated method stub
+		obj.setUsualt(UserService.authenticated().getUsername());
+		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj.setId(null);
 		return repo.save(obj);
 	}

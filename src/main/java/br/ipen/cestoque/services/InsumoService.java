@@ -1,5 +1,6 @@
 package br.ipen.cestoque.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,6 +103,8 @@ public class InsumoService {
 
 	public Insumo insert(Insumo obj) {
 		// TODO Auto-generated method stub
+		obj.setUsualt(UserService.authenticated().getUsername());
+		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj.setId(null);
 		return repo.save(obj);
 	}
