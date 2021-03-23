@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.dto.CategoriaDTO;
+import br.ipen.cestoque.dto.CategoriaNewDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
 import br.ipen.cestoque.services.exception.DataIntegrityException;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
@@ -74,6 +75,10 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaNewDTO objDto) {
+		return new Categoria(null, objDto.getNome(), objDto.getUsualt(), objDto.getDatalt());
 	}
 	
 	public Categoria fromDTO(CategoriaDTO objDto) {
