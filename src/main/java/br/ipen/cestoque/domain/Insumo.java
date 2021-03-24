@@ -69,7 +69,7 @@ public class Insumo implements Serializable {
 	@Transient
 	private Integer codlocalizacaoIE;
 
-	@JsonIgnore
+	
 	@ManyToMany
 	@JoinTable(name = "INSUMO_CATEGORIA", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
@@ -104,7 +104,7 @@ public class Insumo implements Serializable {
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigoalmox, String observacao,
 			Boolean essencial, Date datavalidade, Double quantidade, Double taxadeconsumo, String codigobarra,
 			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor,
-			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote) {
+			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote, List<Categoria> categorias) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -129,8 +129,12 @@ public class Insumo implements Serializable {
 		this.dataamostracq = dataamostracq;
 		this.lote = lote;
 		this.nomecodalmox = nome + " - " + codigoalmox;
+		this.categorias = categorias;
 	}
+	
+	
 
+	
 	@JsonIgnore
 	public List<Produto> getProdutos() {
 		List<Produto> lista = new ArrayList<>();

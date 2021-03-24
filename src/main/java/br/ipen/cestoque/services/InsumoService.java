@@ -71,7 +71,8 @@ public class InsumoService {
 				objDto.getDatairradiado(),
 				objDto.getAmostracq(),
 				objDto.getDataamostracq(),
-				objDto.getLote()
+				objDto.getLote(),
+				objDto.getCategorias()
 				);
 	}
 	
@@ -97,7 +98,8 @@ public class InsumoService {
 				objDto.getData_irradiado(),
 				objDto.getAmostra_cq(),
 				objDto.getData_amostra_cq(),
-				objDto.getLote()
+				objDto.getLote(),
+				null
 				);
 	}
 
@@ -110,13 +112,39 @@ public class InsumoService {
 	}
 	
 	public Insumo update(Insumo obj) {
-		Insumo up = find(obj.getId());
-		updateData(up, obj);
-		return repo.save(up);
+		Insumo newObj = find(obj.getId());
+		newObj.setUsualt(UserService.authenticated().getUsername());
+		newObj.setDatalt(new Date(System.currentTimeMillis()));
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 
-	private void updateData(Insumo up, Insumo obj) {
-		up.setNome(obj.getNome());
+	private void updateData(Insumo newObj, Insumo obj) {
+		if(obj != null) {
+			if(obj.getNome() != null && obj.getNome() != "") {
+				newObj.setNome(obj.getNome());
+			}
+			if(obj.getNomenclatura() != null && obj.getNomenclatura() != "") {
+				newObj.setNomenclatura(obj.getNomenclatura());
+			}
+			if(obj.getCodigoalmox() != null && obj.getCodigoalmox() != "") {
+				newObj.setCodigoalmox(obj.getCodigoalmox());
+			}
+			if(obj.getObservacao() != null && obj.getObservacao() != "") {
+				newObj.setObservacao(obj.getObservacao());
+			}
+			if(obj.getEssencial() != null) {
+				newObj.setEssencial(obj.getEssencial());
+			}
+			if(obj.getTaxadeconsumo() != null) {
+				newObj.setTaxadeconsumo(obj.getTaxadeconsumo());
+			}
+			if(obj.getCategorias() != null && !obj.getCategorias().isEmpty()) {
+				newObj.setCategorias(obj.getCategorias());
+			}
+		}
+		newObj.setUsualt(UserService.authenticated().getUsername());
+		newObj.setDatalt(new Date(System.currentTimeMillis()));
 	}
 	
 	public void delete(Integer id) {

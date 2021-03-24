@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,9 +40,17 @@ public class InsumoResource {
 	
 	@ApiOperation(value = "Retorna insumo por ID")
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<Insumo> find(@PathVariable Integer id){
+	public ResponseEntity<Insumo> find(@PathVariable String id){
 		Insumo insumo;
-		insumo = service.find(id);
+		insumo = service.find(Integer.parseInt(id));
+		return ResponseEntity.ok().body(insumo);
+	}
+	
+	@ApiOperation(value = "Retorna insumo por ID")
+	@RequestMapping(value="/findbyid",method=RequestMethod.GET)
+	public ResponseEntity<Insumo> findById(@RequestParam(value = "insumo_id") String insumo_id){
+		Insumo insumo;
+		insumo = service.find(Integer.parseInt(insumo_id));
 		return ResponseEntity.ok().body(insumo);
 	}
 	
@@ -190,7 +199,7 @@ public class InsumoResource {
 	}
 	
 	@ApiOperation(value = "Insere novo insumo")
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> insert(@Valid @RequestBody InsumoNewDTO objDto){
 		Insumo obj = service.fromDTO(objDto);
 		obj = service.insert(obj); 
@@ -206,5 +215,14 @@ public class InsumoResource {
 		ilrepo.update(Integer.parseInt(insumolocalizacao_id),Double.parseDouble(quantidademinima));
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> update(@Valid @RequestBody InsumoDTO objDto){
+		Insumo obj = service.fromDTO(objDto);
+		//obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
 	
 }

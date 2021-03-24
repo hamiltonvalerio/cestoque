@@ -1,20 +1,23 @@
 package br.ipen.cestoque.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.Unidade;
 
-public class InsumoDTO implements Serializable{
+public class InsumoDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer id;
 	private String nomenclatura;
 	private String nome;
@@ -22,21 +25,21 @@ public class InsumoDTO implements Serializable{
 	private String codigoalmox;
 	private String observacao;
 	private Boolean essencial;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datavalidade;
-	
+
 	private Double quantidade;
 	private Double taxadeconsumo;
 	private String codigobarra;
 	private String qrcode;
 	private String rfid;
-	
-	private String usualt;	
+
+	private String usualt;
 	private Date datalt;
-	
+
 	private Unidade unidade;
-	
+
 	private Integer codinsumofornecedor;
 	private Boolean irradiado;
 	private Date datairradiado;
@@ -45,14 +48,12 @@ public class InsumoDTO implements Serializable{
 	private String lote;
 	private String nomecodalmox;
 
-	
-	
+	private List<Categoria> categorias = new ArrayList<>();
+
 	public InsumoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-
 
 	public InsumoDTO(Insumo obj) {
 		id = obj.getId();
@@ -68,7 +69,7 @@ public class InsumoDTO implements Serializable{
 		codigobarra = obj.getCodigobarra();
 		qrcode = obj.getQrcode();
 		rfid = obj.getRfid();
-		usualt = obj.getUsualt();	
+		usualt = obj.getUsualt();
 		datalt = obj.getDatalt();
 		unidade = obj.getUnidade();
 		codinsumofornecedor = obj.getCodinsumofornecedor();
@@ -77,8 +78,8 @@ public class InsumoDTO implements Serializable{
 		amostracq = obj.getAmostracq();
 		dataamostracq = obj.getDataamostracq();
 		lote = obj.getLote();
-		nomecodalmox = obj.getNome() +" - "+ obj.getCodigoalmox();
-		
+		nomecodalmox = obj.getNome() + " - " + obj.getCodigoalmox();
+		categorias = obj.getCategorias();
 	}
 
 	public Integer getId() {
@@ -264,6 +265,13 @@ public class InsumoDTO implements Serializable{
 	public void setNomecodalmox(String nomecodalmox) {
 		this.nomecodalmox = nomecodalmox;
 	}
-	
-	
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
 }

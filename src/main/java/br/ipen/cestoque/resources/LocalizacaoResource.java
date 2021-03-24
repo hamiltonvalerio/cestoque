@@ -32,9 +32,16 @@ public class LocalizacaoResource {
 	private LocalizacaoService service;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<Localizacao> find(@PathVariable Integer id){
+	public ResponseEntity<Localizacao> find(@PathVariable String id){
 		Localizacao localizacao;
-		localizacao = service.find(id);
+		localizacao = service.find(Integer.parseInt(id));
+		return ResponseEntity.ok().body(localizacao);
+	}
+	
+	@RequestMapping(value="/findbyid",method=RequestMethod.GET)
+	public ResponseEntity<Localizacao> findById(@RequestParam(value = "localizacao_id") String localizacao_id){
+		Localizacao localizacao;
+		localizacao = service.find(Integer.parseInt(localizacao_id));
 		return ResponseEntity.ok().body(localizacao);
 	}
 	
