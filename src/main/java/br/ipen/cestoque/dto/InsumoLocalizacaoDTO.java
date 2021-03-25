@@ -23,7 +23,7 @@ public class InsumoLocalizacaoDTO implements Serializable{
 	private String observacao;
 	private Boolean essencial;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date datavalidade;
 	
 	private Double quantidade;

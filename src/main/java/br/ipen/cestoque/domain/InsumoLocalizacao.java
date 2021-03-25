@@ -49,7 +49,7 @@ public class InsumoLocalizacao implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataIrradiacao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dataValidade;
 
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")

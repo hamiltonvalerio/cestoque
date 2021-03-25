@@ -48,7 +48,7 @@ public class InsumoEntrada implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataVencIrradiacao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dataValidade;
 
 	private Double quantidade;
