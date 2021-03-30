@@ -1,9 +1,8 @@
 package br.ipen.cestoque.dto;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.InsumoMovimentacao;
@@ -16,10 +15,6 @@ public class InsumoMovimentacaoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
-	// private Integer id_insumo;
-
-	// private String nome_insumo;
 
 	private Insumo insumo;
 
@@ -35,17 +30,13 @@ public class InsumoMovimentacaoDTO implements Serializable {
 
 	private String loteRecebimento;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataIrradiacao;
+	private LocalDateTime dataIrradiacao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataValidade;
+	private LocalDate dataValidade;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataAprovacao;
+	private LocalDateTime dataAprovacao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataReproprovacao;
+	private LocalDateTime dataReproprovacao;
 
 	private Boolean aprovado;
 
@@ -134,35 +125,35 @@ public class InsumoMovimentacaoDTO implements Serializable {
 		this.loteRecebimento = loteRecebimento;
 	}
 
-	public Date getDataIrradiacao() {
+	public LocalDateTime getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(Date dataIrradiacao) {
+	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 
-	public Date getDataValidade() {
+	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(Date dataValidade) {
+	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 
-	public Date getDataAprovacao() {
+	public LocalDateTime getDataAprovacao() {
 		return dataAprovacao;
 	}
 
-	public void setDataAprovacao(Date dataAprovacao) {
+	public void setDataAprovacao(LocalDateTime dataAprovacao) {
 		this.dataAprovacao = dataAprovacao;
 	}
 
-	public Date getDataReproprovacao() {
+	public LocalDateTime getDataReproprovacao() {
 		return dataReproprovacao;
 	}
 
-	public void setDataReproprovacao(Date dataReproprovacao) {
+	public void setDataReproprovacao(LocalDateTime dataReproprovacao) {
 		this.dataReproprovacao = dataReproprovacao;
 	}
 

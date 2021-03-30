@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
 	/**
 	 * 
@@ -28,28 +28,26 @@ public class Produto implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
-	
+
 	private Double quantidade;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_produto;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+
 	private Date data_validade;
-	
+
 	private String usualt;
 	private Date datalt;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "colaborador_id")
 	private Colaborador colaborador;
-	
-	//@JsonIgnore
+
+	// @JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemProduto> itens = new HashSet<>();
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemProducao> itensProducao = new HashSet<>();
@@ -59,7 +57,8 @@ public class Produto implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produto(Integer id, String nome, Double quantidade, Date data_produto, String usualt, Date datalt, Colaborador colaborador, Date data_validade) {
+	public Produto(Integer id, String nome, Double quantidade, Date data_produto, String usualt, Date datalt,
+			Colaborador colaborador, Date data_validade) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -151,7 +150,6 @@ public class Produto implements Serializable{
 	public void setData_validade(Date data_validade) {
 		this.data_validade = data_validade;
 	}
-	
 
 	public String getNome() {
 		return nome;
@@ -172,7 +170,7 @@ public class Produto implements Serializable{
 		builder.append(", Inserido por: ");
 		builder.append(getColaborador().getNome());
 		builder.append("\nDetalhes:\n");
-		for(ItemProduto ip : getItens()) {
+		for (ItemProduto ip : getItens()) {
 			builder.append(ip.toString());
 		}
 		return builder.toString();
@@ -193,8 +191,5 @@ public class Produto implements Serializable{
 	public void setItensProducao(Set<ItemProducao> itensProducao) {
 		this.itensProducao = itensProducao;
 	}
-	
-	
-	
-	
+
 }

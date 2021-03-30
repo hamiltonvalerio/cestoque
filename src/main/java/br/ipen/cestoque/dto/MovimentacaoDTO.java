@@ -5,39 +5,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.ipen.cestoque.domain.Localizacao;
-import br.ipen.cestoque.domain.Movimentacao;
 
-public class MovimentacaoDTO implements Serializable{
+public class MovimentacaoDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer id;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+
 	private Date datamovimentacao;
-	
 
 	private Localizacao localizacaoOrigem;
 
 	private Localizacao localizacaoDestino;
 
 	private List<InsumoMovimentacaoDTO> itens = new ArrayList<>();
-	
+
 	private String usualt;
-	
+
 	private Date datalt;
-	
-	
 
 	public MovimentacaoDTO() {
 	}
-	
 
 	public Integer getId() {
 		return id;
@@ -71,7 +63,6 @@ public class MovimentacaoDTO implements Serializable{
 		this.localizacaoDestino = localizacaoDestino;
 	}
 
-
 	public String getUsualt() {
 		return usualt;
 	}
@@ -88,18 +79,12 @@ public class MovimentacaoDTO implements Serializable{
 		this.datalt = datalt;
 	}
 
-
 	public List<InsumoMovimentacaoDTO> getItens() {
 		return itens;
 	}
 
-
 	public void setItens(List<InsumoMovimentacaoDTO> itens) {
 		this.itens = itens;
 	}
-	
-	
-	
-	
 
 }

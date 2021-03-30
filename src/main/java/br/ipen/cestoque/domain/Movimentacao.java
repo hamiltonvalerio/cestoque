@@ -25,7 +25,6 @@ public class Movimentacao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datamovimentacao;
 	
 	private Localizacao localizacaoOrigem;

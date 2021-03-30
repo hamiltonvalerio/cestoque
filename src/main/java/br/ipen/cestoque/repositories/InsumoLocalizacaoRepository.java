@@ -1,5 +1,7 @@
 package br.ipen.cestoque.repositories;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -84,8 +86,8 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("insumo") Insumo insumo, 
 			@Param("localizacao") Localizacao localizacao,
 			@Param("loteFornecedor") String loteFornecedor,
-			@Param("dataValidade") Date dataValidade, 
-			@Param("dataIrradiacao") Date dataIrradiacao);
+			@Param("dataValidade") LocalDate dataValidade, 
+			@Param("dataIrradiacao") LocalDateTime dataIrradiacao);
 
 
 }

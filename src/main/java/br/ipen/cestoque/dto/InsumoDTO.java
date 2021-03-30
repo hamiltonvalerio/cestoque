@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.Unidade;
@@ -26,7 +24,6 @@ public class InsumoDTO implements Serializable {
 	private String observacao;
 	private Boolean essencial;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datavalidade;
 
 	private Double quantidade;

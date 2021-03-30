@@ -25,7 +25,6 @@ public class Saida implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data_saida;
 	
 	private Double total;

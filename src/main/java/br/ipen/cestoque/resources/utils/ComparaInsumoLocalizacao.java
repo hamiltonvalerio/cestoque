@@ -1,7 +1,8 @@
 package br.ipen.cestoque.resources.utils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class ComparaInsumoLocalizacao {
 	List<InsumoLocalizacao> listaIL = new ArrayList<>();
 
 	public InsumoLocalizacao compara(Insumo insumo, Localizacao localizacao, String loteFornecedor,
-			Date dataValidade, Date dataIrradiacao) {
+			LocalDate dataValidade, LocalDateTime dataIrradiacao) {
 
 		listaIL = insumoLocalizacaoRepository.findTodosDuplicado(insumo, localizacao,
 				loteFornecedor, dataValidade, dataIrradiacao);

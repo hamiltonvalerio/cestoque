@@ -41,7 +41,6 @@ public class Insumo implements Serializable {
 	private String observacao;
 	private Boolean essencial;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date datavalidade;
 
 	private Double quantidade;

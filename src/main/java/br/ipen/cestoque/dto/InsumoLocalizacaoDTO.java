@@ -3,18 +3,16 @@ package br.ipen.cestoque.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.Unidade;
 
-public class InsumoLocalizacaoDTO implements Serializable{
+public class InsumoLocalizacaoDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer id;
 	private String nomenclatura;
 	private String nome;
@@ -22,36 +20,37 @@ public class InsumoLocalizacaoDTO implements Serializable{
 	private String codigoalmox;
 	private String observacao;
 	private Boolean essencial;
-	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+
 	private Date datavalidade;
-	
+
 	private Double quantidade;
+
 	private Double taxadeconsumo;
 	private String codigobarra;
 	private String qrcode;
 	private String rfid;
-	
-	private String usualt;	
+
+	private String usualt;
 	private Date datalt;
-	
+
 	private Unidade unidade;
-	
+
 	private Integer codinsumofornecedor;
 	private Boolean irradiado;
+
 	private Date datairradiado;
 	private Boolean amostracq;
 	private Date dataamostracq;
 	private String lote;
 	private String nomecodalmox;
-	
+
 	private String loteRecebimento;
-	
+
 	public InsumoLocalizacaoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public InsumoLocalizacaoDTO(Insumo obj) {
 		id = obj.getId();
 		nomenclatura = obj.getNomenclatura();
@@ -66,7 +65,7 @@ public class InsumoLocalizacaoDTO implements Serializable{
 		codigobarra = obj.getCodigobarra();
 		qrcode = obj.getQrcode();
 		rfid = obj.getRfid();
-		usualt = obj.getUsualt();	
+		usualt = obj.getUsualt();
 		datalt = obj.getDatalt();
 		unidade = obj.getUnidade();
 		codinsumofornecedor = obj.getCodinsumofornecedor();
@@ -75,7 +74,7 @@ public class InsumoLocalizacaoDTO implements Serializable{
 		amostracq = obj.getAmostracq();
 		dataamostracq = obj.getDataamostracq();
 		lote = obj.getLote();
-		nomecodalmox = obj.getNome() +" - "+ obj.getCodigoalmox();
+		nomecodalmox = obj.getNome() + " - " + obj.getCodigoalmox();
 	}
 
 	public Integer getId() {
@@ -269,5 +268,5 @@ public class InsumoLocalizacaoDTO implements Serializable{
 	public void setLoteRecebimento(String loteRecebimento) {
 		this.loteRecebimento = loteRecebimento;
 	}
-	
+
 }

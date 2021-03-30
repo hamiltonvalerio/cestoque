@@ -1,7 +1,8 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @DynamicUpdate
@@ -46,41 +45,28 @@ public class InsumoLocalizacao implements Serializable {
 
 	private String loteProducao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataIrradiacao;
+	//@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private LocalDateTime dataIrradiacao;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date dataValidade;
+	private LocalDate dataValidade;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataAprovacao;
+	private LocalDateTime dataAprovacao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataReprovacao;
+	private LocalDateTime dataReprovacao;
 
 	private Boolean aprovado;
 
 	@Transient
 	private String nomedoinsumo;
-	
-	private String loteRecebimento; 
-	
+
+	private String loteRecebimento;
+
 	@Transient
 	private String foiaprovado;
-	
+
 	@Transient
 	private String emaprovacao;
 
-	/*
-	 * @ManyToMany
-	 * 
-	 * @JoinTable(name = "INSUMOS_LOCALIZACOES", joinColumns = @JoinColumn(name =
-	 * "insumolocalizacao_id"), inverseJoinColumns = @JoinColumn(name =
-	 * "localizacao_id") ) private List<Localizacao> localizacoes = new
-	 * ArrayList<>();
-	 */
-
-	// private Localizacao localizacao;
 
 	public InsumoLocalizacao() {
 		super();
@@ -88,8 +74,8 @@ public class InsumoLocalizacao implements Serializable {
 	}
 
 	public InsumoLocalizacao(Integer id, Insumo insumo, Localizacao localizacao, Double quantidade,
-			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao, Date dataIrradiacao,
-			Date dataValidade, Date dataAprovacao, Date dataReprovacao, Boolean aprovado, String loteRecebimento) {
+			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao, LocalDateTime dataIrradiacao,
+			LocalDate dataValidade, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
@@ -155,35 +141,35 @@ public class InsumoLocalizacao implements Serializable {
 		this.loteCR = loteCR;
 	}
 
-	public Date getDataIrradiacao() {
+	public LocalDateTime getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(Date dataIrradiacao) {
+	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 
-	public Date getDataValidade() {
+	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(Date dataValidade) {
+	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 
-	public Date getDataAprovacao() {
+	public LocalDateTime getDataAprovacao() {
 		return dataAprovacao;
 	}
 
-	public void setDataAprovacao(Date dataAprovacao) {
+	public void setDataAprovacao(LocalDateTime dataAprovacao) {
 		this.dataAprovacao = dataAprovacao;
 	}
 
-	public Date getDataReprovacao() {
+	public LocalDateTime getDataReprovacao() {
 		return dataReprovacao;
 	}
 
-	public void setDataReprovacao(Date dataReprovacao) {
+	public void setDataReprovacao(LocalDateTime dataReprovacao) {
 		this.dataReprovacao = dataReprovacao;
 	}
 
@@ -266,10 +252,10 @@ public class InsumoLocalizacao implements Serializable {
 	}
 
 	public String getFoiaprovado() {
-		if(this.aprovado != null) {
-			if(this.aprovado == true) {
+		if (this.aprovado != null) {
+			if (this.aprovado == true) {
 				this.foiaprovado = "SIM";
-			}else {
+			} else {
 				this.foiaprovado = "NÃO";
 			}
 		}
@@ -279,6 +265,5 @@ public class InsumoLocalizacao implements Serializable {
 	public void setFoiaprovado(String foiaprovado) {
 		this.foiaprovado = foiaprovado;
 	}
-	
 
 }

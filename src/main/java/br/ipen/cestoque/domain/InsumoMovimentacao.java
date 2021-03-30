@@ -1,7 +1,8 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -50,17 +50,13 @@ public class InsumoMovimentacao implements Serializable {
 
 	private String loteRecebimento;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataIrradiacao;
+	private LocalDateTime dataIrradiacao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataValidade;
+	private LocalDate dataValidade;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataAprovacao;
+	private LocalDateTime dataAprovacao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataReprovacao;
+	private LocalDateTime dataReprovacao;
 
 	private Boolean aprovado;
 
@@ -71,8 +67,8 @@ public class InsumoMovimentacao implements Serializable {
 
 	public InsumoMovimentacao(Integer id, Insumo insumo, Localizacao localizacao, Movimentacao movimentacao,
 			Double quantidadeOrigem, Double quantidadeMovimentada, String loteFornecedor, String loteCR,
-			String loteProducao, String loteRecebimento, Date dataIrradiacao, Date dataValidade, Date dataAprovacao,
-			Date dataReprovacao, Boolean aprovado) {
+			String loteProducao, String loteRecebimento, LocalDateTime dataIrradiacao, LocalDate dataValidade,
+			LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
@@ -171,35 +167,35 @@ public class InsumoMovimentacao implements Serializable {
 		this.loteRecebimento = loteRecebimento;
 	}
 
-	public Date getDataIrradiacao() {
+	public LocalDateTime getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(Date dataIrradiacao) {
+	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 
-	public Date getDataValidade() {
+	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(Date dataValidade) {
+	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 
-	public Date getDataAprovacao() {
+	public LocalDateTime getDataAprovacao() {
 		return dataAprovacao;
 	}
 
-	public void setDataAprovacao(Date dataAprovacao) {
+	public void setDataAprovacao(LocalDateTime dataAprovacao) {
 		this.dataAprovacao = dataAprovacao;
 	}
 
-	public Date getDataReprovacao() {
+	public LocalDateTime getDataReprovacao() {
 		return dataReprovacao;
 	}
 
-	public void setDataReprovacao(Date dataReprovacao) {
+	public void setDataReprovacao(LocalDateTime dataReprovacao) {
 		this.dataReprovacao = dataReprovacao;
 	}
 

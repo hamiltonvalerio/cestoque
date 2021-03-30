@@ -1,7 +1,8 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -41,15 +44,16 @@ public class InsumoEntrada implements Serializable {
 
 	private String loteFornecedor;
 	private String loteCR;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataIrradiacao;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataVencIrradiacao;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date dataValidade;
+	//@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private LocalDateTime dataIrradiacao;
+
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataVencIrradiacao;
+
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataValidade;
 
 	private Double quantidade;
 	private Double valor;
@@ -64,8 +68,8 @@ public class InsumoEntrada implements Serializable {
 	}
 
 	public InsumoEntrada(Integer id, Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR,
-			Date dataIrradiacao, Date dataVencIrradiacao, Date dataValidade, Double quantidade, Double valor,
-			Double valorTotal, String loteRecebimento) {
+			LocalDateTime dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade,
+			Double quantidade, Double valor, Double valorTotal, String loteRecebimento) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
@@ -113,19 +117,19 @@ public class InsumoEntrada implements Serializable {
 		this.loteCR = loteCR;
 	}
 
-	public Date getDataIrradiacao() {
+	public LocalDateTime getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(Date dataIrradiacao) {
+	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 
-	public Date getDataVencIrradiacao() {
+	public LocalDate getDataVencIrradiacao() {
 		return dataVencIrradiacao;
 	}
 
-	public void setDataVencIrradiacao(Date dataVencIrradiacao) {
+	public void setDataVencIrradiacao(LocalDate dataVencIrradiacao) {
 		this.dataVencIrradiacao = dataVencIrradiacao;
 	}
 
@@ -137,11 +141,11 @@ public class InsumoEntrada implements Serializable {
 		this.valorTotal = valorTotal;
 	}
 
-	public Date getDataValidade() {
+	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(Date dataValidade) {
+	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 
@@ -201,7 +205,5 @@ public class InsumoEntrada implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

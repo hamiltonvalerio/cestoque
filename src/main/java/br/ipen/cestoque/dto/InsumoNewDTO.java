@@ -5,61 +5,55 @@ import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.ipen.cestoque.domain.Unidade;
 
-
-public class InsumoNewDTO implements Serializable{
+public class InsumoNewDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nomenclatura;
-	
+
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
-	
+
 	private Double valor;
-	
+
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String codigo_almox;
-	
-	
+
 	private String observacao;
-	
+
 	@NotEmpty(message = "Preenchimento obrigatório!")
 	private Boolean essencial;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+
 	private Date data_validade;
-	
-	
+
 	private Double quantidade;
-	
+
 	private Double taxa_de_consumo;
-	
+
 	private String codigo_barra;
-	
+
 	private String qrcode;
-	
+
 	private String rfid;
-	
-	private String usualt;	
+
+	private String usualt;
 	private Date datalt;
-	
+
 	private Unidade unidade;
-	
+
 	private Integer cod_insumo_fornecedor;
 	private Boolean irradiado;
 	private Date data_irradiado;
 	private Boolean amostra_cq;
 	private Date data_amostra_cq;
 	private String lote;
-	
+
 	public InsumoNewDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -232,6 +226,5 @@ public class InsumoNewDTO implements Serializable{
 	public void setLote(String lote) {
 		this.lote = lote;
 	}
-	
-	
+
 }
