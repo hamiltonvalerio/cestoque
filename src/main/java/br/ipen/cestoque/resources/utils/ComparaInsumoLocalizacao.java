@@ -27,7 +27,7 @@ public class ComparaInsumoLocalizacao {
 	List<InsumoLocalizacao> listaIL = new ArrayList<>();
 
 	public InsumoLocalizacao compara(Insumo insumo, Localizacao localizacao, String loteFornecedor,
-			LocalDate dataValidade, LocalDateTime dataIrradiacao) {
+			LocalDate dataValidade, LocalDate dataIrradiacao) {
 
 		listaIL = insumoLocalizacaoRepository.findTodosDuplicado(insumo, localizacao,
 				loteFornecedor, dataValidade, dataIrradiacao);

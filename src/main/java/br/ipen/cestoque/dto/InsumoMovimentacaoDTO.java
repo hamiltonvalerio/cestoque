@@ -30,7 +30,7 @@ public class InsumoMovimentacaoDTO implements Serializable {
 
 	private String loteRecebimento;
 
-	private LocalDateTime dataIrradiacao;
+	private LocalDate dataIrradiacao;
 
 	private LocalDate dataValidade;
 
@@ -125,11 +125,11 @@ public class InsumoMovimentacaoDTO implements Serializable {
 		this.loteRecebimento = loteRecebimento;
 	}
 
-	public LocalDateTime getDataIrradiacao() {
+	public LocalDate getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
+	public void setDataIrradiacao(LocalDate dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 

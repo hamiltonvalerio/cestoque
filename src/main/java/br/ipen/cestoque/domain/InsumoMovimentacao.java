@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -50,8 +53,10 @@ public class InsumoMovimentacao implements Serializable {
 
 	private String loteRecebimento;
 
-	private LocalDateTime dataIrradiacao;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataIrradiacao;
 
+	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataValidade;
 
 	private LocalDateTime dataAprovacao;
@@ -67,7 +72,7 @@ public class InsumoMovimentacao implements Serializable {
 
 	public InsumoMovimentacao(Integer id, Insumo insumo, Localizacao localizacao, Movimentacao movimentacao,
 			Double quantidadeOrigem, Double quantidadeMovimentada, String loteFornecedor, String loteCR,
-			String loteProducao, String loteRecebimento, LocalDateTime dataIrradiacao, LocalDate dataValidade,
+			String loteProducao, String loteRecebimento, LocalDate dataIrradiacao, LocalDate dataValidade,
 			LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado) {
 		super();
 		this.id = id;
@@ -167,11 +172,11 @@ public class InsumoMovimentacao implements Serializable {
 		this.loteRecebimento = loteRecebimento;
 	}
 
-	public LocalDateTime getDataIrradiacao() {
+	public LocalDate getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
+	public void setDataIrradiacao(LocalDate dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 

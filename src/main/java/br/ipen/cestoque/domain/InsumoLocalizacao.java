@@ -46,7 +46,7 @@ public class InsumoLocalizacao implements Serializable {
 	private String loteProducao;
 
 	//@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private LocalDateTime dataIrradiacao;
+	private LocalDate dataIrradiacao;
 
 	private LocalDate dataValidade;
 
@@ -74,7 +74,7 @@ public class InsumoLocalizacao implements Serializable {
 	}
 
 	public InsumoLocalizacao(Integer id, Insumo insumo, Localizacao localizacao, Double quantidade,
-			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao, LocalDateTime dataIrradiacao,
+			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao, LocalDate dataIrradiacao,
 			LocalDate dataValidade, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento) {
 		super();
 		this.id = id;
@@ -141,11 +141,11 @@ public class InsumoLocalizacao implements Serializable {
 		this.loteCR = loteCR;
 	}
 
-	public LocalDateTime getDataIrradiacao() {
+	public LocalDate getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
+	public void setDataIrradiacao(LocalDate dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 

@@ -158,9 +158,13 @@ public class MovimentacaoService {
 			// insumoLocalizacaoOrigem =
 			// insumoLocalizacaoRepository.findByIdLocalizacaoAndIdInsumo(localizacaoOrigem,
 			// insumo);
-			if (insumoLocalizacaoOrigem.getQuantidade() == null) {
-				insumoLocalizacaoOrigem.setQuantidade(0.0);
-			}
+
+
+				if (insumoLocalizacaoOrigem.getQuantidade() == null) {
+					insumoLocalizacaoOrigem.setQuantidade(0.0);
+				}
+		
+			
 			Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant;
 			insumoLocalizacaoOrigem.setQuantidade(novaQuantidade);
 			insumosLocalizacoesOrigem.add(insumoLocalizacaoOrigem);

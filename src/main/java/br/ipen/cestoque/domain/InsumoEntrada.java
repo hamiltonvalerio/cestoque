@@ -47,12 +47,12 @@ public class InsumoEntrada implements Serializable {
 
 	//@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(iso = ISO.DATE_TIME)
-	private LocalDateTime dataIrradiacao;
+	private LocalDate dataIrradiacao;
 
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataVencIrradiacao;
 
-	@DateTimeFormat(iso = ISO.DATE)
+	//@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataValidade;
 
 	private Double quantidade;
@@ -68,7 +68,7 @@ public class InsumoEntrada implements Serializable {
 	}
 
 	public InsumoEntrada(Integer id, Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR,
-			LocalDateTime dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade,
+			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade,
 			Double quantidade, Double valor, Double valorTotal, String loteRecebimento) {
 		super();
 		this.id = id;
@@ -117,11 +117,11 @@ public class InsumoEntrada implements Serializable {
 		this.loteCR = loteCR;
 	}
 
-	public LocalDateTime getDataIrradiacao() {
+	public LocalDate getDataIrradiacao() {
 		return dataIrradiacao;
 	}
 
-	public void setDataIrradiacao(LocalDateTime dataIrradiacao) {
+	public void setDataIrradiacao(LocalDate dataIrradiacao) {
 		this.dataIrradiacao = dataIrradiacao;
 	}
 

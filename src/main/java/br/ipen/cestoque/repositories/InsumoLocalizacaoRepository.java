@@ -87,7 +87,7 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("localizacao") Localizacao localizacao,
 			@Param("loteFornecedor") String loteFornecedor,
 			@Param("dataValidade") LocalDate dataValidade, 
-			@Param("dataIrradiacao") LocalDateTime dataIrradiacao);
-
-
+			@Param("dataIrradiacao") LocalDate dataIrradiacao);
+	
+	
 }
