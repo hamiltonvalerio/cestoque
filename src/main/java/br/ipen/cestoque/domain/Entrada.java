@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -27,7 +30,7 @@ public class Entrada implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataEntrada;
 
 	private String numeronf;
@@ -49,6 +52,9 @@ public class Entrada implements Serializable {
 
 	@OneToMany(mappedBy = "entrada")
 	private List<InsumoEntrada> itens = new ArrayList<>();
+
+	@OneToMany(mappedBy = "entrada")
+	private List<ArquivoEntrada> arquivos = new ArrayList<>();
 
 	public Entrada() {
 		super();
@@ -165,6 +171,14 @@ public class Entrada implements Serializable {
 
 	public void setItens(List<InsumoEntrada> itens) {
 		this.itens = itens;
+	}
+
+	public List<ArquivoEntrada> getArquivos() {
+		return arquivos;
+	}
+
+	public void setArquivos(List<ArquivoEntrada> arquivos) {
+		this.arquivos = arquivos;
 	}
 
 	public Localizacao getLocalizacao() {

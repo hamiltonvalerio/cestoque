@@ -55,7 +55,7 @@ public class EntradaService {
 	}
 
 	@Transactional
-	public Entrada insert(Entrada obj) {
+	public Entrada insert(Entrada entrada) {
 		List<Insumo> insumos = new ArrayList<>();
 		List<InsumoLocalizacao> insumosLocalizacoes = new ArrayList<>();
 		Insumo insumo;
@@ -63,14 +63,14 @@ public class EntradaService {
 		
 		Localizacao localizacao = new Localizacao();
 		InsumoLocalizacao insumoLocalizacao;
-		localizacao = obj.getLocalizacao();
+		localizacao = entrada.getLocalizacao();
 		
-		obj.setId(null);
-		obj.setUsualt(UserService.authenticated().getUsername());
-		obj.setDatalt(new Date(System.currentTimeMillis()));
-		obj = repo.save(obj);
+		entrada.setId(null);
+		entrada.setUsualt(UserService.authenticated().getUsername());
+		entrada.setDatalt(new Date(System.currentTimeMillis()));
+		entrada = repo.save(entrada);
 		
-		for(InsumoEntrada ie : obj.getItens()) {
+		for(InsumoEntrada ie : entrada.getItens()) {
 			insumo = new Insumo();
 			insumo = insumoService.find(ie.getInsumo().getId());
 			insumo.setUnidade(ie.getInsumo().getUnidade());
@@ -78,7 +78,7 @@ public class EntradaService {
 			quant = ie.getQuantidade();
 			ie.setInsumo(insumo);
 			ie.setQuantidade(quant);
-			ie.setLoteRecebimento(obj.getLoteRecebimento());
+			ie.setLoteRecebimento(entrada.getLoteRecebimento());
 			//insumo.setId(ie.getInsumo().getId());
 			if(ie.getInsumo().getQuantidade() == null) {
 				ie.getInsumo().setQuantidade(0.0);
@@ -96,18 +96,18 @@ public class EntradaService {
 			if(insumoLocalizacao == null) {
 				insumoLocalizacao = new InsumoLocalizacao();
 				insumoLocalizacao.setInsumo(insumo);
-				insumoLocalizacao.setLocalizacao(obj.getLocalizacao());
+				insumoLocalizacao.setLocalizacao(entrada.getLocalizacao());
 				insumoLocalizacao.setQuantidade(quant);
 				insumoLocalizacao.setLoteFornecedor(ie.getLoteFornecedor());
 				insumoLocalizacao.setLoteCR(ie.getLoteCR());
 				insumoLocalizacao.setDataIrradiacao(ie.getDataIrradiacao());
 				insumoLocalizacao.setDataValidade(ie.getDataValidade());
-				insumoLocalizacao.setLoteRecebimento(obj.getLoteRecebimento());
+				insumoLocalizacao.setLoteRecebimento(entrada.getLoteRecebimento());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}else {
 				Double novaQuantidade = insumoLocalizacao.getQuantidade() + quant;
 				insumoLocalizacao.setQuantidade(novaQuantidade);
-				insumoLocalizacao.setLoteRecebimento(obj.getLoteRecebimento());
+				insumoLocalizacao.setLoteRecebimento(entrada.getLoteRecebimento());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}
 			
@@ -116,12 +116,12 @@ public class EntradaService {
 			
 			
 			//ie.setValor(ie.getInsumo().getValor());
-			ie.setEntrada(obj);
+			ie.setEntrada(entrada);
 		}
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoes);
-		insumoEntradaRepository.saveAll(obj.getItens());
+		insumoEntradaRepository.saveAll(entrada.getItens());
 		insumoRepository.saveAll(insumos);
-		return obj;
+		return entrada;
 	}
 	
 	public List<Entrada> findAll() {
