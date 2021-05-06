@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ArquivoEntrada implements Serializable{
+public class EntradaArquivo implements Serializable{
 
 	/**
 	 * 
@@ -32,12 +32,12 @@ public class ArquivoEntrada implements Serializable{
 	@JoinColumn(name = "entrada_id")
 	private Entrada entrada;
 
-	public ArquivoEntrada() {
+	public EntradaArquivo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArquivoEntrada(Integer id, Arquivo arquivo, Entrada entrada) {
+	public EntradaArquivo(Integer id, Arquivo arquivo, Entrada entrada) {
 		super();
 		this.id = id;
 		this.arquivo = arquivo;
@@ -84,7 +84,7 @@ public class ArquivoEntrada implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ArquivoEntrada other = (ArquivoEntrada) obj;
+		EntradaArquivo other = (EntradaArquivo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

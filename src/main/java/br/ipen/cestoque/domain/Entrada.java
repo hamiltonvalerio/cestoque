@@ -54,7 +54,7 @@ public class Entrada implements Serializable {
 	private List<InsumoEntrada> itens = new ArrayList<>();
 
 	@OneToMany(mappedBy = "entrada")
-	private List<ArquivoEntrada> arquivos = new ArrayList<>();
+	private List<EntradaArquivo> arquivos = new ArrayList<>();
 
 	public Entrada() {
 		super();
@@ -173,11 +173,11 @@ public class Entrada implements Serializable {
 		this.itens = itens;
 	}
 
-	public List<ArquivoEntrada> getArquivos() {
+	public List<EntradaArquivo> getArquivos() {
 		return arquivos;
 	}
 
-	public void setArquivos(List<ArquivoEntrada> arquivos) {
+	public void setArquivos(List<EntradaArquivo> arquivos) {
 		this.arquivos = arquivos;
 	}
 

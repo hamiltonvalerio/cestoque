@@ -51,13 +51,14 @@ public class EntradaResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody Entrada obj){
+	public ResponseEntity<String> insert(@Valid @RequestBody Entrada obj){
 		System.out.println("obj: "+obj.getNumLIA());
 		String loterecebimento = gera.gerarLote(obj.getDataEntrada());
 		obj.setLoteRecebimento(loterecebimento);
 		obj = service.insert(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		//return ResponseEntity.created(uri).build();
+		return ResponseEntity.ok().body(obj.getId().toString());
 	}
 	
 	@RequestMapping(value="/inserarquivos",method = RequestMethod.POST)
