@@ -1,15 +1,19 @@
 package br.ipen.cestoque.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.ipen.cestoque.domain.Entrada;
+import br.ipen.cestoque.domain.EntradaArquivo;
 import br.ipen.cestoque.domain.InsumoEntrada;
 import br.ipen.cestoque.domain.Localizacao;
+import net.bytebuddy.asm.Advice.This;
 
 public class EntradaDTO implements Serializable{
 
@@ -42,6 +46,8 @@ public class EntradaDTO implements Serializable{
 	
 	private Set<InsumoEntrada> itens = new HashSet<>();
 	
+	private Set<EntradaArquivo> arquivos = new HashSet<>();
+	
 	public EntradaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -61,13 +67,14 @@ public class EntradaDTO implements Serializable{
 		this.itens.addAll(obj.getItens());
 		this.show = false;
 		this.loteRecebimento = obj.getLoteRecebimento();
+		this.getArquivos().addAll(obj.getArquivos());
 	}
 	
 	
 
 
 	public EntradaDTO(Integer id, Date dataEntrada, String numeronf, String  numLIA, String numProcesso, String numRequisicao, String usualt, Date datalt,
-			Set<InsumoEntrada> itens, String loteRecebimento) {
+			Set<InsumoEntrada> itens, String loteRecebimento, Set<EntradaArquivo> arquivos) {
 		super();
 		this.id = id;
 		this.dataEntrada = dataEntrada;
@@ -79,6 +86,7 @@ public class EntradaDTO implements Serializable{
 		this.datalt = datalt;
 		this.itens = itens;
 		this.loteRecebimento = loteRecebimento;
+		this.setArquivos(arquivos);
 	}
 
 	public Integer getId() {
@@ -178,6 +186,14 @@ public class EntradaDTO implements Serializable{
 
 	public void setLoteRecebimento(String loteRecebimento) {
 		this.loteRecebimento = loteRecebimento;
+	}
+
+	public Set<EntradaArquivo> getArquivos() {
+		return arquivos;
+	}
+
+	public void setArquivos(Set<EntradaArquivo> arquivos) {
+		this.arquivos = arquivos;
 	}
 	
 	

@@ -6,6 +6,6 @@ import br.ipen.cestoque.domain.Arquivo;
 
 public interface ArquivoService {
 
-	public Arquivo salvar(MultipartFile[] arquivos, Integer id);
+	public void salvar(MultipartFile[] arquivos, Integer id);
 	
 }

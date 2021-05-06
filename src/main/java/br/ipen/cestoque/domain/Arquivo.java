@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Arquivo implements Serializable{
 
@@ -24,8 +26,8 @@ public class Arquivo implements Serializable{
 	
 	private String tipo;
 	
-	@Lob
-	private byte[] arquivo;
+	@Type(type="org.hibernate.type.BinaryType") 
+	private byte[] data;
 
 	public Arquivo() {
 		super();
@@ -38,12 +40,12 @@ public class Arquivo implements Serializable{
 		this.tipo = tipo;
 	}
 
-	public Arquivo(Integer id, String nome, String tipo, byte[] arquivo) {
+	public Arquivo(Integer id, String nome, String tipo, byte[] data) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
-		this.arquivo = arquivo;
+		this.data = data;
 	}
 
 	public Integer getId() {
@@ -70,12 +72,12 @@ public class Arquivo implements Serializable{
 		this.tipo = tipo;
 	}
 
-	public byte[] getArquivo() {
-		return arquivo;
+	public byte[] getData() {
+		return data;
 	}
 
-	public void setArquivo(byte[] arquivo) {
-		this.arquivo = arquivo;
+	public void setData(byte[] data) {
+		this.data = data;
 	}
 	
 	

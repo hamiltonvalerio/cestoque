@@ -132,12 +132,15 @@ public class EntradaService {
 		
 	}
 	
+	
 	public List<Entrada> findAllOrderById() {
-		// TODO Auto-generated method stub
-		//return repo.findAll();
-		
-		return repo.findAllByOrderByIdDesc();
-		
+		try {
+			return repo.findAllByOrderByIdDesc();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	
 	}
 
 	public Integer findMaxId() {

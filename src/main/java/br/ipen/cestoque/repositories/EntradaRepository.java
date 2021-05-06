@@ -18,7 +18,8 @@ public interface EntradaRepository extends JpaRepository<Entrada, Integer>{
 	@Query("SELECT coalesce(max(e.id), 0) FROM Entrada e")
 	public Integer findMaxId();
 
+	
 	public List<Entrada> findAllByOrderByIdDesc();
-
+	
 	
 }

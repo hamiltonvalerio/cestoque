@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.ipen.cestoque.domain.Entrada;
 import br.ipen.cestoque.dto.EntradaDTO;
 import br.ipen.cestoque.resources.utils.GeraLoteRecebimentoCR;
+import br.ipen.cestoque.services.EntradaArquivoService;
 import br.ipen.cestoque.services.EntradaService;
 
 
@@ -38,6 +39,9 @@ public class EntradaResource {
 
 	@Autowired
 	private EntradaService service;
+	
+	@Autowired
+	private EntradaArquivoService entradaArquivoService;
 	
 	
 	@Autowired
@@ -67,6 +71,7 @@ public class EntradaResource {
 			@RequestParam(name="identrada") String entrada) 
 			
 	{	
+		entradaArquivoService.salvar(files, Integer.parseInt(entrada));
 		
 		return ResponseEntity.created(null).build();
 	}
