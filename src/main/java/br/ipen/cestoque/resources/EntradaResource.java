@@ -7,8 +7,11 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +30,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.ipen.cestoque.domain.Entrada;
+import br.ipen.cestoque.domain.ResponseFile;
 import br.ipen.cestoque.dto.EntradaDTO;
 import br.ipen.cestoque.resources.utils.GeraLoteRecebimentoCR;
 import br.ipen.cestoque.services.EntradaArquivoService;
@@ -82,6 +86,38 @@ public class EntradaResource {
 		List<EntradaDTO> listDto = list.stream().map(obj -> new EntradaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
+	
+	 @GetMapping("/files")
+	  public ResponseEntity<List<ResponseFile>> getListFiles() {
+	    List<ResponseFile> files = entradaArquivoService.getAllFiles().map(dbFile -> {
+	      String fileDownloadUri = ServletUriComponentsBuilder
+	          .fromCurrentContextPath()
+	          .path("/files/")
+	          .path(dbFile.getId().toString())
+	          .toUriString();
+
+	      return new ResponseFile(
+	          dbFile.getArquivo().getNome(),
+	          fileDownloadUri,
+	          dbFile.getArquivo().getTipo(),
+	          dbFile.getArquivo().getData().length);
+	    }).collect(Collectors.toList());
+
+	    return ResponseEntity.status(HttpStatus.OK).body(files);
+
+	  }
+	 
+	 
+	 /*@GetMapping("/downloadFile/{fileId}")
+	    public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
+	        // Load file from database
+	        DBFile dbFile = dbFileStorageService.getFile(fileId);
+
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(dbFile.getFileType()))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
+	                .body(new ByteArrayResource(dbFile.getData()));
+	    }*/
 	
 	
 }
