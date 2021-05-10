@@ -58,6 +58,9 @@ public class InsumoMovimentacao implements Serializable {
 
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataValidade;
+	
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataFabricacao;
 
 	private LocalDateTime dataAprovacao;
 
@@ -73,7 +76,7 @@ public class InsumoMovimentacao implements Serializable {
 	public InsumoMovimentacao(Integer id, Insumo insumo, Localizacao localizacao, Movimentacao movimentacao,
 			Double quantidadeOrigem, Double quantidadeMovimentada, String loteFornecedor, String loteCR,
 			String loteProducao, String loteRecebimento, LocalDate dataIrradiacao, LocalDate dataValidade,
-			LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado) {
+			LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
@@ -87,6 +90,7 @@ public class InsumoMovimentacao implements Serializable {
 		this.loteRecebimento = loteRecebimento;
 		this.dataIrradiacao = dataIrradiacao;
 		this.dataValidade = dataValidade;
+		this.setDataFabricacao(dataFabricacao);
 		this.dataAprovacao = dataAprovacao;
 		this.dataReprovacao = dataReprovacao;
 		this.aprovado = aprovado;
@@ -235,6 +239,14 @@ public class InsumoMovimentacao implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public LocalDate getDataFabricacao() {
+		return dataFabricacao;
+	}
+
+	public void setDataFabricacao(LocalDate dataFabricacao) {
+		this.dataFabricacao = dataFabricacao;
 	}
 
 }

@@ -49,6 +49,8 @@ public class InsumoLocalizacao implements Serializable {
 	private LocalDate dataIrradiacao;
 
 	private LocalDate dataValidade;
+	
+	private LocalDate dataFabricacao;
 
 	private LocalDateTime dataAprovacao;
 
@@ -75,7 +77,7 @@ public class InsumoLocalizacao implements Serializable {
 
 	public InsumoLocalizacao(Integer id, Insumo insumo, Localizacao localizacao, Double quantidade,
 			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao, LocalDate dataIrradiacao,
-			LocalDate dataValidade, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento) {
+			LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
@@ -87,6 +89,7 @@ public class InsumoLocalizacao implements Serializable {
 		this.loteProducao = loteProducao;
 		this.dataIrradiacao = dataIrradiacao;
 		this.dataValidade = dataValidade;
+		this.dataFabricacao = dataFabricacao;
 		this.dataAprovacao = dataAprovacao;
 		this.dataReprovacao = dataReprovacao;
 		this.aprovado = aprovado;
@@ -264,6 +267,14 @@ public class InsumoLocalizacao implements Serializable {
 
 	public void setFoiaprovado(String foiaprovado) {
 		this.foiaprovado = foiaprovado;
+	}
+
+	public LocalDate getDataFabricacao() {
+		return dataFabricacao;
+	}
+
+	public void setDataFabricacao(LocalDate dataFabricacao) {
+		this.dataFabricacao = dataFabricacao;
 	}
 
 }

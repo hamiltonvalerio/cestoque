@@ -2,7 +2,6 @@ package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -54,6 +54,8 @@ public class InsumoEntrada implements Serializable {
 
 	//@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataValidade;
+	
+	private LocalDate dataFabricacao;
 
 	private Double quantidade;
 	private Double valor;
@@ -61,6 +63,9 @@ public class InsumoEntrada implements Serializable {
 	private Double valorTotal;
 
 	private String loteRecebimento;
+	
+	@Transient
+	private Integer quantidadeetiquetas;
 
 	public InsumoEntrada() {
 		super();
@@ -68,7 +73,7 @@ public class InsumoEntrada implements Serializable {
 	}
 
 	public InsumoEntrada(Integer id, Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR,
-			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade,
+			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao,
 			Double quantidade, Double valor, Double valorTotal, String loteRecebimento) {
 		super();
 		this.id = id;
@@ -79,6 +84,7 @@ public class InsumoEntrada implements Serializable {
 		this.dataIrradiacao = dataIrradiacao;
 		this.dataVencIrradiacao = dataVencIrradiacao;
 		this.dataValidade = dataValidade;
+		this.setDataFabricacao(dataFabricacao);
 		this.quantidade = quantidade;
 		this.valor = valor;
 		this.valorTotal = valorTotal;
@@ -204,6 +210,25 @@ public class InsumoEntrada implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Integer getQuantidadeetiquetas() {
+		if(this.quantidadeetiquetas == null) {
+			this.setQuantidadeetiquetas(1);
+		}
+		return quantidadeetiquetas;
+	}
+
+	public void setQuantidadeetiquetas(Integer quantidadeetiquetas) {
+		this.quantidadeetiquetas = quantidadeetiquetas;
+	}
+
+	public LocalDate getDataFabricacao() {
+		return dataFabricacao;
+	}
+
+	public void setDataFabricacao(LocalDate dataFabricacao) {
+		this.dataFabricacao = dataFabricacao;
 	}
 
 }
