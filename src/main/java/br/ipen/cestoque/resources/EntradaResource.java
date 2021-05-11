@@ -1,11 +1,5 @@
 package br.ipen.cestoque.resources;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Entrada;
 import br.ipen.cestoque.domain.EntradaArquivo;
-import br.ipen.cestoque.domain.InsumoEntrada;
 import br.ipen.cestoque.dto.EntradaDTO;
 import br.ipen.cestoque.resources.utils.GeraLoteRecebimentoCR;
 import br.ipen.cestoque.services.EntradaArquivoService;
@@ -55,7 +48,6 @@ public class EntradaResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<String> insert(@Valid @RequestBody Entrada obj) {
-		System.out.println("obj: " + obj.getNumLIA());
 		String loterecebimento = gera.gerarLote(obj.getDataEntrada());
 		obj.setLoteRecebimento(loterecebimento);
 		obj = service.insert(obj);
