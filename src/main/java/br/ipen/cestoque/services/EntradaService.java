@@ -103,6 +103,8 @@ public class EntradaService {
 				insumoLocalizacao.setDataIrradiacao(ie.getDataIrradiacao());
 				insumoLocalizacao.setDataValidade(ie.getDataValidade());
 				insumoLocalizacao.setLoteRecebimento(entrada.getLoteRecebimento());
+				insumoLocalizacao.setDataFabricacao(ie.getDataFabricacao());
+				insumoLocalizacao.setLoteARM(ie.getLoteARM());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}else {
 				Double novaQuantidade = insumoLocalizacao.getQuantidade() + quant;

@@ -45,6 +45,8 @@ public class InsumoLocalizacaoDTO implements Serializable {
 	private String nomecodalmox;
 
 	private String loteRecebimento;
+	
+	private String loteARM;
 
 	public InsumoLocalizacaoDTO() {
 		super();
@@ -75,6 +77,8 @@ public class InsumoLocalizacaoDTO implements Serializable {
 		dataamostracq = obj.getDataamostracq();
 		lote = obj.getLote();
 		nomecodalmox = obj.getNome() + " - " + obj.getCodigoalmox();
+		
+		
 	}
 
 	public Integer getId() {
@@ -267,6 +271,14 @@ public class InsumoLocalizacaoDTO implements Serializable {
 
 	public void setLoteRecebimento(String loteRecebimento) {
 		this.loteRecebimento = loteRecebimento;
+	}
+
+	public String getLoteARM() {
+		return loteARM;
+	}
+
+	public void setLoteARM(String loteARM) {
+		this.loteARM = loteARM;
 	}
 
 }

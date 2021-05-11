@@ -9,13 +9,12 @@ public class ValidationError extends StandardError {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private List<FieldMessage> errors = new ArrayList<>();
-	
-	
 
-	public ValidationError(long timeStamp, Integer status, String error, String message, String path) {
-		super(timeStamp, status, error, message, path);
+	private List<FieldMessage> errors = new ArrayList<>();
+
+	public ValidationError(long timeStamp, Integer status, String error, String message) {
+		super(timeStamp, status, error, message);
+		// TODO Auto-generated constructor stub
 	}
 
 	public List<FieldMessage> getErrors() {
@@ -25,7 +24,5 @@ public class ValidationError extends StandardError {
 	public void addError(String fieldName, String message) {
 		errors.add(new FieldMessage(fieldName, message));
 	}
-
-	
 
 }

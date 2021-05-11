@@ -8,9 +8,11 @@ import java.io.InputStream;
 import java.util.prefs.Preferences;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.ipen.cestoque.resources.ImpressoraResource;
+import br.ipen.cestoque.services.exception.ImpressoraException;
 import honeywell.connection.ConnectionBase;
 import honeywell.connection.Connection_TCP;
 import honeywell.printer.DocumentDPL;
@@ -44,7 +46,7 @@ public class ImpressaoDatamaxService implements Runnable {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ImpressoraException("Erro de conexão com a impressora", e.getCause());
 		} finally {
 			conn.close();
 		}
@@ -90,5 +92,6 @@ public class ImpressaoDatamaxService implements Runnable {
 		run();
 		return true;
 	}
+	
 
 }

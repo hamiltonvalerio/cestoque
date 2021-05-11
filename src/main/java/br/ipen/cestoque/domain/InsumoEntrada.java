@@ -17,53 +17,27 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class InsumoEntrada implements Serializable {
+public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/*
-	 * @JsonIgnore
-	 * 
-	 * @EmbeddedId private InsumoEntradaPK id = new InsumoEntradaPK();
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
-	@ManyToOne
-	@JoinColumn(name = "insumo_id", nullable = false)
-	private Insumo insumo;
-
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "entrada_id")
 	private Entrada entrada;
 
-	private String loteFornecedor;
-	private String loteCR;
-
-	//@JsonFormat(pattern = "yyyy-MM-dd")
-	@DateTimeFormat(iso = ISO.DATE_TIME)
-	private LocalDate dataIrradiacao;
-
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataVencIrradiacao;
 
-	//@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate dataValidade;
-	
-	private LocalDate dataFabricacao;
-
 	private Double quantidade;
+
 	private Double valor;
 
 	private Double valorTotal;
 
-	private String loteRecebimento;
-	
 	@Transient
 	private Integer quantidadeetiquetas;
 
@@ -74,21 +48,40 @@ public class InsumoEntrada implements Serializable {
 
 	public InsumoEntrada(Integer id, Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR,
 			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao,
-			Double quantidade, Double valor, Double valorTotal, String loteRecebimento) {
+			Double quantidade, Double valor, Double valorTotal, String loteRecebimento, String loteARM,
+			String testesuper) {
 		super();
-		this.id = id;
-		this.insumo = insumo;
+		this.setId(id);
+		this.setInsumo(insumo);
 		this.entrada = entrada;
-		this.loteFornecedor = loteFornecedor;
-		this.loteCR = loteCR;
-		this.dataIrradiacao = dataIrradiacao;
+		this.setLoteFornecedor(loteFornecedor);
+		this.setLoteCR(loteCR);
+		this.setDataIrradiacao(dataIrradiacao);
 		this.dataVencIrradiacao = dataVencIrradiacao;
-		this.dataValidade = dataValidade;
+		this.setDataValidade(dataValidade);
 		this.setDataFabricacao(dataFabricacao);
 		this.quantidade = quantidade;
 		this.valor = valor;
 		this.valorTotal = valorTotal;
-		this.loteRecebimento = loteRecebimento;
+		this.setLoteRecebimento(loteRecebimento);
+		this.setLoteARM(loteARM);
+
+	}
+
+	public Entrada getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(Entrada entrada) {
+		this.entrada = entrada;
+	}
+
+	public LocalDate getDataVencIrradiacao() {
+		return dataVencIrradiacao;
+	}
+
+	public void setDataVencIrradiacao(LocalDate dataVencIrradiacao) {
+		this.dataVencIrradiacao = dataVencIrradiacao;
 	}
 
 	public Double getQuantidade() {
@@ -107,38 +100,6 @@ public class InsumoEntrada implements Serializable {
 		this.valor = valor;
 	}
 
-	public String getLoteFornecedor() {
-		return loteFornecedor;
-	}
-
-	public void setLoteFornecedor(String loteFornecedor) {
-		this.loteFornecedor = loteFornecedor;
-	}
-
-	public String getLoteCR() {
-		return loteCR;
-	}
-
-	public void setLoteCR(String loteCR) {
-		this.loteCR = loteCR;
-	}
-
-	public LocalDate getDataIrradiacao() {
-		return dataIrradiacao;
-	}
-
-	public void setDataIrradiacao(LocalDate dataIrradiacao) {
-		this.dataIrradiacao = dataIrradiacao;
-	}
-
-	public LocalDate getDataVencIrradiacao() {
-		return dataVencIrradiacao;
-	}
-
-	public void setDataVencIrradiacao(LocalDate dataVencIrradiacao) {
-		this.dataVencIrradiacao = dataVencIrradiacao;
-	}
-
 	public Double getValorTotal() {
 		return valorTotal;
 	}
@@ -147,88 +108,12 @@ public class InsumoEntrada implements Serializable {
 		this.valorTotal = valorTotal;
 	}
 
-	public LocalDate getDataValidade() {
-		return dataValidade;
-	}
-
-	public void setDataValidade(LocalDate dataValidade) {
-		this.dataValidade = dataValidade;
-	}
-
-	public String getLoteRecebimento() {
-		return loteRecebimento;
-	}
-
-	public void setLoteRecebimento(String loteRecebimento) {
-		this.loteRecebimento = loteRecebimento;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Insumo getInsumo() {
-		return insumo;
-	}
-
-	public void setInsumo(Insumo insumo) {
-		this.insumo = insumo;
-	}
-
-	public Entrada getEntrada() {
-		return entrada;
-	}
-
-	public void setEntrada(Entrada entrada) {
-		this.entrada = entrada;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		InsumoEntrada other = (InsumoEntrada) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
 	public Integer getQuantidadeetiquetas() {
-		if(this.quantidadeetiquetas == null) {
-			this.setQuantidadeetiquetas(1);
-		}
 		return quantidadeetiquetas;
 	}
 
 	public void setQuantidadeetiquetas(Integer quantidadeetiquetas) {
 		this.quantidadeetiquetas = quantidadeetiquetas;
-	}
-
-	public LocalDate getDataFabricacao() {
-		return dataFabricacao;
-	}
-
-	public void setDataFabricacao(LocalDate dataFabricacao) {
-		this.dataFabricacao = dataFabricacao;
 	}
 
 }

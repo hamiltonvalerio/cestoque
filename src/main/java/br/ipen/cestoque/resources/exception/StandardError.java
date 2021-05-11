@@ -12,15 +12,14 @@ public class StandardError implements Serializable{
 	private Integer status;
 	private String error;
 	private String message;
-	private String path;
-	
-	public StandardError(long timeStamp, Integer status, String error, String message, String path) {
+
+	public StandardError(long timeStamp, Integer status, String error, String message) {
 		super();
 		this.timeStamp = timeStamp;
 		this.status = status;
 		this.error = error;
 		this.message = message;
-		this.path = path;
+
 	}
 
 	public long getTimeStamp() {
@@ -55,13 +54,5 @@ public class StandardError implements Serializable{
 		this.message = message;
 	}
 
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-	
 	
 }

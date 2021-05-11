@@ -78,12 +78,8 @@ public class EntradaArquivoService implements ArquivoService {
 	}
 
 	public Boolean gerarEtiquetasDatamax(Entrada obj) {
-		
-			File file2 = new File("D:\\DATAMAX\\testedatamax.txt");
-			
-			File file3 = new File("D:\\DATAMAX\\temp2.txt");
-		
-	 		File file = null;
+
+			File file = null;
 			try {
 				file = File.createTempFile("arquivotemporario", ".txt");
 			} catch (IOException e) {
@@ -146,18 +142,10 @@ public class EntradaArquivoService implements ArquivoService {
 
             	FileInputStream stream = new FileInputStream(file);
             	MultipartFile multip = new MockMultipartFile("file", file.getName(), MediaType.TEXT_PLAIN_VALUE, stream);
-            	byte [] tes = multip.getBytes();
-            	//Boolean imprimeArquivoFile = impressaoDatamaxService.imprimeArquivoBytes(tes);
-            	//Boolean imprimeArquivoFile = impressaoDatamaxService.imprimeArquivoMultipart(multipartFile);
-            	//Boolean imprimeArquivoFile = impressaoDatamaxService.imprimeArquivoFile(file2);
-            	//Boolean imprimeArquivoFile = impressaoDatamaxService.imprimeArquivoFileToMultipar(file2);
-            	
-            	 //MultipartFile multipartFileteste = new MockMultipartFile("test.txt", new FileInputStream(file)); 
-            	 byte [] tes2 = multip.getBytes();
-            	 Boolean imprimeArquivoFile = impressaoDatamaxService.imprimeArquivoBytes(tes2);
+           	 	byte [] tes2 = multip.getBytes();
+            	Boolean imprimeArquivoFile = impressaoDatamaxService.imprimeArquivoBytes(tes2);
             	 
             	file.delete();
-
             	
             } catch (IOException e) {
 				// TODO Auto-generated catch block
