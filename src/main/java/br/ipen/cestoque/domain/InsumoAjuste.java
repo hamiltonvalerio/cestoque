@@ -8,13 +8,13 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@DynamicUpdate
 public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 
 	/**
@@ -34,32 +34,32 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 	private String usualt;
 	
 	private Date datalt;
+	
+	@Transient
+	private Unidade unidade;
 
-	public InsumoAjuste(Integer id, Insumo insumo, 	Double quantidademinima, String loteFornecedor,
-			String loteCR, String loteProducao, LocalDate dataIrradiacao, LocalDate dataValidade, 
-			LocalDate dataFabricacao, LocalDateTime dataAprovacao, 	LocalDateTime dataReprovacao, 
-			Boolean aprovado, String loteRecebimento, String loteARM, Localizacao localizacao,
-			Double quantidade, Date dataAjuste, String usualt, Date datalt) {
+	public InsumoAjuste(
+			Date dataAjuste, 
+			LocalDate dataFabricacao, 
+			LocalDate dataValidade,
+			Insumo insumo,
+			Localizacao localizacao,
+			String loteARM,
+			String loteCR,
+			String loteFornecedor,
+			Double quantidade,
+			Unidade unidade) {
 		super();
-		this.setId(id);
+		this.dataAjuste = dataAjuste;
+		this.setDataFabricacao(dataFabricacao);
+		this.setDataValidade(dataValidade);
 		this.setInsumo(insumo);
 		this.localizacao = localizacao;
-		this.quantidade = quantidade;
-		this.setLoteFornecedor(loteFornecedor);
-		this.setLoteCR(loteCR);
-		this.setDataIrradiacao(dataIrradiacao);
-		this.setDataValidade(dataValidade);
-		this.setDataFabricacao(dataFabricacao);
-		this.setDataAprovacao(dataAprovacao);
-		this.setDataReprovacao(dataReprovacao);
-		this.setAprovado(aprovado);
-		this.setLoteRecebimento(loteRecebimento);
 		this.setLoteARM(loteARM);
-		this.localizacao = localizacao;
+		this.setLoteCR(loteCR);
+		this.setLoteFornecedor(loteFornecedor);
 		this.quantidade = quantidade;
-		this.dataAjuste = dataAjuste;
-		this.usualt = usualt;
-		this.datalt = datalt;
+		this.unidade = unidade;
 	}
 
 	public Localizacao getLocalizacao() {
@@ -100,6 +100,14 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
+	}
+
+	public Unidade getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
 	}
 	
 	
