@@ -26,7 +26,7 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 
 	private Double quantidade;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	//@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataAjuste;
 
 	private String usualt;

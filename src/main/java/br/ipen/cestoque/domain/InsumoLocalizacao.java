@@ -63,7 +63,8 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setDataAprovacao(dataAprovacao);
 		this.setDataReprovacao(dataReprovacao);
 		this.setAprovado(aprovado);
-		this.setNomedoinsumo(insumo.getNome());
+		//this.setNomedoinsumo(insumo.getNome());
+		this.nomedoinsumo = insumo.getNome();
 		this.setLoteRecebimento(loteRecebimento);
 		this.setLoteARM(loteARM);
 	}

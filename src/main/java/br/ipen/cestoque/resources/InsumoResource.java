@@ -172,6 +172,9 @@ public class InsumoResource {
 		
 		List<InsumoLocalizacao> ils = service.buscatodosporlocalizacaonopage(Integer.parseInt(localizacao_id)); 
 		
+		for (InsumoLocalizacao il : ils) {
+			il.setNomedoinsumo(il.getInsumo().getNome());
+		}
 		
 		//List<Insumo> list = service.buscaporlocalizacaonopage(Integer.parseInt(localizacao_id));
 		
