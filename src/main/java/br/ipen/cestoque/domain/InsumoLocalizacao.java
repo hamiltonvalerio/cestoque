@@ -38,6 +38,9 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 
 	@Transient
 	private String emaprovacao;
+	
+	@Transient
+	private String codigoalmoxarifado;
 
 	public InsumoLocalizacao() {
 		super();
@@ -123,6 +126,14 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 
 	public void setEmaprovacao(String emaprovacao) {
 		this.emaprovacao = emaprovacao;
+	}
+
+	public String getCodigoalmoxarifado() {
+		return codigoalmoxarifado;
+	}
+
+	public void setCodigoalmoxarifado(String codigoalmoxarifado) {
+		this.codigoalmoxarifado = codigoalmoxarifado;
 	}
 
 }
