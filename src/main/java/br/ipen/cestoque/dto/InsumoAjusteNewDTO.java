@@ -22,7 +22,7 @@ public class InsumoAjusteNewDTO implements Serializable {
 
 	private Integer id;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	//@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataAjuste;
 
 	@DateTimeFormat(iso = ISO.DATE)

@@ -167,7 +167,5 @@ public abstract class DadosComunsInsumos {
 			return false;
 		return true;
 	}
-	
-	
 
 }

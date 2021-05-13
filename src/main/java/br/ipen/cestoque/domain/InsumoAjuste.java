@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.DynamicUpdate;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -37,6 +35,11 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 	
 	@Transient
 	private Unidade unidade;
+	
+	public InsumoAjuste() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public InsumoAjuste(
 			Date dataAjuste, 
@@ -60,6 +63,34 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 		this.setLoteFornecedor(loteFornecedor);
 		this.quantidade = quantidade;
 		this.unidade = unidade;
+	}
+	
+	
+
+	public InsumoAjuste(Localizacao localizacao, Double quantidade, Date dataAjuste, String usualt, Date datalt,
+			Unidade unidade,Integer id, Insumo insumo, String loteFornecedor, String loteCR, LocalDate dataIrradiacao,
+			String loteRecebimento, String loteARM, LocalDate dataValidade, LocalDate dataFabricacao, Boolean aprovado,
+			LocalDateTime dataAprovacao, LocalDateTime dataReprovacao) {
+		super();
+		this.localizacao = localizacao;
+		this.quantidade = quantidade;
+		this.dataAjuste = dataAjuste;
+		this.usualt = usualt;
+		this.datalt = datalt;
+		this.unidade = unidade;
+		
+		this.setId(id);
+		this.setInsumo(insumo);
+		this.setLoteFornecedor(loteFornecedor);
+		this.setLoteCR(loteCR);
+		this.setDataIrradiacao(dataIrradiacao);
+		this.setLoteRecebimento(loteRecebimento);
+		this.setLoteARM(loteARM);
+		this.setDataValidade(dataValidade);
+		this.setDataFabricacao(dataFabricacao);
+		this.setAprovado(aprovado);
+		this.setDataAprovacao(dataAprovacao);;
+		this.setDataReprovacao(dataReprovacao);
 	}
 
 	public Localizacao getLocalizacao() {

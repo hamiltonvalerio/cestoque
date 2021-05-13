@@ -89,5 +89,10 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("dataValidade") LocalDate dataValidade, 
 			@Param("dataIrradiacao") LocalDate dataIrradiacao);
 	
-	
+	@Transactional
+	@Modifying
+	@Query("UPDATE InsumoLocalizacao " + "	SET quantidade =:quantidade "
+			+ "	WHERE id =:insumolocalizacao_id")
+	public void updateAjusteQuantidade(@Param("insumolocalizacao_id") int insumolocalizacao_id,
+			@Param("quantidade") double quantidade);
 }
