@@ -142,6 +142,9 @@ public class InsumoService {
 			if(obj.getCategorias() != null && !obj.getCategorias().isEmpty()) {
 				newObj.setCategorias(obj.getCategorias());
 			}
+			if(obj.getUnidade() != null && obj.getUnidade().getNome() != "") {
+				newObj.setUnidade(obj.getUnidade());
+			}
 		}
 		newObj.setUsualt(UserService.authenticated().getUsername());
 		newObj.setDatalt(new Date(System.currentTimeMillis()));

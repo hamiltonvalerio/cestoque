@@ -233,7 +233,6 @@ public class InsumoResource {
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> update(@Valid @RequestBody InsumoDTO objDto) {
 		Insumo obj = service.fromDTO(objDto);
-		// obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}

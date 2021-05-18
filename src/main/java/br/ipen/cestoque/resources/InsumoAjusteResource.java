@@ -40,9 +40,6 @@ public class InsumoAjusteResource {
 	public ResponseEntity<List<InsumoAjuste> > findAjustesByDataELocalizacao(
 			@RequestParam(value = "localizacao_id") String localizacao_id,
 			@RequestParam(value = "dataAjuste") Date dataAjuste){
-
-		System.out.println("Data Ajuste: "+dataAjuste);
-		System.out.println("localizacao_id: "+localizacao_id);
 		
 		List<InsumoAjuste> list = insumoAjusteService.findAjustesByDataELocalizacao(Integer.parseInt(localizacao_id), dataAjuste);
 
