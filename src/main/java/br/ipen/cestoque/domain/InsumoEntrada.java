@@ -37,7 +37,11 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 
 	@Transient
 	private Integer quantidadeetiquetas;
+	
+	@Transient
+	private String codigoalmoxarifado;
 
+	
 	public InsumoEntrada() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -62,6 +66,7 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 		this.valorTotal = valorTotal;
 		this.setLoteRecebimento(loteRecebimento);
 		this.setLoteARM(loteARM);
+		this.codigoalmoxarifado = insumo.getCodigoalmox();
 
 	}
 
@@ -111,6 +116,14 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 
 	public void setQuantidadeetiquetas(Integer quantidadeetiquetas) {
 		this.quantidadeetiquetas = quantidadeetiquetas;
+	}
+
+	public String getCodigoalmoxarifado() {
+		return codigoalmoxarifado;
+	}
+
+	public void setCodigoalmoxarifado(String codigoalmoxarifado) {
+		this.codigoalmoxarifado = codigoalmoxarifado;
 	}
 
 }

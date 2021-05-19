@@ -114,7 +114,7 @@ public class EntradaArquivoService implements ArquivoService {
             			bw.write(System.lineSeparator());
             			bw.write("102100000800020Lote Fornecedor: "+content.getLoteFornecedor());
             			bw.write(System.lineSeparator());
-            			bw.write("102100000800190Cod Almox: "+content.getLoteFornecedor());
+            			bw.write("102100000800190Cod Almox: "+content.getInsumo().getCodigoalmox());
             			bw.write(System.lineSeparator());
             			bw.write("102100000700020Fab.:");
             			bw.write(System.lineSeparator());

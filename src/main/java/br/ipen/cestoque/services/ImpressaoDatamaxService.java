@@ -21,7 +21,7 @@ import honeywell.printer.DocumentDPL;
 public class ImpressaoDatamaxService implements Runnable {
 
 	private String connType = "TCP/IP";
-	private String m_deviceAddress = "192.168.001.129";
+	private String m_deviceAddress = "10.0.34.132";
 	private int m_devicePort = 9100;
 	private String printerLanguage = "DPL";
 	private Integer m_printHeadWidth = 384;

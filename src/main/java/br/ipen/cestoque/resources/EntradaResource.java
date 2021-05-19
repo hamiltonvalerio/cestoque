@@ -116,6 +116,8 @@ public class EntradaResource {
 
 	@RequestMapping(value = "/geraretiquetas", method = RequestMethod.POST)
 	public ResponseEntity<Void> gerarEtiquetasDatamax(@RequestBody Entrada obj) {
+		
+		
 
 		Boolean bol = entradaArquivoService.gerarEtiquetasDatamax(obj);
 

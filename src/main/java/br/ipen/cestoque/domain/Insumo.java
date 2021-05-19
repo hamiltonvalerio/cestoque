@@ -66,6 +66,9 @@ public class Insumo implements Serializable {
 
 	@Transient
 	private Integer codlocalizacaoIE;
+	
+	@Transient
+	private String codigoalmoxarifadoinsumo;;
 
 	
 	@ManyToMany
@@ -126,6 +129,7 @@ public class Insumo implements Serializable {
 		this.amostracq = amostracq;
 		this.dataamostracq = dataamostracq;
 		this.lote = lote;
+		this.codigoalmoxarifadoinsumo = codigoalmox;
 		this.nomecodalmox = nome + " - " + codigoalmox;
 		this.categorias = categorias;
 	}
@@ -369,7 +373,7 @@ public class Insumo implements Serializable {
 
 	public String getNomecodalmox() {
 		if (this.nome != null && this.codigoalmox != null) {
-			this.setCodigoalmox(this.nome + " - " + this.codigoalmox);
+			this.setNomecodalmox(this.nome + " - " + this.codigoalmox);
 		}
 		return nomecodalmox;
 	}
@@ -392,6 +396,14 @@ public class Insumo implements Serializable {
 
 	public void setCodlocalizacaoIE(Integer codlocalizacaoIE) {
 		this.codlocalizacaoIE = codlocalizacaoIE;
+	}
+
+	public String getCodigoalmoxarifadoinsumo() {
+		return codigoalmoxarifadoinsumo;
+	}
+
+	public void setCodigoalmoxarifadoinsumo(String codigoalmoxarifadoinsumo) {
+		this.codigoalmoxarifadoinsumo = codigoalmoxarifadoinsumo;
 	}
 
 }
