@@ -10,9 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.envers.Audited;
 
 @Entity
 @DynamicUpdate
+@Audited
 public class InsumoLocalizacao extends DadosComunsInsumos implements Serializable {
 
 	/**

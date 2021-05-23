@@ -2,6 +2,11 @@ package br.ipen.cestoque.services.exception;
 
 public class FileSaveException extends RuntimeException{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public FileSaveException(String message) {
         super(message);
     }

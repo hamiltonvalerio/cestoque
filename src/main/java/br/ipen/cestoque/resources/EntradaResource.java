@@ -58,11 +58,8 @@ public class EntradaResource {
 
 	@RequestMapping(value = "/inserarquivos", method = RequestMethod.POST)
 	public ResponseEntity<Void> insertarquivos(@RequestParam(name = "files") MultipartFile[] files,
-			@RequestParam(name = "identrada") String entrada)
-
-	{
-		entradaArquivoService.salvar(files, Integer.parseInt(entrada));
-
+			@RequestParam(name = "identrada") Integer identrada){
+		entradaArquivoService.salvar(files, identrada);
 		return ResponseEntity.created(null).build();
 	}
 

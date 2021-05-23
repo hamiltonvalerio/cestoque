@@ -13,9 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Audited
 public class Entrada implements Serializable {
 
 	/**
@@ -51,6 +55,7 @@ public class Entrada implements Serializable {
 	private List<InsumoEntrada> itens = new ArrayList<>();
 
 	@OneToMany(mappedBy = "entrada")
+	@NotAudited
 	private List<EntradaArquivo> arquivos = new ArrayList<>();
 
 	public Entrada() {
