@@ -1,25 +1,67 @@
 package br.ipen.cestoque.services;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.util.JRSaver;
 
 @Service
 public class RelatorioServiceImpl implements RelatorioService{
-		
+	
+	@Autowired
+	private ArmazenamentoService armazenamentoService;  
 
 	@Override
 	public byte[] gerarRelatorioPDF(String inputFileName, Map<String, Object> params) {
 		// TODO Auto-generated method stub
-		return null;
+		return gerarRelatorioPDF(inputFileName, params, new JREmptyDataSource());
 	}
 
 	@Override
 	public byte[] gerarRelatorioPDF(String inputFileName, Map<String, Object> params, JRDataSource dataSource) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		byte[] bytes = null;
+		JasperReport jasperReport = null;
+		
+		try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {
+			// Check if a compiled report exists
+			if (armazenamentoService.jasperFileExists(inputFileName)) {
+				jasperReport = (JasperReport) JRLoader
+						.loadObject(armazenamentoService.loadJasperFile(inputFileName));
+			}
+			// Compile report from source and save
+			else {
+				String jrxml = armazenamentoService.loadJrxmlFile(inputFileName);
+				//log.info("{} loaded. Compiling report", jrxml);
+				jasperReport = JasperCompileManager.compileReport(jrxml);
+				// Save compiled report. Compiled report is loaded next time
+				JRSaver.saveObject(jasperReport,
+						armazenamentoService.loadJasperFile(inputFileName));
+			}
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,
+					dataSource);
+			bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+		}
+		catch (JRException | IOException e) {
+			e.printStackTrace();
+			//log.error("Encountered error when loading jasper file", e);
+		}
+
+		return bytes;
 	}
 
 }

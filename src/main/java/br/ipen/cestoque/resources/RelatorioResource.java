@@ -3,6 +3,7 @@ package br.ipen.cestoque.resources;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import br.ipen.cestoque.services.RelatorioServiceImpl;
 @RequestMapping(value = "/relatorios")
 public class RelatorioResource {
 
+	@Autowired
 	private RelatorioServiceImpl relatorioServiceImpl;
 
 	@RequestMapping(value = "/teste2", method = RequestMethod.GET)
