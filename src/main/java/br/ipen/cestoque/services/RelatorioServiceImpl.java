@@ -2,6 +2,7 @@ package br.ipen.cestoque.services;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,7 @@ public class RelatorioServiceImpl implements RelatorioService{
 	private ArmazenamentoService armazenamentoService;  
 
 	@Override
-	public byte[] gerarRelatorioPDF(String inputFileName, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return gerarRelatorioPDF(inputFileName, params, new JREmptyDataSource());
-	}
-
-	@Override
-	public byte[] gerarRelatorioPDF(String inputFileName, Map<String, Object> params, JRDataSource dataSource) {
+	public byte[] gerarRelatorioPDF(String inputFileName, Map<String, Object> params, Connection connection) {
 		// TODO Auto-generated method stub
 		
 		byte[] bytes = null;
@@ -49,11 +44,10 @@ public class RelatorioServiceImpl implements RelatorioService{
 				//log.info("{} loaded. Compiling report", jrxml);
 				jasperReport = JasperCompileManager.compileReport(jrxml);
 				// Save compiled report. Compiled report is loaded next time
-				JRSaver.saveObject(jasperReport,
-						armazenamentoService.loadJasperFile(inputFileName));
+				JRSaver.saveObject(jasperReport,armazenamentoService.loadJasperFile(inputFileName));
 			}
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,
-					dataSource);
+					connection);
 			bytes = JasperExportManager.exportReportToPdf(jasperPrint);
 		}
 		catch (JRException | IOException e) {
