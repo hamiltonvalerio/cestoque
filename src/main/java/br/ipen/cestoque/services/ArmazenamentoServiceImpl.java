@@ -65,10 +65,18 @@ public class ArmazenamentoServiceImpl implements ArmazenamentoService{
 
 	@Override
 	public boolean jasperFileExists(String file) {
-		Path reportFile = rootLocation;
-		reportFile = reportFile.resolve(file + ".jasper");
-		if (Files.exists(reportFile))
-			return true;
+		//Path reportFile = rootLocation;
+		Path reportFile;
+		try {
+			reportFile = Paths.get(properties.getLocalRelatorio().getURI());
+			reportFile = reportFile.resolve(file + ".jasper");
+			if (Files.exists(reportFile))
+				return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 		return false;
 	}
 
@@ -86,9 +94,16 @@ public class ArmazenamentoServiceImpl implements ArmazenamentoService{
 
 	@Override
 	public File loadJasperFile(String file) {
-		Path reportFile = rootLocation;
-		reportFile = reportFile.resolve(file + ".jasper");
-		return reportFile.toFile();
+		//Path reportFile = rootLocation;
+		Path reportFile;
+		try {
+			reportFile = Paths.get(properties.getLocalRelatorio().getURI());
+			reportFile = reportFile.resolve(file + ".jasper");
+			return reportFile.toFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new ArmazenamentoFileNotFoundException("Could not load file", e);
+		}
 	}
 
 }

@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.ipen.cestoque.ApplicationProperties;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -24,14 +26,21 @@ public class RelatorioServiceImpl implements RelatorioService{
 	
 	@Autowired
 	private ArmazenamentoService armazenamentoService;  
-
+	
+	@Autowired
+	private ApplicationProperties properties;
+	
+	private static final String JASPER_DIRETORIO = "classpath:relatorios/";
+	
 	@Override
 	public byte[] gerarRelatorioPDF(String inputFileName, Map<String, Object> params, Connection connection) {
 		// TODO Auto-generated method stub
 		
 		byte[] bytes = null;
 		JasperReport jasperReport = null;
-		
+
+		params.put("IMAGEM_DIRETORIO", JASPER_DIRETORIO);
+
 		try (ByteArrayOutputStream byteArray = new ByteArrayOutputStream()) {
 			// Check if a compiled report exists
 			if (armazenamentoService.jasperFileExists(inputFileName)) {

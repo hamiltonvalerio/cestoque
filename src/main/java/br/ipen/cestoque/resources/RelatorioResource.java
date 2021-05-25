@@ -47,12 +47,9 @@ public class RelatorioResource {
 	
 	@RequestMapping(value = "/insumos", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> reportInsumos() {
-
 		Map<String, Object> params = new HashMap<>();
-		
-		
 
-		byte[] bytes = relatorioServiceImpl.gerarRelatorioPDF("template_retrato", params, connection);
+		byte[] bytes = relatorioServiceImpl.gerarRelatorioPDF("insumos-01", params, connection);
 		ContentDisposition contentDisposition = ContentDisposition.builder("inline").filename("insumos.pdf")
 				.build();
 		HttpHeaders headers = new HttpHeaders();
