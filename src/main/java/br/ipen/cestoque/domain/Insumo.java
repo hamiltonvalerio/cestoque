@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.envers.NotAudited;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -96,6 +97,11 @@ public class Insumo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
+	
+	@OneToMany(mappedBy = "insumo")
+	@NotAudited
+	private List<InsumoArquivo> arquivos = new ArrayList<>();
+
 
 	public Insumo() {
 		super();
@@ -404,6 +410,14 @@ public class Insumo implements Serializable {
 
 	public void setCodigoalmoxarifadoinsumo(String codigoalmoxarifadoinsumo) {
 		this.codigoalmoxarifadoinsumo = codigoalmoxarifadoinsumo;
+	}
+
+	public List<InsumoArquivo> getArquivos() {
+		return arquivos;
+	}
+
+	public void setArquivos(List<InsumoArquivo> arquivos) {
+		this.arquivos = arquivos;
 	}
 
 }
