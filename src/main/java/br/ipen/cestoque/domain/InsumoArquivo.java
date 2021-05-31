@@ -41,6 +41,8 @@ public class InsumoArquivo implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public InsumoArquivo(Integer id, Arquivo arquivo, Insumo insumo, String loteFornecedor) {
 		super();
 		this.id = id;
@@ -48,6 +50,8 @@ public class InsumoArquivo implements Serializable{
 		this.insumo = insumo;
 		this.loteFornecedor = loteFornecedor;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -105,7 +109,5 @@ public class InsumoArquivo implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
 }

@@ -1,18 +1,13 @@
 package br.ipen.cestoque.services;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +50,11 @@ public class EntradaArquivoService implements ArquivoService {
 		if (arquivos.length > 0) {
 			for (MultipartFile mtf : arquivos) {
 				try {
-					listaEntradaArquivos.add(new EntradaArquivo(null, arquivoRepository.save(new Arquivo(null,
-							StringUtils.cleanPath(mtf.getOriginalFilename()), mtf.getContentType(), mtf.getBytes())),
+					listaEntradaArquivos.add(new EntradaArquivo(null, arquivoRepository.save(new Arquivo(
+							null,
+							StringUtils.cleanPath(mtf.getOriginalFilename()),
+							mtf.getContentType(), 
+							mtf.getBytes())),
 							entrada));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

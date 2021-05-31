@@ -101,7 +101,7 @@ public class Insumo implements Serializable {
 	@OneToMany(mappedBy = "insumo")
 	@NotAudited
 	private List<InsumoArquivo> arquivos = new ArrayList<>();
-
+	
 
 	public Insumo() {
 		super();

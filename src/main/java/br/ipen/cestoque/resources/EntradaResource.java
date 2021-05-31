@@ -15,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Entrada;
 import br.ipen.cestoque.domain.EntradaArquivo;
+import br.ipen.cestoque.domain.InsumoArquivo;
 import br.ipen.cestoque.dto.EntradaDTO;
 import br.ipen.cestoque.resources.utils.GeraLoteRecebimentoCR;
 import br.ipen.cestoque.services.EntradaArquivoService;
 import br.ipen.cestoque.services.EntradaService;
+import br.ipen.cestoque.services.InsumoArquivoService;
 
 @RestController
 @RequestMapping(value = "/entradas")
@@ -35,6 +38,9 @@ public class EntradaResource {
 
 	@Autowired
 	private EntradaArquivoService entradaArquivoService;
+	
+	@Autowired
+	private InsumoArquivoService insumoArquivoService;
 
 	@Autowired
 	private GeraLoteRecebimentoCR gera;
@@ -56,10 +62,20 @@ public class EntradaResource {
 		return ResponseEntity.ok().body(obj.getId().toString());
 	}
 
-	@RequestMapping(value = "/inserarquivos", method = RequestMethod.POST)
-	public ResponseEntity<Void> insertarquivos(@RequestParam(name = "files") MultipartFile[] files,
+	@RequestMapping(value = "/inserearquivos", method = RequestMethod.POST)
+	public ResponseEntity<Void> inserearquivos(@RequestParam(name = "files") MultipartFile[] files,
 			@RequestParam(name = "identrada") Integer identrada){
 		entradaArquivoService.salvar(files, identrada);
+		return ResponseEntity.created(null).build();
+	}
+	
+	@RequestMapping(value = "/insereinsumosarquivos", method = RequestMethod.POST)
+	public ResponseEntity<Void> insereinsumosarquivos(
+			@RequestParam(name = "file") MultipartFile file,
+			@RequestParam(name = "idinsumo") Integer idinsumo,
+			@RequestParam(name = "loteFornecedor") String loteFornecedor){
+		
+		insumoArquivoService.salvar(file, idinsumo, loteFornecedor);
 		return ResponseEntity.created(null).build();
 	}
 
