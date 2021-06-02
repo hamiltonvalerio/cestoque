@@ -32,4 +32,30 @@ public class GeraLoteRecebimentoCR {
 		return lr.toString();
 	}
 	
+	public String gerarLoteComLia(String numLIA) {
+		//formatardata YYYYmmdd hora e minuto
+		String str = "";
+		if(numLIA != null) {
+			str = numLIA;
+		}else {
+			str = "NLV";
+		}
+		Integer ultimoId = entradaService.findMaxId();
+		StringBuilder lr = new StringBuilder();
+		lr.append("LRCR").append(str).append(ultimoId);
+		
+		System.out.println("ULTIMO ID:"+lr.toString());
+		
+		return lr.toString();
+	}
+	
+	public String gerarLei() {
+		//formatardata YYYYmmdd hora e minuto
+		String str = "";
+		StringBuilder lr = new StringBuilder();
+		lr.append("LEI").append(str);
+		
+		return "";
+	}
+	
 }

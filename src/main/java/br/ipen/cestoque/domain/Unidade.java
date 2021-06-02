@@ -11,9 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Audited
 public class Unidade implements Serializable{
 
 	
@@ -37,6 +41,7 @@ public class Unidade implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "unidade")
+	@NotAudited
 	private List<Insumo> insumos = new ArrayList<>();
 	
 	public Unidade() {

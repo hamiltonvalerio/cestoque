@@ -36,6 +36,16 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	private Double valor;
 
 	private Double valorTotal;
+	
+	@ManyToOne
+	@JoinColumn(name = "unidaderecebida_id")
+	private Unidade unidadeRecebida;
+	
+	private Double quantidadeVolume;
+	
+	@ManyToOne
+	@JoinColumn(name = "unidadeentrada_id")
+	private Unidade unidadeEntrada;
 
 	@Transient
 	private Integer quantidadeetiquetas;
@@ -52,7 +62,7 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	public InsumoEntrada(Integer id, Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR,
 			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao,
 			Double quantidade, Double valor, Double valorTotal, String loteRecebimento, String loteARM,
-			String testesuper) {
+			String testesuper, Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -69,6 +79,9 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 		this.setLoteRecebimento(loteRecebimento);
 		this.setLoteARM(loteARM);
 		this.codigoalmoxarifado = insumo.getCodigoalmox();
+		this.setUnidadeRecebida(unidadeRecebida);
+		this.quantidadeVolume = quantidadeVolume;
+		this.setUnidadeEntrada(unidadeEntrada);
 
 	}
 
@@ -127,5 +140,31 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	public void setCodigoalmoxarifado(String codigoalmoxarifado) {
 		this.codigoalmoxarifado = codigoalmoxarifado;
 	}
+
+	public Unidade getUnidadeRecebida() {
+		return unidadeRecebida;
+	}
+
+	public void setUnidadeRecebida(Unidade unidadeRecebida) {
+		this.unidadeRecebida = unidadeRecebida;
+	}
+
+	public Double getQuantidadeVolume() {
+		return quantidadeVolume;
+	}
+
+	public void setQuantidadeVolume(Double quantidadeVolume) {
+		this.quantidadeVolume = quantidadeVolume;
+	}
+
+	public Unidade getUnidadeEntrada() {
+		return unidadeEntrada;
+	}
+
+	public void setUnidadeEntrada(Unidade unidadeEntrada) {
+		this.unidadeEntrada = unidadeEntrada;
+	}
+	
+	
 
 }

@@ -54,7 +54,7 @@ public class EntradaResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<String> insert(@Valid @RequestBody Entrada obj) {
-		String loterecebimento = gera.gerarLote(obj.getDataEntrada());
+		String loterecebimento = gera.gerarLoteComLia(obj.getNumLIA());
 		obj.setLoteRecebimento(loterecebimento);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
