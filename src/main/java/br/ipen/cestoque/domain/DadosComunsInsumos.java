@@ -46,6 +46,18 @@ public abstract class DadosComunsInsumos {
 	private LocalDateTime dataAprovacao;
 
 	private LocalDateTime dataReprovacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "unidaderecebida_id")
+	private Unidade unidadeRecebida;
+	
+	private Double quantidadeVolume;
+	
+	@ManyToOne
+	@JoinColumn(name = "unidadeentrada_id")
+	private Unidade unidadeEntrada;
+	
+	private String loteLEI;
 
 	public Integer getId() {
 		return id;
@@ -143,6 +155,30 @@ public abstract class DadosComunsInsumos {
 		this.dataReprovacao = dataReprovacao;
 	}
 
+	public Unidade getUnidadeRecebida() {
+		return unidadeRecebida;
+	}
+
+	public void setUnidadeRecebida(Unidade unidadeRecebida) {
+		this.unidadeRecebida = unidadeRecebida;
+	}
+
+	public Double getQuantidadeVolume() {
+		return quantidadeVolume;
+	}
+
+	public void setQuantidadeVolume(Double quantidadeVolume) {
+		this.quantidadeVolume = quantidadeVolume;
+	}
+
+	public Unidade getUnidadeEntrada() {
+		return unidadeEntrada;
+	}
+
+	public void setUnidadeEntrada(Unidade unidadeEntrada) {
+		this.unidadeEntrada = unidadeEntrada;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -166,6 +202,14 @@ public abstract class DadosComunsInsumos {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getLoteLEI() {
+		return loteLEI;
+	}
+
+	public void setLoteLEI(String loteLEI) {
+		this.loteLEI = loteLEI;
 	}
 
 }

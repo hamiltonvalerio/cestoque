@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.ipen.cestoque.domain.InsumoMovimentacao;
 import br.ipen.cestoque.domain.Movimentacao;
 import br.ipen.cestoque.dto.MovimentacaoDTO;
 import br.ipen.cestoque.services.MovimentacaoService;
@@ -59,13 +60,15 @@ public class MovimentacaoResource {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Movimentacao obj){
+		obj.getItens().removeIf(im -> im.getQuantidadeMovimentada() == 0);
+		if(!obj.getItens().isEmpty()) {
+			obj = service.insert(obj); 
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+			return ResponseEntity.created(uri).build();
+		}else {
+			return ResponseEntity.created(null).build();
+		}
 		
-		System.out.println("obj: "+obj);
-		
-		
-		obj = service.insert(obj); 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)

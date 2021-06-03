@@ -20,6 +20,7 @@ import br.ipen.cestoque.repositories.InsumoEntradaRepository;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
 import br.ipen.cestoque.resources.utils.ComparaInsumoLocalizacao;
+import br.ipen.cestoque.resources.utils.GeraLoteRecebimentoCR;
 import br.ipen.cestoque.services.exception.ObjectNotFoundException;
 
 
@@ -43,6 +44,9 @@ public class EntradaService {
 	
 	@Autowired
 	private ComparaInsumoLocalizacao comparaInsumoLocalizacao; 
+	
+	@Autowired
+	private GeraLoteRecebimentoCR gera;
 	
 	@SuppressWarnings("unused")
 	@Autowired
@@ -79,6 +83,7 @@ public class EntradaService {
 			ie.setInsumo(insumo);
 			ie.setQuantidade(quant);
 			ie.setLoteRecebimento(entrada.getLoteRecebimento());
+			ie.setLoteLEI(gera.gerarLei());
 			//insumo.setId(ie.getInsumo().getId());
 			if(ie.getInsumo().getQuantidade() == null) {
 				ie.getInsumo().setQuantidade(0.0);
@@ -105,11 +110,13 @@ public class EntradaService {
 				insumoLocalizacao.setLoteRecebimento(entrada.getLoteRecebimento());
 				insumoLocalizacao.setDataFabricacao(ie.getDataFabricacao());
 				insumoLocalizacao.setLoteARM(ie.getLoteARM());
+				insumoLocalizacao.setLoteLEI(ie.getLoteLEI());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}else {
 				Double novaQuantidade = insumoLocalizacao.getQuantidade() + quant;
 				insumoLocalizacao.setQuantidade(novaQuantidade);
 				insumoLocalizacao.setLoteRecebimento(entrada.getLoteRecebimento());
+				insumoLocalizacao.setLoteLEI(ie.getLoteLEI());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}
 			

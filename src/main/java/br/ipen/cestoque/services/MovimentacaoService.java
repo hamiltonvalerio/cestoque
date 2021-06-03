@@ -144,11 +144,13 @@ public class MovimentacaoService {
 				insumoLocalizacaoDestino.setInsumo(insumo);
 				insumoLocalizacaoDestino.setLocalizacao(obj.getLocalizacaoDestino());
 				insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
+				insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 			} else {
 				Double novaQuantidade = insumoLocalizacaoDestino.getQuantidade() + quant;
 				insumoLocalizacaoDestino.setAprovado(im.getAprovado());
 				insumoLocalizacaoDestino.setQuantidade(novaQuantidade);
+				insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 			}
 

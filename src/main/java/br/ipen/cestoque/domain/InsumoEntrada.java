@@ -36,22 +36,14 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	private Double valor;
 
 	private Double valorTotal;
-	
-	@ManyToOne
-	@JoinColumn(name = "unidaderecebida_id")
-	private Unidade unidadeRecebida;
-	
-	private Double quantidadeVolume;
-	
-	@ManyToOne
-	@JoinColumn(name = "unidadeentrada_id")
-	private Unidade unidadeEntrada;
 
 	@Transient
 	private Integer quantidadeetiquetas;
 	
 	@Transient
 	private String codigoalmoxarifado;
+	
+	
 
 	
 	public InsumoEntrada() {
@@ -62,7 +54,7 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	public InsumoEntrada(Integer id, Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR,
 			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao,
 			Double quantidade, Double valor, Double valorTotal, String loteRecebimento, String loteARM,
-			String testesuper, Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada) {
+			String testesuper, Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -80,8 +72,9 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 		this.setLoteARM(loteARM);
 		this.codigoalmoxarifado = insumo.getCodigoalmox();
 		this.setUnidadeRecebida(unidadeRecebida);
-		this.quantidadeVolume = quantidadeVolume;
+		this.setQuantidadeVolume(quantidadeVolume);
 		this.setUnidadeEntrada(unidadeEntrada);
+		this.setLoteLEI(loteLEI);
 
 	}
 
@@ -140,31 +133,5 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	public void setCodigoalmoxarifado(String codigoalmoxarifado) {
 		this.codigoalmoxarifado = codigoalmoxarifado;
 	}
-
-	public Unidade getUnidadeRecebida() {
-		return unidadeRecebida;
-	}
-
-	public void setUnidadeRecebida(Unidade unidadeRecebida) {
-		this.unidadeRecebida = unidadeRecebida;
-	}
-
-	public Double getQuantidadeVolume() {
-		return quantidadeVolume;
-	}
-
-	public void setQuantidadeVolume(Double quantidadeVolume) {
-		this.quantidadeVolume = quantidadeVolume;
-	}
-
-	public Unidade getUnidadeEntrada() {
-		return unidadeEntrada;
-	}
-
-	public void setUnidadeEntrada(Unidade unidadeEntrada) {
-		this.unidadeEntrada = unidadeEntrada;
-	}
-	
-	
 
 }
