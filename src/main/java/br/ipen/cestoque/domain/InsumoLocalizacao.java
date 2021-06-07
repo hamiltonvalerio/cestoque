@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -15,6 +16,7 @@ import org.hibernate.envers.Audited;
 @Entity
 @DynamicUpdate
 @Audited
+@Table(name = "insumolocalizacao")
 public class InsumoLocalizacao extends DadosComunsInsumos implements Serializable {
 
 	/**

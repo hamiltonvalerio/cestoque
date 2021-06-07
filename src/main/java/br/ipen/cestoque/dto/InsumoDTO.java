@@ -44,6 +44,8 @@ public class InsumoDTO implements Serializable {
 	private Date dataamostracq;
 	private String lote;
 	private String nomecodalmox;
+	
+	private Double quantidadeTotalAtual;
 
 	private List<Categoria> categorias = new ArrayList<>();
 
@@ -77,6 +79,7 @@ public class InsumoDTO implements Serializable {
 		lote = obj.getLote();
 		nomecodalmox = obj.getNome() + " - " + obj.getCodigoalmox();
 		categorias = obj.getCategorias();
+		quantidadeTotalAtual = obj.getQuantidadeTotalAtual();
 	}
 
 	public Integer getId() {
@@ -269,6 +272,14 @@ public class InsumoDTO implements Serializable {
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public Double getQuantidadeTotalAtual() {
+		return quantidadeTotalAtual;
+	}
+
+	public void setQuantidadeTotalAtual(Double quantidadeTotalAtual) {
+		this.quantidadeTotalAtual = quantidadeTotalAtual;
 	}
 
 }

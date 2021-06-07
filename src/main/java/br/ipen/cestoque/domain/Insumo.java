@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,15 +18,18 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Formula;
 import org.hibernate.envers.NotAudited;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DynamicUpdate(value = true)
+@Table(name = "insumo")
 public class Insumo implements Serializable {
 
 	/**
@@ -67,11 +72,17 @@ public class Insumo implements Serializable {
 
 	@Transient
 	private Integer codlocalizacaoIE;
-	
-	@Transient
-	private String codigoalmoxarifadoinsumo;;
 
-	
+	@Transient
+	private String codigoalmoxarifadoinsumo;
+
+	@Formula(" (SELECT SUM(il.quantidade) "
+			+ " FROM Insumo i "
+			+ " INNER JOIN InsumoLocalizacao il ON (il.insumo_id = i.id) "
+			+ " WHERE i.codigoalmox = codigoalmox )")
+	@Basic(fetch=FetchType.EAGER)
+	private Double quantidadeTotalAtual;
+
 	@ManyToMany
 	@JoinTable(name = "INSUMO_CATEGORIA", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
@@ -81,15 +92,6 @@ public class Insumo implements Serializable {
 	@JoinTable(name = "INSUMO_FORNECEDOR", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "fornecedor_id"))
 	private List<Fornecedor> fornecedores = new ArrayList<>();
 
-	/*
-	 * @JsonIgnore
-	 * 
-	 * @ManyToMany
-	 * 
-	 * @JoinTable(name = "INSUMO_LOCALIZACAO", joinColumns = @JoinColumn(name =
-	 * "insumo_id"), inverseJoinColumns = @JoinColumn(name = "localizacao_id") )
-	 */
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.insumo")
 	private Set<ItemProduto> itens = new HashSet<>();
@@ -97,11 +99,10 @@ public class Insumo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
-	
+
 	@OneToMany(mappedBy = "insumo")
 	@NotAudited
 	private List<InsumoArquivo> arquivos = new ArrayList<>();
-	
 
 	public Insumo() {
 		super();
@@ -111,7 +112,8 @@ public class Insumo implements Serializable {
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigoalmox, String observacao,
 			Boolean essencial, Date datavalidade, Double quantidade, Double taxadeconsumo, String codigobarra,
 			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor,
-			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote, List<Categoria> categorias) {
+			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote,
+			List<Categoria> categorias) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -139,10 +141,7 @@ public class Insumo implements Serializable {
 		this.nomecodalmox = nome + " - " + codigoalmox;
 		this.categorias = categorias;
 	}
-	
-	
 
-	
 	@JsonIgnore
 	public List<Produto> getProdutos() {
 		List<Produto> lista = new ArrayList<>();
@@ -418,6 +417,14 @@ public class Insumo implements Serializable {
 
 	public void setArquivos(List<InsumoArquivo> arquivos) {
 		this.arquivos = arquivos;
+	}
+
+	public Double getQuantidadeTotalAtual() {
+		return quantidadeTotalAtual;
+	}
+
+	public void setQuantidadeTotalAtual(Double quantidadeTotalAtual) {
+		this.quantidadeTotalAtual = quantidadeTotalAtual;
 	}
 
 }

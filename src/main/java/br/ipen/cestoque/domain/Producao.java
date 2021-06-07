@@ -8,12 +8,14 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.ipen.cestoque.domain.enums.EstadoProducao;
 
 @Entity
+@Table(name = "producao")
 public class Producao implements Serializable{
 
 	/**

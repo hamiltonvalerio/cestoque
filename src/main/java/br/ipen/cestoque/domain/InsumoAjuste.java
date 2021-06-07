@@ -8,11 +8,13 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Table(name = "insumoajuste")
 public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 
 	/**
