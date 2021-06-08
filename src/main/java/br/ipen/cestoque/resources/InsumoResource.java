@@ -1,7 +1,6 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 

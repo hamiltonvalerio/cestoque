@@ -79,6 +79,8 @@ public class EntradaService {
 			insumo = insumoService.find(ie.getInsumo().getId());
 			insumo.setUnidade(ie.getInsumo().getUnidade());
 			insumo.setValor(ie.getValor());
+			insumo.setPrecisairradiacao(ie.getInsumo().getPrecisairradiacao());
+			insumo.setPrecisacontrolequalidade(ie.getInsumo().getPrecisacontrolequalidade());
 			quant = ie.getQuantidade();
 			ie.setInsumo(insumo);
 			ie.setQuantidade(quant);
@@ -111,12 +113,18 @@ public class EntradaService {
 				insumoLocalizacao.setDataFabricacao(ie.getDataFabricacao());
 				insumoLocalizacao.setLoteARM(ie.getLoteARM());
 				insumoLocalizacao.setLoteLEI(ie.getLoteLEI());
+				insumoLocalizacao.setQuantidadeVolume(ie.getQuantidadeVolume());
+				insumoLocalizacao.setUnidadeEntrada(ie.getUnidadeEntrada());
+				insumoLocalizacao.setUnidadeRecebida(ie.getUnidadeRecebida());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}else {
 				Double novaQuantidade = insumoLocalizacao.getQuantidade() + quant;
 				insumoLocalizacao.setQuantidade(novaQuantidade);
 				insumoLocalizacao.setLoteRecebimento(entrada.getLoteRecebimento());
 				insumoLocalizacao.setLoteLEI(ie.getLoteLEI());
+				insumoLocalizacao.setQuantidadeVolume(ie.getQuantidadeVolume());
+				insumoLocalizacao.setUnidadeEntrada(ie.getUnidadeEntrada());
+				insumoLocalizacao.setUnidadeRecebida(ie.getUnidadeRecebida());
 				insumosLocalizacoes.add(insumoLocalizacao);
 			}
 			
