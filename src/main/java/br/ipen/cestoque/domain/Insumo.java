@@ -84,12 +84,12 @@ public class Insumo implements Serializable {
 	private Double quantidadeTotalAtual;
 
 	@ManyToMany
-	@JoinTable(name = "INSUMO_CATEGORIA", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	@JoinTable(name = "INSUMOCATEGORIA", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "INSUMO_FORNECEDOR", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "fornecedor_id"))
+	@JoinTable(name = "INSUMOFORNECEDOR", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "fornecedor_id"))
 	private List<Fornecedor> fornecedores = new ArrayList<>();
 
 	@JsonIgnore
@@ -103,17 +103,16 @@ public class Insumo implements Serializable {
 	@OneToMany(mappedBy = "insumo")
 	@NotAudited
 	private List<InsumoArquivo> arquivos = new ArrayList<>();
-
-	public Insumo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
+	private Boolean precisairradiacao;
+	
+	private Boolean precisacontrolequalidade;
 
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigoalmox, String observacao,
 			Boolean essencial, Date datavalidade, Double quantidade, Double taxadeconsumo, String codigobarra,
 			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor,
 			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote,
-			List<Categoria> categorias) {
+			List<Categoria> categorias, Boolean precisairradiacao, Boolean precisacontrolequalidade) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -140,6 +139,12 @@ public class Insumo implements Serializable {
 		this.codigoalmoxarifadoinsumo = codigoalmox;
 		this.nomecodalmox = nome + " - " + codigoalmox;
 		this.categorias = categorias;
+		this.precisairradiacao = precisairradiacao;
+		this.precisacontrolequalidade = precisacontrolequalidade;
+	}
+
+	public Insumo() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@JsonIgnore
@@ -426,5 +431,23 @@ public class Insumo implements Serializable {
 	public void setQuantidadeTotalAtual(Double quantidadeTotalAtual) {
 		this.quantidadeTotalAtual = quantidadeTotalAtual;
 	}
+
+	public Boolean getPrecisairradiacao() {
+		return precisairradiacao;
+	}
+
+	public void setPrecisairradiacao(Boolean precisairradiacao) {
+		this.precisairradiacao = precisairradiacao;
+	}
+
+	public Boolean getPrecisacontrolequalidade() {
+		return precisacontrolequalidade;
+	}
+
+	public void setPrecisacontrolequalidade(Boolean precisacontrolequalidade) {
+		this.precisacontrolequalidade = precisacontrolequalidade;
+	}
+	
+	
 
 }

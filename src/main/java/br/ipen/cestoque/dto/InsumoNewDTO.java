@@ -53,6 +53,8 @@ public class InsumoNewDTO implements Serializable {
 	private Boolean amostra_cq;
 	private Date data_amostra_cq;
 	private String lote;
+	private Boolean precisairradiacao;
+	private Boolean precisacontrolequalidade;
 
 	public InsumoNewDTO() {
 		super();
@@ -227,4 +229,21 @@ public class InsumoNewDTO implements Serializable {
 		this.lote = lote;
 	}
 
+	public Boolean getPrecisairradiacao() {
+		return precisairradiacao;
+	}
+
+	public void setPrecisairradiacao(Boolean precisairradiacao) {
+		this.precisairradiacao = precisairradiacao;
+	}
+
+	public Boolean getPrecisacontrolequalidade() {
+		return precisacontrolequalidade;
+	}
+
+	public void setPrecisacontrolequalidade(Boolean precisacontrolequalidade) {
+		this.precisacontrolequalidade = precisacontrolequalidade;
+	}
+
+	
 }

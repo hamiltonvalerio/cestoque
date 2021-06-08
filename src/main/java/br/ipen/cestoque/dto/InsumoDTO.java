@@ -48,6 +48,10 @@ public class InsumoDTO implements Serializable {
 	private Double quantidadeTotalAtual;
 
 	private List<Categoria> categorias = new ArrayList<>();
+	
+	private Boolean precisairradiacao;
+	
+	private Boolean precisacontrolequalidade;
 
 	public InsumoDTO() {
 		super();
@@ -80,6 +84,8 @@ public class InsumoDTO implements Serializable {
 		nomecodalmox = obj.getNome() + " - " + obj.getCodigoalmox();
 		categorias = obj.getCategorias();
 		quantidadeTotalAtual = obj.getQuantidadeTotalAtual();
+		precisairradiacao = obj.getPrecisairradiacao();
+		precisacontrolequalidade = obj.getPrecisacontrolequalidade();
 	}
 
 	public Integer getId() {
@@ -281,5 +287,22 @@ public class InsumoDTO implements Serializable {
 	public void setQuantidadeTotalAtual(Double quantidadeTotalAtual) {
 		this.quantidadeTotalAtual = quantidadeTotalAtual;
 	}
+
+	public Boolean getPrecisairradiacao() {
+		return precisairradiacao;
+	}
+
+	public void setPrecisairradiacao(Boolean precisairradiacao) {
+		this.precisairradiacao = precisairradiacao;
+	}
+
+	public Boolean getPrecisacontrolequalidade() {
+		return precisacontrolequalidade;
+	}
+
+	public void setPrecisacontrolequalidade(Boolean precisacontrolequalidade) {
+		this.precisacontrolequalidade = precisacontrolequalidade;
+	}
+	
 
 }

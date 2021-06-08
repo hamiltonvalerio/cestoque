@@ -122,6 +122,13 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	}
 
 	public String getFoiaprovado() {
+		if(getAprovado() != null) {
+			if(getAprovado().equals(true)) {
+				this.foiaprovado = "SIM";
+			}else {
+				this.foiaprovado = "NÃO";
+			}
+		}
 		return foiaprovado;
 	}
 

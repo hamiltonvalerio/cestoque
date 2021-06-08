@@ -1,7 +1,6 @@
 package br.ipen.cestoque.repositories;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -67,6 +66,15 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 	Page<InsumoLocalizacao> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id,
 			Pageable pageRequest);
 
+	
+	@Transactional(readOnly = true)
+	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
+			+ "AND il.quantidade != 0 "
+			+ "ORDER BY il.insumo.nome ASC")
+	List<InsumoLocalizacao> buscaTodosPorLocalizacaoList(@Param("localizacao_id") Integer localizacao_id);
+	
+	
+	
 	@Transactional
 	@Modifying
 	@Query("UPDATE InsumoLocalizacao " + "	SET quantidademinima =:quantidademinima "
@@ -76,6 +84,9 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 
 	public List<InsumoLocalizacao> findAllByLocalizacao_id(Integer localizacao_id);
 
+	
+	
+	
 	@Query("SELECT il FROM InsumoLocalizacao il "
 			+ "WHERE il.localizacao =:localizacao "
 			+ "AND il.insumo =:insumo "

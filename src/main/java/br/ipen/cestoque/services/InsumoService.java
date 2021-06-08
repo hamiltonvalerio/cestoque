@@ -72,7 +72,9 @@ public class InsumoService {
 				objDto.getAmostracq(),
 				objDto.getDataamostracq(),
 				objDto.getLote(),
-				objDto.getCategorias()
+				objDto.getCategorias(),
+				objDto.getPrecisairradiacao(),
+				objDto.getPrecisacontrolequalidade()
 				);
 	}
 	
@@ -99,7 +101,9 @@ public class InsumoService {
 				objDto.getAmostra_cq(),
 				objDto.getData_amostra_cq(),
 				objDto.getLote(),
-				null
+				null,
+				objDto.getPrecisairradiacao(),
+				objDto.getPrecisacontrolequalidade()
 				);
 	}
 
@@ -184,7 +188,8 @@ public class InsumoService {
 	
 	public List<InsumoLocalizacao> buscatodosporlocalizacaonopage(Integer localizacao_id) {
 		// TODO Auto-generated method stub
-		return insumoLocalizacaoRepository.findAllByLocalizacao_id(localizacao_id);
+		//return insumoLocalizacaoRepository.findAllByLocalizacao_id(localizacao_id);
+		return insumoLocalizacaoRepository.buscaTodosPorLocalizacaoList(localizacao_id);
 	}
 
 	public Page<InsumoLocalizacao> findInsumoLocalizacaoByLocalizacao(int localizacao_id, Integer page, Integer linesPerPage) {

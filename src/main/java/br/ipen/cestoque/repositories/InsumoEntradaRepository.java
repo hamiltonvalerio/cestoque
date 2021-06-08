@@ -10,7 +10,7 @@ import br.ipen.cestoque.domain.InsumoEntrada;
 @Repository
 public interface InsumoEntradaRepository extends JpaRepository<InsumoEntrada, Integer>{
 	
-	@Query(value="SELECT true FROM insumo_entrada ie "
+	@Query(value="SELECT true FROM insumoentrada ie "
 			+ "	WHERE "
 			+ "	ie.lotelei =:lotelei ", 
 			nativeQuery = true)
