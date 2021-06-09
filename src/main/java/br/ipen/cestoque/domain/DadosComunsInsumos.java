@@ -58,7 +58,11 @@ public abstract class DadosComunsInsumos {
 	private Unidade unidadeEntrada;
 	
 	private String loteLEI;
-
+	
+	private String condambamostragemgc;
+	private String condambamostragemur;
+	private Double quantidadeDescartada;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -177,6 +181,30 @@ public abstract class DadosComunsInsumos {
 
 	public void setUnidadeEntrada(Unidade unidadeEntrada) {
 		this.unidadeEntrada = unidadeEntrada;
+	}
+	
+	public String getCondambamostragemgc() {
+		return condambamostragemgc;
+	}
+
+	public void setCondambamostragemgc(String condambamostragemgc) {
+		this.condambamostragemgc = condambamostragemgc;
+	}
+
+	public String getCondambamostragemur() {
+		return condambamostragemur;
+	}
+
+	public void setCondambamostragemur(String condambamostragemur) {
+		this.condambamostragemur = condambamostragemur;
+	}
+
+	public Double getQuantidadeDescartada() {
+		return quantidadeDescartada;
+	}
+
+	public void setQuantidadeDescartada(Double quantidadeDescartada) {
+		this.quantidadeDescartada = quantidadeDescartada;
 	}
 
 	@Override
