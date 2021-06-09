@@ -60,7 +60,7 @@ public class MovimentacaoResource {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Movimentacao obj){
-		obj.getItens().removeIf(im -> im.getQuantidadeMovimentada() == 0);
+		//obj.getItens().removeIf(im -> im.getQuantidadeMovimentada() == 0);
 		if(!obj.getItens().isEmpty()) {
 			obj = service.insert(obj); 
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();

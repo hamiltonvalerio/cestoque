@@ -61,7 +61,7 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 
 	@Transactional(readOnly = true)
 	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
-			+ "AND il.quantidade != 0 "
+			//+ "AND il.quantidade != 0 "
 			+ "ORDER BY il.insumo.nome ASC")
 	Page<InsumoLocalizacao> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id,
 			Pageable pageRequest);
@@ -69,7 +69,7 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 	
 	@Transactional(readOnly = true)
 	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
-			+ "AND il.quantidade != 0 "
+			+ "AND il.quantidade != 0"
 			+ "ORDER BY il.insumo.nome ASC")
 	List<InsumoLocalizacao> buscaTodosPorLocalizacaoList(@Param("localizacao_id") Integer localizacao_id);
 	
