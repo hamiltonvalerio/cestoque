@@ -39,6 +39,12 @@ public class Localizacao implements Serializable {
 
 	@Column(name = "aprovacao", nullable = false)
 	private Boolean aprovacao = false;
+	
+	@Column(name = "descarte", nullable = false)
+	private Boolean descarte = false;
+	
+	@Column(name = "utilizado", nullable = false)
+	private Boolean utilizado = false;
 
 	// @ManyToMany(mappedBy = "localizacoes")
 	@JsonIgnore
@@ -50,13 +56,16 @@ public class Localizacao implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Localizacao(Integer id, String nome, Boolean aprovacao, String usualt, Date datalt) {
+	public Localizacao(Integer id, String nome, Boolean aprovacao, String usualt, Date datalt,
+			Boolean descarte, Boolean utilizado) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.aprovacao = aprovacao;
 		this.usualt = usualt;
 		this.datalt = datalt;
+		this.descarte = descarte;
+		this.utilizado = utilizado;
 	}
 
 	public Integer getId() {
@@ -131,5 +140,23 @@ public class Localizacao implements Serializable {
 	public void setInsumolocalizacoes(List<InsumoLocalizacao> insumolocalizacoes) {
 		this.insumolocalizacoes = insumolocalizacoes;
 	}
+
+	public Boolean getDescarte() {
+		return descarte;
+	}
+
+	public void setDescarte(Boolean descarte) {
+		this.descarte = descarte;
+	}
+
+	public Boolean getUtilizado() {
+		return utilizado;
+	}
+
+	public void setUtilizado(Boolean utilizado) {
+		this.utilizado = utilizado;
+	}
+	
+	
 
 }

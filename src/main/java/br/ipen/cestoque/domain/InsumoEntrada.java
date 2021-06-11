@@ -56,7 +56,8 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	public InsumoEntrada(Integer id, Insumo insumo, Entrada entrada, String loteFornecedor, String loteCR,
 			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao,
 			Double quantidade, Double valor, Double valorTotal, String loteRecebimento, String loteARM,
-			String testesuper, Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI) {
+			String testesuper, Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI,
+			Double quantidadeUtilizada) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -77,6 +78,7 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 		this.setQuantidadeVolume(quantidadeVolume);
 		this.setUnidadeEntrada(unidadeEntrada);
 		this.setLoteLEI(loteLEI);
+		this.setQuantidadeUtilizada(quantidadeUtilizada);
 
 	}
 

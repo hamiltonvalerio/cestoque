@@ -85,11 +85,11 @@ public class LocalizacaoService {
 	}
 	
 	public Localizacao fromDTO(LocalizacaoDTO objDto) {
-		return new Localizacao(objDto.getId(), objDto.getNome().toUpperCase(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt());
+		return new Localizacao(objDto.getId(), objDto.getNome().toUpperCase(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado());
 	}
 	
 	public Localizacao fromDTO(LocalizacaoNewDTO objDto) {
-		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt());
+		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado());
 		return col;
 	}
 	

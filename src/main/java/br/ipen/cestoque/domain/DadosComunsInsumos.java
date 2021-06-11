@@ -63,6 +63,8 @@ public abstract class DadosComunsInsumos {
 	private String condambamostragemur;
 	private Double quantidadeDescartada;
 	
+	private Double quantidadeUtilizada;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -238,6 +240,14 @@ public abstract class DadosComunsInsumos {
 
 	public void setLoteLEI(String loteLEI) {
 		this.loteLEI = loteLEI;
+	}
+
+	public Double getQuantidadeUtilizada() {
+		return quantidadeUtilizada;
+	}
+
+	public void setQuantidadeUtilizada(Double quantidadeUtilizada) {
+		this.quantidadeUtilizada = quantidadeUtilizada;
 	}
 
 }

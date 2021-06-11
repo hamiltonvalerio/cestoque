@@ -20,6 +20,10 @@ public class LocalizacaoNewDTO implements Serializable {
 	private Date datalt;
 
 	private Boolean aprovacao;
+	
+	private Boolean descarte;
+	
+	private Boolean utilizado;
 
 	public LocalizacaoNewDTO() {
 		super();
@@ -58,4 +62,21 @@ public class LocalizacaoNewDTO implements Serializable {
 		this.datalt = datalt;
 	}
 
+	public Boolean getDescarte() {
+		return descarte;
+	}
+
+	public void setDescarte(Boolean descarte) {
+		this.descarte = descarte;
+	}
+
+	public Boolean getUtilizado() {
+		return utilizado;
+	}
+
+	public void setUtilizado(Boolean utilizado) {
+		this.utilizado = utilizado;
+	}
+
+	
 }
