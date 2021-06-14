@@ -43,9 +43,13 @@ public abstract class DadosComunsInsumos {
 
 	private Boolean aprovado;
 
+	private Boolean irradiado;
+	
 	private LocalDateTime dataAprovacao;
 
 	private LocalDateTime dataReprovacao;
+	
+	private LocalDateTime dataPrevisaoControle;
 	
 	@ManyToOne
 	@JoinColumn(name = "unidaderecebida_id")
@@ -248,6 +252,22 @@ public abstract class DadosComunsInsumos {
 
 	public void setQuantidadeUtilizada(Double quantidadeUtilizada) {
 		this.quantidadeUtilizada = quantidadeUtilizada;
+	}
+
+	public LocalDateTime getDataPrevisaoControle() {
+		return dataPrevisaoControle;
+	}
+
+	public void setDataPrevisaoControle(LocalDateTime dataPrevisaoControle) {
+		this.dataPrevisaoControle = dataPrevisaoControle;
+	}
+
+	public Boolean getIrradiado() {
+		return irradiado;
+	}
+
+	public void setIrradiado(Boolean irradiado) {
+		this.irradiado = irradiado;
 	}
 
 }

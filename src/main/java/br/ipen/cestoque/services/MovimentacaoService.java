@@ -148,6 +148,8 @@ public class MovimentacaoService {
 				insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
 				insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
 				insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
+				insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
+				insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 			} else {
 				Double novaQuantidade = insumoLocalizacaoDestino.getQuantidade() + quant;
@@ -157,6 +159,8 @@ public class MovimentacaoService {
 				insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
 				insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
 				insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
+				insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
+				insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 			}
 

@@ -51,7 +51,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 			String loteProducao, String loteRecebimento, LocalDate dataIrradiacao, LocalDate dataValidade,
 			LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado,
 			String loteARM, String condambamostragemgc, String condambamostragemur, Double quantidadeDescartada,
-			Double quantidadeUtilizada ) {
+			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle, Boolean irradiado) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -74,6 +74,8 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.setCondambamostragemur(condambamostragemur);
 		this.setQuantidadeDescartada(quantidadeDescartada);
 		this.setQuantidadeUtilizada(quantidadeUtilizada);
+		this.setDataPrevisaoControle(dataPrevisaoControle);
+		this.setIrradiado(irradiado);
 	}
 
 	public Localizacao getLocalizacao() {

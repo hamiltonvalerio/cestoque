@@ -37,15 +37,25 @@ public class Localizacao implements Serializable {
 
 	private Date datalt;
 
-	@Column(name = "aprovacao", nullable = false)
+	@Column(name = "aprovacao")
 	private Boolean aprovacao = false;
 	
-	@Column(name = "descarte", nullable = false)
+	@Column(name = "descarte")
 	private Boolean descarte = false;
 	
-	@Column(name = "utilizado", nullable = false)
+	@Column(name = "utilizado")
 	private Boolean utilizado = false;
-
+	
+	@Column(name = "almoxarifadoprincipal", unique = true)
+	private Boolean almoxarifadoprincipal = false;
+	
+	@Column(name = "irradiacao")
+	private Boolean irradiacao = false;
+	
+	@Column(name = "atualizaqtdminima")
+	private Boolean atualizaqtdminima = false;
+		
+	
 	// @ManyToMany(mappedBy = "localizacoes")
 	@JsonIgnore
 	@OneToMany(mappedBy = "localizacao")
@@ -57,7 +67,7 @@ public class Localizacao implements Serializable {
 	}
 
 	public Localizacao(Integer id, String nome, Boolean aprovacao, String usualt, Date datalt,
-			Boolean descarte, Boolean utilizado) {
+			Boolean descarte, Boolean utilizado, Boolean almoxarifadoprincipal, Boolean irradiacao, Boolean atualizaqtdminima) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -66,6 +76,9 @@ public class Localizacao implements Serializable {
 		this.datalt = datalt;
 		this.descarte = descarte;
 		this.utilizado = utilizado;
+		this.almoxarifadoprincipal = almoxarifadoprincipal;
+		this.irradiacao = irradiacao;
+		this.atualizaqtdminima = atualizaqtdminima;
 	}
 
 	public Integer getId() {
@@ -156,7 +169,29 @@ public class Localizacao implements Serializable {
 	public void setUtilizado(Boolean utilizado) {
 		this.utilizado = utilizado;
 	}
-	
-	
+
+	public Boolean getAlmoxarifadoprincipal() {
+		return almoxarifadoprincipal;
+	}
+
+	public void setAlmoxarifadoprincipal(Boolean almoxarifadoprincipal) {
+		this.almoxarifadoprincipal = almoxarifadoprincipal;
+	}
+
+	public Boolean getIrradiacao() {
+		return irradiacao;
+	}
+
+	public void setIrradiacao(Boolean irradiacao) {
+		this.irradiacao = irradiacao;
+	}
+
+	public Boolean getAtualizaqtdminima() {
+		return atualizaqtdminima;
+	}
+
+	public void setAtualizaqtdminima(Boolean atualizaqtdminima) {
+		this.atualizaqtdminima = atualizaqtdminima;
+	}
 
 }

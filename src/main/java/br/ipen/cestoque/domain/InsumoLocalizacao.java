@@ -57,7 +57,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 			LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento, String loteARM,
 			Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI, 
 			String condambamostragemgc, String condambamostragemur, Double quantidadeDescartada,
-			Double quantidadeUtilizada) {
+			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle, Boolean irradiado) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -85,6 +85,8 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setCondambamostragemur(condambamostragemur);
 		this.setQuantidadeDescartada(quantidadeDescartada);
 		this.setQuantidadeUtilizada(quantidadeUtilizada);
+		this.setDataPrevisaoControle(dataPrevisaoControle);
+		this.setIrradiado(irradiado);
 	}
 
 	public Localizacao getLocalizacao() {

@@ -24,6 +24,12 @@ public class LocalizacaoNewDTO implements Serializable {
 	private Boolean descarte;
 	
 	private Boolean utilizado;
+	
+	private Boolean almoxarifadoprincipal;
+	
+	private Boolean irradiacao;
+	
+	private Boolean atualizaqtdminima;
 
 	public LocalizacaoNewDTO() {
 		super();
@@ -77,6 +83,31 @@ public class LocalizacaoNewDTO implements Serializable {
 	public void setUtilizado(Boolean utilizado) {
 		this.utilizado = utilizado;
 	}
+
+	public Boolean getAlmoxarifadoprincipal() {
+		return almoxarifadoprincipal;
+	}
+
+	public void setAlmoxarifadoprincipal(Boolean almoxarifadoprincipal) {
+		this.almoxarifadoprincipal = almoxarifadoprincipal;
+	}
+
+	public Boolean getIrradiacao() {
+		return irradiacao;
+	}
+
+	public void setIrradiacao(Boolean irradiacao) {
+		this.irradiacao = irradiacao;
+	}
+
+	public Boolean getAtualizaqtdminima() {
+		return atualizaqtdminima;
+	}
+
+	public void setAtualizaqtdminima(Boolean atualizaqtdminima) {
+		this.atualizaqtdminima = atualizaqtdminima;
+	}
+
 
 	
 }

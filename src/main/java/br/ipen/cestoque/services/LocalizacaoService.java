@@ -35,6 +35,9 @@ public class LocalizacaoService {
 	public Localizacao insert(Localizacao obj) {
 		// TODO Auto-generated method stub
 		obj.setId(null);
+		if(obj.getAlmoxarifadoprincipal() == false) {
+			obj.setAlmoxarifadoprincipal(null);
+		}
 		obj.setUsualt(UserService.authenticated().getUsername());
 		obj.setDatalt(new Date(System.currentTimeMillis()));
 		return repo.save(obj);
@@ -85,11 +88,15 @@ public class LocalizacaoService {
 	}
 	
 	public Localizacao fromDTO(LocalizacaoDTO objDto) {
-		return new Localizacao(objDto.getId(), objDto.getNome().toUpperCase(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado());
+		return new Localizacao(objDto.getId(), objDto.getNome().toUpperCase(), objDto.getAprovacao(), objDto.getUsualt(), 
+				objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado(), objDto.getAlmoxarifadoprincipal(), 
+				objDto.getIrradiacao(), objDto.getAtualizaqtdminima());
 	}
 	
 	public Localizacao fromDTO(LocalizacaoNewDTO objDto) {
-		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getAprovacao(), objDto.getUsualt(), objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado());
+		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getAprovacao(), objDto.getUsualt(), 
+				objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado(), objDto.getAlmoxarifadoprincipal(), 
+				objDto.getIrradiacao(), objDto.getAtualizaqtdminima());
 		return col;
 	}
 	
