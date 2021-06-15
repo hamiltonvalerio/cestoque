@@ -98,9 +98,25 @@ public class EntradaService {
 			//verificar se tem insumos nesta localização, se sim, somar os as quantidades
 			insumoLocalizacao = new InsumoLocalizacao();
 			//insumoLocalizacao = insumoLocalizacaoRepository.findDuplicado(insumo, localizacao, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());
-			insumoLocalizacao = comparaInsumoLocalizacao.compara(insumo, localizacao, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());
+			//insumoLocalizacao = comparaInsumoLocalizacao.compara(insumo, localizacao, ie.getLoteFornecedor(), ie.getDataValidade(), ie.getDataIrradiacao());
 			
-			if(insumoLocalizacao == null) {
+			insumoLocalizacao = new InsumoLocalizacao();
+			insumoLocalizacao.setInsumo(insumo);
+			insumoLocalizacao.setLocalizacao(entrada.getLocalizacao());
+			insumoLocalizacao.setQuantidade(quant);
+			insumoLocalizacao.setLoteFornecedor(ie.getLoteFornecedor());
+			insumoLocalizacao.setLoteCR(ie.getLoteCR());
+			insumoLocalizacao.setDataIrradiacao(ie.getDataIrradiacao());
+			insumoLocalizacao.setDataValidade(ie.getDataValidade());
+			insumoLocalizacao.setLoteRecebimento(entrada.getLoteRecebimento());
+			insumoLocalizacao.setDataFabricacao(ie.getDataFabricacao());
+			insumoLocalizacao.setLoteARM(ie.getLoteARM());
+			insumoLocalizacao.setLoteLEI(ie.getLoteLEI());
+			insumoLocalizacao.setQuantidadeVolume(ie.getQuantidadeVolume());
+			insumoLocalizacao.setUnidadeEntrada(ie.getUnidadeEntrada());
+			insumoLocalizacao.setUnidadeRecebida(ie.getUnidadeRecebida());
+			insumosLocalizacoes.add(insumoLocalizacao);
+			/*if(insumoLocalizacao == null) {
 				insumoLocalizacao = new InsumoLocalizacao();
 				insumoLocalizacao.setInsumo(insumo);
 				insumoLocalizacao.setLocalizacao(entrada.getLocalizacao());
@@ -126,7 +142,7 @@ public class EntradaService {
 				insumoLocalizacao.setUnidadeEntrada(ie.getUnidadeEntrada());
 				insumoLocalizacao.setUnidadeRecebida(ie.getUnidadeRecebida());
 				insumosLocalizacoes.add(insumoLocalizacao);
-			}
+			}*/
 			
 			//testar acima local
 			

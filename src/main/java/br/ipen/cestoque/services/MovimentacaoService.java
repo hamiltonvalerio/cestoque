@@ -94,41 +94,23 @@ public class MovimentacaoService {
 			insumoLocalizacaoOrigem = new InsumoLocalizacao();
 			//List<InsumoLocalizacao> listaOrigem = new ArrayList<>();
 			
-			insumoLocalizacaoDestino = comparaInsumoLocalizacao.compara(insumo, localizacaoDestino,
+			/*insumoLocalizacaoDestino = comparaInsumoLocalizacao.compara(insumo, localizacaoDestino,
 					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
 			
 			insumoLocalizacaoOrigem = comparaInsumoLocalizacao.compara(insumo, localizacaoOrigem,
 					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-
-			/*insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicado(insumo, localizacaoDestino,
-					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-			insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicado(insumo, localizacaoOrigem,
-					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());*/
 			
-			/*listaDestino = insumoLocalizacaoRepository.findTodosDuplicado(insumo, localizacaoDestino,
-					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-			if(listaDestino.size() == 1) {
-				insumoLocalizacaoDestino = listaDestino.get(0);
-			}
-			
-			listaOrigem = insumoLocalizacaoRepository.findTodosDuplicado(insumo, localizacaoOrigem,
-					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-			if(listaOrigem.size() == 1) {
-				insumoLocalizacaoOrigem = listaOrigem.get(0);
-			}else if(listaOrigem.size() > 1) {				
-				for (InsumoLocalizacao lo : listaOrigem) {
-					int comp = ComparisonChain.start()
-							.compare(insumo.getId(), lo.getInsumo().getId())
-							.compare(localizacaoOrigem.getId(), lo.getLocalizacao().getId())
-							.compare(im.getLoteFornecedor(), lo.getLoteFornecedor(), Ordering.natural().nullsFirst())
-							.compare(im.getDataValidade(), lo.getDataValidade(), Ordering.natural().nullsFirst())
-							.compare(im.getDataIrradiacao(), lo.getDataIrradiacao(), Ordering.natural().nullsFirst()).result();
-					if(comp == 0) {
-						insumoLocalizacaoOrigem = lo;
-						 //break;
-					}
+			if(insumoLocalizacaoOrigem == null) {
+				if(localizacaoOrigem.getIrradiacao() == true) {
+					insumoLocalizacaoOrigem = comparaInsumoLocalizacao.compara(insumo, localizacaoOrigem,
+							im.getLoteFornecedor(), im.getDataValidade(), null);
 				}
 			}*/
+			
+			insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+			
+			insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+			
 
 
 			if (insumoLocalizacaoDestino == null) {

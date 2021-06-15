@@ -83,9 +83,6 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("quantidademinima") double quantidademinima);
 
 	public List<InsumoLocalizacao> findAllByLocalizacao_id(Integer localizacao_id);
-
-	
-	
 	
 	@Query("SELECT il FROM InsumoLocalizacao il "
 			+ "WHERE il.localizacao =:localizacao "
@@ -99,6 +96,15 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("loteFornecedor") String loteFornecedor,
 			@Param("dataValidade") LocalDate dataValidade, 
 			@Param("dataIrradiacao") LocalDate dataIrradiacao);
+	
+	@Query("SELECT il FROM InsumoLocalizacao il "
+			+ "WHERE il.localizacao =:localizacao "
+			+ "AND il.insumo = :insumo "
+			+ "AND il.loteLEI = :loteLEI ")
+	public InsumoLocalizacao findDuplicadoLoteLei(
+			@Param("insumo") Insumo insumo, 
+			@Param("localizacao") Localizacao localizacao,
+			@Param("loteLEI") String loteLEI);
 	
 	@Transactional
 	@Modifying
