@@ -19,81 +19,107 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Localizacao;
+import br.ipen.cestoque.domain.LocalizacaoFilha;
 import br.ipen.cestoque.dto.LocalizacaoDTO;
 import br.ipen.cestoque.dto.LocalizacaoNewDTO;
 import br.ipen.cestoque.services.LocalizacaoService;
 
-
 @RestController
-@RequestMapping(value="/localizacoes")
+@RequestMapping(value = "/localizacoes")
 public class LocalizacaoResource {
 
 	@Autowired
 	private LocalizacaoService service;
-	
-	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<Localizacao> find(@PathVariable String id){
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Localizacao> find(@PathVariable String id) {
 		Localizacao localizacao;
 		localizacao = service.find(Integer.parseInt(id));
 		return ResponseEntity.ok().body(localizacao);
 	}
-	
-	@RequestMapping(value="/findbyid",method=RequestMethod.GET)
-	public ResponseEntity<Localizacao> findById(@RequestParam(value = "localizacao_id") String localizacao_id){
+
+	@RequestMapping(value = "/findbyid", method = RequestMethod.GET)
+	public ResponseEntity<Localizacao> findById(@RequestParam(value = "localizacao_id") String localizacao_id) {
 		Localizacao localizacao;
 		localizacao = service.find(Integer.parseInt(localizacao_id));
 		return ResponseEntity.ok().body(localizacao);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> insert(@Valid @RequestBody LocalizacaoNewDTO objDto){
+	public ResponseEntity<Void> insert(@Valid @RequestBody LocalizacaoNewDTO objDto) {
+		if(objDto.getAlmoxarifadoprincipal() != null) {
+			if(objDto.getAlmoxarifadoprincipal() == false) {
+				objDto.setAlmoxarifadoprincipal(null);
+			}	
+		}
 		Localizacao obj = service.fromDTO(objDto);
-		obj = service.insert(obj); 
+		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> update(@Valid @RequestBody LocalizacaoDTO objDto){
+	public ResponseEntity<Void> update(@Valid @RequestBody LocalizacaoDTO objDto) {
 		Localizacao obj = service.fromDTO(objDto);
-		//obj.setId(id);
+		// obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
+	@RequestMapping(value="/insertfilha", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> insertfilha(@Valid @RequestBody LocalizacaoFilha objDto){
+		if(objDto.getAlmoxarifadoprincipal() != null) {
+			if(objDto.getAlmoxarifadoprincipal() == false) {
+				objDto.setAlmoxarifadoprincipal(null);
+			}	
+		}
+		objDto.setLocalizacao(objDto.getLocalizacaopai());
+		objDto = service.insertfilha(objDto); 
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objDto.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/updatefilha", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> updatefilha(@Valid @RequestBody LocalizacaoFilha objDto){
+		objDto = service.updatefilha(objDto);
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<LocalizacaoDTO> > findAll(){
+
+	/*@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<LocalizacaoDTO>> findAll() {
 		List<Localizacao> list = service.findAll();
 		List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
-	}
+	}*/
 	
-	@RequestMapping(value="/findAllInsumoLocalizacao", method=RequestMethod.GET)
-	public ResponseEntity<List<LocalizacaoDTO>> findAllInsumoLocalizacao(){
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Localizacao>> findAll() {
+		List<Localizacao> list = service.findAll();
+		//List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value = "/findAllInsumoLocalizacao", method = RequestMethod.GET)
+	public ResponseEntity<List<LocalizacaoDTO>> findAllInsumoLocalizacao() {
 		List<Localizacao> list = service.findAllInsumoLocalizacao();
 		List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
-	
-	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<LocalizacaoDTO> > findPage(
-			@RequestParam(value = "page", defaultValue = "0") Integer page, 
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage, 
-			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
-			@RequestParam(value = "direction", defaultValue = "ASC") String direction
-			){
+
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	public ResponseEntity<Page<LocalizacaoDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 		Page<Localizacao> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<LocalizacaoDTO> listDto = list.map(obj -> new LocalizacaoDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}
-	
-	
-	
+
 }

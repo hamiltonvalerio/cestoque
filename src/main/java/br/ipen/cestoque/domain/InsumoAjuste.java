@@ -24,8 +24,6 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 	@JoinColumn(name = "localizacao_id", nullable = false)
 	private Localizacao localizacao;
 
-	private Double quantidade;
-	
 	//@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataAjuste;
 
@@ -61,7 +59,7 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 		this.setLoteARM(loteARM);
 		this.setLoteCR(loteCR);
 		this.setLoteFornecedor(loteFornecedor);
-		this.quantidade = quantidade;
+		this.setQuantidade(quantidade);
 		this.unidade = unidade;
 	}
 	
@@ -73,7 +71,7 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 			LocalDateTime dataAprovacao, LocalDateTime dataReprovacao) {
 		super();
 		this.localizacao = localizacao;
-		this.quantidade = quantidade;
+		this.setQuantidade(quantidade);
 		this.dataAjuste = dataAjuste;
 		this.usualt = usualt;
 		this.datalt = datalt;
@@ -99,14 +97,6 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 
 	public void setLocalizacao(Localizacao localizacao) {
 		this.localizacao = localizacao;
-	}
-
-	public Double getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Double quantidade) {
-		this.quantidade = quantidade;
 	}
 
 	public Date getDataAjuste() {

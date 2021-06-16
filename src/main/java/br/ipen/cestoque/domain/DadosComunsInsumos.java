@@ -65,8 +65,9 @@ public abstract class DadosComunsInsumos {
 	
 	private String condambamostragemgc;
 	private String condambamostragemur;
+
+	private Double quantidade;
 	private Double quantidadeDescartada;
-	
 	private Double quantidadeUtilizada;
 	
 	public Integer getId() {
@@ -268,6 +269,14 @@ public abstract class DadosComunsInsumos {
 
 	public void setIrradiado(Boolean irradiado) {
 		this.irradiado = irradiado;
+	}
+
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
 	}
 
 }

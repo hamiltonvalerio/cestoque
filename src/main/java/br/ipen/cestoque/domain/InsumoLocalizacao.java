@@ -27,8 +27,10 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	@ManyToOne
 	@JoinColumn(name = "localizacao_id", nullable = false)
 	private Localizacao localizacao;
-
-	private Double quantidade;
+	
+	@ManyToOne
+	@JoinColumn(name = "localizacaofilha_id", nullable = false)
+	private LocalizacaoFilha localizacaoFilha;
 
 	private Double quantidademinima;
 
@@ -52,6 +54,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	}
 
 	public InsumoLocalizacao(Integer id, Insumo insumo, Localizacao localizacao, Double quantidade,
+			LocalizacaoFilha localizacaoFilha,
 			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao,
 			LocalDate dataIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao,
 			LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento, String loteARM,
@@ -62,7 +65,8 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setId(id);
 		this.setInsumo(insumo);
 		this.localizacao = localizacao;
-		this.quantidade = quantidade;
+		this.localizacaoFilha = localizacaoFilha;
+		this.setQuantidade(quantidade);
 		this.quantidademinima = quantidademinima;
 		this.setLoteFornecedor(loteFornecedor);
 		this.setLoteCR(loteCR);
@@ -73,7 +77,6 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setDataAprovacao(dataAprovacao);
 		this.setDataReprovacao(dataReprovacao);
 		this.setAprovado(aprovado);
-		//this.setNomedoinsumo(insumo.getNome());
 		this.nomedoinsumo = insumo.getNome();
 		this.setLoteRecebimento(loteRecebimento);
 		this.setLoteARM(loteARM);
@@ -95,14 +98,6 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 
 	public void setLocalizacao(Localizacao localizacao) {
 		this.localizacao = localizacao;
-	}
-
-	public Double getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Double quantidade) {
-		this.quantidade = quantidade;
 	}
 
 	public Double getQuantidademinima() {
@@ -158,6 +153,14 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 
 	public void setCodigoalmoxarifado(String codigoalmoxarifado) {
 		this.codigoalmoxarifado = codigoalmoxarifado;
+	}
+
+	public LocalizacaoFilha getLocalizacaoFilha() {
+		return localizacaoFilha;
+	}
+
+	public void setLocalizacaoFilha(LocalizacaoFilha localizacaoFilha) {
+		this.localizacaoFilha = localizacaoFilha;
 	}
 
 }

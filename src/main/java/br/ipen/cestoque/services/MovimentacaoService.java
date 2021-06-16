@@ -81,7 +81,6 @@ public class MovimentacaoService {
 			insumo.setValor(im.getInsumo().getValor());
 			quant = im.getQuantidadeMovimentada();
 			im.setInsumo(insumo);
-			// im.setQuantidadeMovimentada(quant);
 			if (im.getInsumo().getQuantidade() == null) {
 				im.getInsumo().setQuantidade(0.0);
 			}
@@ -89,23 +88,9 @@ public class MovimentacaoService {
 			insumos.add(insumo);
 
 			insumoLocalizacaoDestino = new InsumoLocalizacao();
-			//List<InsumoLocalizacao> listaDestino = new ArrayList<>();
 
 			insumoLocalizacaoOrigem = new InsumoLocalizacao();
-			//List<InsumoLocalizacao> listaOrigem = new ArrayList<>();
 			
-			/*insumoLocalizacaoDestino = comparaInsumoLocalizacao.compara(insumo, localizacaoDestino,
-					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-			
-			insumoLocalizacaoOrigem = comparaInsumoLocalizacao.compara(insumo, localizacaoOrigem,
-					im.getLoteFornecedor(), im.getDataValidade(), im.getDataIrradiacao());
-			
-			if(insumoLocalizacaoOrigem == null) {
-				if(localizacaoOrigem.getIrradiacao() == true) {
-					insumoLocalizacaoOrigem = comparaInsumoLocalizacao.compara(insumo, localizacaoOrigem,
-							im.getLoteFornecedor(), im.getDataValidade(), null);
-				}
-			}*/
 			
 			insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
 			
@@ -145,13 +130,10 @@ public class MovimentacaoService {
 				insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
 				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 			}
+			
+			
 
-			// verificar se tem insumos nesta localização ORIGEM, se sim, subtrair as
-			// quantidades
-
-			// insumoLocalizacaoOrigem =
-			// insumoLocalizacaoRepository.findByIdLocalizacaoAndIdInsumo(localizacaoOrigem,
-			// insumo);
+			
 
 
 			if (insumoLocalizacaoOrigem.getQuantidade() == null) {

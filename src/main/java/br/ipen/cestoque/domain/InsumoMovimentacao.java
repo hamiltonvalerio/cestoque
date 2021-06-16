@@ -27,6 +27,10 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	@JoinColumn(name = "localizacao_id", nullable = false)
 	private Localizacao localizacao;
 
+	@ManyToOne
+	@JoinColumn(name = "localizacaofilha_id", nullable = false)
+	private LocalizacaoFilha localizacaoFilha;
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "movimentacao_id")
@@ -37,9 +41,6 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	private Double quantidadeMovimentada;
 
 	private String loteProducao;
-	
-	
-	
 
 	public InsumoMovimentacao() {
 		super();
@@ -47,15 +48,17 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	}
 
 	public InsumoMovimentacao(Integer id, Insumo insumo, Localizacao localizacao, Movimentacao movimentacao,
-			Double quantidadeOrigem, Double quantidadeMovimentada, String loteFornecedor, String loteCR,
-			String loteProducao, String loteRecebimento, LocalDate dataIrradiacao, LocalDate dataValidade,
-			LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao, Boolean aprovado,
-			String loteARM, String condambamostragemgc, String condambamostragemur, Double quantidadeDescartada,
-			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle, Boolean irradiado) {
+			LocalizacaoFilha localizacaoFilha, Double quantidadeOrigem, Double quantidadeMovimentada,
+			String loteFornecedor, String loteCR, String loteProducao, String loteRecebimento, LocalDate dataIrradiacao,
+			LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao,
+			Boolean aprovado, String loteARM, String condambamostragemgc, String condambamostragemur,
+			Double quantidadeDescartada, Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle,
+			Boolean irradiado, Double quantidade) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
 		this.localizacao = localizacao;
+		this.localizacaoFilha = localizacaoFilha;
 		this.movimentacao = movimentacao;
 		this.quantidadeOrigem = quantidadeOrigem;
 		this.quantidadeMovimentada = quantidadeMovimentada;
@@ -76,6 +79,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.setQuantidadeUtilizada(quantidadeUtilizada);
 		this.setDataPrevisaoControle(dataPrevisaoControle);
 		this.setIrradiado(irradiado);
+		this.setQuantidade(quantidade);
 	}
 
 	public Localizacao getLocalizacao() {
@@ -116,6 +120,14 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 
 	public void setLoteProducao(String loteProducao) {
 		this.loteProducao = loteProducao;
+	}
+
+	public LocalizacaoFilha getLocalizacaoFilha() {
+		return localizacaoFilha;
+	}
+
+	public void setLocalizacaoFilha(LocalizacaoFilha localizacaoFilha) {
+		this.localizacaoFilha = localizacaoFilha;
 	}
 
 }

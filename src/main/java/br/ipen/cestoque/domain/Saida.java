@@ -9,14 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Audited
 @Table(name = "saida")
-public class Saida implements Serializable{
+public class Saida implements Serializable {
 
 	/**
 	 * 
@@ -26,32 +31,35 @@ public class Saida implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	private Date data_saida;
-	
-	private Double total;
-	
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private Date dataSaida;
+
 	private String observacoes;
-	
+
 	private String usualt;
 	private Date datalt;
-	
-	@OneToMany(mappedBy = "id.saida")
+
+	@ManyToOne
+	@JoinColumn(name = "localizacao_id")
+	private Localizacao localizacao;
+
+	@OneToMany(mappedBy = "saida")
 	private Set<InsumoSaida> itens = new HashSet<>();
-	
+
 	public Saida() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Saida(Integer id, Date data_saida, Double total, String observacoes, String usualt, Date datalt) {
+	public Saida(Integer id, Date dataSaida, String observacoes, String usualt, Date datalt, Localizacao localizacao) {
 		super();
 		this.id = id;
-		this.data_saida = data_saida;
-		this.total = total;
+		this.dataSaida = dataSaida;
 		this.observacoes = observacoes;
 		this.usualt = usualt;
 		this.datalt = datalt;
+		this.localizacao = localizacao;
 	}
 
 	public Integer getId() {
@@ -62,20 +70,28 @@ public class Saida implements Serializable{
 		this.id = id;
 	}
 
-	public Date getData_saida() {
-		return data_saida;
+	public Date getDataSaida() {
+		return dataSaida;
 	}
 
-	public void setData_saida(Date data_saida) {
-		this.data_saida = data_saida;
+	public void setDataSaida(Date dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 
-	public Double getTotal() {
-		return total;
+	public String getObservacoes() {
+		return observacoes;
 	}
 
-	public void setTotal(Double total) {
-		this.total = total;
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public Localizacao getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
 	}
 
 	public String getNumeronf() {
@@ -134,7 +150,5 @@ public class Saida implements Serializable{
 	public void setItens(Set<InsumoSaida> itens) {
 		this.itens = itens;
 	}
-	
-	
-	
+
 }

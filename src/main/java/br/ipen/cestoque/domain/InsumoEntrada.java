@@ -34,21 +34,16 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataVencIrradiacao;
 
-	private Double quantidade;
-
 	private Double valor;
 
 	private Double valorTotal;
 
 	@Transient
 	private Integer quantidadeetiquetas;
-	
+
 	@Transient
 	private String codigoalmoxarifado;
-	
-	
 
-	
 	public InsumoEntrada() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -69,7 +64,7 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 		this.dataVencIrradiacao = dataVencIrradiacao;
 		this.setDataValidade(dataValidade);
 		this.setDataFabricacao(dataFabricacao);
-		this.quantidade = quantidade;
+		this.setQuantidade(quantidade);
 		this.valor = valor;
 		this.valorTotal = valorTotal;
 		this.setLoteRecebimento(loteRecebimento);
@@ -97,14 +92,6 @@ public class InsumoEntrada extends DadosComunsInsumos implements Serializable {
 
 	public void setDataVencIrradiacao(LocalDate dataVencIrradiacao) {
 		this.dataVencIrradiacao = dataVencIrradiacao;
-	}
-
-	public Double getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Double quantidade) {
-		this.quantidade = quantidade;
 	}
 
 	public Double getValor() {

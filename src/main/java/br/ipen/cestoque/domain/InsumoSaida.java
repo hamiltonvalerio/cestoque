@@ -1,16 +1,25 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.envers.Audited;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Audited
 @Table(name = "insumosaida")
-public class InsumoSaida implements Serializable{
+public class InsumoSaida extends DadosComunsInsumos implements Serializable {
 
 	/**
 	 * 
@@ -18,56 +27,55 @@ public class InsumoSaida implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
-	@EmbeddedId
-	private InsumoSaidaPK id = new InsumoSaidaPK();
-	
-	private Double quantidade;
+	@ManyToOne
+	@JoinColumn(name = "saida_id")
+	private Saida saida;
+
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataVencIrradiacao;
+
 	private Double valor;
-	
+
+	private Double valorTotal;
+
+	@Transient
+	private Integer quantidadeetiquetas;
+
+	@Transient
+	private String codigoalmoxarifado;
+
 	public InsumoSaida() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public InsumoSaida(Insumo insumo, Saida saida, Double quantidade, Double valor) {
+	public InsumoSaida(Integer id, Insumo insumo, Saida saida, String loteFornecedor, String loteCR,
+			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao,
+			Double quantidade, Double valor, Double valorTotal, String loteRecebimento, String loteARM,
+			String testesuper, Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI,
+			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle) {
 		super();
-		id.setInsumo(insumo);
-		id.setSaida(saida);
-		this.quantidade = quantidade;
-		this.setValor(valor);
-	}
-	
-	@JsonIgnore
-	public Saida getSaida() {
-		return id.getSaida();
-	}
-	
-	public void setSaida(Saida saida) {
-		id.setSaida(saida);
-	}
-	
-	public Insumo getInsumo() {
-		return id.getInsumo();
-	}
-	
-	public void setInsumo(Insumo insumo) {
-		id.setInsumo(insumo);
-	}
-
-	public InsumoSaidaPK getId() {
-		return id;
-	}
-
-	public void setId(InsumoSaidaPK id) {
-		this.id = id;
-	}
-
-	public Double getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Double quantidade) {
-		this.quantidade = quantidade;
+		this.setId(id);
+		this.setInsumo(insumo);
+		this.saida = saida;
+		this.setLoteFornecedor(loteFornecedor);
+		this.setLoteCR(loteCR);
+		this.setDataIrradiacao(dataIrradiacao);
+		this.dataVencIrradiacao = dataVencIrradiacao;
+		this.setDataValidade(dataValidade);
+		this.setDataFabricacao(dataFabricacao);
+		this.setQuantidade(quantidade);
+		this.valor = valor;
+		this.valorTotal = valorTotal;
+		this.setLoteRecebimento(loteRecebimento);
+		this.setLoteARM(loteARM);
+		this.codigoalmoxarifado = insumo.getCodigoalmox();
+		this.setUnidadeRecebida(unidadeRecebida);
+		this.setQuantidadeVolume(quantidadeVolume);
+		this.setUnidadeEntrada(unidadeEntrada);
+		this.setLoteLEI(loteLEI);
+		this.setQuantidadeUtilizada(quantidadeUtilizada);
+		this.setDataPrevisaoControle(dataPrevisaoControle);
 	}
 
 	public Double getValor() {
@@ -77,7 +85,45 @@ public class InsumoSaida implements Serializable{
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	
-	
-	
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public Integer getQuantidadeetiquetas() {
+		return quantidadeetiquetas;
+	}
+
+	public void setQuantidadeetiquetas(Integer quantidadeetiquetas) {
+		this.quantidadeetiquetas = quantidadeetiquetas;
+	}
+
+	public String getCodigoalmoxarifado() {
+		return codigoalmoxarifado;
+	}
+
+	public void setCodigoalmoxarifado(String codigoalmoxarifado) {
+		this.codigoalmoxarifado = codigoalmoxarifado;
+	}
+
+	public Saida getSaida() {
+		return saida;
+	}
+
+	public void setSaida(Saida saida) {
+		this.saida = saida;
+	}
+
+	public LocalDate getDataVencIrradiacao() {
+		return dataVencIrradiacao;
+	}
+
+	public void setDataVencIrradiacao(LocalDate dataVencIrradiacao) {
+		this.dataVencIrradiacao = dataVencIrradiacao;
+	}
+
 }
