@@ -28,10 +28,6 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	@JoinColumn(name = "localizacao_id", nullable = false)
 	private Localizacao localizacao;
 	
-	@ManyToOne
-	@JoinColumn(name = "localizacaofilha_id", nullable = false)
-	private LocalizacaoFilha localizacaoFilha;
-
 	private Double quantidademinima;
 
 	private String loteProducao;
@@ -54,7 +50,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	}
 
 	public InsumoLocalizacao(Integer id, Insumo insumo, Localizacao localizacao, Double quantidade,
-			LocalizacaoFilha localizacaoFilha,
+			
 			Double quantidademinima, String loteFornecedor, String loteCR, String loteProducao,
 			LocalDate dataIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao,
 			LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento, String loteARM,
@@ -65,7 +61,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setId(id);
 		this.setInsumo(insumo);
 		this.localizacao = localizacao;
-		this.localizacaoFilha = localizacaoFilha;
+
 		this.setQuantidade(quantidade);
 		this.quantidademinima = quantidademinima;
 		this.setLoteFornecedor(loteFornecedor);
@@ -155,12 +151,6 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.codigoalmoxarifado = codigoalmoxarifado;
 	}
 
-	public LocalizacaoFilha getLocalizacaoFilha() {
-		return localizacaoFilha;
-	}
 
-	public void setLocalizacaoFilha(LocalizacaoFilha localizacaoFilha) {
-		this.localizacaoFilha = localizacaoFilha;
-	}
 
 }

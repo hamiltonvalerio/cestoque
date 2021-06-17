@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 @MappedSuperclass
 public class DadosComunsLocalizacoes {
@@ -41,6 +42,9 @@ public class DadosComunsLocalizacoes {
 	
 	@Column(name = "localizacaofilha")
 	private Boolean localizacaofilha = false;
+	
+	@OneToOne
+	private Localizacao objlocalizacaofilha;
 		
 	
 
@@ -130,6 +134,14 @@ public class DadosComunsLocalizacoes {
 
 	public void setLocalizacaofilha(Boolean localizacaofilha) {
 		this.localizacaofilha = localizacaofilha;
+	}
+
+	public Localizacao getObjlocalizacaofilha() {
+		return objlocalizacaofilha;
+	}
+
+	public void setObjlocalizacaofilha(Localizacao objlocalizacaofilha) {
+		this.objlocalizacaofilha = objlocalizacaofilha;
 	}
 
 }

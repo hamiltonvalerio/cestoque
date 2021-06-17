@@ -27,10 +27,6 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	@JoinColumn(name = "localizacao_id", nullable = false)
 	private Localizacao localizacao;
 
-	@ManyToOne
-	@JoinColumn(name = "localizacaofilha_id", nullable = false)
-	private LocalizacaoFilha localizacaoFilha;
-
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "movimentacao_id")
@@ -48,7 +44,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	}
 
 	public InsumoMovimentacao(Integer id, Insumo insumo, Localizacao localizacao, Movimentacao movimentacao,
-			LocalizacaoFilha localizacaoFilha, Double quantidadeOrigem, Double quantidadeMovimentada,
+			Double quantidadeOrigem, Double quantidadeMovimentada,
 			String loteFornecedor, String loteCR, String loteProducao, String loteRecebimento, LocalDate dataIrradiacao,
 			LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao,
 			Boolean aprovado, String loteARM, String condambamostragemgc, String condambamostragemur,
@@ -58,7 +54,6 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.setId(id);
 		this.setInsumo(insumo);
 		this.localizacao = localizacao;
-		this.localizacaoFilha = localizacaoFilha;
 		this.movimentacao = movimentacao;
 		this.quantidadeOrigem = quantidadeOrigem;
 		this.quantidadeMovimentada = quantidadeMovimentada;
@@ -122,12 +117,5 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.loteProducao = loteProducao;
 	}
 
-	public LocalizacaoFilha getLocalizacaoFilha() {
-		return localizacaoFilha;
-	}
-
-	public void setLocalizacaoFilha(LocalizacaoFilha localizacaoFilha) {
-		this.localizacaoFilha = localizacaoFilha;
-	}
 
 }

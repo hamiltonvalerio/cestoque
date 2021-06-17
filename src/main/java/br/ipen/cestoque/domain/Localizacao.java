@@ -27,9 +27,7 @@ public class Localizacao extends DadosComunsLocalizacoes implements Serializable
 	@OneToMany(mappedBy = "localizacao")
 	private List<InsumoLocalizacao> insumolocalizacoes = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "localizacao")
-	private List<LocalizacaoFilha> localizacoesfilhas = new ArrayList<>();
-	
+
 	public Localizacao() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,13 +56,6 @@ public class Localizacao extends DadosComunsLocalizacoes implements Serializable
 		this.insumolocalizacoes = insumolocalizacoes;
 	}
 
-	public List<LocalizacaoFilha> getLocalizacoesfilhas() {
-		return localizacoesfilhas;
-	}
-
-	public void setLocalizacoesfilhas(List<LocalizacaoFilha> localizacoesfilhas) {
-		this.localizacoesfilhas = localizacoesfilhas;
-	}
 	
 	
 	

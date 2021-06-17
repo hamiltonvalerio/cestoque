@@ -2,7 +2,6 @@ package br.ipen.cestoque.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Localizacao;
-import br.ipen.cestoque.domain.LocalizacaoFilha;
 import br.ipen.cestoque.dto.LocalizacaoDTO;
 import br.ipen.cestoque.services.LocalizacaoService;
 
@@ -58,20 +56,6 @@ public class LocalizacaoResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@RequestMapping(value="/insertfilha", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> insertfilha(@Valid @RequestBody LocalizacaoFilha objDto){
-		objDto.setLocalizacao(objDto.getLocalizacaopai());
-		objDto = service.insertfilha(objDto); 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objDto.getId()).toUri();
-		return ResponseEntity.created(uri).build();
-	}
-	
-	@RequestMapping(value="/updatefilha", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> updatefilha(@Valid @RequestBody LocalizacaoFilha objDto){
-		objDto = service.updatefilha(objDto);
-		return ResponseEntity.noContent().build();
-	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
@@ -94,10 +78,10 @@ public class LocalizacaoResource {
 	}
 
 	@RequestMapping(value = "/findAllInsumoLocalizacao", method = RequestMethod.GET)
-	public ResponseEntity<List<LocalizacaoDTO>> findAllInsumoLocalizacao() {
+	public ResponseEntity<List<Localizacao>> findAllInsumoLocalizacao() {
 		List<Localizacao> list = service.findAllInsumoLocalizacao();
-		List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+		//List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(list);
 	}
 	
 
