@@ -30,7 +30,7 @@ public class DadosComunsLocalizacoes {
 	@Column(name = "utilizado")
 	private Boolean utilizado = false;
 	
-	@Column(name = "almoxarifadoprincipal", unique = true)
+	@Column(name = "almoxarifadoprincipal")
 	private Boolean almoxarifadoprincipal = false;
 	
 	@Column(name = "irradiacao")

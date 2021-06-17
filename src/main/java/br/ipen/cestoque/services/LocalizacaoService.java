@@ -133,6 +133,16 @@ public class LocalizacaoService {
 		return col;
 	}
 
+	public Boolean validaAlmoxarifadoPrincipal() {
+		// TODO Auto-generated method stub
+		return repo.validaAlmoxarifadoPrincipal();
+	}
+
+	public Localizacao findAlmoxPrincipal() {
+		// TODO Auto-generated method stub
+		return repo.findAlmoxPrincipal();
+	}
+
 	
 
 }

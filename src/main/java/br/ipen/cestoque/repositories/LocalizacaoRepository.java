@@ -18,5 +18,13 @@ public interface LocalizacaoRepository extends JpaRepository<Localizacao, Intege
 	public List<Localizacao> findAllInsumoLocalizacao();
 
 	public List<Localizacao> findAllByOrderByNome();
+	
+	@Query("SELECT CASE WHEN COUNT(l) > 0 THEN true ELSE false END FROM Localizacao l "
+			+ "WHERE l.almoxarifadoprincipal = true")
+	public boolean validaAlmoxarifadoPrincipal();
+
+	@Query("SELECT l FROM Localizacao l "
+			+ "WHERE l.almoxarifadoprincipal = true")
+	public Localizacao findAlmoxPrincipal();
 
 }

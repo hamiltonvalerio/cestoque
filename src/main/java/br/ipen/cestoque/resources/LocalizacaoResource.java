@@ -21,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.ipen.cestoque.domain.Localizacao;
 import br.ipen.cestoque.domain.LocalizacaoFilha;
 import br.ipen.cestoque.dto.LocalizacaoDTO;
-import br.ipen.cestoque.dto.LocalizacaoNewDTO;
 import br.ipen.cestoque.services.LocalizacaoService;
 
 @RestController
@@ -46,15 +45,9 @@ public class LocalizacaoResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> insert(@Valid @RequestBody LocalizacaoNewDTO objDto) {
-		if(objDto.getAlmoxarifadoprincipal() != null) {
-			if(objDto.getAlmoxarifadoprincipal() == false) {
-				objDto.setAlmoxarifadoprincipal(null);
-			}	
-		}
-		Localizacao obj = service.fromDTO(objDto);
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+	public ResponseEntity<Void> insert(@Valid @RequestBody Localizacao objDto) {
+		objDto = service.insert(objDto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objDto.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
@@ -68,11 +61,6 @@ public class LocalizacaoResource {
 	
 	@RequestMapping(value="/insertfilha", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> insertfilha(@Valid @RequestBody LocalizacaoFilha objDto){
-		if(objDto.getAlmoxarifadoprincipal() != null) {
-			if(objDto.getAlmoxarifadoprincipal() == false) {
-				objDto.setAlmoxarifadoprincipal(null);
-			}	
-		}
 		objDto.setLocalizacao(objDto.getLocalizacaopai());
 		objDto = service.insertfilha(objDto); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objDto.getId()).toUri();
@@ -111,6 +99,7 @@ public class LocalizacaoResource {
 		List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
+	
 
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<LocalizacaoDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -120,6 +109,18 @@ public class LocalizacaoResource {
 		Page<Localizacao> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<LocalizacaoDTO> listDto = list.map(obj -> new LocalizacaoDTO(obj));
 		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(value = "/validaAlmoxarifadoPrincipal", method = RequestMethod.GET)
+	public Boolean validaAlmoxarifadoPrincipal() {
+		return service.validaAlmoxarifadoPrincipal();
+	}
+	
+	@RequestMapping(value = "/findAlmoxPrincipal", method = RequestMethod.GET)
+	public ResponseEntity<Localizacao> findAlmoxPrincipal() {
+		Localizacao localizacao;
+		localizacao = service.findAlmoxPrincipal();
+		return ResponseEntity.ok().body(localizacao);
 	}
 
 }
