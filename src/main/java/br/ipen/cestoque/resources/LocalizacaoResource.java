@@ -50,10 +50,8 @@ public class LocalizacaoResource {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> update(@Valid @RequestBody LocalizacaoDTO objDto) {
-		Localizacao obj = service.fromDTO(objDto);
-		// obj.setId(id);
-		obj = service.update(obj);
+	public ResponseEntity<Void> update(@Valid @RequestBody Localizacao objDto) {
+		objDto = service.update(objDto);
 		return ResponseEntity.noContent().build();
 	}
 

@@ -42,13 +42,14 @@ public class LocalizacaoService {
 	}
 
 	public Localizacao update(Localizacao obj) {
-		Localizacao newObj = find(obj.getId());
-		newObj.setUsualt(UserService.authenticated().getUsername());
-		newObj.setDatalt(new Date(System.currentTimeMillis()));
-		updateData(newObj, obj);
-		return repo.save(newObj);
+		//Localizacao newObj = find(obj.getId());
+		obj.setUsualt(UserService.authenticated().getUsername());
+		obj.setDatalt(new Date(System.currentTimeMillis()));
+		//updateData(newObj, obj);
+		return repo.save(obj);
 	}
 	
+	@SuppressWarnings("unused")
 	private void updateData(Localizacao newObj, Localizacao obj) {
 		// TODO Auto-generated method stub
 		newObj.setNome(obj.getNome());
@@ -105,6 +106,14 @@ public class LocalizacaoService {
 		return repo.findAlmoxPrincipal();
 	}
 
+	public Localizacao findByLocalizacaoUtilizado(Integer id) throws ObjectNotFoundException {
+		
+		return repo.findByLocalizacaoUtilizado(id);
+	}
 	
+	public Localizacao findByLocalizacaoDescartado(Integer id) throws ObjectNotFoundException {
+		
+		return repo.findByLocalizacaoDescartado(id);
+	}
 
 }

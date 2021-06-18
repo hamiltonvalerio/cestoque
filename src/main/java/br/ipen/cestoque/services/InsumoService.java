@@ -198,6 +198,13 @@ public class InsumoService {
 		// TODO Auto-generated method stub
 		return insumoLocalizacaoRepository.buscaTodosPorLocalizacao(localizacao_id,pageRequest);
 	}
+	
+	public Page<InsumoLocalizacao> findInsumoLocalizacaoByLocalizacaoSemVazio(int localizacao_id, Integer page, Integer linesPerPage) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage);
+		
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.buscaTodosPorLocalizacaoSemVazio(localizacao_id,pageRequest);
+	}
 
 	public Long findTotalCadastrados() {
 		// TODO Auto-generated method stub

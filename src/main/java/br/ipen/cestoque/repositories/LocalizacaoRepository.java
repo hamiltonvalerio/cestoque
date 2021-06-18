@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,5 +27,17 @@ public interface LocalizacaoRepository extends JpaRepository<Localizacao, Intege
 	@Query("SELECT l FROM Localizacao l "
 			+ "WHERE l.almoxarifadoprincipal = true")
 	public Localizacao findAlmoxPrincipal();
+
+	@Query(value="SELECT * FROM localizacao "
+			+  "WHERE objlocalizacaofilha_id = :id "
+			+ " AND utilizado = true ", 
+			nativeQuery = true)
+	public Localizacao findByLocalizacaoUtilizado(@Param("id") Integer id);
+	
+	@Query(value="SELECT * FROM localizacao  "
+			+ " WHERE objlocalizacaofilha_id = :id "
+			+ " AND descarte = true ", 
+			nativeQuery = true)
+	public Localizacao findByLocalizacaoDescartado(@Param("id") Integer id);
 
 }

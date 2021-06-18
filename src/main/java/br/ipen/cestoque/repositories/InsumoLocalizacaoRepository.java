@@ -65,7 +65,13 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			+ "ORDER BY il.insumo.nome ASC")
 	Page<InsumoLocalizacao> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id,
 			Pageable pageRequest);
-
+	
+	@Transactional(readOnly = true)
+	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
+			+ "AND il.quantidade != 0 "
+			+ "ORDER BY il.insumo.nome ASC")
+	Page<InsumoLocalizacao> buscaTodosPorLocalizacaoSemVazio(@Param("localizacao_id") Integer localizacao_id,
+			Pageable pageRequest);
 	
 	@Transactional(readOnly = true)
 	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
@@ -112,4 +118,10 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			+ "	WHERE id =:insumolocalizacao_id")
 	public void updateAjusteQuantidade(@Param("insumolocalizacao_id") int insumolocalizacao_id,
 			@Param("quantidade") double quantidade);
+
+	@Transactional
+	@Modifying
+	@Query("UPDATE InsumoLocalizacao " + "	SET aprovado =:aprovado "
+			+ "	WHERE lotelei LIKE :lotelei")
+	public void updateAprovacaoPorLoteLEI(@Param("aprovado") boolean aprovado, @Param("lotelei") String lotelei);
 }

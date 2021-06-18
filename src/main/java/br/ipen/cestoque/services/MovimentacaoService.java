@@ -43,7 +43,10 @@ public class MovimentacaoService {
 	private InsumoService insumoService;
 	
 	@Autowired
-	private ComparaInsumoLocalizacao comparaInsumoLocalizacao; 
+	private ComparaInsumoLocalizacao comparaInsumoLocalizacao;
+	
+	@Autowired
+	private LocalizacaoService localizacaoService; 
 
 	/*
 	 * public MovimentacaoService(final MovimentacaoMapper movimentacaoMapper, final
@@ -59,6 +62,8 @@ public class MovimentacaoService {
 		List<InsumoLocalizacao> insumosLocalizacoesOrigem = new ArrayList<>();
 		Insumo insumo;
 		Double quant;
+		Double quantidadeutilizada;
+		Double quantidadedescartada;
 
 		Localizacao localizacaoOrigem = new Localizacao();
 		InsumoLocalizacao insumoLocalizacaoOrigem;
@@ -80,6 +85,8 @@ public class MovimentacaoService {
 			insumo.setUnidade(im.getInsumo().getUnidade());
 			insumo.setValor(im.getInsumo().getValor());
 			quant = im.getQuantidadeMovimentada();
+			quantidadeutilizada = im.getQuantidadeUtilizada() == null ? 0.0 : im.getQuantidadeUtilizada(); 
+			quantidadedescartada = im.getQuantidadeDescartada() == null ? 0.0 : im.getQuantidadeDescartada();
 			im.setInsumo(insumo);
 			if (im.getInsumo().getQuantidade() == null) {
 				im.getInsumo().setQuantidade(0.0);
@@ -100,53 +107,219 @@ public class MovimentacaoService {
 
 			if (insumoLocalizacaoDestino == null) {
 				insumoLocalizacaoDestino = new InsumoLocalizacao();
-				insumoLocalizacaoDestino.setAprovado(im.getAprovado());
-				insumoLocalizacaoDestino.setDataAprovacao(im.getDataAprovacao());
-				insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
-				insumoLocalizacaoDestino.setDataValidade(im.getDataValidade());
-				insumoLocalizacaoDestino.setLoteCR(im.getLoteCR());
-				insumoLocalizacaoDestino.setLoteFornecedor(im.getLoteFornecedor());
-				insumoLocalizacaoDestino.setLoteProducao(im.getLoteProducao());
-				insumoLocalizacaoDestino.setQuantidade(quant);
-				insumoLocalizacaoDestino.setInsumo(insumo);
-				insumoLocalizacaoDestino.setLocalizacao(obj.getLocalizacaoDestino());
-				insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
-				insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
-				insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
-				insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
-				insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
-				insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
-				insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
-				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
+				if(obj.getLocalizacaoDestino().getLocalizacaofilha() == true) {
+					if(obj.getLocalizacaoDestino().getObjlocalizacaofilha().getId() == obj.getLocalizacaoOrigem().getId()) {
+						if(im.getQuantidadeUtilizada() != null) {
+							if(im.getQuantidadeUtilizada() > 0) {
+								Localizacao locutil = localizacaoService.findByLocalizacaoUtilizado(obj.getLocalizacaoOrigem().getId());
+								//se eu tenho uma localização de utilização eu insiro nesta localização um novo insumolocalização
+								//senão eu insiro no resultado
+								if(locutil != null) {
+									insumoLocalizacaoDestino.setAprovado(im.getAprovado());
+									insumoLocalizacaoDestino.setDataAprovacao(im.getDataAprovacao());
+									insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
+									insumoLocalizacaoDestino.setDataValidade(im.getDataValidade());
+									insumoLocalizacaoDestino.setLoteCR(im.getLoteCR());
+									insumoLocalizacaoDestino.setLoteFornecedor(im.getLoteFornecedor());
+									insumoLocalizacaoDestino.setLoteProducao(im.getLoteProducao());
+									
+									//qtd utilizada
+									insumoLocalizacaoDestino.setQuantidade(im.getQuantidadeUtilizada());
+									
+									insumoLocalizacaoDestino.setInsumo(insumo);
+									
+									//localizacao insumos utilizados
+									insumoLocalizacaoDestino.setLocalizacao(locutil);
+									
+									insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
+									insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+									insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
+									insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
+									insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
+									insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
+									insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+								}
+							}
+						}else if(im.getQuantidadeDescartada() != null) {
+							if(im.getQuantidadeDescartada() > 0) {
+								Localizacao locutil = localizacaoService.findByLocalizacaoDescartado(obj.getLocalizacaoOrigem().getId());
+								insumoLocalizacaoDestino.setAprovado(im.getAprovado());
+								insumoLocalizacaoDestino.setDataAprovacao(im.getDataAprovacao());
+								insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
+								insumoLocalizacaoDestino.setDataValidade(im.getDataValidade());
+								insumoLocalizacaoDestino.setLoteCR(im.getLoteCR());
+								insumoLocalizacaoDestino.setLoteFornecedor(im.getLoteFornecedor());
+								insumoLocalizacaoDestino.setLoteProducao(im.getLoteProducao());
+								
+								//qtd utilizada
+								insumoLocalizacaoDestino.setQuantidade(im.getQuantidadeDescartada());
+								
+								insumoLocalizacaoDestino.setInsumo(insumo);
+								
+								//localizacao insumos descartado
+								insumoLocalizacaoDestino.setLocalizacao(locutil);
+								
+								insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
+								insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
+								insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
+								insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
+								insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
+								insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+							}	
+						}
+						insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
+					}
+					InsumoLocalizacao insumoLocalizacaoDestinoResultado = new InsumoLocalizacao();
+					insumoLocalizacaoDestinoResultado.setAprovado(im.getAprovado());
+					insumoLocalizacaoDestinoResultado.setDataAprovacao(im.getDataAprovacao());
+					insumoLocalizacaoDestinoResultado.setDataIrradiacao(im.getDataIrradiacao());
+					insumoLocalizacaoDestinoResultado.setDataValidade(im.getDataValidade());
+					insumoLocalizacaoDestinoResultado.setLoteCR(im.getLoteCR());
+					insumoLocalizacaoDestinoResultado.setLoteFornecedor(im.getLoteFornecedor());
+					insumoLocalizacaoDestinoResultado.setLoteProducao(im.getLoteProducao());
+					insumoLocalizacaoDestinoResultado.setQuantidade(quant);
+					insumoLocalizacaoDestinoResultado.setInsumo(insumo);
+					insumoLocalizacaoDestinoResultado.setLocalizacao(obj.getLocalizacaoDestino());
+					insumoLocalizacaoDestinoResultado.setLoteRecebimento(im.getLoteRecebimento());
+					insumoLocalizacaoDestinoResultado.setLoteLEI(im.getLoteLEI());
+					insumoLocalizacaoDestinoResultado.setQuantidadeVolume(im.getQuantidadeVolume());
+					insumoLocalizacaoDestinoResultado.setUnidadeEntrada(im.getUnidadeEntrada());
+					insumoLocalizacaoDestinoResultado.setUnidadeRecebida(im.getUnidadeRecebida());
+					insumoLocalizacaoDestinoResultado.setDataPrevisaoControle(im.getDataPrevisaoControle());
+					insumoLocalizacaoDestinoResultado.setIrradiado(im.getIrradiado());
+					insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoResultado);
+				}else {
+					insumoLocalizacaoDestino.setAprovado(im.getAprovado());
+					insumoLocalizacaoDestino.setDataAprovacao(im.getDataAprovacao());
+					insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
+					insumoLocalizacaoDestino.setDataValidade(im.getDataValidade());
+					insumoLocalizacaoDestino.setLoteCR(im.getLoteCR());
+					insumoLocalizacaoDestino.setLoteFornecedor(im.getLoteFornecedor());
+					insumoLocalizacaoDestino.setLoteProducao(im.getLoteProducao());
+					insumoLocalizacaoDestino.setQuantidade(quant);
+					insumoLocalizacaoDestino.setInsumo(insumo);
+					insumoLocalizacaoDestino.setLocalizacao(obj.getLocalizacaoDestino());
+					insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
+					insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+					insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
+					insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
+					insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
+					insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
+					insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
+				}
+		
 			} else {
-				Double novaQuantidade = insumoLocalizacaoDestino.getQuantidade() + quant;
-				insumoLocalizacaoDestino.setAprovado(im.getAprovado());
-				insumoLocalizacaoDestino.setQuantidade(novaQuantidade);
-				insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
-				insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
-				insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
-				insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
-				insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
-				insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
-				insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
+				if(insumoLocalizacaoDestino.getLocalizacao().getLocalizacaofilha() == true) {
+					if(quantidadedescartada > 0) {
+						//joga pra descarte
+						Localizacao locutil = localizacaoService.findByLocalizacaoDescartado(insumoLocalizacaoDestino.getLocalizacao().getObjlocalizacaofilha().getId());
+						if(locutil != null) {
+							InsumoLocalizacao insumoLocalizacaoDestinoDescarte = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, locutil, im.getLoteLEI());
+							insumoLocalizacaoDestinoDescarte.setAprovado(im.getAprovado());
+							insumoLocalizacaoDestinoDescarte.setQuantidade(insumoLocalizacaoDestinoDescarte.getQuantidade() + quantidadedescartada);
+							insumoLocalizacaoDestinoDescarte.setLoteLEI(im.getLoteLEI());
+							insumoLocalizacaoDestinoDescarte.setQuantidadeVolume(im.getQuantidadeVolume());
+							insumoLocalizacaoDestinoDescarte.setUnidadeEntrada(im.getUnidadeEntrada());
+							insumoLocalizacaoDestinoDescarte.setUnidadeRecebida(im.getUnidadeRecebida());
+							insumoLocalizacaoDestinoDescarte.setDataPrevisaoControle(im.getDataPrevisaoControle());
+							insumoLocalizacaoDestinoDescarte.setIrradiado(im.getIrradiado());
+						}
+						
+					}else if(quantidadeutilizada > 0) {
+						//joga pra utilizada
+						Localizacao locutil = localizacaoService.findByLocalizacaoUtilizado(insumoLocalizacaoDestino.getLocalizacao().getObjlocalizacaofilha().getId());
+						if(locutil != null) {
+							InsumoLocalizacao insumoLocalizacaoDestinoUtilizado = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, locutil, im.getLoteLEI());
+							insumoLocalizacaoDestinoUtilizado.setAprovado(im.getAprovado());
+							insumoLocalizacaoDestinoUtilizado.setQuantidade(insumoLocalizacaoDestinoUtilizado.getQuantidade() + quantidadeutilizada);
+							insumoLocalizacaoDestinoUtilizado.setLoteLEI(im.getLoteLEI());
+							insumoLocalizacaoDestinoUtilizado.setQuantidadeVolume(im.getQuantidadeVolume());
+							insumoLocalizacaoDestinoUtilizado.setUnidadeEntrada(im.getUnidadeEntrada());
+							insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
+							insumoLocalizacaoDestinoUtilizado.setDataPrevisaoControle(im.getDataPrevisaoControle());
+							insumoLocalizacaoDestinoUtilizado.setIrradiado(im.getIrradiado());
+						}
+					}
+					/*else {
+						Double novaQuantidade = insumoLocalizacaoDestino.getQuantidade() + quant + quantidadeutilizada + quantidadedescartada;
+						insumoLocalizacaoDestino.setAprovado(im.getAprovado());
+						insumoLocalizacaoDestino.setQuantidade(novaQuantidade);
+						insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+						insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
+						insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
+						insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
+						insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
+						insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());	
+					}*/
+					Double quantidaderestante = insumoLocalizacaoOrigem.getQuantidade() - quantidadeutilizada - quantidadedescartada;
+					if(quantidaderestante > 0) {
+						InsumoLocalizacao insumoLocalizacaoDestinoRestante = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, insumoLocalizacaoDestino.getLocalizacao(), im.getLoteLEI());
+						if(insumoLocalizacaoDestinoRestante != null) {
+							insumoLocalizacaoDestinoRestante.setAprovado(im.getAprovado());
+							insumoLocalizacaoDestinoRestante.setQuantidade(insumoLocalizacaoDestinoRestante.getQuantidade() + quantidaderestante);
+							insumoLocalizacaoDestinoRestante.setLoteLEI(im.getLoteLEI());
+							insumoLocalizacaoDestinoRestante.setQuantidadeVolume(im.getQuantidadeVolume());
+							insumoLocalizacaoDestinoRestante.setUnidadeEntrada(im.getUnidadeEntrada());
+							insumoLocalizacaoDestinoRestante.setUnidadeRecebida(im.getUnidadeRecebida());
+							insumoLocalizacaoDestinoRestante.setDataPrevisaoControle(im.getDataPrevisaoControle());
+							insumoLocalizacaoDestinoRestante.setIrradiado(im.getIrradiado());
+						}else {
+							insumoLocalizacaoDestinoRestante = new InsumoLocalizacao();
+							insumoLocalizacaoDestinoRestante.setAprovado(im.getAprovado());
+							insumoLocalizacaoDestinoRestante.setDataAprovacao(im.getDataAprovacao());
+							insumoLocalizacaoDestinoRestante.setDataIrradiacao(im.getDataIrradiacao());
+							insumoLocalizacaoDestinoRestante.setDataValidade(im.getDataValidade());
+							insumoLocalizacaoDestinoRestante.setLoteCR(im.getLoteCR());
+							insumoLocalizacaoDestinoRestante.setLoteFornecedor(im.getLoteFornecedor());
+							insumoLocalizacaoDestinoRestante.setLoteProducao(im.getLoteProducao());
+							insumoLocalizacaoDestinoRestante.setQuantidade(quantidaderestante);
+							insumoLocalizacaoDestinoRestante.setInsumo(insumo);
+							insumoLocalizacaoDestinoRestante.setLocalizacao(insumoLocalizacaoDestino.getLocalizacao());
+							insumoLocalizacaoDestinoRestante.setLoteRecebimento(im.getLoteRecebimento());
+							insumoLocalizacaoDestinoRestante.setLoteLEI(im.getLoteLEI());
+							insumoLocalizacaoDestinoRestante.setQuantidadeVolume(im.getQuantidadeVolume());
+							insumoLocalizacaoDestinoRestante.setUnidadeEntrada(im.getUnidadeEntrada());
+							insumoLocalizacaoDestinoRestante.setUnidadeRecebida(im.getUnidadeRecebida());
+							insumoLocalizacaoDestinoRestante.setDataPrevisaoControle(im.getDataPrevisaoControle());
+							insumoLocalizacaoDestinoRestante.setIrradiado(im.getIrradiado());
+						}
+						insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoRestante);
+					}
+					
+					
+					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
+				}else {
+					Double novaQuantidade = insumoLocalizacaoDestino.getQuantidade() + quant + quantidadeutilizada + quantidadedescartada;
+					insumoLocalizacaoDestino.setAprovado(im.getAprovado());
+					insumoLocalizacaoDestino.setQuantidade(novaQuantidade);
+					insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+					insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
+					insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
+					insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
+					insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
+					insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
+				}
+				
+				
+				
+				
 			}
-			
-			
-
-			
-
 
 			if (insumoLocalizacaoOrigem.getQuantidade() == null) {
 				insumoLocalizacaoOrigem.setQuantidade(0.0);
 			}
 		
 			
-			Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant;
+			Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant - quantidadeutilizada - quantidadedescartada;
 			insumoLocalizacaoOrigem.setQuantidade(novaQuantidade);
 			insumosLocalizacoesOrigem.add(insumoLocalizacaoOrigem);
 
 			im.setMovimentacao(obj);
-
+			
+			this.atualizaAprovacaoLoteLei(im);
 		}
 
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesDestino);
@@ -154,6 +327,16 @@ public class MovimentacaoService {
 		insumoMovimentacaoRepository.saveAll(obj.getItens());
 		insumoRepository.saveAll(insumos);
 		return obj;
+	}
+	
+	public void atualizaAprovacaoLoteLei(InsumoMovimentacao in) {
+		if(in.getAprovado() != null) {
+			if(in.getAprovado() == true) {
+				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(true,in.getLoteLEI());
+			}else {
+				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, in.getLoteLEI());
+			}
+		}
 	}
 
 	public List<Movimentacao> findAll() {
