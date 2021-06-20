@@ -3,10 +3,12 @@ package br.ipen.cestoque.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
@@ -27,6 +29,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	@JoinColumn(name = "localizacao_id", nullable = false)
 	private Localizacao localizacao;
 
+	@Audited
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "movimentacao_id")
@@ -37,6 +40,9 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	private Double quantidadeMovimentada;
 
 	private String loteProducao;
+	
+	@OneToOne
+	private Localizacao localizacaoOrigem;
 
 	public InsumoMovimentacao() {
 		super();
@@ -49,7 +55,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 			LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao,
 			Boolean aprovado, String loteARM, String condambamostragemgc, String condambamostragemur,
 			Double quantidadeDescartada, Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle,
-			Boolean irradiado, Double quantidade) {
+			Boolean irradiado, Double quantidade, Localizacao localizacaoOrigem, String usualt, Date datalt) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -75,6 +81,9 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.setDataPrevisaoControle(dataPrevisaoControle);
 		this.setIrradiado(irradiado);
 		this.setQuantidade(quantidade);
+		this.localizacaoOrigem = localizacaoOrigem;
+		this.setUsualt(usualt);
+		this.setDatalt(datalt);
 	}
 
 	public Localizacao getLocalizacao() {
@@ -115,6 +124,14 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 
 	public void setLoteProducao(String loteProducao) {
 		this.loteProducao = loteProducao;
+	}
+
+	public Localizacao getLocalizacaoOrigem() {
+		return localizacaoOrigem;
+	}
+
+	public void setLocalizacaoOrigem(Localizacao localizacaoOrigem) {
+		this.localizacaoOrigem = localizacaoOrigem;
 	}
 
 

@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		}
 		
 		
-		return new UserSS(col.getId(), email, col.getSenha(), col.getPerfis());
+		return new UserSS(col.getId(), email, col.getSenha(),col.getNome(), col.getPerfis());
 	}
 
 }

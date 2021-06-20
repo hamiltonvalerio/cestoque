@@ -21,4 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addInterceptor(entradaServiceInterceptor).addPathPatterns("/entradas");
 	}*/
 
+
+	
+
 }

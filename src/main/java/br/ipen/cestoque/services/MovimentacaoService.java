@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Insumo;
@@ -47,6 +49,7 @@ public class MovimentacaoService {
 	
 	@Autowired
 	private LocalizacaoService localizacaoService; 
+	
 
 	/*
 	 * public MovimentacaoService(final MovimentacaoMapper movimentacaoMapper, final
@@ -77,9 +80,11 @@ public class MovimentacaoService {
 		obj.setUsualt(UserService.authenticated().getUsername());
 		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj = repo.save(obj);
+		
 
 		for (InsumoMovimentacao im : obj.getItens()) {
 			im.setLocalizacao(localizacaoDestino);
+			im.setLocalizacaoOrigem(localizacaoOrigem);
 			insumo = new Insumo();
 			insumo = insumoService.find(im.getInsumo().getId());
 			insumo.setUnidade(im.getInsumo().getUnidade());
@@ -104,7 +109,8 @@ public class MovimentacaoService {
 			insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
 			
 
-
+			
+			
 			if (insumoLocalizacaoDestino == null) {
 				insumoLocalizacaoDestino = new InsumoLocalizacao();
 				if(obj.getLocalizacaoDestino().getLocalizacaofilha() == true) {
@@ -168,6 +174,8 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
 							}	
 						}
+						insumoLocalizacaoDestino.setUsualt(UserService.authenticated().getNome());
+						insumoLocalizacaoDestino.setDatalt(new Date(System.currentTimeMillis()));
 						insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 					}
 					InsumoLocalizacao insumoLocalizacaoDestinoResultado = new InsumoLocalizacao();
@@ -188,6 +196,8 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestinoResultado.setUnidadeRecebida(im.getUnidadeRecebida());
 					insumoLocalizacaoDestinoResultado.setDataPrevisaoControle(im.getDataPrevisaoControle());
 					insumoLocalizacaoDestinoResultado.setIrradiado(im.getIrradiado());
+					insumoLocalizacaoDestinoResultado.setUsualt(UserService.authenticated().getNome());
+					insumoLocalizacaoDestinoResultado.setDatalt(new Date(System.currentTimeMillis()));
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoResultado);
 				}else {
 					insumoLocalizacaoDestino.setAprovado(im.getAprovado());
@@ -207,6 +217,8 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
 					insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
 					insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+					insumoLocalizacaoDestino.setUsualt(UserService.authenticated().getNome());
+					insumoLocalizacaoDestino.setDatalt(new Date(System.currentTimeMillis()));
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 				}
 		
@@ -285,6 +297,8 @@ public class MovimentacaoService {
 							insumoLocalizacaoDestinoRestante.setDataPrevisaoControle(im.getDataPrevisaoControle());
 							insumoLocalizacaoDestinoRestante.setIrradiado(im.getIrradiado());
 						}
+						insumoLocalizacaoDestinoRestante.setUsualt(UserService.authenticated().getNome());
+						insumoLocalizacaoDestinoRestante.setDatalt(new Date(System.currentTimeMillis()));
 						insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoRestante);
 					}
 					
@@ -300,6 +314,8 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
 					insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
 					insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+					insumoLocalizacaoDestino.setUsualt(UserService.authenticated().getNome());
+					insumoLocalizacaoDestino.setDatalt(new Date(System.currentTimeMillis()));
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 				}
 				
@@ -315,6 +331,8 @@ public class MovimentacaoService {
 			
 			Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant - quantidadeutilizada - quantidadedescartada;
 			insumoLocalizacaoOrigem.setQuantidade(novaQuantidade);
+			insumoLocalizacaoOrigem.setUsualt(UserService.authenticated().getNome());
+			insumoLocalizacaoOrigem.setDatalt(new Date(System.currentTimeMillis()));
 			insumosLocalizacoesOrigem.add(insumoLocalizacaoOrigem);
 
 			im.setMovimentacao(obj);

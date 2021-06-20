@@ -20,6 +20,7 @@ public class UserSS implements UserDetails{
 	private Integer id;
 	private String email;
 	private String senha;
+	private String nome;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	public UserSS() {
@@ -29,11 +30,12 @@ public class UserSS implements UserDetails{
 
 	
 	
-	public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
+	public UserSS(Integer id, String email, String senha, String nome, Set<Perfil> perfis) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
+		this.nome = nome;
 		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 
@@ -85,6 +87,18 @@ public class UserSS implements UserDetails{
 
 	public boolean hasHole(Perfil perfil) {
 		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	}
+
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

@@ -8,6 +8,9 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Entrada;
@@ -51,6 +54,7 @@ public class EntradaService {
 	@SuppressWarnings("unused")
 	@Autowired
 	private ColaboradorService colaboradorService;
+
 		
 	public Entrada find(Integer id) throws ObjectNotFoundException {
 		Optional<Entrada> obj = repo.findById(id);
@@ -115,6 +119,8 @@ public class EntradaService {
 			insumoLocalizacao.setQuantidadeVolume(ie.getQuantidadeVolume());
 			insumoLocalizacao.setUnidadeEntrada(ie.getUnidadeEntrada());
 			insumoLocalizacao.setUnidadeRecebida(ie.getUnidadeRecebida());
+			insumoLocalizacao.setUsualt(UserService.authenticated().getNome());
+			insumoLocalizacao.setDatalt(new Date(System.currentTimeMillis()));
 			insumosLocalizacoes.add(insumoLocalizacao);
 			/*if(insumoLocalizacao == null) {
 				insumoLocalizacao = new InsumoLocalizacao();

@@ -2,6 +2,7 @@ package br.ipen.cestoque.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,12 +11,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 
 @MappedSuperclass
 public abstract class DadosComunsInsumos {
 
+	@Audited
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -24,15 +28,19 @@ public abstract class DadosComunsInsumos {
 	@JoinColumn(name = "insumo_id", nullable = false)
 	private Insumo insumo;
 
+	@Audited
 	private String loteFornecedor;
 
+	@Audited
 	private String loteCR;
 
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataIrradiacao;
 
+	@Audited
 	private String loteRecebimento;
 
+	@Audited
 	private String loteARM;
 
 	@DateTimeFormat(iso = ISO.DATE)
@@ -61,14 +69,22 @@ public abstract class DadosComunsInsumos {
 	@JoinColumn(name = "unidadeentrada_id")
 	private Unidade unidadeEntrada;
 	
+	@Audited
 	private String loteLEI;
 	
 	private String condambamostragemgc;
 	private String condambamostragemur;
 
+	@Audited
 	private Double quantidade;
+	@Audited
 	private Double quantidadeDescartada;
+	@Audited
 	private Double quantidadeUtilizada;
+	@Audited
+	private String usualt;
+	@Audited
+	private Date datalt;
 	
 	public Integer getId() {
 		return id;
@@ -278,5 +294,23 @@ public abstract class DadosComunsInsumos {
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	public String getUsualt() {
+		return usualt;
+	}
+
+	public void setUsualt(String usualt) {
+		this.usualt = usualt;
+	}
+
+	public Date getDatalt() {
+		return datalt;
+	}
+
+	public void setDatalt(Date datalt) {
+		this.datalt = datalt;
+	}
+	
+	
 
 }
