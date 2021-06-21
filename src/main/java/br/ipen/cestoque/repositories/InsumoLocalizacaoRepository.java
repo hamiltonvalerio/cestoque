@@ -112,6 +112,9 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("localizacao") Localizacao localizacao,
 			@Param("loteLEI") String loteLEI);
 	
+	@Query(value = "SELECT DISTINCT on (lotelei) lotelei, * FROM public.insumolocalizacao ", nativeQuery = true)
+	public List<InsumoLocalizacao> findLotesLEIInsumosLocalizacoes();
+	
 	@Transactional
 	@Modifying
 	@Query("UPDATE InsumoLocalizacao " + "	SET quantidade =:quantidade "

@@ -211,5 +211,9 @@ public class InsumoService {
 		return insumoLocalizacaoRepository.count();
 	}
 	
+	public List<InsumoLocalizacao> findLotesLEIInsumosLocalizacoes(){
+		return insumoLocalizacaoRepository.findLotesLEIInsumosLocalizacoes();
+	}
+	
 	
 }

@@ -252,5 +252,12 @@ public class InsumoResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@ApiOperation(value = "Retorna LotesLEI cadastrados")
+	@RequestMapping(value = "/findLotesLEIInsumosLocalizacoes", method = RequestMethod.GET)
+	public ResponseEntity<List<InsumoLocalizacao>> findLotesLEIInsumosLocalizacoes() {
+		List<InsumoLocalizacao> lista = service.findLotesLEIInsumosLocalizacoes();
+		return ResponseEntity.ok().body(lista);
+	}
 
 }
