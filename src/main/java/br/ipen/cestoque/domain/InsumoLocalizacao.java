@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -44,6 +45,9 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	
 	@Transient
 	private String codigoalmoxarifado;
+	
+	@OneToOne
+	private Localizacao localizacaoOrigem;
 
 	public InsumoLocalizacao() {
 		super();
@@ -57,7 +61,8 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 			LocalDateTime dataReprovacao, Boolean aprovado, String loteRecebimento, String loteARM,
 			Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI, 
 			String condambamostragemgc, String condambamostragemur, Double quantidadeDescartada,
-			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle, Boolean irradiado, String usualt, Date datalt) {
+			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle, Boolean irradiado, String usualt, Date datalt,
+			Localizacao localizacaoOrigem) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -89,6 +94,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setIrradiado(irradiado);
 		this.setUsualt(usualt);
 		this.setDatalt(datalt);
+		this.localizacaoOrigem = localizacaoOrigem;
 	}
 
 	public Localizacao getLocalizacao() {
@@ -152,6 +158,14 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 
 	public void setCodigoalmoxarifado(String codigoalmoxarifado) {
 		this.codigoalmoxarifado = codigoalmoxarifado;
+	}
+
+	public Localizacao getLocalizacaoOrigem() {
+		return localizacaoOrigem;
+	}
+
+	public void setLocalizacaoOrigem(Localizacao localizacaoOrigem) {
+		this.localizacaoOrigem = localizacaoOrigem;
 	}
 
 

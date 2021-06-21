@@ -74,7 +74,7 @@ public class EntradaService {
 		localizacao = entrada.getLocalizacao();
 		
 		entrada.setId(null);
-		entrada.setUsualt(UserService.authenticated().getUsername());
+		entrada.setUsualt(UserService.authenticated().getNome());
 		entrada.setDatalt(new Date(System.currentTimeMillis()));
 		entrada = repo.save(entrada);
 		

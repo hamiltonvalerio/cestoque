@@ -127,4 +127,10 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 	@Query("UPDATE InsumoLocalizacao " + "	SET aprovado =:aprovado "
 			+ "	WHERE lotelei LIKE :lotelei")
 	public void updateAprovacaoPorLoteLEI(@Param("aprovado") boolean aprovado, @Param("lotelei") String lotelei);
+
+	@Transactional(readOnly = true)
+	@Query("SELECT il FROM InsumoLocalizacao il "
+			+ "WHERE lotelei LIKE :lotelei "
+			+ "ORDER BY id ASC")
+	public List<InsumoLocalizacao> findInsumosLocalizacoesByLoteLEI(@Param("lotelei") String loteLEI);
 }

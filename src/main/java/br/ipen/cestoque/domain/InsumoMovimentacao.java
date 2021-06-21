@@ -85,6 +85,35 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.setUsualt(usualt);
 		this.setDatalt(datalt);
 	}
+	
+	public InsumoMovimentacao(InsumoLocalizacao il) {
+		super();
+		this.setInsumo(il.getInsumo());
+		this.localizacao = il.getLocalizacao();
+		this.quantidadeOrigem = null;
+		this.quantidadeMovimentada = il.getQuantidade();
+		this.setLoteFornecedor(il.getLoteFornecedor());
+		this.setLoteCR(il.getLoteCR());
+		this.loteProducao = il.getLoteProducao();
+		this.setDataIrradiacao(il.getDataIrradiacao());
+		this.setDataValidade(il.getDataValidade());
+		this.setDataFabricacao(il.getDataFabricacao());
+		this.setDataAprovacao(il.getDataAprovacao());
+		this.setDataReprovacao(il.getDataReprovacao());
+		this.setAprovado(il.getAprovado());
+		this.setLoteRecebimento(il.getLoteRecebimento());
+		this.setLoteARM(il.getLoteARM());
+		this.setCondambamostragemgc(il.getCondambamostragemgc());
+		this.setCondambamostragemur(il.getCondambamostragemur());
+		this.setQuantidadeDescartada(il.getQuantidadeDescartada());
+		this.setQuantidadeUtilizada(il.getQuantidadeUtilizada());
+		this.setDataPrevisaoControle(il.getDataPrevisaoControle());
+		this.setIrradiado(il.getIrradiado());
+		this.setQuantidade(il.getQuantidade());
+		this.localizacaoOrigem = il.getLocalizacaoOrigem();
+		this.setUsualt(il.getUsualt());
+		this.setDatalt(il.getDatalt());
+	}
 
 	public Localizacao getLocalizacao() {
 		return localizacao;

@@ -15,10 +15,12 @@ import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.InsumoEntrada;
 import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
+import br.ipen.cestoque.repositories.InsumoEntradaRepository;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
 import br.ipen.cestoque.services.exception.DataIntegrityException;
@@ -35,6 +37,9 @@ public class InsumoService {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	private InsumoEntradaRepository ierepo;
 
 	public Insumo find(Integer id) throws ObjectNotFoundException {
 		Optional<Insumo> obj = repo.findById(id);
@@ -213,6 +218,16 @@ public class InsumoService {
 	
 	public List<InsumoLocalizacao> findLotesLEIInsumosLocalizacoes(){
 		return insumoLocalizacaoRepository.findLotesLEIInsumosLocalizacoes();
+	}
+
+	public List<InsumoLocalizacao> findInsumosLocalizacoesByLoteLEI(String loteLEI) {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.findInsumosLocalizacoesByLoteLEI(loteLEI);
+	}
+
+	public InsumoEntrada findInsumoEntradaByLoteLEI(String loteLEI) {
+		// TODO Auto-generated method stub
+		return ierepo.findInsumoEntradaByLoteLEI(loteLEI);
 	}
 	
 	

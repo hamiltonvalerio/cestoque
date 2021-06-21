@@ -81,10 +81,15 @@ public class MovimentacaoService {
 		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj = repo.save(obj);
 		
-
+		InsumoMovimentacao imdestino = new InsumoMovimentacao();
+		List<InsumoMovimentacao> itensMovimentados = new ArrayList<>();
+ 
 		for (InsumoMovimentacao im : obj.getItens()) {
+			imdestino = new InsumoMovimentacao(); 
 			im.setLocalizacao(localizacaoDestino);
 			im.setLocalizacaoOrigem(localizacaoOrigem);
+			im.setUsualt(UserService.authenticated().getNome());
+			im.setDatalt(new Date(System.currentTimeMillis()));
 			insumo = new Insumo();
 			insumo = insumoService.find(im.getInsumo().getId());
 			insumo.setUnidade(im.getInsumo().getUnidade());
@@ -108,7 +113,7 @@ public class MovimentacaoService {
 			
 			insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
 			
-
+			
 			
 			
 			if (insumoLocalizacaoDestino == null) {
@@ -144,6 +149,7 @@ public class MovimentacaoService {
 									insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
 									insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
 									insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+									//
 								}
 							}
 						}else if(im.getQuantidadeDescartada() != null) {
@@ -176,6 +182,12 @@ public class MovimentacaoService {
 						}
 						insumoLocalizacaoDestino.setUsualt(UserService.authenticated().getNome());
 						insumoLocalizacaoDestino.setDatalt(new Date(System.currentTimeMillis()));
+						
+						//insere a movimentação utilizada
+						
+						InsumoMovimentacao movim = new InsumoMovimentacao(insumoLocalizacaoDestino);
+						movim.setLocalizacaoOrigem(localizacaoOrigem);
+						itensMovimentados.add(movim);
 						insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 					}
 					InsumoLocalizacao insumoLocalizacaoDestinoResultado = new InsumoLocalizacao();
@@ -198,6 +210,7 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestinoResultado.setIrradiado(im.getIrradiado());
 					insumoLocalizacaoDestinoResultado.setUsualt(UserService.authenticated().getNome());
 					insumoLocalizacaoDestinoResultado.setDatalt(new Date(System.currentTimeMillis()));
+					
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoResultado);
 				}else {
 					insumoLocalizacaoDestino.setAprovado(im.getAprovado());
@@ -219,6 +232,7 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
 					insumoLocalizacaoDestino.setUsualt(UserService.authenticated().getNome());
 					insumoLocalizacaoDestino.setDatalt(new Date(System.currentTimeMillis()));
+					
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 				}
 		
@@ -299,9 +313,9 @@ public class MovimentacaoService {
 						}
 						insumoLocalizacaoDestinoRestante.setUsualt(UserService.authenticated().getNome());
 						insumoLocalizacaoDestinoRestante.setDatalt(new Date(System.currentTimeMillis()));
+						
 						insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoRestante);
 					}
-					
 					
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 				}else {
@@ -314,8 +328,12 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
 					insumoLocalizacaoDestino.setDataPrevisaoControle(im.getDataPrevisaoControle());
 					insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
+					insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
 					insumoLocalizacaoDestino.setUsualt(UserService.authenticated().getNome());
 					insumoLocalizacaoDestino.setDatalt(new Date(System.currentTimeMillis()));
+					insumoLocalizacaoDestino.setDataValidade(im.getDataValidade());
+					
+					
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 				}
 				
@@ -338,11 +356,21 @@ public class MovimentacaoService {
 			im.setMovimentacao(obj);
 			
 			this.atualizaAprovacaoLoteLei(im);
+			
+			itensMovimentados.add(im);
+		    
 		}
 
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesDestino);
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesOrigem);
-		insumoMovimentacaoRepository.saveAll(obj.getItens());
+		
+		//AQUI
+		for (InsumoMovimentacao itm : itensMovimentados) {
+			itm.setId(null);
+			insumoMovimentacaoRepository.save(itm);
+		}
+		
+		//insumoMovimentacaoRepository.saveAll(itensMovimentados);
 		insumoRepository.saveAll(insumos);
 		return obj;
 	}
@@ -358,12 +386,7 @@ public class MovimentacaoService {
 	}
 
 	public List<Movimentacao> findAll() {
-		// TODO Auto-generated method stub
-		// return repo.findAll();
-
 		List<Movimentacao> lista = repo.findAllByOrderByIdDesc();
-		//List<MovimentacaoDTO> listaDTO = new ArrayList<>();
-
 		return lista;
 	}
 

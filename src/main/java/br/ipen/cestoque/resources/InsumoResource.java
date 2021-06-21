@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.InsumoEntrada;
 import br.ipen.cestoque.domain.InsumoLocalizacao;
 import br.ipen.cestoque.dto.InsumoDTO;
+import br.ipen.cestoque.dto.InsumoEntradaDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.services.InsumoService;
@@ -37,6 +39,8 @@ public class InsumoResource {
 
 	@Autowired
 	private InsumoLocalizacaoRepository ilrepo;
+
+	
 
 	@ApiOperation(value = "Retorna insumo por ID")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -168,7 +172,7 @@ public class InsumoResource {
 
 		Page<InsumoLocalizacao> list = service.findInsumoLocalizacaoByLocalizacao(Integer.parseInt(localizacao_id),
 				page, linesPerPage);
-		
+
 		for (InsumoLocalizacao insumoLocalizacao : list) {
 			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
 		}
@@ -176,16 +180,16 @@ public class InsumoResource {
 		return ResponseEntity.ok().body(list);
 
 	}
-	
+
 	@RequestMapping(value = "/buscainsumolocalizacaoporlocalizacaoSemVazio", method = RequestMethod.GET)
 	public ResponseEntity<Page<InsumoLocalizacao>> findInsumoLocalizacaoByLocalizacaoSemVazio(
 			@RequestParam(value = "localizacao_id") String localizacao_id,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage) {
 
-		Page<InsumoLocalizacao> list = service.findInsumoLocalizacaoByLocalizacaoSemVazio(Integer.parseInt(localizacao_id),
-				page, linesPerPage);
-		
+		Page<InsumoLocalizacao> list = service
+				.findInsumoLocalizacaoByLocalizacaoSemVazio(Integer.parseInt(localizacao_id), page, linesPerPage);
+
 		for (InsumoLocalizacao insumoLocalizacao : list) {
 			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
 		}
@@ -204,27 +208,6 @@ public class InsumoResource {
 			il.setNomedoinsumo(il.getInsumo().getNome());
 		}
 
-		// List<Insumo> list =
-		// service.buscaporlocalizacaonopage(Integer.parseInt(localizacao_id));
-
-		/*
-		 * List<Insumo> list = new ArrayList<>();
-		 * 
-		 * for(InsumoLocalizacao il : ils) { Insumo i = new Insumo();
-		 * 
-		 * list.add(new Insumo()) }
-		 */
-
-		/*
-		 * for (Insumo insumo : list) { for (InsumoLocalizacao il :
-		 * insumo.getLocalizacoes()) {
-		 * if(il.getLocalizacao().getId().equals(Integer.parseInt(localizacao_id))) {
-		 * insumo.setQuantidade(il.getQuantidade());
-		 * insumo.setNomecodalmox(il.getInsumo().getNome()+" - "+il.getInsumo().
-		 * getCodigoalmox());
-		 * 
-		 * } } }
-		 */
 		return ResponseEntity.ok().body(ils);
 	}
 
@@ -252,12 +235,33 @@ public class InsumoResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@ApiOperation(value = "Retorna LotesLEI cadastrados")
 	@RequestMapping(value = "/findLotesLEIInsumosLocalizacoes", method = RequestMethod.GET)
 	public ResponseEntity<List<InsumoLocalizacao>> findLotesLEIInsumosLocalizacoes() {
 		List<InsumoLocalizacao> lista = service.findLotesLEIInsumosLocalizacoes();
 		return ResponseEntity.ok().body(lista);
+	}
+
+	@RequestMapping(value = "/findInsumosLocalizacoesByLoteLEI", method = RequestMethod.GET)
+	public ResponseEntity<List<InsumoLocalizacao>> findInsumosLocalizacoesByLoteLEI(
+			@RequestParam(value = "loteLEI") String loteLEI) {
+
+		List<InsumoLocalizacao> ils = service.findInsumosLocalizacoesByLoteLEI(loteLEI);
+
+		for (InsumoLocalizacao il : ils) {
+			il.setNomedoinsumo(il.getInsumo().getNome());
+		}
+
+		return ResponseEntity.ok().body(ils);
+	}
+
+	@RequestMapping(value = "/findInsumoEntradaByLoteLEI", method = RequestMethod.GET)
+	public ResponseEntity<InsumoEntradaDTO> findInsumoEntradaByLoteLEI(@RequestParam(value = "loteLEI") String loteLEI) {
+
+		InsumoEntrada ie = service.findInsumoEntradaByLoteLEI(loteLEI);
+		
+		return ResponseEntity.ok().body(new InsumoEntradaDTO(ie));
 	}
 
 }
