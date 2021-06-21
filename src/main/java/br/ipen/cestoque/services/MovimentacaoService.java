@@ -6,12 +6,11 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Insumo;
@@ -243,14 +242,32 @@ public class MovimentacaoService {
 						Localizacao locutil = localizacaoService.findByLocalizacaoDescartado(insumoLocalizacaoDestino.getLocalizacao().getObjlocalizacaofilha().getId());
 						if(locutil != null) {
 							InsumoLocalizacao insumoLocalizacaoDestinoDescarte = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, locutil, im.getLoteLEI());
-							insumoLocalizacaoDestinoDescarte.setAprovado(im.getAprovado());
-							insumoLocalizacaoDestinoDescarte.setQuantidade(insumoLocalizacaoDestinoDescarte.getQuantidade() + quantidadedescartada);
-							insumoLocalizacaoDestinoDescarte.setLoteLEI(im.getLoteLEI());
-							insumoLocalizacaoDestinoDescarte.setQuantidadeVolume(im.getQuantidadeVolume());
-							insumoLocalizacaoDestinoDescarte.setUnidadeEntrada(im.getUnidadeEntrada());
-							insumoLocalizacaoDestinoDescarte.setUnidadeRecebida(im.getUnidadeRecebida());
-							insumoLocalizacaoDestinoDescarte.setDataPrevisaoControle(im.getDataPrevisaoControle());
-							insumoLocalizacaoDestinoDescarte.setIrradiado(im.getIrradiado());
+							if(insumoLocalizacaoDestinoDescarte != null) {
+								insumoLocalizacaoDestinoDescarte.setAprovado(im.getAprovado());
+								insumoLocalizacaoDestinoDescarte.setQuantidade(insumoLocalizacaoDestinoDescarte.getQuantidade() + quantidadedescartada);
+								insumoLocalizacaoDestinoDescarte.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoDescarte.setQuantidadeVolume(im.getQuantidadeVolume());
+								insumoLocalizacaoDestinoDescarte.setUnidadeEntrada(im.getUnidadeEntrada());
+								insumoLocalizacaoDestinoDescarte.setUnidadeRecebida(im.getUnidadeRecebida());
+								insumoLocalizacaoDestinoDescarte.setDataPrevisaoControle(im.getDataPrevisaoControle());
+								insumoLocalizacaoDestinoDescarte.setIrradiado(im.getIrradiado());
+							}else {
+								insumoLocalizacaoDestinoDescarte = new InsumoLocalizacao(im);
+								insumoLocalizacaoDestinoDescarte.setId(null);
+								insumoLocalizacaoDestinoDescarte.setLocalizacao(locutil);
+								insumoLocalizacaoDestinoDescarte.setAprovado(im.getAprovado());
+								insumoLocalizacaoDestinoDescarte.setQuantidade((insumoLocalizacaoDestinoDescarte.getQuantidade() != null ?insumoLocalizacaoDestinoDescarte.getQuantidade(): 0.0)  + quantidadedescartada);
+								insumoLocalizacaoDestinoDescarte.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoDescarte.setQuantidadeVolume(im.getQuantidadeVolume());
+								insumoLocalizacaoDestinoDescarte.setUnidadeEntrada(im.getUnidadeEntrada());
+								insumoLocalizacaoDestinoDescarte.setUnidadeRecebida(im.getUnidadeRecebida());
+								insumoLocalizacaoDestinoDescarte.setDataPrevisaoControle(im.getDataPrevisaoControle());
+								insumoLocalizacaoDestinoDescarte.setIrradiado(im.getIrradiado());
+							}
+							InsumoMovimentacao movim = new InsumoMovimentacao(insumoLocalizacaoDestinoDescarte);
+							movim.setLocalizacaoOrigem(localizacaoOrigem);
+							itensMovimentados.add(movim);
+							insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoDescarte);
 						}
 						
 					}else if(quantidadeutilizada > 0) {
@@ -258,14 +275,32 @@ public class MovimentacaoService {
 						Localizacao locutil = localizacaoService.findByLocalizacaoUtilizado(insumoLocalizacaoDestino.getLocalizacao().getObjlocalizacaofilha().getId());
 						if(locutil != null) {
 							InsumoLocalizacao insumoLocalizacaoDestinoUtilizado = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, locutil, im.getLoteLEI());
-							insumoLocalizacaoDestinoUtilizado.setAprovado(im.getAprovado());
-							insumoLocalizacaoDestinoUtilizado.setQuantidade(insumoLocalizacaoDestinoUtilizado.getQuantidade() + quantidadeutilizada);
-							insumoLocalizacaoDestinoUtilizado.setLoteLEI(im.getLoteLEI());
-							insumoLocalizacaoDestinoUtilizado.setQuantidadeVolume(im.getQuantidadeVolume());
-							insumoLocalizacaoDestinoUtilizado.setUnidadeEntrada(im.getUnidadeEntrada());
-							insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
-							insumoLocalizacaoDestinoUtilizado.setDataPrevisaoControle(im.getDataPrevisaoControle());
-							insumoLocalizacaoDestinoUtilizado.setIrradiado(im.getIrradiado());
+							if(insumoLocalizacaoDestinoUtilizado != null) {
+								insumoLocalizacaoDestinoUtilizado.setAprovado(im.getAprovado());
+								insumoLocalizacaoDestinoUtilizado.setQuantidade(insumoLocalizacaoDestinoUtilizado.getQuantidade() + quantidadeutilizada);
+								insumoLocalizacaoDestinoUtilizado.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoUtilizado.setQuantidadeVolume(im.getQuantidadeVolume());
+								insumoLocalizacaoDestinoUtilizado.setUnidadeEntrada(im.getUnidadeEntrada());
+								insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
+								insumoLocalizacaoDestinoUtilizado.setDataPrevisaoControle(im.getDataPrevisaoControle());
+								insumoLocalizacaoDestinoUtilizado.setIrradiado(im.getIrradiado());
+							}else {
+								insumoLocalizacaoDestinoUtilizado = new InsumoLocalizacao(im);
+								insumoLocalizacaoDestinoUtilizado.setId(null);
+								insumoLocalizacaoDestinoUtilizado.setLocalizacao(locutil);
+								insumoLocalizacaoDestinoUtilizado.setAprovado(im.getAprovado());
+								insumoLocalizacaoDestinoUtilizado.setQuantidade((insumoLocalizacaoDestinoUtilizado.getQuantidade() != null ?insumoLocalizacaoDestinoUtilizado.getQuantidade(): 0.0)  + quantidadeutilizada);
+								insumoLocalizacaoDestinoUtilizado.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoUtilizado.setQuantidadeVolume(im.getQuantidadeVolume());
+								insumoLocalizacaoDestinoUtilizado.setUnidadeEntrada(im.getUnidadeEntrada());
+								insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
+								insumoLocalizacaoDestinoUtilizado.setDataPrevisaoControle(im.getDataPrevisaoControle());
+								insumoLocalizacaoDestinoUtilizado.setIrradiado(im.getIrradiado());
+							}
+							InsumoMovimentacao movim = new InsumoMovimentacao(insumoLocalizacaoDestinoUtilizado);
+							movim.setLocalizacaoOrigem(localizacaoOrigem);
+							itensMovimentados.add(movim);
+							insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoUtilizado);
 						}
 					}
 					/*else {
@@ -336,10 +371,7 @@ public class MovimentacaoService {
 					
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 				}
-				
-				
-				
-				
+
 			}
 
 			if (insumoLocalizacaoOrigem.getQuantidade() == null) {
@@ -365,12 +397,7 @@ public class MovimentacaoService {
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesOrigem);
 		
 		//AQUI
-		for (InsumoMovimentacao itm : itensMovimentados) {
-			itm.setId(null);
-			insumoMovimentacaoRepository.save(itm);
-		}
-		
-		//insumoMovimentacaoRepository.saveAll(itensMovimentados);
+		insumoMovimentacaoRepository.saveAll(itensMovimentados);
 		insumoRepository.saveAll(insumos);
 		return obj;
 	}

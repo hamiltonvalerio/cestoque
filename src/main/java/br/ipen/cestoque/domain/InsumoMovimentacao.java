@@ -90,7 +90,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		super();
 		this.setInsumo(il.getInsumo());
 		this.localizacao = il.getLocalizacao();
-		this.quantidadeOrigem = null;
+		this.quantidadeOrigem = 0.0;
 		this.quantidadeMovimentada = il.getQuantidade();
 		this.setLoteFornecedor(il.getLoteFornecedor());
 		this.setLoteCR(il.getLoteCR());
@@ -113,6 +113,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.localizacaoOrigem = il.getLocalizacaoOrigem();
 		this.setUsualt(il.getUsualt());
 		this.setDatalt(il.getDatalt());
+		this.setLoteLEI(il.getLoteLEI());
 	}
 
 	public Localizacao getLocalizacao() {
