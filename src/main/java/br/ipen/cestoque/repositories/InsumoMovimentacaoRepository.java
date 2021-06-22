@@ -20,6 +20,7 @@ public interface InsumoMovimentacaoRepository extends JpaRepository<InsumoMovime
 			+ "INNER JOIN im.localizacao l "
 			+ "INNER JOIN im.localizacaoOrigem lo "
 			+ "WHERE im.loteLEI LIKE :lotelei "
+			+ "AND im.quantidadeMovimentada != 0 "
 			+ "ORDER BY im.datalt ASC")
 	public List<InsumoMovimentacao> movimentacoesPorLoteLEI(@Param("lotelei") String loteLEI);
 		
