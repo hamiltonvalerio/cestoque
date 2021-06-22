@@ -422,4 +422,9 @@ public class MovimentacaoService {
 		return repo.findAll(pageRequest);
 	}
 
+	public List<InsumoMovimentacao> movimentacoesPorLoteLEI(String loteLEI) {
+		// TODO Auto-generated method stub
+		return insumoMovimentacaoRepository.movimentacoesPorLoteLEI(loteLEI);
+	}
+
 }

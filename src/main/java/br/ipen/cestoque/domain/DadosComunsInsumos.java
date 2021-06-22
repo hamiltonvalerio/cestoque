@@ -83,7 +83,9 @@ public abstract class DadosComunsInsumos {
 	private Double quantidadeUtilizada;
 	@Audited
 	private String usualt;
+	
 	@Audited
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date datalt;
 	
 	public Integer getId() {

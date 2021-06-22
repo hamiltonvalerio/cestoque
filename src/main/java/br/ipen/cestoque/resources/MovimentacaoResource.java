@@ -17,7 +17,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.InsumoMovimentacao;
 import br.ipen.cestoque.domain.Movimentacao;
-import br.ipen.cestoque.dto.MovimentacaoDTO;
 import br.ipen.cestoque.services.MovimentacaoService;
 
 
@@ -83,6 +82,14 @@ public class MovimentacaoResource {
 		//System.out.println(list.getSize());
 		//Page<InsumoDTO> listDto = list.map(obj -> new InsumoDTO(obj));
 		//System.out.println(listDto.getSize());
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@RequestMapping(value="/movimentacoesPorLoteLEI", method=RequestMethod.GET)
+	public ResponseEntity<List<InsumoMovimentacao>> movimentacoesPorLoteLEI(@RequestParam(value = "loteLEI") String loteLEI){
+
+		List<InsumoMovimentacao> list = service.movimentacoesPorLoteLEI(loteLEI);
+
 		return ResponseEntity.ok().body(list);
 	}
 	
