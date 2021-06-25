@@ -1,6 +1,6 @@
 # Sistema de Controle de Estoque de Insumos para Produção de Radiofármacos
 
-Backend API REST desenvolvida em Java 8
+Backend API REST desenvolvido em Java 8
 - Spring Boot;
 - Spring Security;
 - PostgreSql;
