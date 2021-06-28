@@ -135,6 +135,8 @@ public class MovimentacaoService {
 									
 									//qtd utilizada
 									insumoLocalizacaoDestino.setQuantidade(im.getQuantidadeUtilizada());
+									insumoLocalizacaoDestino.setQuantidadeUtilizada(im.getQuantidadeUtilizada());
+									
 									
 									insumoLocalizacaoDestino.setInsumo(insumo);
 									
@@ -164,6 +166,7 @@ public class MovimentacaoService {
 								
 								//qtd utilizada
 								insumoLocalizacaoDestino.setQuantidade(im.getQuantidadeDescartada());
+								insumoLocalizacaoDestino.setQuantidadeDescartada(im.getQuantidadeDescartada());
 								
 								insumoLocalizacaoDestino.setInsumo(insumo);
 								
@@ -264,6 +267,8 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestinoDescarte.setDataPrevisaoControle(im.getDataPrevisaoControle());
 								insumoLocalizacaoDestinoDescarte.setIrradiado(im.getIrradiado());
 							}
+							insumoLocalizacaoDestinoDescarte.setUsualt(UserService.authenticated().getNome());
+							insumoLocalizacaoDestinoDescarte.setDatalt(new Date(System.currentTimeMillis()));
 							InsumoMovimentacao movim = new InsumoMovimentacao(insumoLocalizacaoDestinoDescarte);
 							movim.setLocalizacaoOrigem(localizacaoOrigem);
 							itensMovimentados.add(movim);
@@ -284,6 +289,7 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
 								insumoLocalizacaoDestinoUtilizado.setDataPrevisaoControle(im.getDataPrevisaoControle());
 								insumoLocalizacaoDestinoUtilizado.setIrradiado(im.getIrradiado());
+								insumoLocalizacaoDestinoUtilizado.setQuantidadeUtilizada(im.getQuantidadeUtilizada());
 							}else {
 								insumoLocalizacaoDestinoUtilizado = new InsumoLocalizacao(im);
 								insumoLocalizacaoDestinoUtilizado.setId(null);
@@ -296,7 +302,10 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
 								insumoLocalizacaoDestinoUtilizado.setDataPrevisaoControle(im.getDataPrevisaoControle());
 								insumoLocalizacaoDestinoUtilizado.setIrradiado(im.getIrradiado());
+								insumoLocalizacaoDestinoUtilizado.setQuantidadeUtilizada(im.getQuantidadeUtilizada());
 							}
+							insumoLocalizacaoDestinoUtilizado.setUsualt(UserService.authenticated().getNome());
+							insumoLocalizacaoDestinoUtilizado.setDatalt(new Date(System.currentTimeMillis()));
 							InsumoMovimentacao movim = new InsumoMovimentacao(insumoLocalizacaoDestinoUtilizado);
 							movim.setLocalizacaoOrigem(localizacaoOrigem);
 							itensMovimentados.add(movim);

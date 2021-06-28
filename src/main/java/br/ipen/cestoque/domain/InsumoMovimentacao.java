@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.envers.Audited;
 
@@ -43,6 +44,9 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 	
 	@OneToOne
 	private Localizacao localizacaoOrigem;
+	
+	@Transient
+	private Double quantidadeRealMovimentada;
 
 	public InsumoMovimentacao() {
 		super();
@@ -162,6 +166,27 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 
 	public void setLocalizacaoOrigem(Localizacao localizacaoOrigem) {
 		this.localizacaoOrigem = localizacaoOrigem;
+	}
+
+	public Double getQuantidadeRealMovimentada() {
+		if(this.localizacao != null) {
+			if(this.localizacao.getUtilizado() != null) {
+				if(this.localizacao.getUtilizado()) {
+					return this.getQuantidadeUtilizada();
+				}else if(this.localizacao.getDescarte()) {
+					return this.getQuantidadeDescartada();
+				}else {
+					this.getQuantidadeMovimentada();
+				}
+			}else if(this.localizacao.getDescarte() != null) {
+				return this.localizacao.getDescarte()?this.getQuantidadeDescartada():this.getQuantidadeMovimentada();
+			}	
+		}
+		return quantidadeMovimentada;
+	}
+
+	public void setQuantidadeRealMovimentada(Double quantidadeRealMovimentada) {
+		this.quantidadeRealMovimentada = quantidadeRealMovimentada;
 	}
 
 
