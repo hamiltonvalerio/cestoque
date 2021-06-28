@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
@@ -33,8 +34,10 @@ public class Movimentacao implements Serializable{
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date datamovimentacao;
 	
+	@OneToOne
 	private Localizacao localizacaoOrigem;
 	
+	@OneToOne
 	private Localizacao localizacaoDestino;
 
 	
