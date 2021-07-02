@@ -13,7 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Colaborador;
-import br.ipen.cestoque.domain.enums.Perfil;
+import br.ipen.cestoque.domain.Perfil;
+//import br.ipen.cestoque.domain.enums.Perfil;
 import br.ipen.cestoque.dto.ColaboradorDTO;
 import br.ipen.cestoque.dto.ColaboradorNewDTO;
 import br.ipen.cestoque.repositories.ColaboradorRepository;
@@ -35,7 +36,7 @@ public class ColaboradorService {
 		
 	public Colaborador find(Integer id) throws ObjectNotFoundException {
 		UserSS user = UserService.authenticated();
-		if(user == null || !user.hasHole(Perfil.ADMIN) && !id.equals(user.getId())) {
+		if(user == null || !user.hasHole(new Perfil(null, "ADMIN", "")) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
 		
@@ -84,9 +85,9 @@ public class ColaboradorService {
 	
 	public Colaborador findByEmail(String email) {
 		UserSS user = UserService.authenticated();
-		if(user==null || !user.hasHole(Perfil.ADMIN) && !email.equals(email)) {
+		/*if(user==null || !user.hasHole(new Perfil(null, "ROLE_ADMIN", "")) && !email.equals(email)) {
 			throw new AuthorizationException("Acesso negado!");
-		} 
+		}*/
 		Colaborador obj = repo.findByEmail(email);
 		if(obj == null) {
 			throw new ObjectNotFoundException("Objeto não encontrado! Id: "+ user.getId() +", Tipo: "+Colaborador.class.getName());

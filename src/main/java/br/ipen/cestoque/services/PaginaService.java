@@ -11,7 +11,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Pagina;
-import br.ipen.cestoque.domain.enums.Perfil;
+import br.ipen.cestoque.domain.Perfil;
+//import br.ipen.cestoque.domain.enums.Perfil;
 import br.ipen.cestoque.dto.PaginaDTO;
 import br.ipen.cestoque.dto.PaginaNewDTO;
 import br.ipen.cestoque.repositories.PaginaRepository;
@@ -30,7 +31,7 @@ public class PaginaService {
 		
 	public Pagina find(Integer id) throws ObjectNotFoundException {
 		UserSS user = UserService.authenticated();
-		if(user == null || !user.hasHole(Perfil.ADMIN) && !id.equals(user.getId())) {
+		if(user == null || !user.hasHole(new Perfil(null, "ADMIN", "")) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
 		

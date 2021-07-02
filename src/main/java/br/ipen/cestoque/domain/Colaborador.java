@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -16,12 +15,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.ipen.cestoque.domain.enums.Perfil;
+//import br.ipen.cestoque.domain.enums.Perfil;
 
 @Entity
 @Table(name = "colaborador")
@@ -54,9 +56,13 @@ public class Colaborador implements Serializable{
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	@ElementCollection(fetch = FetchType.EAGER)
+	/*@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
-	private Set<Integer> perfis = new HashSet<>();
+	private Set<Integer> perfis = new HashSet<>();*/
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "COLABORADORPERFIL", joinColumns = @JoinColumn(name = "colaborador_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
+	private List<Perfil> perfis = new ArrayList<>();
 	
 	private String usualt;
 	
@@ -67,7 +73,7 @@ public class Colaborador implements Serializable{
 	private List<Produto> produtos = new ArrayList<>();
 
 	public Colaborador() {
-		addPerfil(Perfil.ADMIN);
+		//addPerfil(Perfil.ADMIN);
 	}
 
 	public Colaborador(Integer id, String nome, String cpf, String usualt, Date datalt, String senha, String email) {
@@ -78,8 +84,8 @@ public class Colaborador implements Serializable{
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.senha = senha;
-		this.setEmail(email);
-		addPerfil(Perfil.ADMIN);
+		this.email = email;
+		//addPerfil(Perfil.ADMIN);
 	}
 
 	public Integer getId() {
@@ -183,13 +189,13 @@ public class Colaborador implements Serializable{
 		this.senha = senha;
 	}
 
-	public Set<Perfil> getPerfis(){
+	/*public Set<Perfil> getPerfis(){
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 	
 	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
-	}
+	}*/
 
 	public String getEmail() {
 		return email;
@@ -198,6 +204,23 @@ public class Colaborador implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+	
 	
 	
 }

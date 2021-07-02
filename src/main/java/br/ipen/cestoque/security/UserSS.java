@@ -1,14 +1,16 @@
 package br.ipen.cestoque.security;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.ipen.cestoque.domain.enums.Perfil;
+import br.ipen.cestoque.domain.Perfil;
+
+//import br.ipen.cestoque.domain.enums.Perfil;
 
 public class UserSS implements UserDetails{
 	
@@ -30,13 +32,13 @@ public class UserSS implements UserDetails{
 
 	
 	
-	public UserSS(Integer id, String email, String senha, String nome, Set<Perfil> perfis) {
+	public UserSS(Integer id, String email, String senha, String nome, List<Perfil> list) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
-		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
+		this.authorities = list.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 
 

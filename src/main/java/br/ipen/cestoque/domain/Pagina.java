@@ -1,21 +1,20 @@
 package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import br.ipen.cestoque.domain.enums.Perfil;
+//import br.ipen.cestoque.domain.enums.Perfil;
 
 @Entity
 @Table(name = "pagina")
@@ -32,13 +31,17 @@ public class Pagina implements Serializable {
 
 	private String nome;
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	/*@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS_PAGINA")
-	private Set<Integer> perfis = new HashSet<>();
+	private Set<Integer> perfis = new HashSet<>();*/
 
 	private String usualt;
 
 	private Date datalt;
+	
+	@ManyToMany
+	@JoinTable(name = "PAGINAPERFIL", joinColumns = @JoinColumn(name = "pagina_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
+	private List<Perfil> perfis = new ArrayList<>();
 
 	public Pagina() {
 		// TODO Auto-generated constructor stub
@@ -68,13 +71,13 @@ public class Pagina implements Serializable {
 		this.nome = nome;
 	}
 
-	public Set<Perfil> getPerfis() {
+	/*public Set<Perfil> getPerfis() {
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
 	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
-	}
+	}*/
 
 	public String getUsualt() {
 		return usualt;
@@ -115,6 +118,14 @@ public class Pagina implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
 	}
 
 }
