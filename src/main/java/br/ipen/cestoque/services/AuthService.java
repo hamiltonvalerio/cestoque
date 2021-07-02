@@ -43,6 +43,7 @@ public class AuthService {
 		for (int i = 0; i < 10; i++) {
 			vet[i] = randomChar();
 		}
+		//System.out.println(vet);
 		return new String(vet);
 	}
 

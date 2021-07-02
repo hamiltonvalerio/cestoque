@@ -2,16 +2,22 @@ package br.ipen.cestoque.domain.enums;
 
 public enum Perfil {
 
-	ADMIN(1, "ROLE_ADMIN"),
-	BUFFER(2, "ROLE_BUFFER"),
-	PRODUCAO(3, "ROLE_PRODUCAO");
+	ADMIN(1, "ROLE_ADMIN", "ADMINISTRADOR"),
+	BUFFER(2, "ROLE_BUFFER", "BUFFER"),
+	PRODUCAO(3, "ROLE_PRODUCAO", "PRODUCAO"),
+	QUALIDADE(4, "ROLE_QUALIDADE", "CONTROLE DE QUALIDADE"),
+	ALMOXARIFADOCR(5, "ROLE_ALMOXARIFADOCR", "ALMOXARIFADO CR"),
+	IRRADIACAO(6, "ROLE_IRRADIACAO", "IRRADIAÇÃO"),
+	VISUALIZACAO(7, "ROLE_VISUALIZACAO", "VISUALIZAÇÃO");
 	
 	private int cod;
 	private String descricao;
+	private String nome;
 	
-	private Perfil(int cod, String descricao) {
+	private Perfil(int cod, String descricao, String nome) {
 		this.cod = cod;
 		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 	public int getCod() {
@@ -30,6 +36,14 @@ public enum Perfil {
 		this.descricao = descricao;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 	public static Perfil toEnum(Integer cod) {
 		
 		if(cod == null) {
@@ -44,6 +58,5 @@ public enum Perfil {
 		
 		throw new IllegalArgumentException("Id inválido: "+cod);
 	}
-	
-	
+
 }

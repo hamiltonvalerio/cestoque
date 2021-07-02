@@ -17,7 +17,9 @@ public class AuthorizationException extends RuntimeException{
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	public AuthorizationException() {
+		super("Sem autorização para seu perfil!");
+	}
 	
 	
 

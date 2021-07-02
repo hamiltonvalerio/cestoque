@@ -72,7 +72,7 @@ public class ColaboradorResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<ColaboradorDTO> > findAll(){
 		List<Colaborador> list = service.findAll();
@@ -80,7 +80,7 @@ public class ColaboradorResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<ColaboradorDTO> > findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
