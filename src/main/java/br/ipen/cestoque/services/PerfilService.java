@@ -35,9 +35,12 @@ public class PerfilService {
 
 	public Perfil insert(Perfil obj) {
 		// TODO Auto-generated method stub
+		String roleDescricao = "ROLE_";
+		obj.setDescricao(roleDescricao.concat(obj.getDescricao()));
 		obj.setUsualt(UserService.authenticated().getUsername());
 		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj.setId(null);
+		
 		return repo.save(obj);
 	}
 
@@ -53,7 +56,6 @@ public class PerfilService {
 		newObj.setDescricao(obj.getDescricao());
 		newObj.setUsualt(obj.getUsualt());
 		newObj.setDatalt(new Date());
-		
 	}
 
 	public void delete(Integer id) {
@@ -69,7 +71,7 @@ public class PerfilService {
 
 	public List<Perfil> findAll() {
 		// TODO Auto-generated method stub
-		return repo.findAll();
+		return repo.findAllByOrderByNomeAsc();
 	}
 	
 	public Page<Perfil> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){

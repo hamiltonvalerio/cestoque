@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.ipen.cestoque.utils.UpperCaseAndTrim;
+
 @Entity
 @Table(name = "perfil")
 public class Perfil {
@@ -70,7 +72,7 @@ public class Perfil {
 	}
 
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		this.descricao = UpperCaseAndTrim.upperAndTrimAndWitespace(descricao);
 	}
 
 	public String getNome() {
@@ -78,7 +80,7 @@ public class Perfil {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = UpperCaseAndTrim.upperAndTrim(nome);
 	}
 
 	@Override

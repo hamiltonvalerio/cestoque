@@ -74,10 +74,10 @@ public class ColaboradorResource {
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<ColaboradorDTO> > findAll(){
+	public ResponseEntity<List<Colaborador> > findAll(){
 		List<Colaborador> list = service.findAll();
-		List<ColaboradorDTO> listDto = list.stream().map(obj -> new ColaboradorDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+		//List<ColaboradorDTO> listDto = list.stream().map(obj -> new ColaboradorDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(list);
 	}
 	
 	
