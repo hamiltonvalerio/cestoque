@@ -1,5 +1,7 @@
 package br.ipen.cestoque.repositories;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +15,8 @@ public interface ColaboradorRepository extends JpaRepository<Colaborador, Intege
 	
 	@Transactional
 	Colaborador findByEmail(String email);
+
+	List<Colaborador> findAllByOrderByNomeAsc();
 	
 	
 }

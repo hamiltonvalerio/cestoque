@@ -3,7 +3,6 @@ package br.ipen.cestoque.resources;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -41,9 +40,7 @@ public class ColaboradorResource {
 	
 	@RequestMapping(value="/email",method=RequestMethod.GET)
 	public ResponseEntity<Colaborador> find(@RequestParam(value="value") String email){
-		System.out.println(email);
 		Colaborador colaborador = service.findByEmail(email);
-		System.out.println(colaborador.getEmail());
 		return ResponseEntity.ok().body(colaborador);
 	}
 	
@@ -62,6 +59,13 @@ public class ColaboradorResource {
 		Colaborador obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value = "/updateComPerfil", method = RequestMethod.PUT)
+	public ResponseEntity<Void> updateComPerfil(@Valid @RequestBody Colaborador obj){
+		obj = service.updateComPerfil(obj);
 		return ResponseEntity.noContent().build();
 	}
 	

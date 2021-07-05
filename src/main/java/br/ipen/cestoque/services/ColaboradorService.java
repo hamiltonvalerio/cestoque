@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -63,8 +64,14 @@ public class ColaboradorService {
 		newObj.setNome(obj.getNome());
 		newObj.setCpf(obj.getCpf());
 		newObj.setUsualt(obj.getUsualt());
-		newObj.setDatalt(new Date());
-		
+		newObj.setDatalt(new Date());	
+	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public Colaborador updateComPerfil(Colaborador obj) {
+		obj.setUsualt(UserService.authenticated().getUsername());
+		obj.setDatalt(new Date(System.currentTimeMillis()));
+		return repo.save(obj);
 	}
 
 	public void delete(Integer id) {
@@ -80,7 +87,7 @@ public class ColaboradorService {
 
 	public List<Colaborador> findAll() {
 		// TODO Auto-generated method stub
-		return repo.findAll();
+		return repo.findAllByOrderByNomeAsc();
 	}
 	
 	public Colaborador findByEmail(String email) {
