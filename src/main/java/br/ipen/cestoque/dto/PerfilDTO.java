@@ -1,10 +1,13 @@
 package br.ipen.cestoque.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
+import br.ipen.cestoque.domain.Pagina;
 import br.ipen.cestoque.domain.Perfil;
 
 public class PerfilDTO implements Serializable {
@@ -21,6 +24,8 @@ public class PerfilDTO implements Serializable {
 
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String nome;
+	
+	private List<Pagina> paginas = new ArrayList<>();
 
 	private String usualt;
 
@@ -30,16 +35,18 @@ public class PerfilDTO implements Serializable {
 		this.id = obj.getId();
 		this.nome = obj.getNome();
 		this.descricao = obj.getDescricao();
+		this.paginas = obj.getPaginas();
 		this.usualt = obj.getUsualt();
 		this.datalt = obj.getDatalt();
 	}
 
 	public PerfilDTO(Integer id, @NotEmpty(message = "Preenchimento obrigatório") String nome, String descricao,
-			String usualt, Date datalt) {
+			List<Pagina> paginas, String usualt, Date datalt) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
+		this.paginas = paginas;
 		this.usualt = usualt;
 		this.datalt = datalt;
 	}
@@ -82,6 +89,14 @@ public class PerfilDTO implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Pagina> getPaginas() {
+		return paginas;
+	}
+
+	public void setPaginas(List<Pagina> paginas) {
+		this.paginas = paginas;
 	}
 
 }

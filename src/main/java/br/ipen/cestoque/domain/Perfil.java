@@ -35,7 +35,7 @@ public class Perfil {
 	@ManyToMany(mappedBy = "perfis")
 	private List<Colaborador> colaboradores = new ArrayList<>();
 
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany(mappedBy = "perfis")
 	private List<Pagina> paginas = new ArrayList<>();
 
