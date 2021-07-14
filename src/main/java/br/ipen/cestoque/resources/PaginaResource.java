@@ -39,13 +39,28 @@ public class PaginaResource {
 		return ResponseEntity.ok().body(Pagina);
 	}
 	
+	@RequestMapping(value="/buscapaginapornome",method=RequestMethod.GET)
+	public ResponseEntity<Pagina> find(@RequestParam(value="value") String nomepagina){
+		Pagina pagina = service.findByNomePagina(nomepagina);
+		return ResponseEntity.ok().body(pagina);
+	}
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody PaginaNewDTO objDto){
-		Pagina obj = service.fromDTO(objDto);
+	public ResponseEntity<Void> insert(@RequestBody PaginaNewDTO objDto){
+		
+		Pagina p = service.findByNomePagina(objDto.getNome());
+		Pagina obj = service.fromDTOComPerfis(objDto);
 		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj.setUsualt(obj.getNome());
-		obj = service.insert(obj); 
+		if(p == null) {
+			obj = service.insert(obj); 
+		}else {
+			obj.setId(p.getId());
+			obj = service.updatePerfis(obj); 
+		}
+		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}

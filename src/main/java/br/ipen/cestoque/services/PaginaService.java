@@ -43,6 +43,7 @@ public class PaginaService {
 	public Pagina insert(Pagina obj) {
 		// TODO Auto-generated method stub
 		obj.setId(null);
+		
 		return repo.save(obj);
 	}
 	
@@ -50,6 +51,10 @@ public class PaginaService {
 		Pagina newObj = find(obj.getId());
 		
 		return repo.save(newObj);
+	}
+	
+	public Pagina updatePerfis(Pagina obj) {
+		return repo.save(obj);
 	}
 
 	public void delete(Integer id) {
@@ -81,6 +86,16 @@ public class PaginaService {
 	public Pagina fromDTO(PaginaNewDTO objDto) {
 		Pagina col = new Pagina(null, objDto.getNome(), objDto.getUsualt(), objDto.getDatalt());
 		return col;
+	}
+	
+	public Pagina fromDTOComPerfis(PaginaNewDTO objDto) {
+		Pagina col = new Pagina(null, objDto.getNome(), objDto.getUsualt(), objDto.getDatalt(), objDto.getPerfis());
+		return col;
+	}
+
+	public Pagina findByNomePagina(String nomepagina) {
+		// TODO Auto-generated method stub
+		return repo.findByNomeLike(nomepagina);
 	}
 	
 	

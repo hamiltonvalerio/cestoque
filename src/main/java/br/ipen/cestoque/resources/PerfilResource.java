@@ -89,4 +89,11 @@ public class PerfilResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@RequestMapping(value="/buscaperfispornomepagina",method=RequestMethod.GET)
+	public ResponseEntity<List<Perfil>> find(@RequestParam(value="value") String nomepagina){
+		List<Perfil> list = service.findAllByNomePagina(nomepagina);
+		return ResponseEntity.ok().body(list);
+	}
+	
+	
 }

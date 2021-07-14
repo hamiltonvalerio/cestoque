@@ -8,6 +8,8 @@ import br.ipen.cestoque.domain.Pagina;
 @Repository
 public interface PaginaRepository extends JpaRepository<Pagina, Integer>{
 
+	Pagina findByNomeLike(String nomepagina);
+
 	
 	
 }

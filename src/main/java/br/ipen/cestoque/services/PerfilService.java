@@ -86,5 +86,11 @@ public class PerfilService {
 	public Perfil fromDTO(PerfilDTO objDto) {
 		return new Perfil(objDto.getId(), objDto.getNome(), objDto.getDescricao(), objDto.getUsualt(), objDto.getDatalt());
 	}
+
+
+	public List<Perfil> findAllByNomePagina(String nomepagina) {
+		// TODO Auto-generated method stub
+		return repo.findAllByNomePagina(nomepagina);
+	}
 	
 }

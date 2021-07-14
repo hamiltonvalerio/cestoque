@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import br.ipen.cestoque.domain.enums.Perfil;
 
@@ -39,7 +43,8 @@ public class Pagina implements Serializable {
 
 	private Date datalt;
 	
-	@ManyToMany
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "PAGINAPERFIL", joinColumns = @JoinColumn(name = "pagina_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
 	private List<Perfil> perfis = new ArrayList<>();
 
@@ -53,6 +58,17 @@ public class Pagina implements Serializable {
 		this.nome = nome;
 		this.usualt = usualt;
 		this.datalt = datalt;
+	}
+	
+	
+
+	public Pagina(Integer id, String nome, String usualt, Date datalt, List<Perfil> perfis) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.usualt = usualt;
+		this.datalt = datalt;
+		this.perfis = perfis;
 	}
 
 	public Integer getId() {

@@ -1,10 +1,13 @@
 package br.ipen.cestoque.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
+import br.ipen.cestoque.domain.Perfil;
 import br.ipen.cestoque.services.validation.ColaboradorInsert;
 
 @ColaboradorInsert
@@ -21,6 +24,8 @@ public class PaginaNewDTO implements Serializable{
 	private String usualt;
 	
 	private Date datalt;
+	
+	private List<Perfil> perfis = new ArrayList<>();
 
 	public PaginaNewDTO() {
 		super();
@@ -49,6 +54,14 @@ public class PaginaNewDTO implements Serializable{
 
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
 	}
 
 }
