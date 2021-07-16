@@ -77,6 +77,8 @@ public class EntradaArquivoService implements ArquivoService {
 
 	public Boolean gerarEtiquetasDatamax(Entrada obj) {
 
+		
+		
 			File file = null;
 			try {
 				file = File.createTempFile("arquivotemporario", ".txt");
@@ -87,7 +89,8 @@ public class EntradaArquivoService implements ArquivoService {
  		
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             	for (InsumoEntrada content : obj.getItens()) {
-            		for (int i = 0; i < content.getQuantidadeetiquetas(); i++) {
+            		Integer quantidade = content.getQuantidadeetiquetas()!=null?content.getQuantidadeetiquetas():0;
+            		for (int i = 0; i < quantidade; i++) {
             			bw.write("M3000");
             			bw.write(System.lineSeparator());
             			bw.write("c0000");
@@ -110,9 +113,9 @@ public class EntradaArquivoService implements ArquivoService {
             			bw.write(System.lineSeparator());
             			bw.write("102200001000020"+content.getInsumo().getNome());
             			bw.write(System.lineSeparator());
-            			bw.write("102100000800020Lote Fornecedor: "+content.getLoteFornecedor());
+            			bw.write("102100000800020Lote Forn: "+content.getLoteFornecedor());
             			bw.write(System.lineSeparator());
-            			bw.write("102100000800190Cod Almox: "+content.getInsumo().getCodigoalmox());
+            			bw.write("102100000800188Cod Almox: "+content.getInsumo().getCodigoalmox());
             			bw.write(System.lineSeparator());
             			bw.write("102100000700020Fab.:");
             			bw.write(System.lineSeparator());

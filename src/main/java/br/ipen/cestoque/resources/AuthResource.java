@@ -72,7 +72,7 @@ public class AuthResource {
 				if (colaborador == null) {
 					throw new ObjectNotFoundException("Email não encontrado.");
 				}
-
+				
 				colaborador.setSenha(pe.encode(objDTO.getSenha()));
 				colaboradorRepository.save(colaborador);
 				emailService.sendNewPassowrdEmail(colaborador, objDTO.getSenha());
