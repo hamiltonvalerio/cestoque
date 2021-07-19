@@ -213,8 +213,11 @@ public class InsumoResource {
 
 	@ApiOperation(value = "Insere novo insumo")
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> insert(@Valid @RequestBody InsumoNewDTO objDto) {
+	public ResponseEntity<Void> insert(@RequestBody InsumoNewDTO objDto) {
 		Insumo obj = service.fromDTO(objDto);
+		if(obj.getEssencial() == null) {
+			obj.setEssencial(false);
+		}
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
