@@ -62,7 +62,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 			Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI,
 			String condambamostragemgc, String condambamostragemur, Double quantidadeDescartada,
 			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle, Boolean irradiado, String usualt,
-			Date datalt, Localizacao localizacaoOrigem) {
+			Date datalt, Localizacao localizacaoOrigem, String subloteLEI) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -95,6 +95,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setUsualt(usualt);
 		this.setDatalt(datalt);
 		this.localizacaoOrigem = localizacaoOrigem;
+		this.setSubloteLEI(subloteLEI);
 	}
 
 	public InsumoLocalizacao(InsumoLocalizacao il) {
@@ -129,6 +130,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setUsualt(il.getUsualt());
 		this.setDatalt(il.getDatalt());
 		this.localizacaoOrigem = il.getLocalizacaoOrigem();
+		this.setSubloteLEI(il.getSubloteLEI());
 	}
 
 	public InsumoLocalizacao(InsumoMovimentacao im) {
@@ -163,6 +165,7 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setUsualt(im.getUsualt());
 		this.setDatalt(im.getDatalt());
 		this.localizacaoOrigem = im.getLocalizacaoOrigem();
+		this.setSubloteLEI(im.getSubloteLEI());
 	}
 
 	public Localizacao getLocalizacao() {

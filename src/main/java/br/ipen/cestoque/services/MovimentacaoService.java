@@ -22,6 +22,7 @@ import br.ipen.cestoque.repositories.InsumoMovimentacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
 import br.ipen.cestoque.repositories.MovimentacaoRepository;
 import br.ipen.cestoque.resources.utils.ComparaInsumoLocalizacao;
+import br.ipen.cestoque.resources.utils.GeraLoteRecebimentoCR;
 
 @Service
 public class MovimentacaoService {
@@ -47,6 +48,9 @@ public class MovimentacaoService {
 	
 	@Autowired
 	private LocalizacaoService localizacaoService; 
+	
+	@Autowired
+	private GeraLoteRecebimentoCR gera;
 	
 
 	/*
@@ -88,6 +92,9 @@ public class MovimentacaoService {
 			im.setLocalizacaoOrigem(localizacaoOrigem);
 			im.setUsualt(UserService.authenticated().getNome());
 			im.setDatalt(new Date(System.currentTimeMillis()));
+			
+			
+			
 			insumo = new Insumo();
 			insumo = insumoService.find(im.getInsumo().getId());
 			insumo.setUnidade(im.getInsumo().getUnidade());
@@ -106,10 +113,39 @@ public class MovimentacaoService {
 
 			insumoLocalizacaoOrigem = new InsumoLocalizacao();
 			
+			if(localizacaoOrigem.getGerasublote() != null) {
+				if(localizacaoOrigem.getGerasublote() == true) {
+					if(im.getIrradiado() == true) {
+						if(im.getSubloteLEI()==null) {
+							insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+							im.setSubloteLEI(im.getLoteLEI());
+							im.setLoteLEI(gera.gerarLei());
+							insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+						}else {
+							insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+							insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+						}
+					}else {
+						insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+						insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+					}
+				}else {
+					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+				}
+			}else if(localizacaoDestino.getGerasublote() != null) {
+				if(localizacaoDestino.getGerasublote() == true) {
+					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+				}else {
+					insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+					insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+				}
+			}else {
+				insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
+				insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
+			}
 			
-			insumoLocalizacaoDestino = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoDestino, im.getLoteLEI());
-			
-			insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
 			
 			
 			
@@ -226,6 +262,7 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestino.setLocalizacao(obj.getLocalizacaoDestino());
 					insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
 					insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+					insumoLocalizacaoDestino.setSubloteLEI(im.getSubloteLEI());
 					insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
 					insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
 					insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());

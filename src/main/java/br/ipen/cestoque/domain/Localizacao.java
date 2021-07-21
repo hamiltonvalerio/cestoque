@@ -34,7 +34,8 @@ public class Localizacao extends DadosComunsLocalizacoes implements Serializable
 	}
 
 	public Localizacao(Integer id, String nome, Boolean aprovacao, String usualt, Date datalt,
-			Boolean descarte, Boolean utilizado, Boolean almoxarifadoprincipal, Boolean irradiacao, Boolean atualizaqtdminima) {
+			Boolean descarte, Boolean utilizado, Boolean almoxarifadoprincipal, Boolean irradiacao, Boolean atualizaqtdminima,
+			Boolean gerasublote) {
 		super();
 		this.setId(id);
 		this.setNome(nome);
@@ -46,6 +47,7 @@ public class Localizacao extends DadosComunsLocalizacoes implements Serializable
 		this.setAlmoxarifadoprincipal(almoxarifadoprincipal);
 		this.setIrradiacao(irradiacao);
 		this.setAtualizaqtdminima(atualizaqtdminima);
+		this.setGerasublote(gerasublote);
 	}
 	
 	public List<InsumoLocalizacao> getInsumolocalizacoes() {

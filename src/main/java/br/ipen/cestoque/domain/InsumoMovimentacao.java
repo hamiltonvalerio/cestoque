@@ -118,6 +118,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.setUsualt(il.getUsualt());
 		this.setDatalt(il.getDatalt());
 		this.setLoteLEI(il.getLoteLEI());
+		this.setSubloteLEI(il.getSubloteLEI());
 	}
 
 	public Localizacao getLocalizacao() {

@@ -43,6 +43,9 @@ public class DadosComunsLocalizacoes {
 	@Column(name = "localizacaofilha")
 	private Boolean localizacaofilha = false;
 	
+	@Column(name = "gerasublote")
+	private Boolean gerasublote = false;
+	
 	@OneToOne
 	private Localizacao objlocalizacaofilha;
 		
@@ -142,6 +145,14 @@ public class DadosComunsLocalizacoes {
 
 	public void setObjlocalizacaofilha(Localizacao objlocalizacaofilha) {
 		this.objlocalizacaofilha = objlocalizacaofilha;
+	}
+
+	public Boolean getGerasublote() {
+		return gerasublote;
+	}
+
+	public void setGerasublote(Boolean gerasublote) {
+		this.gerasublote = gerasublote;
 	}
 
 }

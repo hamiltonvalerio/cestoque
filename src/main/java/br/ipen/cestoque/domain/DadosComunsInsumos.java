@@ -85,6 +85,10 @@ public abstract class DadosComunsInsumos {
 	private String usualt;
 	
 	@Audited
+	private String subloteLEI;
+	
+	
+	@Audited
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date datalt;
 	
@@ -311,6 +315,14 @@ public abstract class DadosComunsInsumos {
 
 	public void setDatalt(Date datalt) {
 		this.datalt = datalt;
+	}
+
+	public String getSubloteLEI() {
+		return subloteLEI;
+	}
+
+	public void setSubloteLEI(String subloteLEI) {
+		this.subloteLEI = subloteLEI;
 	}
 	
 	
