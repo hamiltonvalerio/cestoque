@@ -115,7 +115,7 @@ public class MovimentacaoService {
 			
 			if(localizacaoOrigem.getGerasublote() != null) {
 				if(localizacaoOrigem.getGerasublote() == true) {
-					if(im.getIrradiado() == true) {
+					if(localizacaoOrigem.getIrradiacao() == true &&  im.getIrradiado() == true) {
 						if(im.getSubloteLEI()==null) {
 							insumoLocalizacaoOrigem = insumoLocalizacaoRepository.findDuplicadoLoteLei(insumo, localizacaoOrigem, im.getLoteLEI());
 							im.setSubloteLEI(im.getLoteLEI());
@@ -180,6 +180,7 @@ public class MovimentacaoService {
 									
 									insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
 									insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+									insumoLocalizacaoDestino.setSubloteLEI(im.getSubloteLEI());
 									insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
 									insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
 									insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -210,6 +211,7 @@ public class MovimentacaoService {
 								
 								insumoLocalizacaoDestino.setLoteRecebimento(im.getLoteRecebimento());
 								insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestino.setSubloteLEI(im.getSubloteLEI());
 								insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
 								insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
 								insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -240,6 +242,7 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestinoResultado.setLocalizacao(obj.getLocalizacaoDestino());
 					insumoLocalizacaoDestinoResultado.setLoteRecebimento(im.getLoteRecebimento());
 					insumoLocalizacaoDestinoResultado.setLoteLEI(im.getLoteLEI());
+					insumoLocalizacaoDestinoResultado.setSubloteLEI(im.getSubloteLEI());
 					insumoLocalizacaoDestinoResultado.setQuantidadeVolume(im.getQuantidadeVolume());
 					insumoLocalizacaoDestinoResultado.setUnidadeEntrada(im.getUnidadeEntrada());
 					insumoLocalizacaoDestinoResultado.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -285,6 +288,7 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestinoDescarte.setAprovado(im.getAprovado());
 								insumoLocalizacaoDestinoDescarte.setQuantidade(insumoLocalizacaoDestinoDescarte.getQuantidade() + quantidadedescartada);
 								insumoLocalizacaoDestinoDescarte.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoDescarte.setSubloteLEI(im.getSubloteLEI());
 								insumoLocalizacaoDestinoDescarte.setQuantidadeVolume(im.getQuantidadeVolume());
 								insumoLocalizacaoDestinoDescarte.setUnidadeEntrada(im.getUnidadeEntrada());
 								insumoLocalizacaoDestinoDescarte.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -297,6 +301,7 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestinoDescarte.setAprovado(im.getAprovado());
 								insumoLocalizacaoDestinoDescarte.setQuantidade((insumoLocalizacaoDestinoDescarte.getQuantidade() != null ?insumoLocalizacaoDestinoDescarte.getQuantidade(): 0.0)  + quantidadedescartada);
 								insumoLocalizacaoDestinoDescarte.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoDescarte.setSubloteLEI(im.getSubloteLEI());
 								insumoLocalizacaoDestinoDescarte.setQuantidadeVolume(im.getQuantidadeVolume());
 								insumoLocalizacaoDestinoDescarte.setUnidadeEntrada(im.getUnidadeEntrada());
 								insumoLocalizacaoDestinoDescarte.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -320,6 +325,7 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestinoUtilizado.setAprovado(im.getAprovado());
 								insumoLocalizacaoDestinoUtilizado.setQuantidade(insumoLocalizacaoDestinoUtilizado.getQuantidade() + quantidadeutilizada);
 								insumoLocalizacaoDestinoUtilizado.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoUtilizado.setSubloteLEI(im.getSubloteLEI());
 								insumoLocalizacaoDestinoUtilizado.setQuantidadeVolume(im.getQuantidadeVolume());
 								insumoLocalizacaoDestinoUtilizado.setUnidadeEntrada(im.getUnidadeEntrada());
 								insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -333,6 +339,7 @@ public class MovimentacaoService {
 								insumoLocalizacaoDestinoUtilizado.setAprovado(im.getAprovado());
 								insumoLocalizacaoDestinoUtilizado.setQuantidade((insumoLocalizacaoDestinoUtilizado.getQuantidade() != null ?insumoLocalizacaoDestinoUtilizado.getQuantidade(): 0.0)  + quantidadeutilizada);
 								insumoLocalizacaoDestinoUtilizado.setLoteLEI(im.getLoteLEI());
+								insumoLocalizacaoDestinoUtilizado.setSubloteLEI(im.getSubloteLEI());
 								insumoLocalizacaoDestinoUtilizado.setQuantidadeVolume(im.getQuantidadeVolume());
 								insumoLocalizacaoDestinoUtilizado.setUnidadeEntrada(im.getUnidadeEntrada());
 								insumoLocalizacaoDestinoUtilizado.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -366,6 +373,7 @@ public class MovimentacaoService {
 							insumoLocalizacaoDestinoRestante.setAprovado(im.getAprovado());
 							insumoLocalizacaoDestinoRestante.setQuantidade(insumoLocalizacaoDestinoRestante.getQuantidade() + quantidaderestante);
 							insumoLocalizacaoDestinoRestante.setLoteLEI(im.getLoteLEI());
+							insumoLocalizacaoDestinoRestante.setSubloteLEI(im.getSubloteLEI());
 							insumoLocalizacaoDestinoRestante.setQuantidadeVolume(im.getQuantidadeVolume());
 							insumoLocalizacaoDestinoRestante.setUnidadeEntrada(im.getUnidadeEntrada());
 							insumoLocalizacaoDestinoRestante.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -385,6 +393,7 @@ public class MovimentacaoService {
 							insumoLocalizacaoDestinoRestante.setLocalizacao(insumoLocalizacaoDestino.getLocalizacao());
 							insumoLocalizacaoDestinoRestante.setLoteRecebimento(im.getLoteRecebimento());
 							insumoLocalizacaoDestinoRestante.setLoteLEI(im.getLoteLEI());
+							insumoLocalizacaoDestinoRestante.setSubloteLEI(im.getSubloteLEI());
 							insumoLocalizacaoDestinoRestante.setQuantidadeVolume(im.getQuantidadeVolume());
 							insumoLocalizacaoDestinoRestante.setUnidadeEntrada(im.getUnidadeEntrada());
 							insumoLocalizacaoDestinoRestante.setUnidadeRecebida(im.getUnidadeRecebida());
@@ -403,6 +412,7 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestino.setAprovado(im.getAprovado());
 					insumoLocalizacaoDestino.setQuantidade(novaQuantidade);
 					insumoLocalizacaoDestino.setLoteLEI(im.getLoteLEI());
+					insumoLocalizacaoDestino.setSubloteLEI(im.getSubloteLEI());
 					insumoLocalizacaoDestino.setQuantidadeVolume(im.getQuantidadeVolume());
 					insumoLocalizacaoDestino.setUnidadeEntrada(im.getUnidadeEntrada());
 					insumoLocalizacaoDestino.setUnidadeRecebida(im.getUnidadeRecebida());

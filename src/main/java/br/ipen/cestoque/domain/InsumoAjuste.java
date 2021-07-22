@@ -49,7 +49,9 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 			String loteCR,
 			String loteFornecedor,
 			Double quantidade,
-			Unidade unidade) {
+			Unidade unidade,
+			String loteLEI,
+			String subloteLEI) {
 		super();
 		this.dataAjuste = dataAjuste;
 		this.setDataFabricacao(dataFabricacao);
@@ -61,6 +63,8 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 		this.setLoteFornecedor(loteFornecedor);
 		this.setQuantidade(quantidade);
 		this.unidade = unidade;
+		this.setLoteLEI(subloteLEI);
+		this.setSubloteLEI(subloteLEI);
 	}
 	
 	
@@ -68,7 +72,9 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 	public InsumoAjuste(Localizacao localizacao, Double quantidade, Date dataAjuste, String usualt, Date datalt,
 			Unidade unidade,Integer id, Insumo insumo, String loteFornecedor, String loteCR, LocalDate dataIrradiacao,
 			String loteRecebimento, String loteARM, LocalDate dataValidade, LocalDate dataFabricacao, Boolean aprovado,
-			LocalDateTime dataAprovacao, LocalDateTime dataReprovacao) {
+			LocalDateTime dataAprovacao, LocalDateTime dataReprovacao,
+			String loteLEI,
+			String subloteLEI) {
 		super();
 		this.localizacao = localizacao;
 		this.setQuantidade(quantidade);
@@ -87,8 +93,10 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable{
 		this.setDataValidade(dataValidade);
 		this.setDataFabricacao(dataFabricacao);
 		this.setAprovado(aprovado);
-		this.setDataAprovacao(dataAprovacao);;
+		this.setDataAprovacao(dataAprovacao);
 		this.setDataReprovacao(dataReprovacao);
+		this.setLoteLEI(subloteLEI);
+		this.setSubloteLEI(subloteLEI);
 	}
 
 	public Localizacao getLocalizacao() {
