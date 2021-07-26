@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.InsumoLocalizacao;
 
 @Repository
 public interface InsumoRepository extends JpaRepository<Insumo, Integer>{
@@ -47,6 +48,7 @@ public interface InsumoRepository extends JpaRepository<Insumo, Integer>{
 			+ "WHERE il.localizacao.id = :localizacao_id "
 			+ "ORDER BY il.insumo.nome ASC")
 	public List<Insumo> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id);
+
 
 
 

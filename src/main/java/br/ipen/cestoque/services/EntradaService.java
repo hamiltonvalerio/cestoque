@@ -8,9 +8,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Entrada;
@@ -121,6 +118,7 @@ public class EntradaService {
 			insumoLocalizacao.setUnidadeRecebida(ie.getUnidadeRecebida());
 			insumoLocalizacao.setUsualt(UserService.authenticated().getNome());
 			insumoLocalizacao.setDatalt(new Date(System.currentTimeMillis()));
+			insumoLocalizacao.setCas(ie.getCas());
 			insumosLocalizacoes.add(insumoLocalizacao);
 			/*if(insumoLocalizacao == null) {
 				insumoLocalizacao = new InsumoLocalizacao();

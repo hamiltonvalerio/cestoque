@@ -230,5 +230,10 @@ public class InsumoService {
 		return ierepo.findInsumoEntradaByLoteLEI(loteLEI);
 	}
 	
+	public List<InsumoLocalizacao> findInsumoLocalizacaoByLocalizacaoSemVazio(int localizacao_id) {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.buscaTodosPorLocalizacaoList(localizacao_id);
+	}
+	
 	
 }

@@ -1,5 +1,6 @@
 package br.ipen.cestoque.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +72,23 @@ public class InsumoAjusteService {
 		//Boolean bol = insumoAjusteRepository.findAjustesByDataELocalizacao2(localizacao_id, dt.toString(dtf));
 		List<InsumoAjuste> lista = insumoAjusteRepository.findAjustesByDataELocalizacao(localizacao_id, dt.toString(dtf));
 		return lista;
+	}
+
+	public List<InsumoAjuste> montaAjusterPorLocalizacao(Integer localizacao_id) {
+		// TODO Auto-generated method stub
+		List<InsumoLocalizacao> listaInsumosLocalizacao = insumoLocalizacaoRepository.buscaTodosPorLocalizacaoList(localizacao_id);
+		return this.converteListaInsumoLocalizacaoParaInsumoAjuste(listaInsumosLocalizacao);
+	}
+	
+	public List<InsumoAjuste> converteListaInsumoLocalizacaoParaInsumoAjuste(List<InsumoLocalizacao>  listaInsumosLocalizacao){
+		List<InsumoAjuste> listaInsumoAjuste = new ArrayList<>();
+		//aqui ta a mágica
+		
+		for(InsumoLocalizacao lista : listaInsumosLocalizacao) {
+			listaInsumoAjuste.add(new InsumoAjuste(lista));
+		}
+		
+		return listaInsumoAjuste;
 	}
 	
 }

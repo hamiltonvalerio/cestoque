@@ -59,7 +59,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 			LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao,
 			Boolean aprovado, String loteARM, String condambamostragemgc, String condambamostragemur,
 			Double quantidadeDescartada, Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle,
-			Boolean irradiado, Double quantidade, Localizacao localizacaoOrigem, String usualt, Date datalt) {
+			Boolean irradiado, Double quantidade, Localizacao localizacaoOrigem, String usualt, Date datalt, String armario, String posicao, String cas, String prateleira) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);
@@ -88,6 +88,10 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.localizacaoOrigem = localizacaoOrigem;
 		this.setUsualt(usualt);
 		this.setDatalt(datalt);
+		this.setArmario(armario);
+		this.setPosicao(posicao);
+		this.setCas(cas);
+		this.setPrateleira(prateleira);
 	}
 	
 	public InsumoMovimentacao(InsumoLocalizacao il) {
@@ -119,6 +123,10 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 		this.setDatalt(il.getDatalt());
 		this.setLoteLEI(il.getLoteLEI());
 		this.setSubloteLEI(il.getSubloteLEI());
+		this.setArmario(il.getArmario());
+		this.setPosicao(il.getPosicao());
+		this.setCas(il.getCas());
+		this.setPrateleira(il.getPrateleira());
 	}
 
 	public Localizacao getLocalizacao() {

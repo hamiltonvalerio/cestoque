@@ -15,7 +15,6 @@ import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-
 @MappedSuperclass
 public abstract class DadosComunsInsumos {
 
@@ -52,26 +51,26 @@ public abstract class DadosComunsInsumos {
 	private Boolean aprovado;
 
 	private Boolean irradiado;
-	
+
 	private LocalDateTime dataAprovacao;
 
 	private LocalDateTime dataReprovacao;
-	
+
 	private LocalDateTime dataPrevisaoControle;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "unidaderecebida_id")
 	private Unidade unidadeRecebida;
-	
+
 	private Double quantidadeVolume;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "unidadeentrada_id")
 	private Unidade unidadeEntrada;
-	
+
 	@Audited
 	private String loteLEI;
-	
+
 	private String condambamostragemgc;
 	private String condambamostragemur;
 
@@ -83,15 +82,23 @@ public abstract class DadosComunsInsumos {
 	private Double quantidadeUtilizada;
 	@Audited
 	private String usualt;
-	
+
 	@Audited
 	private String subloteLEI;
-	
-	
+
+	@Audited
+	private String armario;
+	@Audited
+	private String posicao;
+	@Audited
+	private String cas;
+	@Audited
+	private String prateleira;
+
 	@Audited
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date datalt;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -211,7 +218,7 @@ public abstract class DadosComunsInsumos {
 	public void setUnidadeEntrada(Unidade unidadeEntrada) {
 		this.unidadeEntrada = unidadeEntrada;
 	}
-	
+
 	public String getCondambamostragemgc() {
 		return condambamostragemgc;
 	}
@@ -324,7 +331,37 @@ public abstract class DadosComunsInsumos {
 	public void setSubloteLEI(String subloteLEI) {
 		this.subloteLEI = subloteLEI;
 	}
-	
-	
+
+	public String getArmario() {
+		return armario;
+	}
+
+	public void setArmario(String armario) {
+		this.armario = armario;
+	}
+
+	public String getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(String posicao) {
+		this.posicao = posicao;
+	}
+
+	public String getCas() {
+		return cas;
+	}
+
+	public void setCas(String cas) {
+		this.cas = cas;
+	}
+
+	public String getPrateleira() {
+		return prateleira;
+	}
+
+	public void setPrateleira(String prateleira) {
+		this.prateleira = prateleira;
+	}
 
 }

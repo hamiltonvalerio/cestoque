@@ -14,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ipen.cestoque.domain.InsumoAjuste;
-import br.ipen.cestoque.services.EntradaService;
 import br.ipen.cestoque.services.InsumoAjusteService;
 
 @RestController
 @RequestMapping(value = "/ajusteestoque")
 public class InsumoAjusteResource {
 
-	@Autowired
-	private EntradaService entradaService;
-	
+
 	@Autowired
 	private InsumoAjusteService insumoAjusteService;
 	
@@ -35,7 +32,7 @@ public class InsumoAjusteResource {
 	}
 	
 	@RequestMapping(value="/buscaAjustesPorDataELocalizacao", method=RequestMethod.GET)
-	public ResponseEntity<List<InsumoAjuste> > findAjustesByDataELocalizacao(
+	public ResponseEntity<List<InsumoAjuste>> findAjustesByDataELocalizacao(
 			@RequestParam(value = "localizacao_id") String localizacao_id,
 			@RequestParam(value = "dataAjuste") Date dataAjuste){
 		
@@ -43,8 +40,12 @@ public class InsumoAjusteResource {
 
 		return ResponseEntity.ok().body(list);
 		
-	
 	}
+	
+	public ResponseEntity<List<InsumoAjuste>> montaAjusterPorLocalizacao(@RequestParam(value = "localizacao_id") String localizacao_id){
+		List<InsumoAjuste> list = insumoAjusteService.montaAjusterPorLocalizacao(Integer.parseInt(localizacao_id));
+		return ResponseEntity.ok().body(list);
+	} 
 	
 	
 	
