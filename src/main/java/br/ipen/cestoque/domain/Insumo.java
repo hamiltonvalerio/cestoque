@@ -76,11 +76,9 @@ public class Insumo implements Serializable {
 	@Transient
 	private String codigoalmoxarifadoinsumo;
 
-	@Formula(" (SELECT SUM(il.quantidade) "
-			+ " FROM Insumo i "
-			+ " INNER JOIN InsumoLocalizacao il ON (il.insumo_id = i.id) "
-			+ " WHERE i.codigoalmox = codigoalmox )")
-	@Basic(fetch=FetchType.EAGER)
+	@Formula(" (SELECT SUM(il.quantidade) " + " FROM Insumo i "
+			+ " INNER JOIN InsumoLocalizacao il ON (il.insumo_id = i.id) " + " WHERE i.codigoalmox = codigoalmox )")
+	@Basic(fetch = FetchType.EAGER)
 	private Double quantidadeTotalAtual;
 
 	@ManyToMany
@@ -103,16 +101,23 @@ public class Insumo implements Serializable {
 	@OneToMany(mappedBy = "insumo")
 	@NotAudited
 	private List<InsumoArquivo> arquivos = new ArrayList<>();
-	
+
 	private Boolean precisairradiacao;
-	
+
 	private Boolean precisacontrolequalidade;
+
+	private Boolean controlado;
+
+	@ManyToMany
+	@JoinTable(name = "INSUMOORGAO", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "orgao_id"))
+	private List<Orgao> orgaos = new ArrayList<>();
 
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigoalmox, String observacao,
 			Boolean essencial, Date datavalidade, Double quantidade, Double taxadeconsumo, String codigobarra,
 			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor,
 			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote,
-			List<Categoria> categorias, Boolean precisairradiacao, Boolean precisacontrolequalidade) {
+			List<Categoria> categorias, Boolean precisairradiacao, Boolean precisacontrolequalidade, Boolean controlado,
+			List<Orgao> orgaos) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -141,6 +146,8 @@ public class Insumo implements Serializable {
 		this.categorias = categorias;
 		this.precisairradiacao = precisairradiacao;
 		this.precisacontrolequalidade = precisacontrolequalidade;
+		this.controlado = controlado;
+		this.orgaos = orgaos;
 	}
 
 	public Insumo() {
@@ -447,7 +454,21 @@ public class Insumo implements Serializable {
 	public void setPrecisacontrolequalidade(Boolean precisacontrolequalidade) {
 		this.precisacontrolequalidade = precisacontrolequalidade;
 	}
-	
-	
+
+	public Boolean getControlado() {
+		return controlado;
+	}
+
+	public void setControlado(Boolean controlado) {
+		this.controlado = controlado;
+	}
+
+	public List<Orgao> getOrgaos() {
+		return orgaos;
+	}
+
+	public void setOrgaos(List<Orgao> orgaos) {
+		this.orgaos = orgaos;
+	}
 
 }

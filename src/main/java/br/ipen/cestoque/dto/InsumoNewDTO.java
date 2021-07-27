@@ -55,6 +55,7 @@ public class InsumoNewDTO implements Serializable {
 	private String lote;
 	private Boolean precisairradiacao;
 	private Boolean precisacontrolequalidade;
+	private Boolean controlado;
 
 	public InsumoNewDTO() {
 		super();
@@ -243,6 +244,14 @@ public class InsumoNewDTO implements Serializable {
 
 	public void setPrecisacontrolequalidade(Boolean precisacontrolequalidade) {
 		this.precisacontrolequalidade = precisacontrolequalidade;
+	}
+
+	public Boolean getControlado() {
+		return controlado;
+	}
+
+	public void setControlado(Boolean controlado) {
+		this.controlado = controlado;
 	}
 
 	

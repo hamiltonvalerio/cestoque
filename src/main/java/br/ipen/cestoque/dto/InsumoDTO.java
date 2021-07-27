@@ -7,6 +7,7 @@ import java.util.List;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.Orgao;
 import br.ipen.cestoque.domain.Unidade;
 
 public class InsumoDTO implements Serializable {
@@ -44,14 +45,18 @@ public class InsumoDTO implements Serializable {
 	private Date dataamostracq;
 	private String lote;
 	private String nomecodalmox;
-	
+
 	private Double quantidadeTotalAtual;
 
 	private List<Categoria> categorias = new ArrayList<>();
-	
+
 	private Boolean precisairradiacao;
-	
+
 	private Boolean precisacontrolequalidade;
+	
+	private Boolean controlado;
+
+	private List<Orgao> orgaos = new ArrayList<>();
 
 	public InsumoDTO() {
 		super();
@@ -86,6 +91,8 @@ public class InsumoDTO implements Serializable {
 		quantidadeTotalAtual = obj.getQuantidadeTotalAtual();
 		precisairradiacao = obj.getPrecisairradiacao();
 		precisacontrolequalidade = obj.getPrecisacontrolequalidade();
+		orgaos = obj.getOrgaos();
+		controlado = obj.getControlado();
 	}
 
 	public Integer getId() {
@@ -303,6 +310,21 @@ public class InsumoDTO implements Serializable {
 	public void setPrecisacontrolequalidade(Boolean precisacontrolequalidade) {
 		this.precisacontrolequalidade = precisacontrolequalidade;
 	}
-	
+
+	public List<Orgao> getOrgaos() {
+		return orgaos;
+	}
+
+	public void setOrgaos(List<Orgao> orgaos) {
+		this.orgaos = orgaos;
+	}
+
+	public Boolean getControlado() {
+		return controlado;
+	}
+
+	public void setControlado(Boolean controlado) {
+		this.controlado = controlado;
+	}
 
 }

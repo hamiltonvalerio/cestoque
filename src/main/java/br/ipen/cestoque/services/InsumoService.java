@@ -79,7 +79,9 @@ public class InsumoService {
 				objDto.getLote(),
 				objDto.getCategorias(),
 				objDto.getPrecisairradiacao(),
-				objDto.getPrecisacontrolequalidade()
+				objDto.getPrecisacontrolequalidade(),
+				objDto.getControlado(),
+				objDto.getOrgaos()
 				);
 	}
 	
@@ -108,7 +110,9 @@ public class InsumoService {
 				objDto.getLote(),
 				null,
 				objDto.getPrecisairradiacao(),
-				objDto.getPrecisacontrolequalidade()
+				objDto.getPrecisacontrolequalidade(),
+				objDto.getControlado(),
+				null
 				);
 	}
 
@@ -154,6 +158,19 @@ public class InsumoService {
 			if(obj.getUnidade() != null && obj.getUnidade().getNome() != "") {
 				newObj.setUnidade(obj.getUnidade());
 			}
+			if(obj.getPrecisairradiacao() != null) {
+				newObj.setPrecisairradiacao(obj.getPrecisairradiacao());
+			}
+			if(obj.getPrecisacontrolequalidade() != null) {
+				newObj.setPrecisacontrolequalidade(obj.getPrecisacontrolequalidade());
+			}
+			if(obj.getControlado() != null) {
+				newObj.setControlado(obj.getControlado());
+			}
+			if(obj.getOrgaos() != null && !obj.getOrgaos().isEmpty()) {
+				newObj.setOrgaos(obj.getOrgaos());
+			}
+			
 		}
 		newObj.setUsualt(UserService.authenticated().getUsername());
 		newObj.setDatalt(new Date(System.currentTimeMillis()));
