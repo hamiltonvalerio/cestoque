@@ -33,9 +33,9 @@ public class PerfilResource {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Perfil> find(@PathVariable Integer id){
-		Perfil Perfil;
-		Perfil = service.find(id);
-		return ResponseEntity.ok().body(Perfil);
+		Perfil perfil;
+		perfil = service.find(id);
+		return ResponseEntity.ok().body(perfil);
 	}
 	
 	
