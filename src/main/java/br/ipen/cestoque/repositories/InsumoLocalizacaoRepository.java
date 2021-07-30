@@ -135,6 +135,10 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			+ "WHERE lotelei LIKE :lotelei "
 			+ "ORDER BY id ASC")
 	public List<InsumoLocalizacao> findInsumosLocalizacoesByLoteLEI(@Param("lotelei") String loteLEI);
+	
+	@Query("SELECT DISTINCT(il.subloteLEI) FROM InsumoLocalizacao il "
+			+ "WHERE loteLEI LIKE :lotelei ")
+	public String buscaDistinctLotePaiByLoteLei(@Param("lotelei") String loteLEI);
 
 	
 }

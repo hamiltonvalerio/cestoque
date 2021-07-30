@@ -449,6 +449,10 @@ public class MovimentacaoService {
 		}
 
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesDestino);
+		
+		
+		
+		
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesOrigem);
 		
 		//AQUI
@@ -479,7 +483,8 @@ public class MovimentacaoService {
 
 	public List<InsumoMovimentacao> movimentacoesPorLoteLEI(String loteLEI) {
 		// TODO Auto-generated method stub
-		return insumoMovimentacaoRepository.movimentacoesPorLoteLEI(loteLEI);
+		List<InsumoMovimentacao> lista = insumoMovimentacaoRepository.movimentacoesPorLoteLEI(loteLEI);
+		return lista;
 	}
 
 }

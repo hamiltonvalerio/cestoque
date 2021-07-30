@@ -244,7 +244,15 @@ public class InsumoService {
 
 	public InsumoEntrada findInsumoEntradaByLoteLEI(String loteLEI) {
 		// TODO Auto-generated method stub
-		return ierepo.findInsumoEntradaByLoteLEI(loteLEI);
+
+		String loteleipai = insumoLocalizacaoRepository.buscaDistinctLotePaiByLoteLei(loteLEI);
+		
+		if(loteleipai != null) {
+			return ierepo.findInsumoEntradaByLoteLEI(loteleipai);	
+		}else {
+			return ierepo.findInsumoEntradaByLoteLEI(loteLEI);
+		}
+		
 	}
 	
 	public List<InsumoLocalizacao> findInsumoLocalizacaoByLocalizacaoSemVazio(int localizacao_id) {
