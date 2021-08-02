@@ -44,6 +44,8 @@ public class UnidadeService {
 	
 	public Unidade insert(Unidade obj) {
 		// TODO Auto-generated method stub
+		obj.setUsualt(UserService.authenticated().getUsername());
+		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj.setId(null);
 		return repo.save(obj);
 	}
@@ -91,7 +93,7 @@ public class UnidadeService {
 	}
 	
 	public Unidade fromDTO(UnidadeNewDTO objDto) {
-		Unidade col = new Unidade(null, objDto.getNome(), objDto.getSigla(), objDto.getUsualt(), objDto.getDatalt());
+		Unidade col = new Unidade(null, objDto.getNome().toUpperCase(), objDto.getSigla().toUpperCase(), objDto.getUsualt(), objDto.getDatalt());
 		return col;
 	}
 	

@@ -118,4 +118,9 @@ public class LocalizacaoService {
 		return repo.findByLocalizacaoDescartado(id);
 	}
 
+	public List<Localizacao> findByAprovacaoTrue() {
+		// TODO Auto-generated method stub
+		return repo.findByAprovacaoTrue();
+	}
+
 }

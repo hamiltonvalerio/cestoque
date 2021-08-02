@@ -40,4 +40,6 @@ public interface LocalizacaoRepository extends JpaRepository<Localizacao, Intege
 			nativeQuery = true)
 	public Localizacao findByLocalizacaoDescartado(@Param("id") Integer id);
 
+	public List<Localizacao> findByAprovacaoTrue();
+
 }

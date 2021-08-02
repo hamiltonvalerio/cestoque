@@ -82,6 +82,12 @@ public class LocalizacaoResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@RequestMapping(value = "/findByAprovacaoTrue", method = RequestMethod.GET)
+	public ResponseEntity<List<Localizacao>> findByAprovacaoTrue() {
+		List<Localizacao> list = service.findByAprovacaoTrue();
+		return ResponseEntity.ok().body(list);
+	}
+	
 
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<LocalizacaoDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
