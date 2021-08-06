@@ -94,6 +94,9 @@ public abstract class DadosComunsInsumos {
 	private String cas;
 	@Audited
 	private String prateleira;
+	
+	@Audited
+	private Boolean quarentena;
 
 	@Audited
 	@DateTimeFormat(iso = ISO.DATE)
@@ -362,6 +365,14 @@ public abstract class DadosComunsInsumos {
 
 	public void setPrateleira(String prateleira) {
 		this.prateleira = prateleira;
+	}
+
+	public Boolean getQuarentena() {
+		return quarentena;
+	}
+
+	public void setQuarentena(Boolean quarentena) {
+		this.quarentena = quarentena;
 	}
 
 }

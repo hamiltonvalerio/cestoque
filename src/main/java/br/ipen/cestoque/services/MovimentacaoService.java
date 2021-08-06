@@ -86,7 +86,16 @@ public class MovimentacaoService {
 		InsumoMovimentacao imdestino = new InsumoMovimentacao();
 		List<InsumoMovimentacao> itensMovimentados = new ArrayList<>();
  
+
 		for (InsumoMovimentacao im : obj.getItens()) {
+			if(localizacaoDestino.getAprovacao() != null) {
+				if(localizacaoDestino.getAprovacao() == true) {
+					im.setQuarentena(true);
+				}	
+			}
+			
+			
+			
 			imdestino = new InsumoMovimentacao(); 
 			im.setLocalizacao(localizacaoDestino);
 			im.setLocalizacaoOrigem(localizacaoOrigem);
@@ -253,6 +262,9 @@ public class MovimentacaoService {
 					
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestinoResultado);
 				}else {
+					
+				
+										
 					insumoLocalizacaoDestino.setAprovado(im.getAprovado());
 					insumoLocalizacaoDestino.setDataAprovacao(im.getDataAprovacao());
 					insumoLocalizacaoDestino.setDataIrradiacao(im.getDataIrradiacao());
@@ -273,6 +285,8 @@ public class MovimentacaoService {
 					insumoLocalizacaoDestino.setIrradiado(im.getIrradiado());
 					insumoLocalizacaoDestino.setUsualt(UserService.authenticated().getNome());
 					insumoLocalizacaoDestino.setDatalt(new Date(System.currentTimeMillis()));
+					
+					
 					
 					insumosLocalizacoesDestino.add(insumoLocalizacaoDestino);
 				}
@@ -442,31 +456,38 @@ public class MovimentacaoService {
 
 			im.setMovimentacao(obj);
 			
-			this.atualizaAprovacaoLoteLei(im);
+			//this.atualizaAprovacaoLoteLei(im);
 			
 			itensMovimentados.add(im);
 		    
 		}
 
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesDestino);
-		
-		
-		
-		
 		insumoLocalizacaoRepository.saveAll(insumosLocalizacoesOrigem);
 		
 		//AQUI
 		insumoMovimentacaoRepository.saveAll(itensMovimentados);
+		
+		for (InsumoMovimentacao imov: itensMovimentados) {
+			this.atualizaAprovacaoLoteLei(imov);
+		}
+		
+		
 		insumoRepository.saveAll(insumos);
 		return obj;
 	}
 	
 	public void atualizaAprovacaoLoteLei(InsumoMovimentacao in) {
+		
 		if(in.getAprovado() != null) {
 			if(in.getAprovado() == true) {
-				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(true,in.getLoteLEI());
+				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(true,in.getLoteLEI(),false);
 			}else {
-				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, in.getLoteLEI());
+				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, in.getLoteLEI(),true);
+			}
+		}else {
+			if(in.getLocalizacao().getAprovacao() == true) {
+				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, in.getLoteLEI(),true);
 			}
 		}
 	}
