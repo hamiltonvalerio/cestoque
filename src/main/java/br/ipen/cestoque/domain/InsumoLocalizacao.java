@@ -48,6 +48,10 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 
 	@OneToOne
 	private Localizacao localizacaoOrigem;
+	
+	@Transient
+	private String farol;
+	
 
 	public InsumoLocalizacao() {
 		super();
@@ -229,6 +233,27 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	public void setFoiaprovado(String foiaprovado) {
 		this.foiaprovado = foiaprovado;
 	}
+	
+	public String getFarol() {
+		if(getQuarentena() != null) {
+			if(getQuarentena().equals(true)) {
+				this.farol = "card-amarelo";
+			}else if(getAprovado() != null){
+				if(getAprovado().equals(true)) {
+					this.farol = "card-verde";
+				}else {
+					this.farol = "card-vermelho";	
+				}
+			}
+		}else {
+			this.farol = "";
+		}		
+		return farol;
+	}
+
+	public void setFarol(String farol) {
+		this.farol = farol;
+	}
 
 	public String getEmaprovacao() {
 		return emaprovacao;
@@ -253,5 +278,8 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 	public void setLocalizacaoOrigem(Localizacao localizacaoOrigem) {
 		this.localizacaoOrigem = localizacaoOrigem;
 	}
+
+	
+	
 
 }

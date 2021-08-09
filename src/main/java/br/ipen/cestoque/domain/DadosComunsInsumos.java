@@ -97,6 +97,9 @@ public abstract class DadosComunsInsumos {
 	
 	@Audited
 	private Boolean quarentena;
+	
+	@Audited
+	private Boolean recebidonocontrole;
 
 	@Audited
 	@DateTimeFormat(iso = ISO.DATE)
@@ -373,6 +376,14 @@ public abstract class DadosComunsInsumos {
 
 	public void setQuarentena(Boolean quarentena) {
 		this.quarentena = quarentena;
+	}
+
+	public Boolean getRecebidonocontrole() {
+		return recebidonocontrole;
+	}
+
+	public void setRecebidonocontrole(Boolean recebidonocontrole) {
+		this.recebidonocontrole = recebidonocontrole;
 	}
 
 }

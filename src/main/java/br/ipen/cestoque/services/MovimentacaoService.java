@@ -448,7 +448,8 @@ public class MovimentacaoService {
 			}
 		
 			
-			Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant - quantidadeutilizada - quantidadedescartada;
+			//Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant - quantidadeutilizada - quantidadedescartada;
+			Double novaQuantidade = calculaQuantidadeOrigem(insumoLocalizacaoOrigem.getQuantidade(), quant, quantidadeutilizada, quantidadedescartada);
 			insumoLocalizacaoOrigem.setQuantidade(novaQuantidade);
 			insumoLocalizacaoOrigem.setUsualt(UserService.authenticated().getNome());
 			insumoLocalizacaoOrigem.setDatalt(new Date(System.currentTimeMillis()));
@@ -477,13 +478,21 @@ public class MovimentacaoService {
 		return obj;
 	}
 	
+		
+	private Double calculaQuantidadeOrigem(Double quantidade, Double quant, Double quantidadeutilizada,
+			Double quantidadedescartada) {
+		// TODO Auto-generated method stub
+		return quantidade - quant - quantidadeutilizada - quantidadedescartada;
+	}
+
+
 	public void atualizaAprovacaoLoteLei(InsumoMovimentacao in) {
 		
 		if(in.getAprovado() != null) {
 			if(in.getAprovado() == true) {
 				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(true,in.getLoteLEI(),false);
 			}else {
-				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, in.getLoteLEI(),true);
+				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, in.getLoteLEI(),false);
 			}
 		}else {
 			if(in.getLocalizacao().getAprovacao() == true) {
