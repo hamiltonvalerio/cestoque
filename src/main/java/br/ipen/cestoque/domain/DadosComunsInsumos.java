@@ -102,6 +102,13 @@ public abstract class DadosComunsInsumos {
 	private Boolean recebidonocontrole;
 
 	@Audited
+	private String usuariorecebidonocontrole;
+	
+	@Audited
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date datarecebidonocontrole;
+	
+	@Audited
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date datalt;
 
@@ -384,6 +391,22 @@ public abstract class DadosComunsInsumos {
 
 	public void setRecebidonocontrole(Boolean recebidonocontrole) {
 		this.recebidonocontrole = recebidonocontrole;
+	}
+
+	public String getUsuariorecebidonocontrole() {
+		return usuariorecebidonocontrole;
+	}
+
+	public void setUsuariorecebidonocontrole(String usuariorecebidonocontrole) {
+		this.usuariorecebidonocontrole = usuariorecebidonocontrole;
+	}
+
+	public Date getDatarecebidonocontrole() {
+		return datarecebidonocontrole;
+	}
+
+	public void setDatarecebidonocontrole(Date datarecebidonocontrole) {
+		this.datarecebidonocontrole = datarecebidonocontrole;
 	}
 
 }

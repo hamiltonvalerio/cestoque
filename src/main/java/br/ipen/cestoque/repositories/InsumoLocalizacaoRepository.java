@@ -143,5 +143,15 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			+ "WHERE loteLEI LIKE :lotelei ")
 	public String buscaDistinctLotePaiByLoteLei(@Param("lotelei") String loteLEI);
 
+	@Transactional
+	@Modifying
+	@Query("UPDATE InsumoLocalizacao " + "	SET usuariorecebidonocontrole =:usecont, recebidonocontrole =:reccont, datarecebidonocontrole =:datacont "
+			+ "	WHERE id =:insumolocalizacao_id")
+	public void updateRecebimento(
+			@Param("insumolocalizacao_id") int insumolocalizacao_id, 
+			@Param("usecont") String usuariorecebidonocontrole, 
+			@Param("reccont") Boolean recebidonocontrole, 
+			@Param("datacont") Date datarecebidonocontrole);
+
 	
 }
