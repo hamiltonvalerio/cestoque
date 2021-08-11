@@ -111,5 +111,16 @@ public class InsumoLocalizacaoResource {
 
 		return ResponseEntity.ok().body(ils);
 	}
+	
+	@ApiOperation(value = "Altera a previsão de controle")
+	@RequestMapping(value = "/updatePrevisaoControle", method = RequestMethod.POST)
+	public ResponseEntity<Void> updatePrevisaoControle(
+			@RequestParam(value = "insumolocalizacao_id") String insumolocalizacao_id,
+			@RequestParam(value = "usuario") String usuario,
+			@RequestParam(value = "data") String data) {
+		
+		ilrepo.updatePrevisaoControle(Integer.parseInt(insumolocalizacao_id), data, new Date(System.currentTimeMillis()), usuario);
+		return ResponseEntity.noContent().build();
+	}
 
 }
