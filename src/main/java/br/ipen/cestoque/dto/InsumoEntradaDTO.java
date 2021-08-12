@@ -53,7 +53,7 @@ public class InsumoEntradaDTO implements Serializable {
 
 	private LocalDateTime dataReprovacao;
 	
-	private LocalDateTime dataPrevisaoControle;
+	private Date dataPrevisaoControle;
 	
 
 	private Unidade unidadeRecebida;
@@ -243,11 +243,11 @@ public class InsumoEntradaDTO implements Serializable {
 		this.dataReprovacao = dataReprovacao;
 	}
 
-	public LocalDateTime getDataPrevisaoControle() {
+	public Date getDataPrevisaoControle() {
 		return dataPrevisaoControle;
 	}
 
-	public void setDataPrevisaoControle(LocalDateTime dataPrevisaoControle) {
+	public void setDataPrevisaoControle(Date dataPrevisaoControle) {
 		this.dataPrevisaoControle = dataPrevisaoControle;
 	}
 

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import org.joda.time.LocalDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -161,7 +160,7 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			+ "	WHERE id =:insumolocalizacao_id")
 	public void updatePrevisaoControle(
 			@Param("insumolocalizacao_id") int insumolocalizacao_id, 
-			@Param("dataPrevisaoControle") String data, 
+			@Param("dataPrevisaoControle") Date date, 
 			@Param("datalt") Date datalt,
 			@Param("usualt") String usualt);
 

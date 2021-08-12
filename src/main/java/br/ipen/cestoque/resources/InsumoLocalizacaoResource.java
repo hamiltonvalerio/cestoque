@@ -3,6 +3,7 @@ package br.ipen.cestoque.resources;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -118,8 +119,16 @@ public class InsumoLocalizacaoResource {
 			@RequestParam(value = "insumolocalizacao_id") String insumolocalizacao_id,
 			@RequestParam(value = "usuario") String usuario,
 			@RequestParam(value = "data") String data) {
+		try {
+			ilrepo.updatePrevisaoControle(Integer.parseInt(insumolocalizacao_id), DateUtils.parseDate(data, new String[] { "dd/MM/yyyy HH:mm", "dd-MM-yyyy" }) , new Date(System.currentTimeMillis()), usuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		ilrepo.updatePrevisaoControle(Integer.parseInt(insumolocalizacao_id), data, new Date(System.currentTimeMillis()), usuario);
+		
+		
+		
 		return ResponseEntity.noContent().build();
 	}
 

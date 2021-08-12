@@ -3,6 +3,7 @@ package br.ipen.cestoque.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -53,7 +54,7 @@ public class InsumoSaida extends DadosComunsInsumos implements Serializable {
 			LocalDate dataIrradiacao, LocalDate dataVencIrradiacao, LocalDate dataValidade, LocalDate dataFabricacao,
 			Double quantidade, Double valor, Double valorTotal, String loteRecebimento, String loteARM,
 			String testesuper, Unidade unidadeRecebida, Double quantidadeVolume, Unidade unidadeEntrada, String loteLEI,
-			Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle) {
+			Double quantidadeUtilizada, Date dataPrevisaoControle) {
 		super();
 		this.setId(id);
 		this.setInsumo(insumo);

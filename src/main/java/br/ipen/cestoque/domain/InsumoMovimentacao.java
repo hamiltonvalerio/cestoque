@@ -58,7 +58,7 @@ public class InsumoMovimentacao extends DadosComunsInsumos implements Serializab
 			String loteFornecedor, String loteCR, String loteProducao, String loteRecebimento, LocalDate dataIrradiacao,
 			LocalDate dataValidade, LocalDate dataFabricacao, LocalDateTime dataAprovacao, LocalDateTime dataReprovacao,
 			Boolean aprovado, String loteARM, String condambamostragemgc, String condambamostragemur,
-			Double quantidadeDescartada, Double quantidadeUtilizada, LocalDateTime dataPrevisaoControle,
+			Double quantidadeDescartada, Double quantidadeUtilizada, Date dataPrevisaoControle,
 			Boolean irradiado, Double quantidade, Localizacao localizacaoOrigem, String usualt, Date datalt, String armario, String posicao, String cas, String prateleira, 
 			Boolean quarentena) {
 		super();
