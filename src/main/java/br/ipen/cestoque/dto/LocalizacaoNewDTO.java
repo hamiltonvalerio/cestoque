@@ -32,6 +32,8 @@ public class LocalizacaoNewDTO implements Serializable {
 	private Boolean atualizaqtdminima;
 	
 	private Boolean gerasublote;
+	
+	private Boolean resultado;
 
 	public LocalizacaoNewDTO() {
 		super();
@@ -118,6 +120,12 @@ public class LocalizacaoNewDTO implements Serializable {
 		this.gerasublote = gerasublote;
 	}
 
+	public Boolean getResultado() {
+		return resultado;
+	}
 
+	public void setResultado(Boolean resultado) {
+		this.resultado = resultado;
+	}
 	
 }

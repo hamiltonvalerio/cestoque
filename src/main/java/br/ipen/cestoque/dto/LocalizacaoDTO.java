@@ -36,6 +36,8 @@ public class LocalizacaoDTO implements Serializable {
 	private Boolean atualizaqtdminima = false;
 	
 	private Boolean gerasublote = false;
+	
+	private Boolean resultado = false;
 
 	public LocalizacaoDTO() {
 		super();
@@ -54,12 +56,13 @@ public class LocalizacaoDTO implements Serializable {
 		this.irradiacao = obj.getIrradiacao();
 		this.atualizaqtdminima = obj.getAtualizaqtdminima();
 		this.gerasublote = obj.getGerasublote();
+		this.resultado = obj.getResultado();
 		
 	}
 
 	public LocalizacaoDTO(Integer id, String nome, Boolean aprovacao, String usualt, Date datalt,
 			 Boolean descarte, Boolean utilizado, Boolean almoxarifadoprincipal, Boolean atualizaqtdminima,
-			  Boolean gerasublote) {
+			  Boolean gerasublote, Boolean resultado) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -71,6 +74,7 @@ public class LocalizacaoDTO implements Serializable {
 		this.almoxarifadoprincipal = almoxarifadoprincipal;
 		this.atualizaqtdminima = atualizaqtdminima;
 		this.gerasublote = gerasublote;
+		this.resultado = resultado;
 	}
 
 	public Integer getId() {
@@ -159,6 +163,14 @@ public class LocalizacaoDTO implements Serializable {
 
 	public void setGerasublote(Boolean gerasublote) {
 		this.gerasublote = gerasublote;
+	}
+
+	public Boolean getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(Boolean resultado) {
+		this.resultado = resultado;
 	}
 	
 	

@@ -46,6 +46,9 @@ public class DadosComunsLocalizacoes {
 	@Column(name = "gerasublote")
 	private Boolean gerasublote = false;
 	
+	@Column(name = "resultado")
+	private Boolean resultado = false;
+	
 	@OneToOne
 	private Localizacao objlocalizacaofilha;
 		
@@ -153,6 +156,14 @@ public class DadosComunsLocalizacoes {
 
 	public void setGerasublote(Boolean gerasublote) {
 		this.gerasublote = gerasublote;
+	}
+
+	public Boolean getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(Boolean resultado) {
+		this.resultado = resultado;
 	}
 
 }

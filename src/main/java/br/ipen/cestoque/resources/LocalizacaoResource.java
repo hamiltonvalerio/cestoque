@@ -41,6 +41,12 @@ public class LocalizacaoResource {
 		localizacao = service.find(Integer.parseInt(localizacao_id));
 		return ResponseEntity.ok().body(localizacao);
 	}
+	
+	@RequestMapping(value = "/findAllLocalizacoesFilhasByLocalizacaoPai", method = RequestMethod.GET)
+	public ResponseEntity<List<Localizacao>> findAllLocalizacoesFilhasByLocalizacaoPai(@RequestParam(value = "localizacao_id") String localizacao_id) {
+		List<Localizacao> list = service.findAllLocalizacoesFilhasByLocalizacaoPai(Integer.parseInt(localizacao_id));
+		return ResponseEntity.ok().body(list);
+	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Localizacao objDto) {

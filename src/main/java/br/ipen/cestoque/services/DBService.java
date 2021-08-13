@@ -76,8 +76,8 @@ public class DBService {
 				Fornecedor f2 = new Fornecedor(null, "456","Teste de Fornecedor2", "02114428000190", "Hamilton", new Date());
 				fornecedorRepository.saveAll(Arrays.asList(f1,f2));
 				
-				Localizacao l1 = new Localizacao(null, "BUFFER RL", false, "Hamilton", new Date(), true, false, false, true, true, false);
-				Localizacao l2 = new Localizacao(null, "CONTROLE DE QUALIDADE", true, "Hamilton", new Date(), true, false, true, false, false, false);
+				Localizacao l1 = new Localizacao(null, "BUFFER RL", false, "Hamilton", new Date(), true, false, false, true, true, false, false);
+				Localizacao l2 = new Localizacao(null, "CONTROLE DE QUALIDADE", true, "Hamilton", new Date(), true, false, true, false, false, false, true);
 				localizacaoRepository.saveAll(Arrays.asList(l1,l2));
 				
 				Insumo i1 = new Insumo(null, "bandeja de liofilizador estéril", "BANDEJA DE ACO INOXIDAVEL P/LIOFILIZADOS", 0.0, "8171", "", true, new Date(), 3.0,3.0,"","","","hamilton", new Date(), un1, 123, true, new Date(), true, new Date(), "123", null, true, false, true, null);

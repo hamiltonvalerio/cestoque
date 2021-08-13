@@ -42,4 +42,9 @@ public interface LocalizacaoRepository extends JpaRepository<Localizacao, Intege
 
 	public List<Localizacao> findByAprovacaoTrue();
 
+	@Query(value="SELECT * FROM localizacao "
+			+  "WHERE objlocalizacaofilha_id = :id ", 
+				nativeQuery = true) 
+	public List<Localizacao> findAllLocalizacoesFilhasByLocalizacaoPai(@Param("id") Integer id);
+
 }

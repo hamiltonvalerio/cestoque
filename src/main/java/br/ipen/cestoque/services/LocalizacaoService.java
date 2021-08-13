@@ -87,14 +87,14 @@ public class LocalizacaoService {
 		return new Localizacao(objDto.getId(), objDto.getNome().toUpperCase(), objDto.getAprovacao(),
 				objDto.getUsualt(), objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado(),
 				objDto.getAlmoxarifadoprincipal(), objDto.getIrradiacao(), objDto.getAtualizaqtdminima(), 
-				objDto.getGerasublote());
+				objDto.getGerasublote(), objDto.getResultado());
 	}
 
 	public Localizacao fromDTO(LocalizacaoNewDTO objDto) {
 		Localizacao col = new Localizacao(null, objDto.getNome(), objDto.getAprovacao(), objDto.getUsualt(),
 				objDto.getDatalt(), objDto.getDescarte(), objDto.getUtilizado(), objDto.getAlmoxarifadoprincipal(),
 				objDto.getIrradiacao(), objDto.getAtualizaqtdminima(), 
-				objDto.getGerasublote());
+				objDto.getGerasublote(), objDto.getResultado());
 		return col;
 	}
 
@@ -121,6 +121,11 @@ public class LocalizacaoService {
 	public List<Localizacao> findByAprovacaoTrue() {
 		// TODO Auto-generated method stub
 		return repo.findByAprovacaoTrue();
+	}
+
+	public List<Localizacao> findAllLocalizacoesFilhasByLocalizacaoPai(int id) {
+		// TODO Auto-generated method stub
+		return repo.findAllLocalizacoesFilhasByLocalizacaoPai(id);
 	}
 
 }
