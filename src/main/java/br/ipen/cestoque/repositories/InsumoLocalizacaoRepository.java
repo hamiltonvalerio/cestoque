@@ -132,6 +132,14 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("aprovado") boolean aprovado, 
 			@Param("lotelei") String lotelei,
 			@Param("quarentena") boolean quarentena);
+	
+	@Transactional
+	@Modifying
+	@Query("UPDATE InsumoLocalizacao " + "	SET quarentena =:quarentena "
+			+ "	WHERE lotelei LIKE :lotelei")
+	public void updateQuarentenaPorLoteLEI( 
+			@Param("lotelei") String lotelei,
+			@Param("quarentena") boolean quarentena);
 
 	@Transactional(readOnly = true)
 	@Query("SELECT il FROM InsumoLocalizacao il "

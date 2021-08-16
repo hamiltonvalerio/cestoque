@@ -496,7 +496,7 @@ public class MovimentacaoService {
 			}
 		}else {
 			if(in.getLocalizacao().getAprovacao() == true) {
-				insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, in.getLoteLEI(),true);
+				insumoLocalizacaoRepository.updateQuarentenaPorLoteLEI(in.getLoteLEI(),true);
 			}
 		}
 	}
