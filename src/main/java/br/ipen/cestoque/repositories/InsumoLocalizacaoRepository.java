@@ -59,29 +59,26 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("dataValidade") Date dataValidade, 
 			@Param("dataIrradiacao") Date dataIrradiacao);
 
-	@Transactional(readOnly = true)
-	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
-			//+ "AND il.quantidade != 0 "
-			+ "ORDER BY il.insumo.nome ASC")
-	Page<InsumoLocalizacao> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id,
-			Pageable pageRequest);
-	
+
 	@Transactional(readOnly = true)
 	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
 			+ "AND il.quantidade != 0 "
 			+ "ORDER BY il.insumo.nome ASC")
 	Page<InsumoLocalizacao> buscaTodosPorLocalizacaoSemVazio(@Param("localizacao_id") Integer localizacao_id,
 			Pageable pageRequest);
-	
-	
-	
+		
 	@Transactional(readOnly = true)
 	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
 			+ "AND il.quantidade != 0"
 			+ "ORDER BY il.insumo.nome ASC")
 	public List<InsumoLocalizacao> buscaTodosPorLocalizacaoList(@Param("localizacao_id") Integer localizacao_id);
 	
-	
+	@Transactional(readOnly = true)
+	@Query(value = "SELECT il.* "
+			+ "	FROM insumolocalizacao il "
+			+ "	ORDER BY il.quarentena = true DESC NULLS LAST, il.datalt DESC ", nativeQuery = true)
+	Page<InsumoLocalizacao> buscaTodosPorLocalizacao(@Param("localizacao_id") Integer localizacao_id,
+			Pageable pageRequest);
 	
 	@Transactional
 	@Modifying

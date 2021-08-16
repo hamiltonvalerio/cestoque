@@ -210,6 +210,23 @@ public class InsumoResource {
 
 		return ResponseEntity.ok().body(ils);
 	}
+	
+	@RequestMapping(value = "/buscaTodosPorLocalizacao", method = RequestMethod.GET)
+	public ResponseEntity<Page<InsumoLocalizacao>> buscaTodosPorLocalizacao(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "30") Integer linesPerPage) {
+
+		Page<InsumoLocalizacao> list = service
+				.findInsumoLocalizacaoByLocalizacao(Integer.parseInt(localizacao_id), page, linesPerPage);
+
+		for (InsumoLocalizacao insumoLocalizacao : list) {
+			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
+		}
+
+		return ResponseEntity.ok().body(list);
+
+	}
 
 	@ApiOperation(value = "Insere novo insumo")
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
