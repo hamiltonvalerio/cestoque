@@ -1,5 +1,7 @@
 package br.ipen.cestoque.services;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -449,7 +451,8 @@ public class MovimentacaoService {
 		
 			
 			//Double novaQuantidade = insumoLocalizacaoOrigem.getQuantidade() - quant - quantidadeutilizada - quantidadedescartada;
-			Double novaQuantidade = calculaQuantidadeOrigem(insumoLocalizacaoOrigem.getQuantidade(), quant, quantidadeutilizada, quantidadedescartada);
+			Double qtd = insumoLocalizacaoOrigem.getQuantidade();
+			Double novaQuantidade = calculaQuantidadeOrigem(qtd, quant, quantidadeutilizada, quantidadedescartada);
 			insumoLocalizacaoOrigem.setQuantidade(novaQuantidade);
 			insumoLocalizacaoOrigem.setUsualt(UserService.authenticated().getNome());
 			insumoLocalizacaoOrigem.setDatalt(new Date(System.currentTimeMillis()));
@@ -481,8 +484,13 @@ public class MovimentacaoService {
 		
 	private Double calculaQuantidadeOrigem(Double quantidade, Double quant, Double quantidadeutilizada,
 			Double quantidadedescartada) {
+		BigDecimal a = new BigDecimal(quantidade, MathContext.DECIMAL64);
+		BigDecimal b = new BigDecimal(quant, MathContext.DECIMAL64);
+		BigDecimal c = new BigDecimal(quantidadeutilizada, MathContext.DECIMAL64);
+		BigDecimal d = new BigDecimal(quantidadedescartada, MathContext.DECIMAL64);
+		BigDecimal result = a.subtract(b).subtract(c).subtract(d);
 		// TODO Auto-generated method stub
-		return quantidade - quant - quantidadeutilizada - quantidadedescartada;
+		return result.doubleValue();
 	}
 
 
