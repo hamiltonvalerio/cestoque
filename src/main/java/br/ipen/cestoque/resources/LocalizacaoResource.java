@@ -1,6 +1,7 @@
 package br.ipen.cestoque.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ipen.cestoque.domain.Localizacao;
 import br.ipen.cestoque.dto.LocalizacaoDTO;
+import br.ipen.cestoque.dto.LocalizacaoOrdenadaDTO;
 import br.ipen.cestoque.services.LocalizacaoService;
 
 @RestController
@@ -78,6 +80,28 @@ public class LocalizacaoResource {
 	public ResponseEntity<List<Localizacao>> findAll() {
 		List<Localizacao> list = service.findAll();
 		//List<LocalizacaoDTO> listDto = list.stream().map(obj -> new LocalizacaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@RequestMapping(value = "/findAllOrdenado", method = RequestMethod.GET)
+	public ResponseEntity<List<Localizacao>> findAllOrdenado() {
+		List<Localizacao> list = service.findAll();
+		List<LocalizacaoOrdenadaDTO> listaOrdenada = new ArrayList<LocalizacaoOrdenadaDTO>();
+		for (Localizacao l : list) {
+			if(l.getObjlocalizacaofilha() == null) {
+				LocalizacaoOrdenadaDTO lord = new LocalizacaoOrdenadaDTO();
+				lord.setLocalizacao(l);
+				for (Localizacao lo : list) {
+					if(lo.getObjlocalizacaofilha() != null) {
+						if(lo.getObjlocalizacaofilha().getId() == l.getId()) {
+							lord.getLocalizacoesfilhas().add(lo);
+						}
+					}
+				}
+			listaOrdenada.add(lord);
+			}
+		}
+		
 		return ResponseEntity.ok().body(list);
 	}
 

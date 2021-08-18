@@ -51,8 +51,6 @@ public class DadosComunsLocalizacoes {
 	
 	@OneToOne
 	private Localizacao objlocalizacaofilha;
-		
-	
 
 	public Integer getId() {
 		return id;

@@ -26,6 +26,7 @@ public class Localizacao extends DadosComunsLocalizacoes implements Serializable
 	@JsonIgnore
 	@OneToMany(mappedBy = "localizacao")
 	private List<InsumoLocalizacao> insumolocalizacoes = new ArrayList<>();
+
 	
 
 	public Localizacao() {
@@ -59,7 +60,5 @@ public class Localizacao extends DadosComunsLocalizacoes implements Serializable
 		this.insumolocalizacoes = insumolocalizacoes;
 	}
 
-	
-	
 	
 }
