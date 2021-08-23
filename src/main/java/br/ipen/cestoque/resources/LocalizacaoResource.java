@@ -99,11 +99,57 @@ public class LocalizacaoResource {
 					}
 				}
 			listaOrdenada.add(lord);
+			
 			}
 		}
 		
 		return ResponseEntity.ok().body(list);
 	}
+	
+
+	@RequestMapping(value = "/findAllOrdenadoFilhas", method = RequestMethod.GET)
+	public ResponseEntity<List<LocalizacaoOrdenadaDTO>> findAllOrdenadoFilhas() {
+		List<Localizacao> list = service.findAll();
+		List<Localizacao> listfilhas = new ArrayList<>();
+		List<LocalizacaoOrdenadaDTO> listPai = new ArrayList<>();
+		for (Localizacao l : list) {
+			if(l.getLocalizacaofilha() != null && l.getLocalizacaofilha() == true) {
+				listfilhas.add(l);
+			}else {
+				LocalizacaoOrdenadaDTO lo = new LocalizacaoOrdenadaDTO();
+				lo.setLocalizacao(l);
+				listPai.add(lo);
+			}
+		}	
+		
+		for (LocalizacaoOrdenadaDTO lp : listPai) {
+			Integer pai = lp.getLocalizacao().getId();
+			List<Localizacao> lfilhas = new ArrayList<>();
+			lp.setLocalizacoesfilhas(listaTodosFilhos(pai, listfilhas));
+			if(!lp.getLocalizacoesfilhas().isEmpty()) {
+				for(Localizacao lof : lp.getLocalizacoesfilhas()) {
+					lfilhas.addAll(listaTodosFilhos(lof.getId(), listfilhas));
+				}
+				lp.getLocalizacoesfilhas().addAll(lfilhas);
+			}
+		}
+		
+		return ResponseEntity.ok().body(listPai);
+
+	}
+	
+	/*para ser usado recursivamente...massss não to usando*/
+	public List<Localizacao> listaTodosFilhos(Integer pai, List<Localizacao> filhas){
+		List<Localizacao> lks = new ArrayList<>();
+		for(Localizacao lf : filhas) {
+			if(lf.getObjlocalizacaofilha().getId() == pai) {	
+				lks.add(lf);
+			}
+		}
+		return lks;
+	}
+	
+	
 
 	@RequestMapping(value = "/findAllInsumoLocalizacao", method = RequestMethod.GET)
 	public ResponseEntity<List<Localizacao>> findAllInsumoLocalizacao() {
