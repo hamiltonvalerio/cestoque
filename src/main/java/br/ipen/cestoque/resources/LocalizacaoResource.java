@@ -106,7 +106,8 @@ public class LocalizacaoResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-
+	/*Neste dia 24 de Agosto, do ano de 2021, exatamente as 14:32h, num dia ensolarado e com poucas nuvens, fiz esta gambiarra!
+	 * */
 	@RequestMapping(value = "/findAllOrdenadoFilhas", method = RequestMethod.GET)
 	public ResponseEntity<List<LocalizacaoOrdenadaDTO>> findAllOrdenadoFilhas() {
 		List<Localizacao> list = service.findAll();
@@ -138,7 +139,7 @@ public class LocalizacaoResource {
 
 	}
 	
-	/*para ser usado recursivamente...massss não to usando*/
+	/*para ser usado recursivamente...massss não to usando, ou estou?..não sei, o que sei...é que nada sei!*/
 	public List<Localizacao> listaTodosFilhos(Integer pai, List<Localizacao> filhas){
 		List<Localizacao> lks = new ArrayList<>();
 		for(Localizacao lf : filhas) {
