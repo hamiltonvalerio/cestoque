@@ -15,11 +15,14 @@ import org.springframework.stereotype.Service;
 
 import br.ipen.cestoque.domain.Categoria;
 import br.ipen.cestoque.domain.Insumo;
+import br.ipen.cestoque.domain.InsumoAjuste;
 import br.ipen.cestoque.domain.InsumoEntrada;
 import br.ipen.cestoque.domain.InsumoLocalizacao;
+import br.ipen.cestoque.domain.InsumoMovimentacao;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
+import br.ipen.cestoque.repositories.InsumoAjusteRepository;
 import br.ipen.cestoque.repositories.InsumoEntradaRepository;
 import br.ipen.cestoque.repositories.InsumoLocalizacaoRepository;
 import br.ipen.cestoque.repositories.InsumoRepository;
@@ -40,6 +43,9 @@ public class InsumoService {
 	
 	@Autowired
 	private InsumoEntradaRepository ierepo;
+	
+	@Autowired
+	private InsumoAjusteRepository insumoAjusteRepository;
 
 	public Insumo find(Integer id) throws ObjectNotFoundException {
 		Optional<Insumo> obj = repo.findById(id);
@@ -259,6 +265,64 @@ public class InsumoService {
 		// TODO Auto-generated method stub
 		return insumoLocalizacaoRepository.buscaTodosPorLocalizacaoList(localizacao_id);
 	}
+
+	public List<InsumoLocalizacao> findInsumoLocalizacaoByNome(int localizacao_id, String nome) {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.findInsumoLocalizacaoByNome(localizacao_id, nome);
+	}
+
+	public List<InsumoLocalizacao> findInsumoLocalizacaoByCodalmox(int localizacao_id, String codalmox) {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.findInsumoLocalizacaoByCodalmox(localizacao_id, codalmox);
+	}
 	
+	public List<InsumoLocalizacao> findInsumoLocalizacaoByLotelei(int localizacao_id, String lotelei) {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.findInsumoLocalizacaoByLotelei(localizacao_id, lotelei);
+	}
+
+	public List<InsumoLocalizacao> findInsumoLocalizacaoBySublotelei(int localizacao_id, String sublotelei) {
+		// TODO Auto-generated method stub
+		return insumoLocalizacaoRepository.findInsumoLocalizacaoBySublotelei(localizacao_id, sublotelei);
+	}
+
+	public InsumoLocalizacao updateInsumoLocalizacaoInventario(InsumoLocalizacao objDto) {
+		// TODO Auto-generated method stub
+		InsumoAjuste insumoAjuste = new InsumoAjuste(objDto);
+		insumoAjuste.setDataAjuste(new Date(System.currentTimeMillis()));
+		insumoAjuste.setUsualt(UserService.authenticated().getNome());
+		insumoAjuste.setDatalt(new Date(System.currentTimeMillis()));
+		insumoAjusteRepository.save(new InsumoAjuste(objDto));
+		insumoLocalizacaoRepository.save(objDto);
+		atualizaAprovacaoLoteLei(objDto);
+		return objDto;
+	}
 	
+	public void atualizaAprovacaoLoteLei(InsumoLocalizacao il) {
+			
+			if(il.getAprovado() != null) {
+				if(il.getAprovado() == true) {
+					insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(true,il.getLoteLEI(),false);
+				}else {
+					insumoLocalizacaoRepository.updateAprovacaoPorLoteLEI(false, il.getLoteLEI(),false);
+				}
+			}else {
+				if(il.getLocalizacao().getAprovacao() == true) {
+					insumoLocalizacaoRepository.updateQuarentenaPorLoteLEI(il.getLoteLEI(),true);
+				}
+			}
+	}
+	
+	public void atualizaIrradiacaoLoteLei(InsumoLocalizacao il) {
+		
+		if(il.getIrradiado() != null) {
+			if(il.getIrradiado() == true) {
+				insumoLocalizacaoRepository.updateIrradiacaoPorLoteLEI(true,il.getLoteLEI(),false);
+			}else {
+				insumoLocalizacaoRepository.updateIrradiacaoPorLoteLEI(false, il.getLoteLEI(),false);
+			}
+		}
+	}
+		
+
 }

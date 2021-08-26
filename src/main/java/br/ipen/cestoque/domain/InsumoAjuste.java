@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.ipen.cestoque.dto.InsumoLocalizacaoInventarioDTO;
+
 @Entity
 @Table(name = "insumoajuste")
 public class InsumoAjuste extends DadosComunsInsumos implements Serializable {
@@ -73,7 +75,6 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable {
 		this.usualt = usualt;
 		this.datalt = datalt;
 		this.unidade = unidade;
-
 		this.setId(id);
 		this.setInsumo(insumo);
 		this.setLoteFornecedor(loteFornecedor);
@@ -104,6 +105,7 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable {
 		this.setIrradiado(il.getIrradiado());
 		this.setLoteRecebimento(il.getLoteRecebimento());
 		this.setDataValidade(il.getDataValidade());
+		this.setQuantidade(il.getQuantidade());
 		this.setDataFabricacao(il.getDataFabricacao());
 		this.setAprovado(il.getAprovado());
 		this.setDataAprovacao(il.getDataAprovacao());
@@ -114,6 +116,24 @@ public class InsumoAjuste extends DadosComunsInsumos implements Serializable {
 		this.setPosicao(il.getPosicao());
 		this.setCas(il.getCas());
 		this.setPrateleira(il.getPrateleira());
+		this.setLocalizacao(il.getLocalizacao());
+	}
+	
+	public InsumoAjuste(InsumoLocalizacaoInventarioDTO ilv) {
+		// TODO Auto-generated constructor stub
+		this.setId(ilv.getId());
+		this.setLoteFornecedor(ilv.getLoteFornecedor());
+		this.setLoteCR(ilv.getLoteCR());
+		this.setCas(ilv.getCas());
+		this.setDataValidade(ilv.getDataValidade());
+		this.setQuantidade(ilv.getQuantidade());
+		this.setAprovado(ilv.getAprovado());
+		this.setIrradiado(ilv.getIrradiado());
+		this.setArmario(ilv.getArmario());
+		this.setPrateleira(ilv.getPrateleira());
+		this.setPosicao(ilv.getPosicao());
+		this.setUsualt(ilv.getUsualt());
+		this.setDatalt(ilv.getDatalt());
 	}
 
 	public Localizacao getLocalizacao() {

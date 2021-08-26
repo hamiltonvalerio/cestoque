@@ -170,4 +170,47 @@ public interface InsumoLocalizacaoRepository extends JpaRepository<InsumoLocaliz
 			@Param("usualt") String usualt);
 
 	
+	@Transactional(readOnly = true)
+	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
+			+ "AND il.insumo.nome like upper(concat('%', :nome,'%')) "
+			+ "ORDER BY il.insumo.nome ASC")
+	public List<InsumoLocalizacao> findInsumoLocalizacaoByNome(
+			@Param("localizacao_id") int localizacao_id, 
+			@Param("nome") String nome);
+
+	@Transactional(readOnly = true)
+	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
+			+ "AND il.insumo.codigoalmox like :codalmox "
+			+ "ORDER BY il.insumo.nome ASC")
+	public List<InsumoLocalizacao> findInsumoLocalizacaoByCodalmox(
+			@Param("localizacao_id") int localizacao_id, 
+			@Param("codalmox") String codalmox);
+
+	@Transactional(readOnly = true)
+	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
+			+ "AND il.loteLEI LIKE :lotelei "
+			+ "ORDER BY il.insumo.nome ASC")
+	public List<InsumoLocalizacao> findInsumoLocalizacaoByLotelei(
+			@Param("localizacao_id") int localizacao_id, 
+			@Param("lotelei") String lotelei);
+
+	@Transactional(readOnly = true)
+	@Query("SELECT il FROM InsumoLocalizacao il WHERE il.localizacao.id =:localizacao_id "
+			+ "AND il.subloteLEI like :sublotelei "
+			+ "ORDER BY il.insumo.nome ASC")
+	public List<InsumoLocalizacao> findInsumoLocalizacaoBySublotelei(
+			@Param("localizacao_id") int localizacao_id, 
+			@Param("sublotelei") String sublotelei);
+	
+	@Transactional
+	@Modifying
+	@Query("UPDATE InsumoLocalizacao " + "	SET irradiado =:irradiado,  quarentena =:quarentena "
+			+ "	WHERE lotelei LIKE :lotelei")
+	public void updateIrradiacaoPorLoteLEI(
+			@Param("irradiado") boolean irradiado, 
+			@Param("lotelei") String lotelei,
+			@Param("quarentena") boolean quarentena);
+
+
+	
 }

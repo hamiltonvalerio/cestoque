@@ -15,6 +15,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
 
+import br.ipen.cestoque.dto.InsumoLocalizacaoInventarioDTO;
+
 @Entity
 @DynamicUpdate
 @Audited
@@ -185,6 +187,23 @@ public class InsumoLocalizacao extends DadosComunsInsumos implements Serializabl
 		this.setCas(im.getCas());
 		this.setPrateleira(im.getPrateleira());
 		this.setQuarentena(im.getQuarentena());
+	}
+	
+	public InsumoLocalizacao(InsumoLocalizacaoInventarioDTO ilv) {
+		// TODO Auto-generated constructor stub
+		this.setId(ilv.getId());
+		this.setLoteFornecedor(ilv.getLoteFornecedor());
+		this.setLoteCR(ilv.getLoteCR());
+		this.setCas(ilv.getCas());
+		this.setDataValidade(ilv.getDataValidade());
+		this.setQuantidade(ilv.getQuantidade());
+		this.setAprovado(ilv.getAprovado());
+		this.setIrradiado(ilv.getIrradiado());
+		this.setArmario(ilv.getArmario());
+		this.setPrateleira(ilv.getPrateleira());
+		this.setPosicao(ilv.getPosicao());
+		this.setUsualt(ilv.getUsualt());
+		this.setDatalt(ilv.getDatalt());
 	}
 
 	public Localizacao getLocalizacao() {

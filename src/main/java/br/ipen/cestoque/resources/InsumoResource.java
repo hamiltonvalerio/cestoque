@@ -283,5 +283,58 @@ public class InsumoResource {
 		
 		return ResponseEntity.ok().body(new InsumoEntradaDTO(ie));
 	}
+	
+	@RequestMapping(value = "/findInsumoLocalizacaoByNome", method = RequestMethod.GET)
+	public ResponseEntity<List<InsumoLocalizacao>> findInsumoLocalizacaoByNome(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "nome") String nome) {
+
+		List<InsumoLocalizacao> list = service
+				.findInsumoLocalizacaoByNome(Integer.parseInt(localizacao_id), nome);
+		for (InsumoLocalizacao insumoLocalizacao : list) {
+			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
+		}
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@RequestMapping(value = "/findInsumoLocalizacaoByCodalmox", method = RequestMethod.GET)
+	public ResponseEntity<List<InsumoLocalizacao>> findInsumoLocalizacaoByCodalmox(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "codalmox") String codalmox) {
+
+		List<InsumoLocalizacao> list = service
+				.findInsumoLocalizacaoByCodalmox(Integer.parseInt(localizacao_id), codalmox);
+		for (InsumoLocalizacao insumoLocalizacao : list) {
+			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
+		}
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value = "/findInsumoLocalizacaoByLotelei", method = RequestMethod.GET)
+	public ResponseEntity<List<InsumoLocalizacao>> findInsumoLocalizacaoByLotelei(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "lotelei") String lotelei) {
+
+		List<InsumoLocalizacao> list = service
+				.findInsumoLocalizacaoByLotelei(Integer.parseInt(localizacao_id), lotelei);
+		for (InsumoLocalizacao insumoLocalizacao : list) {
+			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
+		}
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value = "/findInsumoLocalizacaoBySublotelei", method = RequestMethod.GET)
+	public ResponseEntity<List<InsumoLocalizacao>> findInsumoLocalizacaoBySublotelei(
+			@RequestParam(value = "localizacao_id") String localizacao_id,
+			@RequestParam(value = "sublotelei") String sublotelei) {
+
+		List<InsumoLocalizacao> list = service
+				.findInsumoLocalizacaoBySublotelei(Integer.parseInt(localizacao_id), sublotelei);
+		for (InsumoLocalizacao insumoLocalizacao : list) {
+			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
+		}
+		return ResponseEntity.ok().body(list);
+	}
+
 
 }
