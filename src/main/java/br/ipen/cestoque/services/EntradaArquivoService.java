@@ -137,7 +137,7 @@ public class EntradaArquivoService implements ArquivoService {
             			bw.write(System.lineSeparator());
             			bw.write("102100000500205"+content.getLoteLEI());
             			bw.write(System.lineSeparator());
-            			bw.write("1a4002800000010"+content.getLoteLEI());
+            			bw.write("1a4002800000020"+content.getLoteLEI());
             			bw.write(System.lineSeparator());
             			bw.write("Q0001");
             			bw.write(System.lineSeparator());
