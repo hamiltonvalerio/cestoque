@@ -111,6 +111,10 @@ public class Insumo implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "INSUMOORGAO", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "orgao_id"))
 	private List<Orgao> orgaos = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "insumo")
+	@NotAudited
+	private List<Consumo> consumos = new ArrayList<>();
 
 	public Insumo(Integer id, String nomenclatura, String nome, Double valor, String codigoalmox, String observacao,
 			Boolean essencial, Date datavalidade, Double quantidade, Double taxadeconsumo, String codigobarra,
@@ -469,6 +473,14 @@ public class Insumo implements Serializable {
 
 	public void setOrgaos(List<Orgao> orgaos) {
 		this.orgaos = orgaos;
+	}
+
+	public List<Consumo> getConsumos() {
+		return consumos;
+	}
+
+	public void setConsumos(List<Consumo> consumos) {
+		this.consumos = consumos;
 	}
 
 }
