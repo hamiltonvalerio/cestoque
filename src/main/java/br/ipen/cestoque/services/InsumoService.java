@@ -18,7 +18,6 @@ import br.ipen.cestoque.domain.Insumo;
 import br.ipen.cestoque.domain.InsumoAjuste;
 import br.ipen.cestoque.domain.InsumoEntrada;
 import br.ipen.cestoque.domain.InsumoLocalizacao;
-import br.ipen.cestoque.domain.InsumoMovimentacao;
 import br.ipen.cestoque.dto.InsumoDTO;
 import br.ipen.cestoque.dto.InsumoNewDTO;
 import br.ipen.cestoque.repositories.CategoriaRepository;
@@ -87,7 +86,8 @@ public class InsumoService {
 				objDto.getPrecisairradiacao(),
 				objDto.getPrecisacontrolequalidade(),
 				objDto.getControlado(),
-				objDto.getOrgaos()
+				objDto.getOrgaos(),
+				objDto.getConsumos()
 				);
 	}
 	
@@ -118,7 +118,8 @@ public class InsumoService {
 				objDto.getPrecisairradiacao(),
 				objDto.getPrecisacontrolequalidade(),
 				objDto.getControlado(),
-				null
+				objDto.getOrgaos(),
+				objDto.getConsumos()
 				);
 	}
 
@@ -175,6 +176,9 @@ public class InsumoService {
 			}
 			if(obj.getOrgaos() != null && !obj.getOrgaos().isEmpty()) {
 				newObj.setOrgaos(obj.getOrgaos());
+			}
+			if(obj.getConsumos() != null && !obj.getConsumos().isEmpty()) {
+				newObj.setConsumos(obj.getConsumos());
 			}
 			
 		}

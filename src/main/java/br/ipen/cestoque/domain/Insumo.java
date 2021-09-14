@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -112,7 +113,8 @@ public class Insumo implements Serializable {
 	@JoinTable(name = "INSUMOORGAO", joinColumns = @JoinColumn(name = "insumo_id"), inverseJoinColumns = @JoinColumn(name = "orgao_id"))
 	private List<Orgao> orgaos = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "insumo")
+	//@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "insumo")
 	@NotAudited
 	private List<Consumo> consumos = new ArrayList<>();
 
@@ -121,7 +123,7 @@ public class Insumo implements Serializable {
 			String qrcode, String rfid, String usualt, Date datalt, Unidade unidade, Integer codinsumofornecedor,
 			Boolean irradiado, Date datairradiado, Boolean amostracq, Date dataamostracq, String lote,
 			List<Categoria> categorias, Boolean precisairradiacao, Boolean precisacontrolequalidade, Boolean controlado,
-			List<Orgao> orgaos) {
+			List<Orgao> orgaos, List<Consumo> consumos) {
 		super();
 		this.id = id;
 		this.nomenclatura = nomenclatura;
@@ -152,6 +154,7 @@ public class Insumo implements Serializable {
 		this.precisacontrolequalidade = precisacontrolequalidade;
 		this.controlado = controlado;
 		this.orgaos = orgaos;
+		this.consumos = consumos;
 	}
 
 	public Insumo() {

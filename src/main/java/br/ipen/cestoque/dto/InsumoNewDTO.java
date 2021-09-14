@@ -1,10 +1,14 @@
 package br.ipen.cestoque.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
+import br.ipen.cestoque.domain.Consumo;
+import br.ipen.cestoque.domain.Orgao;
 import br.ipen.cestoque.domain.Unidade;
 
 public class InsumoNewDTO implements Serializable {
@@ -56,6 +60,9 @@ public class InsumoNewDTO implements Serializable {
 	private Boolean precisairradiacao;
 	private Boolean precisacontrolequalidade;
 	private Boolean controlado;
+	private List<Orgao> orgaos = new ArrayList<>();
+	private List<Consumo> consumos = new ArrayList<>();
+	
 
 	public InsumoNewDTO() {
 		super();
@@ -252,6 +259,22 @@ public class InsumoNewDTO implements Serializable {
 
 	public void setControlado(Boolean controlado) {
 		this.controlado = controlado;
+	}
+
+	public List<Orgao> getOrgaos() {
+		return orgaos;
+	}
+
+	public void setOrgaos(List<Orgao> orgaos) {
+		this.orgaos = orgaos;
+	}
+
+	public List<Consumo> getConsumos() {
+		return consumos;
+	}
+
+	public void setConsumos(List<Consumo> consumos) {
+		this.consumos = consumos;
 	}
 
 	

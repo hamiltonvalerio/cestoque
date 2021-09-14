@@ -2,6 +2,7 @@ package br.ipen.cestoque.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,13 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.hibernate.annotations.DynamicUpdate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.ipen.cestoque.domain.enums.TipoConsumo;
 
 @Entity
-@DynamicUpdate(value = true)
 @Table(name = "consumo")
 public class Consumo implements Serializable{
 	
@@ -32,8 +33,6 @@ public class Consumo implements Serializable{
 	@JoinColumn(name = "insumo_id", nullable = false)
 	private Insumo insumo;
 	
-	private TipoConsumo tipoconsumo;
-	
 	@ManyToOne
 	@JoinColumn(name = "unidadetipo_id", nullable = false)
 	private Unidade unidadetipo;
@@ -44,20 +43,41 @@ public class Consumo implements Serializable{
 	@JoinColumn(name = "unidadecon_id", nullable = false)
 	private Unidade unidadecon;
 
+	@Basic
+	private int tipoconsumo_id;
+	
+	@Transient
+	private TipoConsumo tipoconsumo;
+
 	public Consumo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Consumo(Integer id, Insumo insumo, TipoConsumo tipoconsumo, Unidade unidadetipo, Double quantidadecon,
-			Unidade unidadecon) {
+	public Consumo(Integer id, Insumo insumo, Unidade unidadetipo, Double quantidadecon, Unidade unidadecon,
+			int tipoconsumo_id, TipoConsumo tipoconsumo) {
 		super();
 		this.id = id;
 		this.insumo = insumo;
-		this.tipoconsumo = tipoconsumo;
 		this.unidadetipo = unidadetipo;
 		this.quantidadecon = quantidadecon;
 		this.unidadecon = unidadecon;
+		this.tipoconsumo_id = tipoconsumo_id;
+		this.tipoconsumo = tipoconsumo;
 	}
+	
+	/*@PostLoad
+    void fillTransient() {
+        if (tipoconsumo_id > 0) {
+            this.tipoconsumo = TipoConsumo.of(tipoconsumo_id);
+        }
+    }
+
+    @PrePersist
+    void fillPersistent() {
+        if (tipoconsumo != null) {
+            this.tipoconsumo_id = tipoconsumo.getId();
+        }
+    }*/
 
 	public Integer getId() {
 		return id;
@@ -67,6 +87,7 @@ public class Consumo implements Serializable{
 		this.id = id;
 	}
 
+	@JsonIgnore
 	public Insumo getInsumo() {
 		return insumo;
 	}
@@ -81,6 +102,9 @@ public class Consumo implements Serializable{
 
 	public void setTipoconsumo(TipoConsumo tipoconsumo) {
 		this.tipoconsumo = tipoconsumo;
+		if(this.tipoconsumo != null) {
+			this.tipoconsumo_id = tipoconsumo.getId();
+		}
 	}
 
 	public Unidade getUnidadetipo() {
@@ -105,6 +129,14 @@ public class Consumo implements Serializable{
 
 	public void setUnidadecon(Unidade unidadecon) {
 		this.unidadecon = unidadecon;
+	}
+	
+	public int getTipoconsumo_id() {
+		return tipoconsumo_id;
+	}
+
+	public void setTipoconsumo_id(int tipoconsumo_id) {
+		this.tipoconsumo_id = tipoconsumo_id;
 	}
 
 	@Override
