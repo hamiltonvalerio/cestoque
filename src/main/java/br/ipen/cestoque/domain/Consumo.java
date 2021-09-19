@@ -4,19 +4,22 @@ import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.ipen.cestoque.domain.enums.TipoConsumo;
 
 @Entity
+@DynamicUpdate(value = true)
 @Table(name = "consumo")
 public class Consumo implements Serializable{
 	
@@ -30,7 +33,7 @@ public class Consumo implements Serializable{
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "insumo_id", nullable = false)
+	@JoinColumn(name = "insumo_id", nullable=false)
 	private Insumo insumo;
 	
 	@ManyToOne
@@ -44,9 +47,8 @@ public class Consumo implements Serializable{
 	private Unidade unidadecon;
 
 	@Basic
-	private int tipoconsumo_id;
+	private Integer tipoconsumo_id;
 	
-	@Transient
 	private TipoConsumo tipoconsumo;
 
 	public Consumo() {
@@ -102,9 +104,6 @@ public class Consumo implements Serializable{
 
 	public void setTipoconsumo(TipoConsumo tipoconsumo) {
 		this.tipoconsumo = tipoconsumo;
-		if(this.tipoconsumo != null) {
-			this.tipoconsumo_id = tipoconsumo.getId();
-		}
 	}
 
 	public Unidade getUnidadetipo() {
@@ -131,12 +130,12 @@ public class Consumo implements Serializable{
 		this.unidadecon = unidadecon;
 	}
 	
-	public int getTipoconsumo_id() {
-		return tipoconsumo_id;
+	public Integer getTipoconsumo_id() {
+			return tipoconsumo_id;
 	}
 
-	public void setTipoconsumo_id(int tipoconsumo_id) {
-		this.tipoconsumo_id = tipoconsumo_id;
+	public void setTipoconsumo_id(Integer tipoconsumo_id) {
+		this.tipoconsumo_id = this.tipoconsumo != null ? this.getTipoconsumo().getId() : null;
 	}
 
 	@Override
@@ -163,7 +162,9 @@ public class Consumo implements Serializable{
 			return false;
 		return true;
 	}
+
 	
+
 	
 	
 	

@@ -31,7 +31,7 @@ public class InsumoArquivo implements Serializable{
 	private Arquivo arquivo;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "insumo_id")
 	private Insumo insumo;
 	

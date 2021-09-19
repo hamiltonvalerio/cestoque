@@ -114,7 +114,7 @@ public class Insumo implements Serializable {
 	private List<Orgao> orgaos = new ArrayList<>();
 	
 	//@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "insumo")
+	@OneToMany(mappedBy = "insumo", cascade = CascadeType.ALL)
 	@NotAudited
 	private List<Consumo> consumos = new ArrayList<>();
 

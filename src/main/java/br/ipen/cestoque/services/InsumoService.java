@@ -128,6 +128,7 @@ public class InsumoService {
 		obj.setUsualt(UserService.authenticated().getUsername());
 		obj.setDatalt(new Date(System.currentTimeMillis()));
 		obj.setId(null);
+		obj.getConsumos().stream().forEach((c) -> c.setInsumo(obj));
 		return repo.save(obj);
 	}
 	
@@ -179,6 +180,7 @@ public class InsumoService {
 			}
 			if(obj.getConsumos() != null && !obj.getConsumos().isEmpty()) {
 				newObj.setConsumos(obj.getConsumos());
+				newObj.getConsumos().stream().forEach((c) -> c.setInsumo(obj));
 			}
 			
 		}

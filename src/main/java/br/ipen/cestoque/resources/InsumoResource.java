@@ -190,6 +190,9 @@ public class InsumoResource {
 		Page<InsumoLocalizacao> list = service
 				.findInsumoLocalizacaoByLocalizacaoSemVazio(Integer.parseInt(localizacao_id), page, linesPerPage);
 
+		
+		//list.stream().forEach(e -> e.setCodigoalmoxarifado(e.getInsumo().getCodigoalmox()));
+		
 		for (InsumoLocalizacao insumoLocalizacao : list) {
 			insumoLocalizacao.setCodigoalmoxarifado(insumoLocalizacao.getInsumo().getCodigoalmox());
 		}
@@ -228,10 +231,22 @@ public class InsumoResource {
 
 	}
 
-	@ApiOperation(value = "Insere novo insumo")
+	/*@ApiOperation(value = "Insere novo insumo")
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> insert(@RequestBody InsumoNewDTO objDto) {
 		Insumo obj = service.fromDTO(objDto);
+		if(obj.getEssencial() == null) {
+			obj.setEssencial(false);
+		}
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}*/
+	
+	@ApiOperation(value = "Insere novo insumo")
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> insert(@RequestBody Insumo obj) {
+		//Insumo obj = service.fromDTO(objDto);
 		if(obj.getEssencial() == null) {
 			obj.setEssencial(false);
 		}
